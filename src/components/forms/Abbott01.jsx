@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Input from '../common/Input';
+import TextInput from '../common/TextInput';
+import DateInput from '../common/DateInput';
+import RadioInput from '../common/RadioInput';
 
 const Abbott01 = ({ Abbott01 }) => (
     <div className='Form MainScreen'>
@@ -9,9 +11,15 @@ const Abbott01 = ({ Abbott01 }) => (
                 <span className='Form-text Form-description'>SOLICITUD DE PATROCINIO</span>
             </div>
             <div className='Form-fieldSet'>
-                <Input label='Nacional/Local:' className='Form-textInput'/>
-                <Input label='Internacional:' className='Form-textInput'/>
-                <Input label='Fecha de Solicitud:' className='Form-textInput'/>
+                <TextInput label='Nacional/Local:' className='Form-textInput'/>
+                <TextInput label='Internacional:' className='Form-textInput'/>
+                <DateInput className='Form-dateInput' label='Fecha de Solicitud:' />
+                <TextInput label='Nombre del solicitate:' className='Form-textInput'/>
+                <TextInput label='Unidad de Negocio:' className='Form-textInput'/>
+                <TextInput label='Nombre del HCP:' className='Form-textInput'/>
+                <TextInput label='Especialidad del HCP:' className='Form-textInput'/>
+                <TextInput label='País de Recidencia:' className='Form-textInput'/>
+                <RadioInput label='El HCP es empleado del Gobierno?' name='gobierno'/>
             </div>
         </form>
     </div>

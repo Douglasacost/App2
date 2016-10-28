@@ -13,8 +13,8 @@ export default class Header extends Component {
                     {/* Tabbs */}
                     <div className="mdl-layout__tab-bar mdl-js-ripple-effect">
                         <Link to={`abbott01`} className="mdl-layout__tab is-active">abbott01</Link>
-                        <Link to={`profile`} className="mdl-layout__tab">Profile</Link>
-                        <Link to={`notifications`} className="mdl-layout__tab">Notifications</Link>
+                        <Link to={`Form2`} className="mdl-layout__tab">Form2</Link>
+                        <Link to={`Form3`} className="mdl-layout__tab">Form3</Link>
                     </div>
                 </header>
             </div>

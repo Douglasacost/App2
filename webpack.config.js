@@ -2,7 +2,7 @@
 
 let webpack = require('webpack');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 let common = {
   entry: [
@@ -16,6 +16,10 @@ let common = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'react-hot!babel'
+      },
+      {
+          test: /\.css$/,
+          loader: 'style!css'
       },
       {
         test: /\.scss$/,

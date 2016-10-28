@@ -41,7 +41,13 @@
     }
     &-textInput {
       display: block;
-      margin-bottom: -30px;
+      margin-bottom: -20px;
+    }
+    &-dateInput {
+      margin-top: 20px;
+    }
+    &-dateLabel {
+      
     }
     &-title{
       font-weight: bold;
@@ -160,3 +166,4 @@
     display: block;
   }
 }
+
