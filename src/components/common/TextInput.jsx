@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Textfield } from 'react-mdl';
 
 
 export default class TextInput extends Component {
@@ -7,17 +8,17 @@ export default class TextInput extends Component {
     }
     
     render() {
-        let defaultClasses = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label ';
         let className = this.props.className;
-        let classes = defaultClasses.concat(className);
         let id = this.props.id;
         let label = this.props.label;
         return (
-            <div ref={(input) => this.textInput = input} className={classes}>
-                <input id={id} className='mdl-textfield__input'>
-                </input>
-                <label className="mdl-textfield__label" htmlFor={id}>{label}</label>
-            </div>
+            <Textfield
+                onChange={() => {}}
+                label={label}
+                inputClassName={className}
+                floatingLabel
+                style={{width: '250px', display: 'block', marginBottom: '-20px'}}
+            />
         );
     }
 }
