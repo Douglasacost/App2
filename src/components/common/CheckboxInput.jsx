@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
-import { RadioGroup, Radio  } from 'react-mdl';
+import { Checkbox } from 'react-mdl';
 
 
-export default class RadioInput extends Component {
+export default class CheckboxInput extends Component {
     constructor(props) {
         super(props);
     }
     
     render() {
-        let defaultClasses = 'Form-radioContainer ';
+        let defaultClasses = 'Form-checkboxContainer ';
         let className = this.props.className;
         let classes = defaultClasses.concat(className);
         let id = this.props.id;
         let label = this.props.label;
-        let name = this.props.name;
         let options = this.props.options;
-        let selected = this.props.selected;
         return (
             <div className={classes}>
-                <span className='Form-radioLabel'>{label}</span>
-                <RadioGroup name={name} value={selected}>
+                <span className='Form-checkboxLabel'>{label}</span>
+                <div className='Form-checkboxOptions'>
                     {options.map(function(option, i){
-                        return <Radio value={option} key={i} ripple>{option}</Radio>;
+                        return <Checkbox label={option} key={i} ripple />;
                     })}
-                </RadioGroup>
+                </div>
             </div>
         );
     }

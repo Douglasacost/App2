@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
-import DatePicker from './DatePicker';
+import { connect } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import { setDate } from '../../actions/Actions';
+
+//import CSS
+require('react-datepicker/dist/react-datepicker.css');
 
 
-export default class DateInput extends Component {
+class DateInput extends Component {
     constructor(props) {
         super(props);
+        let startDate = moment();
+        this.props.setDate(startDate);
+    }
+    handleChange(date) {
+        this.props.setDate(date);
     }
     
     render() {
@@ -13,11 +24,17 @@ export default class DateInput extends Component {
         let classes = defaultClasses.concat(className);
         let id = this.props.id;
         let label = this.props.label;
+        let date = this.props.date;
         return (
             <div id={id} className={classes}>
                 <span className='Form-dateLabel'>{label}</span>
-                <DatePicker />
+                <DatePicker
+                    todayButton={"Hoy"}
+                    selected={date}
+                    onChange={this.handleChange.bind(this)} />
             </div>
         );
     }
 }
+
+export default connect(null, { setDate })(DateInput);

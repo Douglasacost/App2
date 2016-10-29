@@ -3,4 +3,10 @@ import { connect } from 'react-redux';
 import Components from '../components';
 let { Abbott01 } = Components;
 
-export default connect()(Abbott01);
+const mapStateToProps = (state) => { 
+    return {
+        abbott01: state.get('abbott01')
+    };
+};
+
+export default connect(mapStateToProps)(Abbott01);

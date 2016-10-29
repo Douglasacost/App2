@@ -17,7 +17,7 @@ export default class TextInput extends Component {
                 label={label}
                 inputClassName={className}
                 floatingLabel
-                style={{width: '250px', display: 'block', marginBottom: '-20px'}}
+                style={{width: '300px', display: 'block', marginBottom: '-20px'}}
             />
         );
     }

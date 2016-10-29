@@ -7,3 +7,10 @@ export const setState = (state) => {
         state
     };
 }
+
+export const setDate = (date) => {
+    return {
+        type: Types.SET_DATE,
+        date
+    };
+}
