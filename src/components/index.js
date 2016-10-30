@@ -1,8 +1,8 @@
-import Header from './Header';
+import FormsList from './FormsList';
 import Abbott01 from './forms/Abbott01';
 
 const Components = {
-    Header,
+    FormsList,
     Abbott01
 };
 
