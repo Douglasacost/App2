@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { setDate } from '../../actions/Actions';
-
-//import CSS
-require('react-datepicker/dist/react-datepicker.css');
-
+import TextInput from '../common/TextInput';
 
 class DateInput extends Component {
     constructor(props) {
@@ -19,7 +16,7 @@ class DateInput extends Component {
     }
     
     render() {
-        let defaultClasses = 'Form-dateInput ';
+        let defaultClasses = 'Form-firmContainer ';
         let className = this.props.className;
         let classes = defaultClasses.concat(className);
         let id = this.props.id;
@@ -27,11 +24,15 @@ class DateInput extends Component {
         let date = this.props.date;
         return (
             <div id={id} className={classes}>
-                <span className='Form-dateLabel'>{label}</span>
-                <DatePicker
-                    todayButton={"Hoy"}
-                    selected={date}
-                    onChange={this.handleChange.bind(this)} />
+                <TextInput label={label} className='Form-textInput'/>
+                <TextInput label='Firma:' className='Form-textInput'/>
+                <div className='Form-dateInput'>
+                    <span className='Form-dateLabel'>Fecha:</span>
+                    <DatePicker
+                        todayButton={"Hoy"}
+                        selected={date}
+                        onChange={this.handleChange.bind(this)} />
+                </div>
             </div>
         );
     }

@@ -19,11 +19,13 @@ export default class RadioInput extends Component {
         return (
             <div className={classes}>
                 <span className='Form-radioLabel'>{label}</span>
-                <RadioGroup name={name} value={selected}>
-                    {options.map(function(option, i){
-                        return <Radio value={option} key={i} ripple>{option}</Radio>;
-                    })}
-                </RadioGroup>
+                <div className='Form-radioOptions'>
+                    <RadioGroup name={name} value={selected}>
+                        {options.map(function(option, i){
+                            return <Radio value={option} key={i} ripple>{option}</Radio>;
+                        })}
+                    </RadioGroup>
+                </div>
             </div>
         );
     }
