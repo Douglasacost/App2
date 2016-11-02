@@ -53,18 +53,20 @@
     &-checkboxContainer {
       label {
         height: 100%;
+        display: block;
+        float: left; 
+        clear: left; 
+        width: auto;
       }
       &--singleOption {
+        height: 24px;
       }
       &--fourOption {
         margin-top: 10px;
         height: 120px;
-        label {
-          display: block;
-          float: left; 
-          clear: left; 
-          width: auto;
-        }
+      }
+      &--first {
+        margin-top: 10px;
       }
     }
     &-radioContainer {

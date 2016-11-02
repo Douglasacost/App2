@@ -3,6 +3,7 @@ import TextInput from '../common/TextInput';
 import DateInput from '../common/DateInput';
 import RadioInput from '../common/RadioInput';
 import Firm from '../common/Firm';
+import Notes from '../common/Notes';
 import CheckboxInput from '../common/CheckboxInput';
 import { Checkbox } from 'react-mdl';
 import moment from 'moment';
@@ -11,6 +12,17 @@ let todayDate = moment();
 const booleanOption = [ 'si', 'no'];
 const impactpOptiones = [ 'Hospital', 'Regional', 'Nacional'];
 const patrocinioIncluye = [ 'Registro/Inscripción', 'Hotel', 'Transporte', 'Comidas'];
+const footNotes = [
+        {
+            text: '* Requerido para oficiales de Gobierno.'
+        },
+        {
+            text: '*** El solicitante debe adjuntar la agenda/programa del evento.'
+        },
+        {
+            text: 'Nota: En caso que el HCP sea un oficial de Gobierno,  el cuestionario Due Diligence debe ser completado por el solicitante y adjuntarlo aprobado a este formato y completar las aprobaciones indicadas.'
+        }
+];
 
 const Abbott01 = ({ abbott01 }) => (
     <div className='Form MainScreen'>
@@ -21,7 +33,7 @@ const Abbott01 = ({ abbott01 }) => (
             </div>
             <div className='Form-fieldSet'>
                 <TextInput label='Nacional/Local:' className='Form-textInputBox' name='Ha'/>
-                <TextInput label='Internacional:' className='Form-textInputBox'/>
+                <TextInput label='Internacional:' className='Form-textInputBox' id='testID'/>
                 <DateInput className='' label='Fecha de Solicitud:' date={abbott01.get('date')}/>
                 <TextInput label='Nombre del solicitate:' className='Form-textInputBox'/>
                 <TextInput label='Unidad de Negocio:' className='Form-textInputBox'/>
@@ -60,7 +72,7 @@ const Abbott01 = ({ abbott01 }) => (
                 <TextInput label='Nombre del evento/congreso al cual fue patrocinado previamente:' className='Form-textInputBox'/>
                 <TextInput label='Lugal del evento/congreso a donde fue patrocinado previamente:' className='Form-textInputBox'/>
                 <CheckboxInput 
-                    className='Form-checkboxContainer--singleOption'
+                    className='Form-checkboxContainer--singleOption Form-checkboxContainer--first'
                     label='El Congreso/evento es consistente con las áreas terapeuticas de interés de Abbott' />
                 <CheckboxInput 
                     className='Form-checkboxContainer--singleOption'
@@ -89,6 +101,7 @@ const Abbott01 = ({ abbott01 }) => (
                 <Firm label='Gerente de producto o unidad de servicio:' date={todayDate} />
                 <Firm label='Director Legal:' date={todayDate} />
                 <Firm label='Gerente General:' date={todayDate} />
+                <Notes notes={footNotes} />
             </div>
         </form>
     </div>

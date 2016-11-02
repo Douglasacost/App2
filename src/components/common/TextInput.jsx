@@ -7,11 +7,13 @@ export default class TextInput extends Component {
     }
     
     render() {
-        let { className, id, label } = this.props;
+        let { className, id, label, name } = this.props;
         return (
             <Textfield
                 onChange={() => {}}
                 label={label}
+                id={id}
+                name={name}
                 inputClassName={className}
                 floatingLabel
             />
