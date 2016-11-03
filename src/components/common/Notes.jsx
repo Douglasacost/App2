@@ -10,9 +10,9 @@ export default class Notes extends Component {
     render() {
         let { className, id, label, title, notes } = this.props;
         return (
-            <div>
-                <span className={cx('Note-title', {className})}>{title}</span>
-                <List>
+            <div className='Note-container'>
+                <span className='Note-title'>{title}</span>
+                <List className='Note-list'>
                     {notes.map(function(note, i){
                             return <ListItem key={i}>{note.text}</ListItem>;
                         })}

@@ -16,7 +16,7 @@ class DateInput extends Component {
     }
     
     render() {
-        let defaultClasses = 'Form-firmContainer ';
+        let defaultClasses = 'Firm-container ';
         let className = this.props.className;
         let classes = defaultClasses.concat(className);
         let id = this.props.id;

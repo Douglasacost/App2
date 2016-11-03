@@ -5,14 +5,13 @@
     padding-right: 0;
   }
 
-  ul {
+  ul, .mdl-list__item {
     padding: 0;
   }
   .mdl-layout__container {
     height: 56px;
   }
 
-  
   .mdl-textfield{
     display: block;
     margin-bottom: -20px;
@@ -50,24 +49,12 @@
     &-title{
       font-weight: bold;
     }
-    &-checkboxContainer {
-      label {
-        height: 100%;
-        display: block;
-        float: left; 
-        clear: left; 
-        width: auto;
-      }
-      &--singleOption {
-        height: 24px;
-      }
-      &--fourOption {
-        margin-top: 10px;
-        height: 120px;
-      }
-      &--first {
-        margin-top: 10px;
-      }
+    &-label {
+      padding: 10px 0;
+      height: 16px;
+    }
+    &-label--under {
+      margin-top: 20px;
     }
     &-radioContainer {
       margin-top: 15px;
@@ -78,15 +65,48 @@
         padding-right: 10px;
       }
     }
-    &-firmContainer {
-      .mdl-textfield {
-        width: 300px;
-        display: inline-block;
-        margin: 0 10px;
-      }
-      .Form-dateInput {
-        display: inline-block;
-        margin: 0 10px;
+    &-expensesTable {
+      margin-top: 50px;
+    }
+  }
+  .Firm-container {
+    .mdl-textfield {
+      width: 300px;
+      display: inline-block;
+      margin: 0 20px 0 0;
+    }
+    .Form-dateInput {
+      display: inline-block;
+      margin: 0 10px;
+    }
+  }
+  .Checkbox-container {
+    label {
+      height: 100%;
+      display: block;
+      float: left; 
+      clear: left; 
+      width: auto;
+    }
+    &--singleOption {
+      height: 24px;
+    }
+    &--fourOption {
+      margin-top: 10px;
+      height: 120px;
+    }
+    &--fiveOption {
+      margin-top: 10px;
+      height: 120px;
+    }
+    &--first {
+      margin-top: 10px;
+    }
+  }
+  .Note {
+    &-container {
+      .Note-list {
+        margin: 0;
       }
     }
   }

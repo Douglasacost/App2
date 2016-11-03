@@ -1,21 +1,65 @@
 import React, { Component } from 'react';
-import { Textfield } from 'react-mdl';
+import TextInput from '../common/TextInput';
 
-export default class TextInput extends Component {
+export default class TextInputGroup extends Component {
     constructor(props) {
         super(props);
     }
     
     render() {
         let { className, label, fields } = this.props;
+        let options = [];
+        switch(fields) {
+            case 'HCP':
+                options = HCPInputs;
+                break;
+            case 'Applicant':
+                options = Applicant;
+                break;
+            case 'Goverment':
+                options = Goverment;
+                break;
+        }
+        console.log(options);
         return (
             <div>
-                { (fields) && 
-                    fields.map(function(field, i){
-                            return <Textfield onChange={() => {}} label={field} key={i} inputClassName={} floatingLabel />;
+                <span>{label}</span>
+                { (options) && 
+                    options.map(function(option, i){
+                            return <TextInput label={option.label} id={option.id} key={i} className='Form-textInputBox'/>;
                         })
                 }
             </div>
         );
     }
 }
+
+const HCPInputs = [
+    {
+        label: 'Nombre del HCP:'
+    },
+    {
+        label: 'Especialidad del HCP:'
+    },
+    {
+        label: 'Especialidad del HCP:'
+    }
+]
+
+const Applicant = [
+    {
+        label: 'Nombre del solicitate:'
+    },
+    {
+        label: 'Unidad de Negocio:'
+    }
+]
+
+const Goverment = [
+    {
+        label: 'Nombre de la Institución/Hospital:'
+    },
+    {
+        label: 'Puesto/Rol en el Gobierno:'
+    }
+]

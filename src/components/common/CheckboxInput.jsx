@@ -8,7 +8,7 @@ export default class CheckboxInput extends Component {
     }
     
     render() {
-        let defaultClasses = 'Form-checkboxContainer ';
+        let defaultClasses = 'Checkbox-container ';
         let className = this.props.className;
         let classes = defaultClasses.concat(className);
         let id = this.props.id;
@@ -17,9 +17,9 @@ export default class CheckboxInput extends Component {
         return (
             <div className={classes}>
                 { (options) &&
-                    <span className='Form-checkboxLabel'>{label}</span>
+                    <span className='Checkbox-label'>{label}</span>
                 }
-                <div className='Form-checkboxOptions'>
+                <div className='Checkbox-options'>
                     { (options) &&
                         options.map(function(option, i){
                             return <Checkbox label={option} key={i} ripple />;

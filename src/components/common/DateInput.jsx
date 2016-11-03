@@ -11,11 +11,11 @@ require('react-datepicker/dist/react-datepicker.css');
 class DateInput extends Component {
     constructor(props) {
         super(props);
-        let startDate = moment();
-        this.props.setDate(startDate);
     }
     handleChange(date) {
-        this.props.setDate(date);
+        let form = this.props.form,
+            input = this.props.input;
+        this.props.setDate(form, input, date);
     }
     
     render() {

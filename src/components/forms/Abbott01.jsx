@@ -5,12 +5,13 @@ import RadioInput from '../common/RadioInput';
 import Firm from '../common/Firm';
 import Notes from '../common/Notes';
 import CheckboxInput from '../common/CheckboxInput';
+import TextInputGroup from '../common/TextInputGroup';
 import { Checkbox } from 'react-mdl';
 import moment from 'moment';
 
 let todayDate = moment();
 const booleanOption = [ 'si', 'no'];
-const impactpOptiones = [ 'Hospital', 'Regional', 'Nacional'];
+const impactOptiones = [ 'Hospital', 'Regional', 'Nacional'];
 const patrocinioIncluye = [ 'Registro/Inscripción', 'Hotel', 'Transporte', 'Comidas'];
 const footNotes = [
         {
@@ -23,25 +24,22 @@ const footNotes = [
             text: 'Nota: En caso que el HCP sea un oficial de Gobierno,  el cuestionario Due Diligence debe ser completado por el solicitante y adjuntarlo aprobado a este formato y completar las aprobaciones indicadas.'
         }
 ];
+const form = 'abbott01';
 
 const Abbott01 = ({ abbott01 }) => (
     <div className='Form MainScreen'>
-        <form className='Form-container' action="#">
+        <form className='Form-container Abbot01' action="#">
             <div className='Form-titleContainer'>
                 <span className='Form-text Form-title'>CACMP-DR ABBOTT 001</span>
                 <span className='Form-text Form-description'>SOLICITUD DE PATROCINIO</span>
             </div>
             <div className='Form-fieldSet'>
-                <TextInput label='Nacional/Local:' className='Form-textInputBox' name='Ha'/>
-                <TextInput label='Internacional:' className='Form-textInputBox' id='testID'/>
-                <DateInput className='' label='Fecha de Solicitud:' date={abbott01.get('date')}/>
-                <TextInput label='Nombre del solicitate:' className='Form-textInputBox'/>
-                <TextInput label='Unidad de Negocio:' className='Form-textInputBox'/>
-                <TextInput label='Nombre del HCP:' className='Form-textInputBox'/>
-                <TextInput label='Especialidad del HCP:' className='Form-textInputBox'/>
-                <TextInput label='País de Recidencia:' className='Form-textInputBox'/>
+                <TextInput label='Nacional/Local:' className='Form-textInputBox'/>
+                <TextInput label='Internacional:' className='Form-textInputBox'/>
+                <DateInput className='' label='Fecha de Solicitud:' date={abbott01.get('date')} form={form} input='date'/>
+                <TextInputGroup fields='Applicant' />
+                <TextInputGroup fields='HCP' />
                 <RadioInput 
-                    className=''
                     label='El HCP es empleado del Gobierno?' 
                     name='gobierno'
                     selected='si'
@@ -57,11 +55,11 @@ const Abbott01 = ({ abbott01 }) => (
                     label='Estas decisiones estan relacionadas a nivel Local, Regional o Nacional con los Hospitales?' 
                     name='escala'
                     selected='Hospital'
-                    options={impactpOptiones}/>
+                    options={impactOptiones}/>
                 <TextInput label='Asociación Medica a la cual pertenece el HCP:' className='Form-textInputBox'/>
                 <TextInput label='Responsabilidades Academicas, si aplica:' className='Form-textInputBox'/>
                 <CheckboxInput 
-                    className='Form-checkboxContainer--fourOption'
+                    className='Checkbox-container--fourOption'
                     label='El patrocinio incluye:'
                     options={patrocinioIncluye}/>
                 <RadioInput 
@@ -72,28 +70,28 @@ const Abbott01 = ({ abbott01 }) => (
                 <TextInput label='Nombre del evento/congreso al cual fue patrocinado previamente:' className='Form-textInputBox'/>
                 <TextInput label='Lugal del evento/congreso a donde fue patrocinado previamente:' className='Form-textInputBox'/>
                 <CheckboxInput 
-                    className='Form-checkboxContainer--singleOption Form-checkboxContainer--first'
+                    className='Checkbox-container--singleOption Checkbox-container--first'
                     label='El Congreso/evento es consistente con las áreas terapeuticas de interés de Abbott' />
                 <CheckboxInput 
-                    className='Form-checkboxContainer--singleOption'
+                    className='Checkbox-container--singleOption'
                     label='El contenido del Congreso/Evento está alineado con la especialidad/área práctica del HCP' />
                 <CheckboxInput 
-                    className='Form-checkboxContainer--singleOption'
+                    className='Checkbox-container--singleOption'
                     label='El Congreso/evento tiene un fuerte y lefítimo contenido científico' />
                 <CheckboxInput 
-                    className='Form-checkboxContainer--singleOption'
+                    className='Checkbox-container--singleOption'
                     label='El HCP tiene una necesidad lefítima de entrenamiento/educación.' />
                 <CheckboxInput 
-                    className='Form-checkboxContainer--singleOption'
+                    className='Checkbox-container--singleOption'
                     label='El HCP compartirá el conocimiento y actualización adquirida con otros HCPs en su país.' />
                 <CheckboxInput 
-                    className='Form-checkboxContainer--singleOption'
+                    className='Checkbox-container--singleOption'
                     label='Es necesario en el país incrementar el conocimiento sobre esta área terapeútica.' />
                 <TextInput label='Nombre del Congreso:' className='Form-textInputBox'/>
                 <TextInput label='Pais/Cuidad:' className='Form-textInputBox'/>
                 <TextInput label='Lugar:' className='Form-textInputBox'/>
-                <DateInput className='Form-dateInput' label='Fecha de Inicio:' date={todayDate}/>
-                <DateInput className='Form-dateInput' label='Fecha de Finalizacion:' date={todayDate}/>
+                <DateInput className='Form-dateInput' label='Fecha de Inicio:' date={abbott01.get('startDate')} form={form} input='startDate' />
+                <DateInput className='Form-dateInput' label='Fecha de Finalizacion:' date={abbott01.get('endDate')} form={form} input='endDate' />
                 <span className='Form-label'>Solicitantes:</span>
                 <Firm label='Nombre del Gerente de Distrito:' date={todayDate} />
                 <Firm label='Nombre del Gerente del Pais:' date={todayDate} />

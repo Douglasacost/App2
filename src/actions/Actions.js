@@ -8,9 +8,11 @@ export const setState = (state) => {
     };
 }
 
-export const setDate = (date) => {
+export const setDate = (form, input, date) => {
     return {
         type: Types.SET_DATE,
+        form,
+        input,
         date
     };
 }

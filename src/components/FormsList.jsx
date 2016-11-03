@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { List, ListItem, ListItemAction  } from 'react-mdl';
 
+const formLinks = [
+    'abbott01',
+    'abbott02',
+    'abbott04',
+    'abbott05',
+    'abbott06',
+    'abbott10',
+    'abbottBuy'
+]
+
 export default class FormsList extends Component {
     constructor(props) {
         super(props);
@@ -10,21 +20,16 @@ export default class FormsList extends Component {
         return (
             <div>
                 <List style={{width: '300px'}}>
-                    <ListItem>
-                        <ListItemAction>
-                            <a href="#/abbott01">abbott01</a>
-                        </ListItemAction>
-                    </ListItem>
-                    <ListItem>
-                        <ListItemAction>
-                            <a href="#"></a>
-                        </ListItemAction>
-                    </ListItem>
-                    <ListItem>
-                        <ListItemAction>
-                            <a href="#"></a>
-                        </ListItemAction>
-                    </ListItem>
+                        {formLinks.map(function(form, i){
+                            let href = '#/' + form
+                            return (
+                                <ListItem key={i}>
+                                    <ListItemAction>
+                                        <a href={href}>{form}</a>
+                                    </ListItemAction>
+                                </ListItem>
+                            );
+                        })}
                 </List>
             </div>
         );
