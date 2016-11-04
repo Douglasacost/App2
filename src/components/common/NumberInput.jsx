@@ -8,7 +8,6 @@ export default class NumberInput extends Component {
     
     render() {
         let { className, id, label, name } = this.props;
-        const pattern = '-?[0-9]*(\.[0-9]+)?';
         return (
             <Textfield
                 onChange={() => {}}

@@ -8,12 +8,9 @@ import CheckboxInput from '../common/CheckboxInput';
 import TextInputGroup from '../common/TextInputGroup';
 import TextBoxInput from '../common/TextBoxInput';
 import NumberInput from '../common/NumberInput';
-import { Checkbox } from 'react-mdl';
 import moment from 'moment';
 
 let todayDate = moment();
-const booleanOption = [ 'si', 'no'];
-const impactOptiones = [ 'Hospital', 'Regional', 'Nacional'];
 const notes = {
         footNotes: [{text: 'Please note that consultant compensation must not be offered or given with the intent to induce, or in exchange for, an explicit agreement or understanding that Abbott products will be used, purchased, leased, ordered, prescribed, recommended, or arranged for or provided formulary or other preferential or qualified status.'}]
 };

@@ -2,8 +2,7 @@ import React from 'react';
 import { Route, IndexRedirect } from 'react-router';
 import Containers from './containers';
 import Components from './components';
-let { GroupsContainer,
-    App,
+let { App,
     Abbott01Container,
     Abbott02Container,
     Abbott04Container,

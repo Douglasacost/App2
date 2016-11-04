@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'react-mdl';
-const cx = require('classnames');
 
 export default class Notes extends Component {
     constructor(props) {
@@ -8,7 +7,7 @@ export default class Notes extends Component {
     }
     
     render() {
-        let { className, id, label, title, notes } = this.props;
+        let { title, notes } = this.props;
         return (
             <div className='Note-container'>
                 <span className='Note-title'>{title}</span>

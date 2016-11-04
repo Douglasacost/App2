@@ -8,12 +8,9 @@ import CheckboxInput from '../common/CheckboxInput';
 import NumberInput from '../common/NumberInput';
 import NumericTable from '../common/NumericTable';
 import TextBoxInput from '../common/TextBoxInput';
-import { Checkbox } from 'react-mdl';
 import moment from 'moment';
 
 let todayDate = moment();
-const booleanOption = [ 'si', 'no'];
-const impactOptions = [ 'Hospital', 'Regional', 'Nacional'];
 const eventoTo = [ 'Medicos', 'Publico general', 'Farmacias', 'Medios', 'Fuerza de Ventas'];
 const planedExpenses = ['Gatos Planificados', 'cantidad'];
 const expensesList = [

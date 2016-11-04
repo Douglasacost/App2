@@ -11,7 +11,6 @@ export default class RadioInput extends Component {
         let defaultClasses = 'Radio-container ';
         let className = this.props.className;
         let classes = defaultClasses.concat(className);
-        let id = this.props.id;
         let label = this.props.label;
         let name = this.props.name;
         let options = this.props.options;

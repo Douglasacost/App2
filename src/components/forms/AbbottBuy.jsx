@@ -8,26 +8,10 @@ import CheckboxInput from '../common/CheckboxInput';
 import NumberInput from '../common/NumberInput';
 import NumericTable from '../common/NumericTable';
 import TextBoxInput from '../common/TextBoxInput';
-import { Checkbox } from 'react-mdl';
 import moment from 'moment';
 
 let todayDate = moment();
-const booleanOption = [ 'si', 'no'];
-const impactOptions = [ 'Hospital', 'Regional', 'Nacional'];
 const orderType = [ 'Orden de compra emitida después del evento:', 'Proveedor único (no cotizaciones adicionales):'];
-const expensesList = [
-    'Hotel/Alojamiento',
-    'Transporte Aereo',
-    'Transporte Terrestre',
-    'Registro/Inscripcion',
-    'Speakers',
-    'Otros Servicios del HCP (por ejemplo, Asesoria, Cong Presidente)',
-    'Comidas/Coffee Breaks',
-    'Salones de Reuniones y Conferencias',
-    'Equipo de Audio y Video',
-    'Materiales Promocionales',
-    'Otros'
-];
 const notes = {
         footNotes: [{text: '(Requerida para Ordenes de Compra emitidas después del evento).'}],
 };

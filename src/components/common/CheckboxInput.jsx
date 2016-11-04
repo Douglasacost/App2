@@ -11,7 +11,6 @@ export default class CheckboxInput extends Component {
         let defaultClasses = 'Checkbox-container ';
         let className = this.props.className;
         let classes = defaultClasses.concat(className);
-        let id = this.props.id;
         let label = this.props.label;
         let options = this.props.options;
         return (

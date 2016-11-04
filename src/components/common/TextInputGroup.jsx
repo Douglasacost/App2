@@ -7,7 +7,7 @@ export default class TextInputGroup extends Component {
     }
     
     render() {
-        let { className, label, fields } = this.props;
+        let { label, fields } = this.props;
         let options = [];
         switch(fields) {
             case 'HCP':

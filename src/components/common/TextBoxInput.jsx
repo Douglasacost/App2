@@ -7,7 +7,7 @@ export default class TextBoxInput extends Component {
     }
     
     render() {
-        let { className, id, label, name, rows } = this.props;
+        let { className, id, name, rows } = this.props;
         rows = parseInt(rows);
         return (
             <Textfield

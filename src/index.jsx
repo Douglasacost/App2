@@ -7,7 +7,6 @@ import { Router, Route, hashHistory } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Map, fromJS } from 'immutable';
 
 // importing custom packages
 import reducers from './reducers';
@@ -28,7 +27,6 @@ const muiTheme = getMuiTheme({
 });
 
 const middleware = [ remoteActionMiddleware ];
-const bridge = {};
 
 const store = createStore(
     reducers,

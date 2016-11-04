@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Textfield, DataTable, TableHeader } from 'react-mdl';
 import NumberInput from '../common/NumberInput';
 
 export default class NumericTable extends Component {

@@ -7,7 +7,6 @@ import Notes from '../common/Notes';
 import CheckboxInput from '../common/CheckboxInput';
 import TextBoxInput from '../common/TextBoxInput';
 import TextInputGroup from '../common/TextInputGroup';
-import { Checkbox } from 'react-mdl';
 import moment from 'moment';
 
 let todayDate = moment();

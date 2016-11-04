@@ -8,13 +8,9 @@ import CheckboxInput from '../common/CheckboxInput';
 import TextInputGroup from '../common/TextInputGroup';
 import NumberInput from '../common/NumberInput';
 import TextBoxInput from '../common/TextBoxInput';
-import { Checkbox } from 'react-mdl';
 import moment from 'moment';
 
 let todayDate = moment();
-const booleanOption = [ 'si', 'no'];
-const impactOptiones = [ 'Hospital', 'Regional', 'Nacional'];
-const patrocinioIncluye = [ 'Registro/Inscripción', 'Hotel', 'Transporte', 'Comidas'];
 const footNotes = [
         {
             text: '* El solicitante debe adjuntar los siguientes documentos para el proceso interno:'
