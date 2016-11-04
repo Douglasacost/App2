@@ -28,7 +28,7 @@ export default Map({
     abbott10: Map({
         date: today
     }),
-    abbottBuy: Map({
+    abbottExcepcionCompra: Map({
         date: today
     })
 });

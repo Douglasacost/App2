@@ -16,9 +16,9 @@ const notes = {
         footNotes: [{text: '(Requerida para Ordenes de Compra emitidas después del evento).'}],
 };
 
-const AbbottBuy = ({ abbottBuy }) => (
+const AbbottExcepcionCompra = ({ abbottExcepcionCompra }) => (
     <div className='Form MainScreen'>
-        <form className='Form-container AbbottBuy' action="#">
+        <form className='Form-container AbbottExcepcionCompra' action="#">
             <div className='Form-titleContainer'>
                 <span className='Form-text Form-title'>CFR CACM-P-RD</span>
                 <span className='Form-text Form-description'>Solicitud de excepción en compra</span>
@@ -27,10 +27,10 @@ const AbbottBuy = ({ abbottBuy }) => (
                 <span className='Form-label'>Nota: Adjuntar este documento a la orden de compra para la aprobación de finanzas.</span>
                 <span className='Form-label'>Por este medio solicito autorización para la siguiente excepción en compras:</span>
                 <CheckboxInput 
-                    className='Checkbox-container--fiveOption'
+                    className='Checkbox-container--twoOption'
                     label='Marcar una de las dos op.:'
                     options={orderType}/>
-                <DateInput className='' label='Fecha:' date={abbottBuy.get('date')}/>
+                <DateInput className='' label='Fecha:' date={abbottExcepcionCompra.get('date')}/>
                 <NumberInput label='Orden de Compra:' className='Form-textInputBox'/>
                 <TextInput label='Nombre del Proveedor' className='Form-textInputBox'/>
                 <TextInput label='Bienes o Servicios solicitados:' className='Form-textInputBox'/>
@@ -47,4 +47,4 @@ const AbbottBuy = ({ abbottBuy }) => (
     </div>
 );
 
-export default AbbottBuy;
+export default AbbottExcepcionCompra;

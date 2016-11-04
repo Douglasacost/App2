@@ -9,7 +9,7 @@ let { App,
     Abbott05Container,
     Abbott06Container,
     Abbott10Container,
-    AbbottBuyContainer } = Containers;
+    AbbottExcepcionCompraContainer } = Containers;
 
 let { FormsList } = Components;
 
@@ -23,7 +23,7 @@ const routes =
         <Route path="abbott05" component={Abbott05Container}></Route>
         <Route path="abbott06" component={Abbott06Container}></Route>
         <Route path="abbott10" component={Abbott10Container}></Route>
-        <Route path="abbottBuy" component={AbbottBuyContainer}></Route>
+        <Route path="abbottExcepcionCompra" component={AbbottExcepcionCompraContainer}></Route>
     </Route>;
 
 export default routes;
