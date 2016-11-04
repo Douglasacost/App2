@@ -4,8 +4,9 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { setDate } from '../../actions/Actions';
 import TextInput from '../common/TextInput';
+import RadioInput from '../common/RadioInput';
 
-class FirmInput extends Component {
+class Reviewer extends Component {
     constructor(props) {
         super(props);
         let startDate = moment();
@@ -24,7 +25,8 @@ class FirmInput extends Component {
         let date = this.props.date;
         return (
             <div id={id} className={classes}>
-                <TextInput label={label} className='Form-textInput'/>
+                <span className='Form-dateLabel'>{label}</span>
+                <TextInput label='' className='Form-textInput'/>
                 <TextInput label='Firma:' className='Form-textInput'/>
                 <div className='Form-dateInput'>
                     <span className='Form-dateLabel'>Fecha:</span>
@@ -33,9 +35,17 @@ class FirmInput extends Component {
                         selected={date}
                         onChange={this.handleChange.bind(this)} />
                 </div>
+                <RadioInput 
+                    label='' 
+                    name='revision'
+                    selected=''
+                    options={review}/>
+                <TextInput label='Condiciones para aprobacion (si aplica):' className='Form-textInput'/>
             </div>
         );
     }
 }
 
-export default connect(null, { setDate })(FirmInput);
+const review = [ 'APROBADO', 'RECHAZADO'];
+
+export default connect(null, { setDate })(Reviewer);

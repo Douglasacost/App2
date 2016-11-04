@@ -28,6 +28,9 @@ export default Map({
     abbott10: Map({
         date: today
     }),
+    abbott11: Map({
+        date: today
+    }),
     abbottExcepcionCompra: Map({
         date: today
     })
