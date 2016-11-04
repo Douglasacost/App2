@@ -9,7 +9,8 @@ const formLinks = [
     'abbott06',
     'abbott10',
     'abbott11',
-    'abbottExcepcionCompra'
+    'abbottExcepcionCompra',
+    'AbbottObjetivosActividad'
 ]
 
 export default class FormsList extends Component {

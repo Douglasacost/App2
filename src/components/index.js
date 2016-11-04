@@ -7,6 +7,7 @@ import Abbott06 from './forms/Abbott06';
 import Abbott10 from './forms/Abbott10';
 import Abbott11 from './forms/Abbott11';
 import AbbottExcepcionCompra from './forms/AbbottExcepcionCompra';
+import AbbottObjetivosActividad from './forms/AbbottObjetivosActividad';
 
 const Components = {
     FormsList,
@@ -17,7 +18,8 @@ const Components = {
     Abbott06,
     Abbott10,
     Abbott11,
-    AbbottExcepcionCompra
+    AbbottExcepcionCompra,
+    AbbottObjetivosActividad
 };
 
 export default Components;

@@ -7,6 +7,7 @@ import Abbott06Container from './Abbott06Container';
 import Abbott10Container from './Abbott10Container';
 import Abbott11Container from './Abbott11Container';
 import AbbottExcepcionCompraContainer from './AbbottExcepcionCompraContainer';
+import AbbottObjetivosActividadContainer from './AbbottObjetivosActividadContainer';
 
 const Containers = {
     App,
@@ -17,7 +18,8 @@ const Containers = {
     Abbott06Container,
     Abbott10Container,
     Abbott11Container,
-    AbbottExcepcionCompraContainer
+    AbbottExcepcionCompraContainer,
+    AbbottObjetivosActividadContainer
 };
 
 export default Containers;

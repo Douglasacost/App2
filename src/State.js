@@ -33,5 +33,8 @@ export default Map({
     }),
     abbottExcepcionCompra: Map({
         date: today
+    }),
+    AbbottObjetivosActividad: Map({
+        date: today
     })
 });

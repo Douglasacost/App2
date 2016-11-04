@@ -10,7 +10,7 @@ export default class NumericTable extends Component {
         let { className, label, fields, headerArray } = this.props;
         return (
             <div className={className}>
-                <span className='Form-label'>{label}</span>
+                <span className='Table-label'>{label}</span>
                 <table>
                     <tbody>
                         <tr>
@@ -22,7 +22,7 @@ export default class NumericTable extends Component {
                             return (
                                 <tr key={i}>
                                     <td>{field}</td>
-                                    <td><NumberInput label='' className='Form-textInputBox'/></td>
+                                    <td><NumberInput label='' className='Table-textInputBox'/></td>
                                 </tr>
                             );
                         })}
