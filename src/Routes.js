@@ -9,6 +9,7 @@ let { App,
     Abbott05Container,
     Abbott06Container,
     Abbott10Container,
+    Abbott101Container,
     Abbott11Container,
     AbbottExcepcionCompraContainer,
     AbbottObjetivosActividadContainer } = Containers;
@@ -25,6 +26,7 @@ const routes =
         <Route path="abbott05" component={Abbott05Container}></Route>
         <Route path="abbott06" component={Abbott06Container}></Route>
         <Route path="abbott10" component={Abbott10Container}></Route>
+        <Route path="abbott10-1" component={Abbott101Container}></Route>
         <Route path="abbott11" component={Abbott11Container}></Route>
         <Route path="abbottExcepcionCompra" component={AbbottExcepcionCompraContainer}></Route>
         <Route path="AbbottObjetivosActividad" component={AbbottObjetivosActividadContainer}></Route>

@@ -24,8 +24,8 @@ class FirmInput extends Component {
         let date = this.props.date;
         return (
             <div id={id} className={classes}>
-                <TextInput label={label} className='Form-textInput'/>
-                <TextInput label='Firma:' className='Form-textInput'/>
+                <TextInput label={label} className='Firm-textInput'/>
+                <TextInput label='Firma:' className='Firm-textInput'/>
                 <div className='Form-dateInput'>
                     <span className='Form-dateLabel'>Fecha:</span>
                     <DatePicker

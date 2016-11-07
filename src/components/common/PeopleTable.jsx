@@ -17,10 +17,10 @@ export default class PeopleTable extends Component {
                     <td>{index}</td>
                     <td><TextInput label='' className='Table-textInputBox'/></td>
                     <td><CheckboxInput 
-                        className='Checkbox-container--singleOption'
+                        className='Checkbox-container--tableOption'
                         label='' /></td>
                     <td><CheckboxInput 
-                        className='Checkbox-container--singleOption'
+                        className='Checkbox-container--tableOption'
                         label='' /></td>
                     <td><TextInput label='' className='Table-textInputBox'/></td>
                     <td><TextInput label='' className='Table-textInputBox'/></td>

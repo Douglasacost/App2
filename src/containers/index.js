@@ -5,6 +5,7 @@ import Abbott04Container from './Abbott04Container';
 import Abbott05Container from './Abbott05Container';
 import Abbott06Container from './Abbott06Container';
 import Abbott10Container from './Abbott10Container';
+import Abbott101Container from './Abbott101Container';
 import Abbott11Container from './Abbott11Container';
 import AbbottExcepcionCompraContainer from './AbbottExcepcionCompraContainer';
 import AbbottObjetivosActividadContainer from './AbbottObjetivosActividadContainer';
@@ -17,6 +18,7 @@ const Containers = {
     Abbott05Container,
     Abbott06Container,
     Abbott10Container,
+    Abbott101Container,
     Abbott11Container,
     AbbottExcepcionCompraContainer,
     AbbottObjetivosActividadContainer

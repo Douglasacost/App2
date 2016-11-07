@@ -25,7 +25,7 @@ const form = 'abbott05';
 
 const Abbott05 = ({ abbott05 }) => (
     <div className='Form MainScreen'>
-        <form className='Form-container Abbot01' action="#">
+        <form className='Form-container Abbot05' action="#">
             <div className='Form-titleContainer'>
                 <span className='Form-text Form-title'>CACMP-DR ABBOTT 005</span>
                 <span className='Form-text Form-description'>RACIONAL DE SERVICIOS PROFESIONALES A CONTRATAR</span>
