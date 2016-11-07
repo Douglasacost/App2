@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TextInput from '../common/TextInput';
 import CheckboxInput from '../common/CheckboxInput';
 
-export default class PeopleTable extends Component {
+export default class ActivityPeopleTable extends Component {
     constructor(props) {
         super(props);
     }

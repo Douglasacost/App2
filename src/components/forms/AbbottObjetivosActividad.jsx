@@ -8,7 +8,7 @@ import CheckboxInput from '../common/CheckboxInput';
 import NumberInput from '../common/NumberInput';
 import NumericTable from '../common/NumericTable';
 import TextBoxInput from '../common/TextBoxInput';
-import PeopleTable from '../common/PeopleTable';
+import ActivityPeopleTable from '../common/ActivityPeopleTable';
 import moment from 'moment';
 
 let todayDate = moment();
@@ -32,7 +32,7 @@ const AbbottObjetivosActividad = ({ AbbottObjetivosActividad }) => (
                 <span className='Form-label'>Objetivo de la actividad o interacción, indicar el nombre del conferencista si aplica:</span>
                 <TextBoxInput rows='4' />
                 <span className='Form-label'>Participantes (Para actividades o eventos con participación mayor de 4 adjuntar lista de participantes)</span>
-                <PeopleTable className='Table'/>
+                <ActivityPeopleTable className='Table'/>
                 <CheckboxInput 
                     className='Checkbox-container--fourOption'
                     label='Marcar una de las dos op.:'

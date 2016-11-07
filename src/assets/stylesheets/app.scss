@@ -127,32 +127,32 @@
   }
   .Table {
     &-textInputBox {
-      height: 30px;
-      width: 150px;
+      height: 37px;
+      width: 100%;
+      margin-bottom: -1px;
+      // Remove 20 padding and keeping style functionality.
       .mdl-textfield {
-        margin-top: -27px;
+        padding: 0
+      }
+      .mdl-textfield__label:after {
+        bottom: 0px;
       }
       input {
-        height: 30px;
+        height: 37px;
+        padding: 0;
+        border-bottom: none;
       }
     }
     table {
       width: 1000px;
       border-collapse: collapse;
     }
-
-    th {
-        height: 50px;
-    }
     td {
       text-align: center;
       vertical-align: bottom;
     }
-    tr {
-      height: 40px;
-    }
     th, td {
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid rgba(0,0,0,.12);
     }
   }
 }
