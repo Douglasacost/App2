@@ -12,7 +12,8 @@ let { App,
     Abbott101Container,
     Abbott11Container,
     AbbottExcepcionCompraContainer,
-    AbbottObjetivosActividadContainer } = Containers;
+    AbbottObjetivosActividadContainer,
+    AbbottExpensesReportContainer } = Containers;
 
 let { FormsList } = Components;
 
@@ -30,6 +31,7 @@ const routes =
         <Route path="abbott11" component={Abbott11Container}></Route>
         <Route path="abbottExcepcionCompra" component={AbbottExcepcionCompraContainer}></Route>
         <Route path="AbbottObjetivosActividad" component={AbbottObjetivosActividadContainer}></Route>
+        <Route path="AbbottExpensesReport" component={AbbottExpensesReportContainer}></Route>
     </Route>;
 
 export default routes;

@@ -10,7 +10,7 @@ export default class TextBoxInput extends Component {
         let { className, id, name, rows } = this.props;
         let classes = 'Form-textAreaBox ';
         if (className) {
-            let classes = classes.concat(className);
+            classes = classes.concat(className);
         }
         rows = parseInt(rows);
         return (

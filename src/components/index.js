@@ -9,6 +9,7 @@ import Abbott101 from './forms/Abbott101';
 import Abbott11 from './forms/Abbott11';
 import AbbottExcepcionCompra from './forms/AbbottExcepcionCompra';
 import AbbottObjetivosActividad from './forms/AbbottObjetivosActividad';
+import AbbottExpensesReport from './forms/AbbottExpensesReport';
 
 const Components = {
     FormsList,
@@ -21,7 +22,8 @@ const Components = {
     Abbott101,
     Abbott11,
     AbbottExcepcionCompra,
-    AbbottObjetivosActividad
+    AbbottObjetivosActividad,
+    AbbottExpensesReport
 };
 
 export default Components;

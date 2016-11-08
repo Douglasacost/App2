@@ -14,7 +14,7 @@ import moment from 'moment';
 let todayDate = moment();
 const activityType = [ 'Reunion HCP', 'Focus Group HCP', 'Servicio Hospital HCP', 'Promocion Trade', 'Reunion Empleados', 'Educacion a Pacientes', 'Educacion Empleados', 'Reunion Cliente No HCP'];
 
-const AbbottObjetivosActividad = ({ AbbottObjetivosActividad }) => (
+const AbbottObjetivosActividad = ({ abbottObjetivosActividad }) => (
     <div className='Form MainScreen'>
         <form className='Form-container AbbottObjetivosActividad' action="#">
             <div className='Form-titleContainer'>
@@ -25,7 +25,7 @@ const AbbottObjetivosActividad = ({ AbbottObjetivosActividad }) => (
                 <TextInput label='Division:' className='Form-textInputBox'/>
                 <TextInput label='Linea:' className='Form-textInputBox'/>
                 <span className='Form-label'>DATOS DEL EVENTO:</span>
-                <DateInput className='' label='Fecha:' date={AbbottObjetivosActividad.get('date')}/>
+                <DateInput className='' label='Fecha:' date={abbottObjetivosActividad.get('date')}/>
                 <NumberInput label='Hora:' className='Form-textInputBox'/>
                 <TextInput label='Lugar:' className='Form-textInputBox'/>
                 <TextInput label='Pais:' className='Form-textInputBox'/>

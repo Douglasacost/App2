@@ -7,9 +7,13 @@ export default class Notes extends Component {
     }
     
     render() {
-        let { title, notes } = this.props;
+        let { title, notes, className } = this.props;
+        let classes = 'Note-container ';
+        if (className) {
+            classes = classes.concat(className);
+        }
         return (
-            <div className='Note-container'>
+            <div className={classes} >
                 <span className='Note-title'>{title}</span>
                 <List className='Note-list'>
                     {notes.map(function(note, i){

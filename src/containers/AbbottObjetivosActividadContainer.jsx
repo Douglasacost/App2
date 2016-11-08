@@ -5,7 +5,7 @@ let { AbbottObjetivosActividad } = Components;
 
 const mapStateToProps = (state) => { 
     return {
-        AbbottObjetivosActividad: state.get('AbbottObjetivosActividad')
+        abbottObjetivosActividad: state.get('abbottObjetivosActividad')
     };
 };
 
