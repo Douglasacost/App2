@@ -38,7 +38,11 @@
     &-textInputBox{
       display: block;
       margin-bottom: -20px;
-      width: 500px;
+      width: 50%;
+      min-width: 200px;
+    }
+    &-textAreaBox {
+      width: 60%;
     }
     &-dateLabel {
       margin-right: 10px;

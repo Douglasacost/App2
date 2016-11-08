@@ -8,16 +8,22 @@ export default class TextBoxInput extends Component {
     
     render() {
         let { className, id, name, rows } = this.props;
+        let classes = 'Form-textAreaBox ';
+        if (className) {
+            let classes = classes.concat(className);
+        }
         rows = parseInt(rows);
         return (
-            <Textfield
-                onChange={() => {}}
-                label=''
-                id={id}
-                name={name}
-                inputClassName={className}
-                rows={rows}
-            />
+            <div className={classes}>
+                <Textfield
+                    onChange={() => {}}
+                    label=''
+                    id={id}
+                    name={name}
+                    inputClassName={className}
+                    rows={rows}
+                />
+            </div>
         );
     }
 }
