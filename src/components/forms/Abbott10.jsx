@@ -4,6 +4,7 @@ import DateInput from '../common/DateInput';
 import Firm from '../common/Firm';
 import Notes from '../common/Notes';
 import TextInputGroup from '../common/TextInputGroup';
+import SubsidiaryTable from '../common/SubsidiaryTable';
 import moment from 'moment';
 
 let todayDate = moment();
@@ -31,6 +32,7 @@ const Abbott10 = ({ abbott10 }) => (
                 <TextInput label='Nombre del contacto de la organización:' className='Form-textInputBox'/>
                 <TextInput label='Número de telefono de la organización:' className='Form-textInputBox'/>
                 <span className='Form-label'>Indique la lista de los nombres y solicitantes de los miembros de la Junta Directiva y/o Comité Ejecutivo:</span>
+                <SubsidiaryTable className='Table'/>
                 <Notes notes={notes} />
                 <TextInput label='Nombre:' className='Form-textInputBox Form-textInputBox--mediumInput'/>
                 <TextInput label='Cargo:' className='Form-textInputBox Form-textInputBox--mediumInput'/>
