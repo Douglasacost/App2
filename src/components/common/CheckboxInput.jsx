@@ -12,6 +12,7 @@ export default class CheckboxInput extends Component {
         let className = this.props.className;
         let classes = defaultClasses.concat(className);
         let label = this.props.label;
+        let id = this.props.id;
         let options = this.props.options;
         return (
             <div className={classes}>
@@ -21,11 +22,11 @@ export default class CheckboxInput extends Component {
                 <div className='Checkbox-options'>
                     { (options) &&
                         options.map(function(option, i){
-                            return <Checkbox label={option} key={i} ripple />;
+                            return <Checkbox label={option.label} id={option.id} key={i} ripple />;
                         })
                     }
                     { (!options) &&
-                        <Checkbox label={label} ripple />
+                        <Checkbox label={label} id={id} ripple />
                     }
                 </div>
             </div>

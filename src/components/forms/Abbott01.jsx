@@ -11,7 +11,7 @@ import moment from 'moment';
 let todayDate = moment();
 const booleanOption = [ 'si', 'no'];
 const impactOptiones = [ 'Hospital', 'Regional', 'Nacional'];
-const patrocinioIncluye = [ 'Registro/Inscripción', 'Hotel', 'Transporte', 'Comidas'];
+const patrocinioIncluye = [ {label: 'Registro/Inscripción', id: 'registro'}, {label:'Hotel', id: 'hotel'}, {label: 'Transporte', id: 'transporte'}, {label: 'Comidas', id: 'comidas'}];
 const footNotes = [
         {
             text: '* Requerido para oficiales de Gobierno.'
@@ -33,62 +33,71 @@ const Abbott01 = ({ abbott01 }) => (
                 <span className='Form-text Form-description'>SOLICITUD DE PATROCINIO</span>
             </div>
             <div className='Form-fieldSet'>
-                <TextInput label='Nacional/Local:' className='Form-textInputBox'/>
-                <TextInput label='Internacional:' className='Form-textInputBox'/>
+                <TextInput label='Nacional/Local:' id='nacional' className='Form-textInputBox'/>
+                <TextInput label='Internacional:' id='internacional' className='Form-textInputBox'/>
                 <DateInput className='' label='Fecha de Solicitud:' date={abbott01.get('date')} form={form} input='date'/>
                 <TextInputGroup fields='Applicant' />
                 <TextInputGroup fields='HCP' />
                 <RadioInput 
                     label='El HCP es empleado del Gobierno?' 
                     name='gobierno'
+                    id='empleadogobierno'
                     selected='si'
                     options={booleanOption}/>
-                <TextInput label='Nombre de la Institución/Hospital:' className='Form-textInputBox'/>
-                <TextInput label='Puesto/Rol en el Gobierno:' className='Form-textInputBox'/>
+                <TextInputGroup fields='Goverment' />
                 <RadioInput 
                     label='El  HPC es un empleado de gobierno que toma decisiones o tiene influcencia en las decisiones relacionadas a compras, inclusion de productos en formularios, políticas publicas de salud, registro de productos, or cualquier otra actividad que pueda impactar el negocio?' 
                     name='impacto'
+                    id='impacto'
                     selected='si'
                     options={booleanOption}/>
                 <RadioInput 
                     label='Estas decisiones estan relacionadas a nivel Local, Regional o Nacional con los Hospitales?' 
                     name='escala'
+                    id='escala'
                     selected='Hospital'
                     options={impactOptiones}/>
-                <TextInput label='Asociación Medica a la cual pertenece el HCP:' className='Form-textInputBox'/>
-                <TextInput label='Responsabilidades Academicas, si aplica:' className='Form-textInputBox'/>
+                <TextInput label='Asociación Medica a la cual pertenece el HCP:' id='asociacion' className='Form-textInputBox'/>
+                <TextInput label='Responsabilidades Academicas, si aplica:' id='responsabilidades' className='Form-textInputBox'/>
                 <CheckboxInput 
                     className='Checkbox-container--fourOption'
                     label='El patrocinio incluye:'
                     options={patrocinioIncluye}/>
                 <RadioInput 
                     label='El HCP fue patrocinado previamente?:' 
-                    name='previoPatrocinio'
+                    name='previopatrocinio'
+                    id='previopatrocinio'
                     selected='si'
                     options={booleanOption}/>
-                <TextInput label='Nombre del evento/congreso al cual fue patrocinado previamente:' className='Form-textInputBox'/>
-                <TextInput label='Lugal del evento/congreso a donde fue patrocinado previamente:' className='Form-textInputBox'/>
+                <TextInput label='Nombre del evento/congreso al cual fue patrocinado previamente:' id='previopatrocinionombre' className='Form-textInputBox'/>
+                <TextInput label='Lugal del evento/congreso a donde fue patrocinado previamente:' id='previopatrociniolugar' className='Form-textInputBox'/>
                 <CheckboxInput 
                     className='Checkbox-container--singleOption Checkbox-container--first'
-                    label='El Congreso/evento es consistente con las áreas terapeuticas de interés de Abbott' />
+                    label='El Congreso/evento es consistente con las áreas terapeuticas de interés de Abbott'
+                    id='eventoconsistente' />
                 <CheckboxInput 
                     className='Checkbox-container--singleOption'
-                    label='El contenido del Congreso/Evento está alineado con la especialidad/área práctica del HCP' />
+                    label='El contenido del Congreso/Evento está alineado con la especialidad/área práctica del HCP'
+                    id='contenidoareadeespecialidad' />
                 <CheckboxInput 
                     className='Checkbox-container--singleOption'
-                    label='El Congreso/evento tiene un fuerte y lefítimo contenido científico' />
+                    label='El Congreso/evento tiene un fuerte y legítimo contenido científico'
+                    id='contenidofuerte' />
                 <CheckboxInput 
                     className='Checkbox-container--singleOption'
-                    label='El HCP tiene una necesidad lefítima de entrenamiento/educación.' />
+                    label='El HCP tiene una necesidad legítima de entrenamiento/educación.'
+                    id='hcpnecesidadlegitima' />
                 <CheckboxInput 
                     className='Checkbox-container--singleOption'
-                    label='El HCP compartirá el conocimiento y actualización adquirida con otros HCPs en su país.' />
+                    label='El HCP compartirá el conocimiento y actualización adquirida con otros HCPs en su país.'
+                    id='hcpcompartira' />
                 <CheckboxInput 
                     className='Checkbox-container--singleOption'
-                    label='Es necesario en el país incrementar el conocimiento sobre esta área terapeútica.' />
-                <TextInput label='Nombre del Congreso:' className='Form-textInputBox'/>
-                <TextInput label='Pais/Cuidad:' className='Form-textInputBox'/>
-                <TextInput label='Lugar:' className='Form-textInputBox'/>
+                    label='Es necesario en el país incrementar el conocimiento sobre esta área terapeútica.'
+                    id='conocimientonecesario' />
+                <TextInput label='Nombre del Congreso:' id='nombredecongreso' className='Form-textInputBox'/>
+                <TextInput label='Pais/Cuidad:' id='paiscongreso' className='Form-textInputBox'/>
+                <TextInput label='Lugar:' id='lugarcongreso' className='Form-textInputBox'/>
                 <DateInput className='Form-dateInput' label='Fecha de Inicio:' date={abbott01.get('startDate')} form={form} input='startDate' />
                 <DateInput className='Form-dateInput' label='Fecha de Finalizacion:' date={abbott01.get('endDate')} form={form} input='endDate' />
                 <span className='Form-label'>Solicitantes:</span>

@@ -36,30 +36,37 @@ export default class TextInputGroup extends Component {
 
 const HCPInputs = [
     {
-        label: 'Nombre del HCP:'
+        label: 'Nombre del HCP:',
+        id: 'nombrehcp'
     },
     {
-        label: 'Especialidad del HCP:'
+        label: 'Especialidad del HCP:',
+        id: 'especialidadhcp'
     },
     {
-        label: 'Especialidad del HCP:'
+        label: 'País de Residencia:',
+        id: 'paisderesidencia'
     }
 ]
 
 const Applicant = [
     {
-        label: 'Nombre del solicitate:'
+        label: 'Nombre del solicitante:',
+        id: 'nombresolicitante'
     },
     {
-        label: 'Unidad de Negocio:'
+        label: 'Unidad de Negocio:',
+        id: 'unidaddenegocio'
     }
 ]
 
 const Goverment = [
     {
-        label: 'Nombre de la Institución/Hospital:'
+        label: 'Nombre de la Institución/Hospital:',
+        id: 'Institución'
     },
     {
-        label: 'Puesto/Rol en el Gobierno:'
+        label: 'Puesto/Rol en el Gobierno:',
+        id: 'rolgobierno'
     }
 ]

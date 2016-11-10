@@ -12,6 +12,7 @@ export default class RadioInput extends Component {
         let className = this.props.className;
         let classes = defaultClasses.concat(className);
         let label = this.props.label;
+        let id = this.props.id;
         let name = this.props.name;
         let options = this.props.options;
         let selected = this.props.selected;
@@ -19,7 +20,7 @@ export default class RadioInput extends Component {
             <div className={classes}>
                 <span className='Form-radioLabel'>{label}</span>
                 <div className='Form-radioOptions'>
-                    <RadioGroup name={name} value={selected}>
+                    <RadioGroup name={name} id={id} value={selected}>
                         {options.map(function(option, i){
                             return <Radio value={option} key={i} ripple>{option}</Radio>;
                         })}

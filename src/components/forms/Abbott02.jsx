@@ -32,32 +32,36 @@ const Abbott02 = ({ abbott02 }) => (
                     className=''
                     label='El HCP es empleado del Gobierno?' 
                     name='gobierno'
+                    id='empleadogobierno'
                     selected='si'
                     options={booleanOption}/>
-                <TextInput label='Nombre de la Institución/Hospital:' className='Form-textInputBox'/>
-                <TextInput label='Puesto/Rol en el Gobierno:' className='Form-textInputBox'/>
+                <TextInputGroup fields='Goverment' />
                 <RadioInput 
                     label='El  HPC es un empleado de gobierno que toma decisiones o tiene influcencia en las decisiones relacionadas a compras, inclusion de productos en formularios, políticas publicas de salud, registro de productos, or cualquier otra actividad que pueda impactar el negocio?' 
                     name='impacto'
+                    id='impacto'
                     selected='si'
                     options={booleanOption}/>
                 <RadioInput 
                     label='Estas decisiones estan relacionadas a nivel Local, Regional o Nacional con los Hospitales?' 
                     name='escala'
+                    id='escala'
                     selected='Hospital'
                     options={impactOptiones}/>
                 <RadioInput 
                     label='Tiene alguna decisión que tomar el HCP relacionada los intereses del negocio?' 
-                    name='decisionIntereses'
+                    name='decisioninteres'
+                    id='decisioninteres'
                     selected='si'
                     options={booleanOption}/>
                 <RadioInput 
                     label='El HCP tomó o influenció alguna decision relacionada con Abbott en los pasados 6 meses o en los siguientes 6 meses?' 
-                    name='decisionIntereses'
+                    name='decisionabbott'
+                    id='decisionabbott'
                     selected='si'
                     options={booleanOption}/>
                 <span className='Form-label'>En caso de que las respuestas de las ultimas 2 preguntas hayan sido afirmativas, por favor explique a continuacion proporcionando los detalles necesarios:</span>
-                <TextBoxInput rows='3' />
+                <TextBoxInput rows='3' id='detalles' />
                 <Firm label='Cuestionario de Diligencia Debida completado por:' date={todayDate} />
                 <Firm label='Nombre del Gerente del Pais:' date={todayDate} />
                 <Firm label='Gerente de producto o unidad de servicio:' date={todayDate} />
