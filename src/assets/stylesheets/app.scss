@@ -20,6 +20,13 @@
       list-style-type: none;
   }
 
+  .mdl-textfield.is-invalid .mdl-textfield__error {
+    position: relative;
+  }
+  .mdl-textfield.is-invalid .mdl-textfield__label:after {
+    bottom: 42px;
+  }
+
   .MainScreen {
     margin: 0;
     width: 100%;

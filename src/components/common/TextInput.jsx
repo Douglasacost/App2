@@ -7,7 +7,7 @@ export default class TextInput extends Component {
     }
     
     render() {
-        let { className, id, label, name } = this.props;
+        let { className, id, label, name, value } = this.props;
         return (
             <div className={className}>
                 <Textfield
@@ -15,6 +15,7 @@ export default class TextInput extends Component {
                     label={label}
                     id={id}
                     name={name}
+                    value={value}
                     floatingLabel
                 />
             </div>

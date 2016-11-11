@@ -12,7 +12,9 @@ class FirmInput extends Component {
         this.props.setDate(startDate);
     }
     handleChange(date) {
-        this.props.setDate(date);
+        let form = this.props.form,
+            input = this.props.input;
+        this.props.setDate(form, input, date);
     }
     
     render() {

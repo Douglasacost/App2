@@ -9,16 +9,17 @@ export default class NumberInput extends Component {
     render() {
         let { className, id, label, name } = this.props;
         return (
-            <Textfield
-                onChange={() => {}}
-                label={label}
-                id={id}
-                name={name}
-                inputClassName={className}
-                pattern="-?[0-9]*(\.[0-9]+)?"
-                error="Ingrese un numero."
-                floatingLabel
-            />
+            <div className={className}>
+                <Textfield
+                    onChange={() => {}}
+                    label={label}
+                    id={id}
+                    name={name}
+                    pattern="-?[0-9]*(\.[0-9]+)?"
+                    error="Ingrese un numero."
+                    floatingLabel
+                />
+            </div>
         );
     }
 }

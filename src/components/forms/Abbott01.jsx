@@ -48,13 +48,11 @@ const Abbott01 = ({ abbott01 }) => (
                 <RadioInput 
                     label='El  HPC es un empleado de gobierno que toma decisiones o tiene influcencia en las decisiones relacionadas a compras, inclusion de productos en formularios, políticas publicas de salud, registro de productos, or cualquier otra actividad que pueda impactar el negocio?' 
                     name='impacto'
-                    id='impacto'
                     selected='si'
                     options={booleanOption}/>
                 <RadioInput 
                     label='Estas decisiones estan relacionadas a nivel Local, Regional o Nacional con los Hospitales?' 
                     name='escala'
-                    id='escala'
                     selected='Hospital'
                     options={impactOptiones}/>
                 <TextInput label='Asociación Medica a la cual pertenece el HCP:' id='asociacion' className='Form-textInputBox'/>
@@ -66,7 +64,6 @@ const Abbott01 = ({ abbott01 }) => (
                 <RadioInput 
                     label='El HCP fue patrocinado previamente?:' 
                     name='previopatrocinio'
-                    id='previopatrocinio'
                     selected='si'
                     options={booleanOption}/>
                 <TextInput label='Nombre del evento/congreso al cual fue patrocinado previamente:' id='previopatrocinionombre' className='Form-textInputBox'/>
