@@ -4,11 +4,16 @@ import { Map, fromJS, List } from 'immutable';
 function formApi() {
   this.getData = function(list) {
     $.getJSON(list, function(data){
-      let listData = data.d.results;
-      console.log(listData);
-      let testMap = Map(listData);
-      console.log(testMap);
+      console.log(data.d.results);
+      let listData = Map(data.d.results['0']);
       let mapped = {};
+      listData.map(function(key, value){
+          console.log(key);
+          console.log(value);
+          let lowKey = firstToLower(key);
+          mapped.set(lowKey, value); 
+      });
+      console.log(mapped);
     });
   }
 }

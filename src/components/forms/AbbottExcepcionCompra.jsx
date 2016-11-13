@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Map, fromJS, List } from 'immutable';
 import TextInput from '../common/TextInput';
 import DateInput from '../common/DateInput';
 import RadioInput from '../common/RadioInput';
@@ -12,7 +13,7 @@ import moment from 'moment';
 import $ from "jquery";
 import { getData } from '../../actions/Actions';
 
- var formApi = require('../../modules/FormApi');
+var formApi = require('../../modules/FormApi');
 
 let todayDate = moment();
 const orderType = [ 'Orden de compra emitida después del evento', 'Proveedor único (no cotizaciones adicionales)'];
@@ -33,7 +34,8 @@ export default class AbbottExcepcionCompra extends Component {
     getDataFromList() {
         console.log('entered get');
         var formApiInstance = new formApi();
-        formApiInstance.getData('/sites/forms/_vti_bin/listdata.svc/ExcepciónDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepción,FechaFirmaDelSolicitante');
+        const realURL = 'https://xourse.sharepoint.com/sites/forms/_vti_bin/listdata.svc/Excepci%C3%B3nDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepci%C3%B3n,FechaFirmaDelSolicitante';
+        formApiInstance.getData('/sites/forms/_vti_bin/listdata.svc/Excepci%C3%B3nDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepci%C3%B3n,FechaFirmaDelSolicitante');
         this.props.getData();
     }
     render() {
