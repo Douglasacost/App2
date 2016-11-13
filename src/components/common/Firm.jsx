@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { setDate } from '../../actions/Actions';
+import { setField } from '../../actions/Actions';
 import TextInput from '../common/TextInput';
 
 class FirmInput extends Component {
     constructor(props) {
         super(props);
         let startDate = moment();
-        this.props.setDate(startDate);
+        this.props.setField(startDate);
     }
     handleChange(date) {
         let form = this.props.form,
             input = this.props.input;
-        this.props.setDate(form, input, date);
+        this.props.setField(form, input, date);
     }
     
     render() {
@@ -40,4 +40,4 @@ class FirmInput extends Component {
     }
 }
 
-export default connect(null, { setDate })(FirmInput);
+export default connect(null, { setField })(FirmInput);

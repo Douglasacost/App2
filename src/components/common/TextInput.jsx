@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Textfield } from 'react-mdl';
+import { setField } from '../../actions/Actions';
 
-export default class TextInput extends Component {
+class TextInput extends Component {
     constructor(props) {
         super(props);
     }
-    
+    handleChange(){
+        console.log('changed');
+        let form = this.props.form,
+            input = this.props.id,
+            value = document.getElementById(this.props.id).value;
+        console.log(value);
+        this.props.setField(form, input, value);
+    }
     render() {
         let { className, id, label, name, value } = this.props;
         return (
             <div className={className}>
                 <Textfield
-                    onChange={() => {}}
+                    onChange={this.handleChange.bind(this)}
                     label={label}
                     id={id}
                     name={name}
@@ -22,3 +31,5 @@ export default class TextInput extends Component {
         );
     }
 }
+
+export default connect(null, { setField })(TextInput);

@@ -19,9 +19,6 @@ export default Map({
     abbott05: Map({
         date: today
     }),
-    abbott05: Map({
-        date: today
-    }),
     abbott06: Map({
         date: today
     }),
@@ -37,10 +34,10 @@ export default Map({
     abbottExcepcionCompra: Map({
         fecha: today,
         tipoDeOrden: '',
-        ordenDeCompra: '',
-        proveedor: '',
+        ordenDeCompra: '10',
+        proveedor: 'test',
         bienesOServiciosSolicitado: '',
-        monto: '',
+        monto: '100',
         moneda: '',
         razonDeExcepcion: '',
         fechaFirmaSolicitante: today,

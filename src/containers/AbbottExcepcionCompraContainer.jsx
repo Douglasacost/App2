@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Components from '../components';
+import { getData } from '../actions/Actions';
 let { AbbottExcepcionCompra } = Components;
 
 const mapStateToProps = (state) => { 

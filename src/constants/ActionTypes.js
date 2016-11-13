@@ -1,2 +1,3 @@
 export const SET_STATE = `SET_STATE`;
-export const SET_DATE = `SET_DATE`;
+export const SET_FIELD = `SET_FIELD`;
+export const GET_DATA = `GET_DATA`;

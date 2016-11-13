@@ -8,11 +8,18 @@ export const setState = (state) => {
     };
 }
 
-export const setDate = (form, input, date) => {
+export const setField = (form, input, data) => {
     return {
-        type: Types.SET_DATE,
+        type: Types.SET_FIELD,
         form,
         input,
-        date
+        data
+    };
+}
+
+export const getData = (list) => {
+    return {
+        type: Types.GET_DATA,
+        list
     };
 }
