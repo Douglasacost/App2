@@ -12,6 +12,8 @@ import moment from 'moment';
 import $ from "jquery";
 import { getData } from '../../actions/Actions';
 
+ var formApi = require('../../modules/FormApi');
+
 let todayDate = moment();
 const orderType = [ 'Orden de compra emitida después del evento', 'Proveedor único (no cotizaciones adicionales)'];
 const notes = {
@@ -30,7 +32,9 @@ export default class AbbottExcepcionCompra extends Component {
     }
     getDataFromList() {
         console.log('entered get');
-        this.props.getData('/sites/forms/_vti_bin/listdata.svc/ExcepciónDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepción,FechaFirmaDelSolicitante');
+        var formApiInstance = new formApi();
+        formApiInstance.getData('/sites/forms/_vti_bin/listdata.svc/ExcepciónDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepción,FechaFirmaDelSolicitante');
+        this.props.getData();
     }
     render() {
         let { abbottExcepcionCompra } = this.props;

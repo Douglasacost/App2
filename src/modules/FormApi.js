@@ -1,14 +1,16 @@
 import $ from 'jquery';
 import { Map, fromJS, List } from 'immutable';
 
-function getJson(list) {
-  $.getJSON(list, function(data){
-    let listData = data.d.results;
-    console.log(listData);
-    let testMap = Map(listData);
-    console.log(testMap);
-    let mapped = {};
-  });
+function formApi() {
+  this.getData = function(list) {
+    $.getJSON(list, function(data){
+      let listData = data.d.results;
+      console.log(listData);
+      let testMap = Map(listData);
+      console.log(testMap);
+      let mapped = {};
+    });
+  }
 }
 
 //common functions
@@ -37,4 +39,4 @@ let mapFromJsObject = function(o) {
     return r;
 };
 
-module.exports = getJson;
+module.exports = formApi;
