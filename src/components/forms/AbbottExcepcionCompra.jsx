@@ -10,6 +10,7 @@ import NumericTable from '../common/NumericTable';
 import TextBoxInput from '../common/TextBoxInput';
 import moment from 'moment';
 import $ from "jquery";
+import { getData } from '../../actions/Actions';
 
 let todayDate = moment();
 const orderType = [ 'Orden de compra emitida después del evento', 'Proveedor único (no cotizaciones adicionales)'];
@@ -22,6 +23,14 @@ const form = 'abbottExcepcionCompra';
 export default class AbbottExcepcionCompra extends Component {
     constructor(props) {
         super(props);
+    }
+    componentDidMount(){
+        console.log('test');
+        this.getDataFromList();
+    }
+    getDataFromList() {
+        console.log('entered get');
+        this.props.getData('/sites/forms/_vti_bin/listdata.svc/ExcepciónDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepción,FechaFirmaDelSolicitante');
     }
     render() {
         let { abbottExcepcionCompra } = this.props;
