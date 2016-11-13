@@ -3,9 +3,7 @@ import { Map } from 'immutable';
 import $ from "jquery";
 import * as Types from '../constants/ActionTypes';
 
-const setState = (state, newState) => {
-  state.mergeDeep(newState);
-}
+const setState = (state, newState) => state.mergeDeep(newState);
 const setField = (state, form, input, data) => state.setIn([form, input], data);
 const getData = (list) => {
   $.getJSON(list, function(data){
