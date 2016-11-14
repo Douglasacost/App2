@@ -39,10 +39,10 @@ export default Map({
         bienesOServiciosSolicitados: '',
         monto: '',
         moneda: '',
-        razonDeExcepción: '',
+        razonDeExcepcion: '',
         fechaFirmaDelSolicitante: '',
-        FechaFirmaDelJefeInmediato: '',
-        FechaFirmaDelGerente: ''
+        fechaFirmaDelJefeInmediato: '',
+        fechaFirmaDelGerente: ''
     }),
     abbottObjetivosActividad: Map({
         date: today

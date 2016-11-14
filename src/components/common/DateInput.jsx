@@ -28,7 +28,7 @@ class DateInput extends Component {
         let stringDate = this.props.stringDate;
         let date;
         if (!stringDate) {
-            date = moment();
+            date = '';
         } else {
             date = moment(stringDate);
         }

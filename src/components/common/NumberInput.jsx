@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import { Textfield } from 'react-mdl';
+import { setField } from '../../actions/Actions';
+import { connect } from 'react-redux';
 
-export default class NumberInput extends Component {
+class NumberInput extends Component {
     constructor(props) {
         super(props);
     }
-    
+    handleChange(){
+        let form = this.props.form,
+            input = this.props.id,
+            value = document.getElementById(this.props.id).value;
+        this.props.setField(form, input, value);
+    }
     render() {
         let { className, id, label, name, value } = this.props;
         return (
             <div className={className}>
                 <Textfield
-                    onChange={() => {}}
+                    onChange={this.handleChange.bind(this)}
                     label={label}
                     id={id}
                     name={name}
@@ -22,3 +29,5 @@ export default class NumberInput extends Component {
         );
     }
 }
+
+export default connect(null, { setField })(NumberInput);

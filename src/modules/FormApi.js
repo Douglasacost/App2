@@ -18,6 +18,37 @@ function formApi() {
       callback(form, mapped);
     });
   }
+  this.postData = function(url, listname, elementName, metadata){
+    let mapped = Map({});
+    metadata.map(function(value, key){
+        let upperKey = firstToUpper(key);
+        mapped = mapped.set(upperKey, value);
+    });
+    var data = mapped.toJS();
+    var item = $.extend({
+        "__metadata": { "type": getListItemType(elementName)}
+    }, data);
+    $.ajax({
+        url: url + "/_api/web/lists/getbytitle('" + listname + "')/items",
+        type: 'POST',
+        contentType: "application/json;odata=verbose",
+        data:  JSON.stringify(item),
+        headers: { 
+            "Accept": "application/json;odata=verbose",
+            "X-RequestDigest": $("#__REQUESTDIGEST").val()
+        },
+        success: function(data){
+            var id = data.d.Id;
+            var message = "You form has been sumitted correctly, you form id is '" + id + "'";
+            alert(message);
+        },
+        error:  function(data){console.log(data);}
+});
+  }
+}
+
+function getListItemType(name) {
+    return"SP.Data." + name[0].toUpperCase() + name.substring(1) + "ListItem";
 }
 
 //common functions
