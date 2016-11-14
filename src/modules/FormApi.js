@@ -12,7 +12,6 @@ function formApi() {
         headers: { "Accept": "application/json; odata=verbose" },
         success: function (data) {
 			// Returning the results
-            console.log(data);
             let listData = Map(data.d);
             keysNames.map(function(key){
                 let value = listData.get(key);
