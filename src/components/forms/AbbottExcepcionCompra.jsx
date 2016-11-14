@@ -27,14 +27,17 @@ export default class AbbottExcepcionCompra extends Component {
         super(props);
     }
     componentDidMount(){
-        this.getDataFromList();
+        var id = this.props.params.id;
+        if (id){
+            this.getDataFromList(id);
+        }
     }
-    getDataFromList(callback) {
+    getDataFromList(id) {
         console.log('entered get');
         var formApiInstance = new formApi();
         const realURL = 'https://xourse.sharpoint.com/sites/forms/_vti_bin/listdata.svc/Excepci%C3%B3nDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepcion,FechaFirmaDelSolicitante';
         let keysNames = ['Fecha','TipoDeOrden','OrdenDeCompra','Proveedor','BienesOServiciosSolicitados','Monto','Moneda','RazonDeExcepcion','FechaFirmaDelSolicitante','FechaFirmaDelSolicitante','FechaFirmaDelJefeInmediato','FechaFirmaDelGerente'];
-        let formId = '0';
+        let formId = id;
         let data = formApiInstance.getData('/sites/forms/_vti_bin/listdata.svc/ExcepcionDeCompra', 
             keysNames, 
             formId, 

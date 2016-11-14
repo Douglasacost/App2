@@ -4,8 +4,9 @@ import { Map, fromJS, List } from 'immutable';
 function formApi() {
   this.getData = function(list, keysNames, formId, form, callback) {
     let mapped = Map({});
+    let id = formId - 1;
     $.getJSON(list, function(data){
-      let listData = Map(data.d.results[formId]);
+      let listData = Map(data.d.results[id]);
       let filteredData = Map({});
       keysNames.map(function(key){
         let value = listData.get(key);
