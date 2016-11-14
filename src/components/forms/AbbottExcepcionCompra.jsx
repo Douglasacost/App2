@@ -11,7 +11,6 @@ import NumericTable from '../common/NumericTable';
 import TextBoxInput from '../common/TextBoxInput';
 import moment from 'moment';
 import $ from "jquery";
-import { getData } from '../../actions/Actions';
 
 var formApi = require('../../modules/FormApi');
 
@@ -28,17 +27,19 @@ export default class AbbottExcepcionCompra extends Component {
         super(props);
     }
     componentDidMount(){
-        console.log('test');
         this.getDataFromList();
     }
-    getDataFromList() {
+    getDataFromList(callback) {
         console.log('entered get');
         var formApiInstance = new formApi();
         const realURL = 'https://xourse.sharpoint.com/sites/forms/_vti_bin/listdata.svc/Excepci%C3%B3nDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepci%C3%B3n,FechaFirmaDelSolicitante';
-        let keysNames = ['Fecha','TipoDeOrden','OrdenDeCompra','Proveedores','BienesOServiciosSolicitados','Monto','Moneda','RazonDeExcepción','FechaFirmaDelSolicitante'];
+        let keysNames = ['Fecha','TipoDeOrden','OrdenDeCompra','Proveedor','BienesOServiciosSolicitados','Monto','Moneda','RazonDeExcepción','FechaFirmaDelSolicitante','fechaFirmaDelSolicitante','FechaFirmaDelJefeInmediato','FechaFirmaDelGerente'];
         let formId = '0';
-        formApiInstance.getData('/sites/forms/_vti_bin/listdata.svc/ExcepciónDeCompra', keysNames, formId);
-        this.props.getData();
+        let data = formApiInstance.getData('/sites/forms/_vti_bin/listdata.svc/ExcepciónDeCompra', 
+            keysNames, 
+            formId, 
+            form, 
+            this.props.setFormData.bind(this));
     }
     render() {
         let { abbottExcepcionCompra } = this.props;
@@ -57,17 +58,17 @@ export default class AbbottExcepcionCompra extends Component {
                             name='tipoDeOrden'
                             selected='Orden de compra emitida después del evento'
                             options={orderType}/>
-                        <DateInput className='' label='Fecha:' date={abbottExcepcionCompra.get('fecha')} form={form} input='fecha' />
-                        <NumberInput label='Orden de Compra:' id='ordenDeCompra' className='Form-textInputBox' form={form}/>
+                        <DateInput className='' label='Fecha:' stringDate={abbottExcepcionCompra.get('fecha')} form={form} input='fecha' />
+                        <NumberInput label='Orden de Compra:' id='ordenDeCompra'value={abbottExcepcionCompra.get('ordenDeCompra')} className='Form-textInputBox' form={form}/>
                         <TextInput label='Nombre del Proveedor' value={abbottExcepcionCompra.get('proveedor')} id='proveedor' className='Form-textInputBox' form={form}/>
-                        <TextInput label='Bienes o Servicios solicitados:' id='bienesOServiciosSolicitado' value={abbottExcepcionCompra.get('bienesOServiciosSolicitado')} className='Form-textInputBox' form={form}/>
+                        <TextInput label='Bienes o Servicios solicitados:' id='bienesOServiciosSolicitado' value={abbottExcepcionCompra.get('bienesOServiciosSolicitados')} className='Form-textInputBox' form={form}/>
                         <NumberInput label='Monto:' id='monto' value={abbottExcepcionCompra.get('monto')} className='Form-textInputBox' form={form}/>
                         <TextInput label='Moneda:' id='moneda' value={abbottExcepcionCompra.get('moneda')} className='Form-textInputBox' form={form}/>
                         <span className='Form-label'>Razón de la excepción:</span>
-                        <TextBoxInput rows='4' id='razonDeExcepcion' value={abbottExcepcionCompra.get('razonDeExcepcion')} form={form}/>
-                        <Firm label='Firma del Budgetary solicitante:' date={abbottExcepcionCompra.get('fechaFirmaSolicitante')} form={form} input='fechaFirmaSolicitante' />
-                        <Firm label='Firma del jefe inmediato:' date={abbottExcepcionCompra.get('fechaFirmaJefeInmediato')} form={form} input='fechaFirmaJefeInmediato' />
-                        <Firm label='Firma del Director o Gerente General del área:' date={abbottExcepcionCompra.get('fechaFirmaGerente')} form={form} input='fechaFirmaGerente' />
+                        <TextBoxInput rows='4' id='razonDeExcepcion' value={abbottExcepcionCompra.get('razonDeExcepción')} form={form}/>
+                        <Firm label='Firma del Budgetary solicitante:' stringDate={abbottExcepcionCompra.get('FechaFirmaDelSolicitante')} form={form} input='FechaFirmaDelSolicitante' />
+                        <Firm label='Firma del jefe inmediato:' stringDate={abbottExcepcionCompra.get('FechaFirmaDelJefeInmediato')} form={form} input='FechaFirmaDelJefeInmediato' />
+                        <Firm label='Firma del Director o Gerente General del área:' stringDate={abbottExcepcionCompra.get('FechaFirmaDelGerente')} form={form} input='FechaFirmaDelGerente' />
                         <Notes notes={notes.footNotes} />
                         <input type="submit" value="Submit"></input >
                     </div>

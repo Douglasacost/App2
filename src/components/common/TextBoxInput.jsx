@@ -7,7 +7,7 @@ export default class TextBoxInput extends Component {
     }
     
     render() {
-        let { className, id, name, rows } = this.props;
+        let { className, id, name, rows, value } = this.props;
         let classes = 'Form-textAreaBox ';
         if (className) {
             classes = classes.concat(className);
@@ -20,6 +20,7 @@ export default class TextBoxInput extends Component {
                     label=''
                     id={id}
                     name={name}
+                    value={value}
                     inputClassName={className}
                     rows={rows}
                 />

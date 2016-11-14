@@ -7,7 +7,7 @@ export default class NumberInput extends Component {
     }
     
     render() {
-        let { className, id, label, name } = this.props;
+        let { className, id, label, name, value } = this.props;
         return (
             <div className={className}>
                 <Textfield
@@ -15,8 +15,7 @@ export default class NumberInput extends Component {
                     label={label}
                     id={id}
                     name={name}
-                    pattern="-?[0-9]*(\.[0-9]+)?"
-                    error="Ingrese un numero."
+                    value={value}
                     floatingLabel
                 />
             </div>

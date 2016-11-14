@@ -17,9 +17,10 @@ export const setField = (form, input, data) => {
     };
 }
 
-export const getData = (list) => {
+export const setFormData = (form, data) => {
     return {
-        type: Types.GET_DATA,
-        list
+        type: Types.SET_FORM_DATA,
+        form,
+        data
     };
 }

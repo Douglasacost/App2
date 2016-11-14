@@ -15,7 +15,8 @@ class DateInput extends Component {
     handleChange(date) {
         let form = this.props.form,
             input = this.props.input;
-        this.props.setField(form, input, date);
+        let stringDate = date.toISOString();
+        this.props.setField(form, input, stringDate);
     }
     
     render() {
@@ -24,7 +25,13 @@ class DateInput extends Component {
         let classes = defaultClasses.concat(className);
         let id = this.props.id;
         let label = this.props.label;
-        let date = this.props.date;
+        let stringDate = this.props.stringDate;
+        let date;
+        if (!stringDate) {
+            date = moment();
+        } else {
+            date = moment(stringDate);
+        }
         return (
             <div id={id} className={classes}>
                 <span className='Form-dateLabel'>{label}</span>

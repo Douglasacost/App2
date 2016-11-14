@@ -4,9 +4,7 @@ import * as Types from '../constants/ActionTypes';
 
 const setState = (state, newState) => state.mergeDeep(newState);
 const setField = (state, form, input, data) => state.setIn([form, input], data);
-const getData = (state, list) => {
-  return state
-}
+const setFormData = (state, form, data) => state.mergeDeepIn([form], data);
 let initialState = Map({});
 
 export default function(state = initialState, action) {
@@ -15,7 +13,7 @@ export default function(state = initialState, action) {
       return setState(state, action.state);
     case Types.SET_FIELD:
       return setField(state, action.form, action.input, action.data);
-    case Types.GET_DATA:
-      return getData(state, action.list);
+    case Types.SET_FORM_DATA:
+      return setFormData(state, action.form, action.data);
   }
 }

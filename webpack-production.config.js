@@ -46,10 +46,7 @@ let common = {
     new CopyWebpackPlugin([
       { from: 'src/assets/images', to: 'assets/images'},
       { from: 'src/index.html'}
-    ]),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin()
+    ])
   ]
 };
 

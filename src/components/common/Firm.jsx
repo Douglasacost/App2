@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DatePicker from 'react-datepicker';
+import DateInput from './DateInput';
 import moment from 'moment';
 import { setField } from '../../actions/Actions';
 import TextInput from '../common/TextInput';
@@ -8,33 +8,20 @@ import TextInput from '../common/TextInput';
 class FirmInput extends Component {
     constructor(props) {
         super(props);
-        let startDate = moment();
-        this.props.setField(startDate);
-    }
-    handleChange(date) {
-        let form = this.props.form,
-            input = this.props.input;
-        this.props.setField(form, input, date);
-    }
-    
+    }    
     render() {
+        let { className, id, label, stringDate, form, input } = this.props;
         let defaultClasses = 'Firm-container ';
-        let className = this.props.className;
         let classes = defaultClasses.concat(className);
-        let id = this.props.id;
-        let label = this.props.label;
-        let date = this.props.date;
         return (
             <div id={id} className={classes}>
                 <TextInput label={label} className='Firm-textInput'/>
                 <TextInput label='Firma:' className='Firm-textInput'/>
-                <div className='Form-dateInput'>
-                    <span className='Form-dateLabel'>Fecha:</span>
-                    <DatePicker
-                        todayButton={"Hoy"}
-                        selected={date}
-                        onChange={this.handleChange.bind(this)} />
-                </div>
+                <DateInput className='' 
+                    label='Fecha:' 
+                    stringDate={stringDate} 
+                    form={form} 
+                    input={input} />
             </div>
         );
     }

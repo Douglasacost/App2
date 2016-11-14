@@ -8,12 +8,9 @@ export default class CheckboxInput extends Component {
     }
     
     render() {
+        let { className, label, id, options } = this.props;
         let defaultClasses = 'Checkbox-container ';
-        let className = this.props.className;
         let classes = defaultClasses.concat(className);
-        let label = this.props.label;
-        let id = this.props.id;
-        let options = this.props.options;
         return (
             <div className={classes}>
                 { (options) &&

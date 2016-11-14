@@ -32,17 +32,17 @@ export default Map({
         date: today
     }),
     abbottExcepcionCompra: Map({
-        fecha: today,
+        fecha: '',
         tipoDeOrden: '',
-        ordenDeCompra: '10',
-        proveedor: 'test',
-        bienesOServiciosSolicitado: '',
-        monto: '100',
+        ordenDeCompra: '',
+        proveedor: '',
+        bienesOServiciosSolicitados: '',
+        monto: '',
         moneda: '',
-        razonDeExcepcion: '',
-        fechaFirmaSolicitante: today,
-        fechaFirmaJefeInmediato: today,
-        fechaFirmaGerente: today
+        razonDeExcepción: '',
+        fechaFirmaDelSolicitante: '',
+        FechaFirmaDelJefeInmediato: '',
+        FechaFirmaDelGerente: ''
     }),
     abbottObjetivosActividad: Map({
         date: today
