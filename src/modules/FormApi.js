@@ -29,7 +29,7 @@ function formApi() {
 		}
     });
   }
-  this.postData = function(url, listname, elementName, metadata){
+  this.postData = function(url, listname, elementName, metadata, callback){
     let mapped = Map({});
     metadata.map(function(value, key){
         let upperKey = firstToUpper(key);
@@ -50,8 +50,9 @@ function formApi() {
         },
         success: function(data){
             var id = data.d.Id;
-            var message = "You form has been sumitted correctly, you form id is '" + id + "'";
+            var message = "Su forma ha sido enviada correctamente. El id de la forma es '" + id + "'";
             alert(message);
+            window.location.href = "https://xourse.sharepoint.com/sites/forms"
         },
         error:  function(data){console.log(data);}
 });
