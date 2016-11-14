@@ -2,21 +2,31 @@ import $ from 'jquery';
 import { Map, fromJS, List } from 'immutable';
 
 function formApi() {
-  this.getData = function(list, keysNames, formId, form, callback) {
+  this.getData = function(url, listname, keysNames, formId, form, callback) {
     let mapped = Map({});
-    let id = formId - 1;
-    $.getJSON(list, function(data){
-      let listData = Map(data.d.results[id]);
-      let filteredData = Map({});
-      keysNames.map(function(key){
-        let value = listData.get(key);
-        filteredData = filteredData.set(key, value);
-      });
-      filteredData.map(function(value, key){
-          let lowKey = firstToLower(key);
-          mapped = mapped.set(lowKey, value); 
-      });
-      callback(form, mapped);
+    let filteredData = Map({});
+    let id = formId;
+    $.ajax({
+        url: url + "/_api/web/lists/getbytitle('" + listname + "')/items(" + id + ")",
+        method: "GET",
+        headers: { "Accept": "application/json; odata=verbose" },
+        success: function (data) {
+			// Returning the results
+            console.log(data);
+            let listData = Map(data.d);
+            keysNames.map(function(key){
+                let value = listData.get(key);
+                filteredData = filteredData.set(key, value);
+            });
+            filteredData.map(function(value, key){
+                let lowKey = firstToLower(key);
+                mapped = mapped.set(lowKey, value); 
+            });
+            callback(form, mapped);
+		},
+		error: function (data) {
+			failure(data);
+		}
     });
   }
   this.postData = function(url, listname, elementName, metadata){
