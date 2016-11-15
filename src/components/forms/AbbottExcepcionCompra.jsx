@@ -15,10 +15,8 @@ import $ from "jquery";
 var formApi = require('../../modules/FormApi');
 
 let todayDate = moment();
+const requiereFirma = ['si', 'no'];
 const orderType = [ 'Orden de compra emitida después del evento', 'Proveedor único (no cotizaciones adicionales)'];
-const notes = {
-        footNotes: [{text: '(Requerida para Ordenes de Compra emitidas después del evento).'}],
-};
 
 const form = 'abbottExcepcionCompra';
 
@@ -36,7 +34,7 @@ export default class AbbottExcepcionCompra extends Component {
         console.log('entered get');
         var formApiInstance = new formApi();
         const realURL = 'https://xourse.sharpoint.com/sites/forms/_vti_bin/listdata.svc/Excepci%C3%B3nDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepcion,FechaFirmaDelSolicitante';
-        let keysNames = ['Fecha','TipoDeOrden','OrdenDeCompra','Proveedor','BienesOServiciosSolicitados','Monto','Moneda','RazonDeExcepcion','FechaFirmaDelSolicitante','FechaFirmaDelSolicitante','FechaFirmaDelJefeInmediato','FechaFirmaDelGerente'];
+        let keysNames = ['Fecha','TipoDeOrden','OrdenDeCompra','Proveedor','BienesOServiciosSolicitados','Monto','Moneda','RazonDeExcepcion','FechaFirmaDelSolicitante','FechaFirmaDelSolicitante','FechaFirmaDelJefeInmediato','FechaFirmaDelGerente', 'JefeInmediato', 'GerenteGeneral', 'RequiereFirmaDirector'];
         let data = formApiInstance.getData('/sites/forms/',
             'ExcepcionDeCompra', 
             keysNames, 
@@ -54,7 +52,7 @@ export default class AbbottExcepcionCompra extends Component {
         );
     }
     render() {
-        let { abbottExcepcionCompra } = this.props;
+        let { abbottExcepcionCompra, user } = this.props;
         return (
             <div className='Form MainScreen'>
                 <form className='Form-container AbbottExcepcionCompra' name='AbbottExcepcionCompra'
@@ -81,10 +79,27 @@ export default class AbbottExcepcionCompra extends Component {
                         <TextInput label='Moneda:' id='moneda' value={abbottExcepcionCompra.get('moneda')} className='Form-textInputBox' form={form}/>
                         <span className='Form-label'>Razón de la excepción:</span>
                         <TextBoxInput rows='4' id='razonDeExcepcion' value={abbottExcepcionCompra.get('razonDeExcepcion')} form={form}/>
-                        <Firm label='Firma del Budgetary solicitante:' stringDate={abbottExcepcionCompra.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
-                        <Firm label='Firma del jefe inmediato:' stringDate={abbottExcepcionCompra.get('fechaFirmaDelJefeInmediato')} form={form} input='fechaFirmaDelJefeInmediato' />
-                        <Firm label='Firma del Director o Gerente General del área:' stringDate={abbottExcepcionCompra.get('fechaFirmaDelGerente')} form={form} input='fechaFirmaDelGerente' />
-                        <Notes notes={notes.footNotes} />
+                        <Firm label='Firma del Budgetary solicitante:' user={user.get('displayName')} stringDate={abbottExcepcionCompra.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
+                        { (abbottExcepcionCompra.get('jefeInmediato') !== '') ?
+                            <Firm label='Firma del jefe inmediato:' jefeInmediato={abbottExcepcionCompra.get('jefeInmediato')} stringDate={abbottExcepcionCompra.get('fechaFirmaDelJefeInmediato')} form={form} input='fechaFirmaDelJefeInmediato' />
+                            :
+                            <span>dropdown</span>
+                        }
+                        { (abbottExcepcionCompra.get('gerenteGeneral') !== '' && abbottExcepcionCompra.get('requiereFirmaDirector') !== 'no') ?
+                            <Firm label='Firma del Director o Gerente General del área:' stringDate={abbottExcepcionCompra.get('fechaFirmaDelGerente')} form={form} input='fechaFirmaDelGerente' />
+                            :
+                            ( (!this.props.params.id) &&
+                                <RadioInput 
+                                    label='¿Requiere firma del gerente? (Requerida para Ordenes de Compra emitidas después del evento)' 
+                                    name='requiereFirmaDirector'
+                                    id='requiereFirmaDirector'
+                                    form={form}
+                                    selected={abbottExcepcionCompra.get('requiereFirmaDirector')}
+                                    options={requiereFirma}/>
+
+                             )
+                                
+                        }
                         <input type="submit" value="Enviar"></input >
                     </div>
                 </form>

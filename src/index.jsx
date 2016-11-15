@@ -14,6 +14,7 @@ import remoteActionMiddleware from './middleware/RemoteActionMiddleware';
 import { setState } from './actions/Actions';
 import state from './State';
 import routes from './Routes';
+import $ from 'jquery';
 
 // importing css
 require("./assets/stylesheets/app.scss");
@@ -33,13 +34,43 @@ const store = createStore(
     middleware
 );
 
-store.dispatch(setState(state));
+try {
+    _spPageContextInfo
+    var userid= _spPageContextInfo.userId;
+    var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/getuserbyid(" + userid + ")";
+    var requestHeaders = { "accept" : "application/json;odata=verbose" };
+    $.ajax({
+        url : requestUri,
+        contentType : "application/json;odata=verbose",
+        headers : requestHeaders,
+        success : onSuccess,
+        error : onError
+    });
+} catch(err) {
+    store.dispatch(setState(state));
+    render(
+        <MuiThemeProvider muiTheme={muiTheme} >
+            <Provider store={store}>
+                <Router history={hashHistory}>{routes}</Router>
+            </Provider>
+        </MuiThemeProvider>,
+        document.getElementById('app')
+    );
+}
 
-render(
-    <MuiThemeProvider muiTheme={muiTheme} >
-        <Provider store={store}>
-            <Router history={hashHistory}>{routes}</Router>
-        </Provider>
-    </MuiThemeProvider>,
-    document.getElementById('app')
-);
+function onSuccess(data, request){
+    var displayName = data.d.Title;
+    store.dispatch(setState(state.set(['user', 'displayName'], displayName)));
+    render(
+        <MuiThemeProvider muiTheme={muiTheme} >
+            <Provider store={store}>
+                <Router history={hashHistory}>{routes}</Router>
+            </Provider>
+        </MuiThemeProvider>,
+        document.getElementById('app')
+    );
+}
+
+function onError(error) {
+    console.log(error);
+}

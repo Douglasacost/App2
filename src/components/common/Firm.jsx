@@ -10,13 +10,13 @@ class FirmInput extends Component {
         super(props);
     }    
     render() {
-        let { className, id, label, stringDate, form, input } = this.props;
+        let { className, id, label, stringDate, form, input, user } = this.props;
         let defaultClasses = 'Firm-container ';
         let classes = defaultClasses.concat(className);
         return (
             <div id={id} className={classes}>
-                <TextInput label={label} className='Firm-textInput'/>
-                <TextInput label='Firma:' className='Firm-textInput'/>
+                <span className='Firm-label'>{label}</span>
+                <span className='Firm-label'><u>{user}</u></span>
                 <DateInput className='' 
                     label='Fecha:' 
                     stringDate={stringDate} 
