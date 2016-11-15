@@ -26,11 +26,17 @@ class DateInput extends Component {
         let id = this.props.id;
         let label = this.props.label;
         let stringDate = this.props.stringDate;
+        let disabled;
         let date;
         if (!stringDate) {
             date = '';
         } else {
             date = moment(stringDate);
+        }
+        if (this.props.disabled) {
+            disabled = true;
+        } else {
+            disabled = false;
         }
         return (
             <div id={id} className={classes}>
@@ -38,7 +44,8 @@ class DateInput extends Component {
                 <DatePicker
                     todayButton={"Hoy"}
                     selected={date}
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange.bind(this)}
+                    disabled={disabled} />
             </div>
         );
     }

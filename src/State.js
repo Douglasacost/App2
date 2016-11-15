@@ -5,7 +5,7 @@ let today = moment();
 
 export default Map({
     user: Map({
-        displayName: 'Carlos'
+        displayName: ''
     }),
     today: today,
     abbott01: Map({
@@ -47,11 +47,12 @@ export default Map({
         fechaFirmaDelJefeInmediato: '',
         fechaFirmaDelGerente: '',
         jefeInmediato: '',
-        jefeInmediatoAprobo: null,
+        jefeInmediatoAprobo: '',
         gerenteGeneral: '',
-        gerenteGeneralAprobo: null,
+        gerenteGeneralAprobo: '',
         requiereFirmaDirector: '',
-        aprobadores: Map({})
+        aprobadores: Map({}),
+        solicitante: ''
     }),
     abbottObjetivosActividad: Map({
         date: today

@@ -43,7 +43,7 @@ function formApi() {
         }
     });
   }
-  this.postData = function(url, listname, elementName, metadata, callback){
+  this.postData = function(url, listname, elementName, metadata, id){
     let mapped = Map({});
     metadata.map(function(value, key){
         let upperKey = firstToUpper(key);
@@ -54,23 +54,43 @@ function formApi() {
     var item = $.extend({
         "__metadata": { "type": getListItemType(elementName)}
     }, data);
-    $.ajax({
-        url: url + "/_api/web/lists/getbytitle('" + listname + "')/items",
-        type: 'POST',
-        contentType: "application/json;odata=verbose",
-        data:  JSON.stringify(item),
-        headers: { 
-            "Accept": "application/json;odata=verbose",
-            "X-RequestDigest": $("#__REQUESTDIGEST").val()
-        },
-        success: function(data){
-            var id = data.d.Id;
-            var message = "Su forma ha sido enviada correctamente. El id de la forma es '" + id + "'";
-            alert(message);
-            window.location.href = "https://xourse.sharepoint.com/sites/forms"
-        },
-        error:  function(data){console.log(data);}
-});
+    if(id){
+        $.ajax({
+            url: url + "/_api/web/lists/getbytitle('" + listname + "')/items(" + id + ")",
+            method: "PATCH",
+            contentType: "application/json;odata=verbose",
+            data:  JSON.stringify(item),
+            headers: { 
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "If-Match": "*"
+            },
+            success: function(data){
+                var message = "Su aprobacion ha sido guardada";
+                alert(message);
+                window.location.href = "https://xourse.sharepoint.com/sites/forms"
+            },
+            error:  function(data){console.log(data);}
+        });
+    } else {
+        $.ajax({
+            url: url + "/_api/web/lists/getbytitle('" + listname + "')/items",
+            type: 'POST',
+            contentType: "application/json;odata=verbose",
+            data:  JSON.stringify(item),
+            headers: { 
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            success: function(data){
+                var id = data.d.Id;
+                var message = "Su forma ha sido enviada correctamente. El id de la forma es '" + id + "'";
+                alert(message);
+                window.location.href = "https://xourse.sharepoint.com/sites/forms"
+            },
+            error:  function(data){console.log(data);}
+        });
+    }
   }
 }
 

@@ -60,7 +60,7 @@ try {
 
 function onSuccess(data, request){
     var displayName = data.d.Title;
-    store.dispatch(setState(state.set(['user', 'displayName'], displayName)));
+    store.dispatch(setState(state.setIn(['user', 'displayName'], displayName)));
     render(
         <MuiThemeProvider muiTheme={muiTheme} >
             <Provider store={store}>

@@ -4,7 +4,11 @@ import * as Types from '../constants/ActionTypes';
 
 const setState = (state, newState) => state.mergeDeep(newState);
 const setField = (state, form, input, data) => state.setIn([form, input], data);
-const setFormData = (state, form, data) => state.mergeDeepIn([form], data);
+const setFormData = (state, form, data) => {
+  let test = state.mergeDeepIn([form], data);
+  console.log(test.toJS());
+  return test;
+}
 let initialState = Map({});
 
 export default function(state = initialState, action) {

@@ -8,27 +8,22 @@ import TextInput from '../common/TextInput';
 class FirmInput extends Component {
     constructor(props) {
         super(props);
-    }    
+    }
     render() {
-        let { className, id, label, stringDate, form, input, user, approbador, approbado } = this.props;
+        let { className, id, label, stringDate, form, input, user, solicitante } = this.props;
         let defaultClasses = 'Firm-container ';
         let classes = defaultClasses.concat(className);
+        let today = moment();
         return (
             <div id={id} className={classes}>
                 <span className='Firm-label'>{label}</span>
-                { (approbador) ?
-                    <span className='Firm-label'><u>{approbador}</u></span>
-                    :
-                    <span className='Firm-label'><u>{user}</u></span>
-                }
+                <span className='Firm-label'><u>{(solicitante !== undefined && solicitante !== null && solicitante !== '') ? solicitante : user }</u></span>
                 <DateInput className='' 
                     label='Fecha:' 
-                    stringDate={stringDate} 
-                    form={form} 
-                    input={input} />
-                { (approbado) &&
-                    <span className='Firm-approvedImages'>approbado</span>
-                }
+                    stringDate={(stringDate !== undefined && stringDate !== null && stringDate !== '') ? moment(stringDate) : today } 
+                    input=''
+                    form=''
+                    disabled={true} />
             </div>
         );
     }
