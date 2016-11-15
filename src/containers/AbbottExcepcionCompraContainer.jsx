@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Components from '../components';
-import { setFormData } from '../actions/Actions';
+import { setFormData, setField } from '../actions/Actions';
 let { AbbottExcepcionCompra } = Components;
 
 const mapStateToProps = (state) => { 
@@ -11,4 +11,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { setFormData })(AbbottExcepcionCompra);
+export default connect(mapStateToProps, { setFormData, setField })(AbbottExcepcionCompra);

@@ -28,13 +28,29 @@ function formApi() {
 		}
     });
   }
+  this.getDataList = function(url, listname, form, input, callback) {
+      $.ajax({
+        url: url + "/_api/web/lists/getbytitle('" + listname + "')/items",
+        method: "GET",
+        headers: { "Accept": "application/json; odata=verbose" },
+        success: function (data) {
+            console.log(data); // Returns JSON collection of the results
+            let listData = List(data.d.results);
+            callback(form, input, listData);
+        },
+        error: function (data) {
+            failure(data);
+        }
+    });
+  }
   this.postData = function(url, listname, elementName, metadata, callback){
     let mapped = Map({});
     metadata.map(function(value, key){
         let upperKey = firstToUpper(key);
         mapped = mapped.set(upperKey, value);
     });
-    var data = mapped.toJS();
+    var data = mapped.remove('Aprobadores').toJS();
+    console.log(data);
     var item = $.extend({
         "__metadata": { "type": getListItemType(elementName)}
     }, data);

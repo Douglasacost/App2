@@ -47,8 +47,11 @@ export default Map({
         fechaFirmaDelJefeInmediato: '',
         fechaFirmaDelGerente: '',
         jefeInmediato: '',
+        jefeInmediatoAprobo: null,
         gerenteGeneral: '',
-        requiereFirmaDirector: ''
+        gerenteGeneralAprobo: null,
+        requiereFirmaDirector: '',
+        aprobadores: Map({})
     }),
     abbottObjetivosActividad: Map({
         date: today

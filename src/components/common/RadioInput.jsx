@@ -31,7 +31,7 @@ class RadioInput extends Component {
                     {options.map(function(option, i){
                         return (
                             <div key={i}>
-                                <input type="radio" name="site_name" 
+                                <input type="radio" name={name} 
                                         value={option} 
                                         checked={option === selected} 
                                         onChange={handleChange} />
