@@ -3,7 +3,11 @@ import { Map } from 'immutable';
 import * as Types from '../constants/ActionTypes';
 
 const setState = (state, newState) => state.mergeDeep(newState);
-const setField = (state, form, input, data) => state.setIn([form, input], data);
+const setField = (state, form, input, data) => {
+  let testX = state.setIn([form, input], data);
+  console.log(testX.getIn([form, 'tipoDeOrden']));
+  return testX;
+}
 const setFormData = (state, form, data) => state.mergeDeepIn([form], data);
 let initialState = Map({});
 

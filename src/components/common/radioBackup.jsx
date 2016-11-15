@@ -8,10 +8,28 @@ class RadioInput extends Component {
     constructor(props) {
         super(props);
     }
-    handleChange(e){
-        let value = e.currentTarget.value,
+    componentDidUpdate(){
+        let radioInput = document.getElementsByName(this.props.name);
+        console.log(radioInput);
+        for(var i = 0; i < radioInput.length; i++){
+            if(radioInput[i].value === this.props.selected){
+                console.log(this.props.selected);
+                radioInput[i].checked = true;
+            }
+        }
+    }
+    handleChange(){
+        let radioInput = document.getElementsByName(this.props.name),
+            value,
             form = this.props.form,
             input = this.props.name;
+        console.log(radioInput);
+        for(var i = 0; i < radioInput.length; i++){
+            if(radioInput[i].checked){
+                value = radioInput[i].value;
+            }
+        }
+        console.log(value);
         this.props.setField(form, input, value);
     }
     render() {
@@ -24,21 +42,17 @@ class RadioInput extends Component {
         let options = this.props.options;
         let selected = this.props.selected;
         let handleChange = this.handleChange.bind(this);
+        console.log('render radioInput');
+        console.log(selected);
         return (
             <div className={classes}>
                 <span className='Form-radioLabel'>{label}</span>
                 <div className='Form-radioOptions'>
-                    {options.map(function(option, i){
-                        return (
-                            <div>
-                                <input type="radio" name="site_name" 
-                                        value={option} 
-                                        checked={option === selected} 
-                                        onChange={handleChange} />
-                                <span>{option}</span>
-                            </div>
-                        );
-                    })}
+                    <RadioGroup name={name} id={id} value={selected}>
+                        {options.map(function(option, i){
+                            return <Radio value={option} key={i} onClick={handleChange} ripple>{option}</Radio>;
+                        })}
+                    </RadioGroup>
                 </div>
             </div>
         );

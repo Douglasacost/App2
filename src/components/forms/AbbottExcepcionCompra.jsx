@@ -57,7 +57,7 @@ export default class AbbottExcepcionCompra extends Component {
         let { abbottExcepcionCompra } = this.props;
         return (
             <div className='Form MainScreen'>
-                <form className='Form-container AbbottExcepcionCompra'
+                <form className='Form-container AbbottExcepcionCompra' name='AbbottExcepcionCompra'
                     onSubmit={this.handleSubmit.bind(this)}>
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CFR CACM-P-RD</span>
@@ -69,7 +69,9 @@ export default class AbbottExcepcionCompra extends Component {
                         <RadioInput 
                             label='Marcar una de las dos op.:' 
                             name='tipoDeOrden'
-                            selected='Orden de compra emitida después del evento'
+                            id='tipoDeOrden'
+                            form={form}
+                            selected={abbottExcepcionCompra.get('tipoDeOrden')}
                             options={orderType}/>
                         <DateInput className='' label='Fecha:' stringDate={abbottExcepcionCompra.get('fecha')} form={form} input='fecha' />
                         <NumberInput label='Orden de Compra:' id='ordenDeCompra'value={abbottExcepcionCompra.get('ordenDeCompra')} className='Form-textInputBox' form={form}/>
@@ -83,7 +85,7 @@ export default class AbbottExcepcionCompra extends Component {
                         <Firm label='Firma del jefe inmediato:' stringDate={abbottExcepcionCompra.get('fechaFirmaDelJefeInmediato')} form={form} input='fechaFirmaDelJefeInmediato' />
                         <Firm label='Firma del Director o Gerente General del área:' stringDate={abbottExcepcionCompra.get('fechaFirmaDelGerente')} form={form} input='fechaFirmaDelGerente' />
                         <Notes notes={notes.footNotes} />
-                        <input type="submit" value="Submit"></input >
+                        <input type="submit" value="Enviar"></input >
                     </div>
                 </form>
             </div>
