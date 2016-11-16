@@ -105,7 +105,7 @@ export default class AbbottExcepcionCompra extends Component {
                             :
                             <Dropdown options={abbottExcepcionCompra.get('aprobadores')} label='Seleccione jefe inmediato' selected={abbottExcepcionCompra.get('jefeInmediato')} input='jefeInmediato' form={form} />
                         }
-                        { (this.props.params.id && abbottExcepcionCompra.get('requiereFirmaDirector') === 'si') ?
+                        { ((this.props.params.id && abbottExcepcionCompra.get('requiereFirmaDirector') === 'si' && abbottExcepcionCompra.get('gerenteGeneral') === user.get('displayName')) || abbottExcepcionCompra.get('gerenteGeneralAprobo') === 'si' ) ?
                             <ApproverFirm label='Firma del Director o Gerente General del área:' aprobador={abbottExcepcionCompra.get('gerenteGeneral')} aprobado={abbottExcepcionCompra.get('gerenteGeneralAprobo')} stringDate={abbottExcepcionCompra.get('fechaFirmaDelGerente')} form={form} dateInput='fechaFirmaDelGerente' approveInput='gerenteGeneralAprobo' id='approvebtn' user={user.get('displayName')}/>
                             :
                             ( (!this.props.params.id) &&
