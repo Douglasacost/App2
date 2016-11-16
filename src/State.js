@@ -52,7 +52,8 @@ export default Map({
         gerenteGeneralAprobo: '',
         requiereFirmaDirector: '',
         aprobadores: Map({}),
-        solicitante: ''
+        solicitante: '',
+        estado: ''
     }),
     abbottObjetivosActividad: Map({
         date: today

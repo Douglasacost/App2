@@ -43,7 +43,7 @@ export default class AbbottExcepcionCompra extends Component {
     getDataFromList(formId) {
         console.log('entered get');
         const realURL = 'https://xourse.sharpoint.com/sites/forms/_vti_bin/listdata.svc/Excepci%C3%B3nDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepcion,FechaFirmaDelSolicitante';
-        let keysNames = ['Fecha','TipoDeOrden','OrdenDeCompra','Proveedor','BienesOServiciosSolicitados','Monto','Moneda','RazonDeExcepcion','FechaFirmaDelSolicitante','FechaFirmaDelSolicitante','FechaFirmaDelJefeInmediato','FechaFirmaDelGerente', 'JefeInmediato', 'GerenteGeneral', 'RequiereFirmaDirector', 'JefeInmediatoAprobo', 'GerenteGeneralAprobo', 'Solicitante'];
+        let keysNames = ['Fecha','TipoDeOrden','OrdenDeCompra','Proveedor','BienesOServiciosSolicitados','Monto','Moneda','RazonDeExcepcion','FechaFirmaDelSolicitante','FechaFirmaDelSolicitante','FechaFirmaDelJefeInmediato','FechaFirmaDelGerente', 'JefeInmediato', 'GerenteGeneral', 'RequiereFirmaDirector', 'JefeInmediatoAprobo', 'GerenteGeneralAprobo', 'Solicitante', 'Estado'];
         let data = formApiInstance.getData('/sites/forms/',
             'ExcepcionDeCompra', 
             keysNames, 
@@ -61,7 +61,7 @@ export default class AbbottExcepcionCompra extends Component {
         if (formId && formId !== undefined && formId !== null && formId !== '' ){
             formState = this.props.abbottExcepcionCompra;    
         } else {
-            formState = this.props.abbottExcepcionCompra.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString());
+            formState = this.props.abbottExcepcionCompra.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente');
         }
         let teststate = this.props.abbottExcepcionCompra.toJS();
         formApiInstance.postData('/sites/forms',
@@ -79,6 +79,7 @@ export default class AbbottExcepcionCompra extends Component {
                     onSubmit={this.handleSubmit.bind(this)}>
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CFR CACM-P-RD</span>
+                        <span className='Form-text Form-state'>Estado: {abbottExcepcionCompra.get('estado')}</span>
                         <span className='Form-text Form-description'>Solicitud de excepción en compra</span>
                     </div>
                     <div className='Form-fieldSet'>
