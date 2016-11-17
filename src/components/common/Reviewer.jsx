@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { setDate } from '../../actions/Actions';
 import TextInput from '../common/TextInput';
 import RadioInput from '../common/RadioInput';
 
 class Reviewer extends Component {
     constructor(props) {
         super(props);
-        let startDate = moment();
-        this.props.setDate(startDate);
     }
     handleChange(date) {
-        this.props.setDate(date);
     }
     
     render() {
@@ -48,4 +44,4 @@ class Reviewer extends Component {
 
 const review = [ 'APROBADO', 'RECHAZADO'];
 
-export default connect(null, { setDate })(Reviewer);
+export default connect(null)(Reviewer);
