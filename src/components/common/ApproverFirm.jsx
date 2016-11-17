@@ -46,7 +46,7 @@ class ApproverFirm extends Component {
                     )
                     :
                     ( (aprobador === user) &&
-                        <div className='Firm-buttons'>
+                        <div className='mui-container'>
                             <button className="mui-btn mui-btn--primary" onClick={handleApprove}>Aprobar</button>
                             <button className="mui-btn mui-btn--primary" onClick={handleReject}>Rechazar</button>
                         </div>

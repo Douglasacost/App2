@@ -74,7 +74,7 @@ export default class AbbottExcepcionCompra extends Component {
     render() {
         let { abbottExcepcionCompra, user } = this.props;
         return (
-            <div className='Form MainScreen'>
+            <div className='Form mui-container'>
                 <form className='Form-container AbbottExcepcionCompra' name='AbbottExcepcionCompra'
                     onSubmit={this.handleSubmit.bind(this)}>
                     <div className='Form-titleContainer'>
@@ -106,7 +106,7 @@ export default class AbbottExcepcionCompra extends Component {
                             :
                             <Dropdown options={abbottExcepcionCompra.get('aprobadores')} label='Seleccione jefe inmediato' selected={abbottExcepcionCompra.get('jefeInmediato')} input='jefeInmediato' form={form} />
                         }
-                        { ((this.props.params.id && abbottExcepcionCompra.get('requiereFirmaDirector') === 'si' && abbottExcepcionCompra.get('gerenteGeneral') === user.get('displayName')) || abbottExcepcionCompra.get('gerenteGeneralAprobo') === 'si' ) ?
+                        { ((this.props.params.id && abbottExcepcionCompra.get('requiereFirmaDirector') === 'si' && abbottExcepcionCompra.get('gerenteGeneral') === user.get('displayName')) || (abbottExcepcionCompra.get('gerenteGeneralAprobo') === 'si' || abbottExcepcionCompra.get('gerenteGeneralAprobo') === 'no') ) ?
                             <ApproverFirm label='Firma del Director o Gerente General del área:' aprobador={abbottExcepcionCompra.get('gerenteGeneral')} aprobado={abbottExcepcionCompra.get('gerenteGeneralAprobo')} stringDate={abbottExcepcionCompra.get('fechaFirmaDelGerente')} form={form} dateInput='fechaFirmaDelGerente' approveInput='gerenteGeneralAprobo' id='approvebtn' user={user.get('displayName')}/>
                             :
                             ( (!this.props.params.id) &&
@@ -121,7 +121,10 @@ export default class AbbottExcepcionCompra extends Component {
                              )
                                 
                         }
-                        <input type="submit" value="Enviar"></input >
+                        { (abbottExcepcionCompra.get('estado') !== 'Aprobado' && abbottExcepcionCompra.get('estado') !== 'Rechazado' ) &&
+                            <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                        }
+                        
                     </div>
                 </form>
             </div>
