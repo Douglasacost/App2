@@ -10,19 +10,15 @@ class ApproverFirm extends Component {
     constructor(props) {
         super(props);
     }
-    handleOnClick(e){
-        e.preventDefault();
-        console.log('clicked');
+    handleClick(selected){
         //set state
         const approveInput = this.props.approveInput,
               dateInput = this.props.dateInput,
               today = moment().toISOString();
         let dataJson = {};
-        dataJson[approveInput] = 'si';
+        dataJson[approveInput] = selected;
         dataJson[dateInput] = today;
         const dataMap = Map(dataJson);
-        // let dataMap = Map({});
-        // dataMap = dataMap.set(approveInput, )
         this.props.setFormData(this.props.form, dataMap);
     }
     render() {
@@ -30,7 +26,8 @@ class ApproverFirm extends Component {
         let defaultClasses = 'Firm-container ';
         let classes = defaultClasses.concat(className);
         let today = moment();
-        let handleOnClick = this.handleOnClick.bind(this);
+        let handleApprove = this.handleClick.bind(this, 'si');
+        let handleReject = this.handleClick.bind(this, 'no');
         return (
             <div className={classes}>
                 <span className='Firm-label'>{label}</span>
@@ -42,10 +39,17 @@ class ApproverFirm extends Component {
                     form=''
                     disabled={true} />
                 { (aprobado !== undefined && aprobado !== null) ?
-                    <span className='Firm-approvedImages'>aprobado</span>
+                    ( (aprobado === 'si') ?
+                        <span className='Firm-approvedImages'>aprobado</span>
+                        :
+                        <span className='Firm-approvedImages'>Rechazado</span>
+                    )
                     :
                     ( (aprobador === user) &&
-                        <button className="mui-btn mui-btn--primary" id={id} onClick={handleOnClick}>Aprobar</button>
+                        <div className='Firm-buttons'>
+                            <button className="mui-btn mui-btn--primary" onClick={handleApprove}>Aprobar</button>
+                            <button className="mui-btn mui-btn--primary" onClick={handleReject}>Rechazar</button>
+                        </div>
                     )
                 }
             </div>
