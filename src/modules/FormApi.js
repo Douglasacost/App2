@@ -2,10 +2,15 @@ import $ from 'jquery';
 import { Map, fromJS, List } from 'immutable';
 
 function formApi() {
-  this.getData = function(url, listname, keysNames, formId, form, callback) {
+  this.getData = function(url, listname, fields, formId, form, callback) {
     let mapped = Map({});
     let filteredData = Map({});
     let id = formId;
+    let keysNames = [];
+    fields.map(function(key){
+        let val = firstToUpper(key);
+        keysNames.push(val);
+    });
     $.ajax({
         url: url + "/_api/web/lists/getbytitle('" + listname + "')/items(" + id + ")",
         method: "GET",

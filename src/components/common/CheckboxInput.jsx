@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
 import { Checkbox } from 'react-mdl';
+import { connect } from 'react-redux';
+import { setField } from '../../actions/Actions';
 
-
-export default class CheckboxInput extends Component {
+class CheckboxInput extends Component {
     constructor(props) {
         super(props);
     }
-    
+    handleChange(){
+        let form = this.props.form,
+            input = this.props.id,
+            value = (this.props.value === 'si') ? 'no' : 'si' ;
+        this.props.setField(form, input, value);
+    }
     render() {
-        let { className, label, id, options } = this.props;
+        let { className, label, id, options, input, form, value } = this.props;
         let defaultClasses = 'Checkbox-container ';
         let classes = defaultClasses.concat(className);
+        let handleChange = this.handleChange.bind(this);
+        let checked;
+        (value === 'si') ? checked = true : checked = false
         return (
             <div className={classes}>
-                { (options) &&
-                    <span className='Checkbox-label'>{label}</span>
-                }
-                <div className='Checkbox-options'>
-                    { (options) &&
-                        options.map(function(option, i){
-                            return <Checkbox label={option.label} id={option.id} key={i} ripple />;
-                        })
-                    }
-                    { (!options) &&
-                        <Checkbox label={label} id={id} ripple />
-                    }
-                </div>
+                <Checkbox label={label} id={id} ripple onChange={handleChange} checked={checked}/>
             </div>
         );
     }
 }
+
+export default connect(null, { setField })(CheckboxInput);

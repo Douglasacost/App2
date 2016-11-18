@@ -21,7 +21,7 @@ const routes =
     <Route path="/" component={App}>
         <IndexRedirect to="formslist" />
         <Route path="formslist" component={FormsList}></Route>
-        <Route path="abbott01" component={Abbott01Container}></Route>
+        <Route path="abbott01(/:id)" component={Abbott01Container}></Route>
         <Route path="abbott02" component={Abbott02Container}></Route>
         <Route path="abbott04" component={Abbott04Container}></Route>
         <Route path="abbott05" component={Abbott05Container}></Route>
