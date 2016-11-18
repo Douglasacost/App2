@@ -52,7 +52,7 @@ export default class Abbott01 extends Component {
                          'asociacion', 'responsabilidades', 'pratrocinioIncluye', 'patrocinadoPreviamente', 'nombrePatrocinioPrevio', 'lugarPatrocinioPrevio', 'congreso', 'nombreDelCongreso', 'paisCiudad', 'lugar', 'fechaDeInicio',
                          'fechaDeFinalizacion', 'gerenteDeDistrito', 'fechaGerenteDeDistrito', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal',
                          'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'registro', 'transporte', 'hotel','comidas', 'eventoConsistente', 'contenidoDeEspecialidad', 'contenidoFuerte',
-                         'hcpNecesidadLegitima', 'hcpCompartira', 'conocimientoNecesario'];
+                         'hcpNecesidadLegitima', 'hcpCompartira', 'conocimientoNecesario', 'gerenteDeDistritoAprobo', 'gerenteDelPaisAprobo'];
         let data = formApiInstance.getData('/sites/forms/',
             'Abbott01', 
             keysNames, 
@@ -64,9 +64,13 @@ export default class Abbott01 extends Component {
     handleSubmit(e){
         e.preventDefault();
         var formApiInstance = new formApi();
-        let formState = this.props.abbott01;
-        let teststate = this.props.abbott01.toJS();
-        console.log(teststate);
+        let formState;
+        const formId = this.props.params.id;
+        if (formId && formId !== undefined && formId !== null && formId !== '' ){
+            formState = this.props.abbott01;    
+        } else {
+            formState = this.props.abbott01.set('estado', 'Pendiente');
+        }
         formApiInstance.postData('/sites/forms',
             'Abbott01',
             'Abbott011',
@@ -201,23 +205,21 @@ export default class Abbott01 extends Component {
                         { (this.props.params.id) ?
                             <ApproverFirm label='Nombre del Gerente del Pais:' aprobador={abbott01.get('gerenteDelPais')} aprobado={abbott01.get('gerenteDelPaisAprobo')} stringDate={abbott01.get('fechaGerenteDelPais')} form={form} dateInput='fechaGerenteDelPais' approveInput='gerenteDelPaisAprobo' user={user.get('displayName')} />
                             :
-                            <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Gerente de Distrito' selected={abbott01.get('gerenteDelPais')} input='gerenteDelPais' form={form} />
+                            <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Gerente del Pais' selected={abbott01.get('gerenteDelPais')} input='gerenteDelPais' form={form} />
                         }
                         <span className='Form-label'>Aprobaciones:</span>
                         { (this.props.params.id) ?
                             <ApproverFirm label='Gerente de producto o unidad de servicio:' aprobador={abbott01.get('gerenteDeProducto')} aprobado={abbott01.get('gerenteDeProductoAprobo')} stringDate={abbott01.get('fechaGerenteDeProducto')} form={form} dateInput='fechaGerenteDeProducto' approveInput='gerenteDeProductoAprobo' user={user.get('displayName')} />
                             :
-                            <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Gerente de Distrito' selected={abbott01.get('gerenteDeProducto')} input='gerenteDeProducto' form={form} />
+                            <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Gerente de Producto' selected={abbott01.get('gerenteDeProducto')} input='gerenteDeProducto' form={form} />
                         }
                         { (this.props.params.id) ?
                             <ApproverFirm label='Director Legal:' aprobador={abbott01.get('directorLegal')} aprobado={abbott01.get('directorLegalAprobo')} stringDate={abbott01.get('fechaDirectoLegal')} form={form} dateInput='fechaDirectoLegal' approveInput='directorLegalAprobo' user={user.get('displayName')} />
                             :
-                            <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Gerente de Distrito' selected={abbott01.get('directorLegal')} input='directorLegal' form={form} />
+                            <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Director Legal' selected={abbott01.get('directorLegal')} input='directorLegal' form={form} />
                         }
-                        { (this.props.params.id) ?
+                        { (this.props.params.id)  &&
                             <ApproverFirm label='Gerente General:' aprobador={abbott01.get('gerenteGeneral')} aprobado={abbott01.get('gerenteGeneralAprobo')} stringDate={abbott01.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
-                            :
-                            <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Gerente de Distrito' selected={abbott01.get('gerenteGeneral')} input='gerenteGeneral' form={form} />
                         }
                         <Notes notes={footNotes} />
                         <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
