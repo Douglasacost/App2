@@ -77,6 +77,7 @@ export default class Abbott02 extends Component {
                 <form className='Form-container Abbott02' action="#">
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CACMP-DR ABBOTT 002</span>
+                        <span className='Form-text Form-state'>Estado: {abbott02.get('estado')}</span>
                         <span className='Form-text Form-description'>Cuestionario de Diligencia Debida para Individuales </span>
                     </div>
                     <div className='Form-fieldSet'>

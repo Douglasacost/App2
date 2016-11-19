@@ -85,6 +85,7 @@ export default class Abbott01 extends Component {
                 <form className='Form-container Abbot01' action="#">
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CACMP-DR ABBOTT 001</span>
+                        <span className='Form-text Form-state'>Estado: {abbott01.get('estado')}</span>
                         <span className='Form-text Form-description'>SOLICITUD DE PATROCINIO</span>
                     </div>
                     <div className='Form-fieldSet'>
