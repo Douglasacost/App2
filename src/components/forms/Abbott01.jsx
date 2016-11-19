@@ -222,7 +222,9 @@ export default class Abbott01 extends Component {
                             <ApproverFirm label='Gerente General:' aprobador={abbott01.get('gerenteGeneral')} aprobado={abbott01.get('gerenteGeneralAprobo')} stringDate={abbott01.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
                         }
                         <Notes notes={footNotes} />
-                        <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                        { (abbott01.get('estado') !== 'Aprobado' && abbott01.get('estado') !== 'Rechazado' ) &&
+                            <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                        }
                     </div>
                 </form>
             </div>

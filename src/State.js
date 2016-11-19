@@ -63,7 +63,31 @@ export default Map({
         aprobadores: Map({})
     }),
     abbott02: Map({
-        date: today
+        fecha: '',
+        nombreHcp: '',
+        especialidadHcp: '',
+        paisDeResidencia: '',
+        empleadoDelGobierno: '',
+        nombreDelHospital: '',
+        rolEnGobierno: '',
+        impacto: '',
+        escala: '',
+        decisionNegocio: '',
+        decisionAbbott: '',
+        detalles: '',
+        solicitante: '',
+        fechaFirmaDelSolicitante: '',
+        gerenteDeProducto: '',
+        fechaGerenteDeProducto: '',
+        gerenteDeProductoAprobo: '',
+        directorLegal: '',
+        fechaDirectoLegal: '',
+        directorLegalAprobo: '',
+        gerenteGeneral: '',
+        fechaGerenteGeneral: '',
+        gerenteGeneralAprobo: '',
+        aprobadores: Map({}),
+        estado: ''
     }),
     abbott04: Map({
         date: today
