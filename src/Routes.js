@@ -23,7 +23,7 @@ const routes =
         <Route path="formslist" component={FormsList}></Route>
         <Route path="abbott01(/:id)" component={Abbott01Container}></Route>
         <Route path="abbott02(/:id)" component={Abbott02Container}></Route>
-        <Route path="abbott04" component={Abbott04Container}></Route>
+        <Route path="abbott04(/:id)" component={Abbott04Container}></Route>
         <Route path="abbott05" component={Abbott05Container}></Route>
         <Route path="abbott06" component={Abbott06Container}></Route>
         <Route path="abbott10" component={Abbott10Container}></Route>

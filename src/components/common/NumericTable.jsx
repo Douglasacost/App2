@@ -7,7 +7,7 @@ export default class NumericTable extends Component {
     }
     
     render() {
-        let { className, label, fields, headerArray } = this.props;
+        let { className, label, fields, headerArray, form, state } = this.props;
         return (
             <div className={className}>
                 <span className='Table-label'>{label}</span>
@@ -19,10 +19,12 @@ export default class NumericTable extends Component {
                             })}
                         </tr>
                         {fields.map(function(field, i){
+                            let label = field.label;
+                            let id = field.id;
                             return (
                                 <tr key={i}>
-                                    <td>{field}</td>
-                                    <td><NumberInput label='' className='Table-textInputBox'/></td>
+                                    <td>{field.label}</td>
+                                    <td><NumberInput label='' id={id} value={state.get(id)} className='Form-textInputBox' form={form}/></td>
                                 </tr>
                             );
                         })}
