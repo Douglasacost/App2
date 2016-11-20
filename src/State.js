@@ -213,7 +213,28 @@ export default Map({
         date: today
     }),
     abbott11: Map({
-        date: today
+        seccion: '',
+        base: '',
+        division: '',
+        solicitante: '',
+        fechaFirmaDelSolicitante: '',
+        gerenteDeProducto: '',
+        fechaGerenteDeProducto: '',
+        gerenteDeProductoAprobo: '',
+        gerenteGeneral: '',
+        fechaGerenteGeneral: '',
+        gerenteGeneralAprobo: '',
+        directorFinanciero: '',
+        fechaDirectorFinanciero: '',
+        directorFinancieroAprobo: '',
+        gerenteCumplimiento: '',
+        fechaGerenteCumplimiento: '',
+        gerenteCumplimientoAprobo: '',
+        directorRegional: '',
+        fechaDirectorRegional: '',
+        directorRegionalAprobo: '',
+        estado: '',
+        aprobadores: Map({})
     }),
     abbottExcepcionCompra: Map({
         fecha: '',

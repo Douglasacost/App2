@@ -137,6 +137,10 @@
     &-container {
       .Note-list {
         margin: 0;
+        span {
+          width: 95%;
+          white-space: nowrap;
+        }
       }
       .mdl-list__item {
         font-size: 14px;
