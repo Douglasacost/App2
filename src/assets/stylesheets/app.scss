@@ -30,6 +30,7 @@
   .MainScreen {
     margin: 0;
     width: 100%;
+    max-width: 1000px;
     height: 100%;
   }
 
@@ -140,6 +141,7 @@
         span {
           width: 95%;
           white-space: nowrap;
+          display: block;
         }
       }
       .mdl-list__item {

@@ -27,7 +27,7 @@ const routes =
         <Route path="abbott05(/:id)" component={Abbott05Container}></Route>
         <Route path="abbott06(/:id)" component={Abbott06Container}></Route>
         <Route path="abbott10" component={Abbott10Container}></Route>
-        <Route path="abbott10-1" component={Abbott101Container}></Route>
+        <Route path="abbott10-1(/:id)" component={Abbott101Container}></Route>
         <Route path="abbott11(/:id)" component={Abbott11Container}></Route>
         <Route path="abbottExcepcionCompra(/:id)" component={AbbottExcepcionCompraContainer}></Route>
         <Route path="AbbottObjetivosActividad" component={AbbottObjetivosActividadContainer}></Route>

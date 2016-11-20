@@ -210,7 +210,31 @@ export default Map({
         date: today
     }),
     abbott101: Map({
-        date: today
+        fecha: '',
+        nombreDelSolicitante: '',
+        unidadDeNegocio: '',
+        nombreBeneficiario: '',
+        solicitudDeSubvencion: '',
+        valorDeLaBeca: '',
+        propositoBeneficio: '',
+        solicitante: '',
+        fechaFirmaDelSolicitante: '',
+        gerenteDeProducto: '',
+        fechaGerenteDeProducto: '',
+        gerenteDeProductoAprobo: '',
+        directorLegal: '',
+        fechaDirectoLegal: '',
+        directorLegalAprobo: '',
+        directorFinanciero: '',
+        fechaDirectorFinanciero: '',
+        directorFinancieroAprobo: '',
+        gerenteMedico: '',
+        fechaGerenteMedico: '',
+        gerenteMedicoAprobo: '',
+        gerenteGeneral: '',
+        fechaGerenteGeneral: '',
+        gerenteGeneralAprobo: '',
+        aprobadores: Map({})
     }),
     abbott11: Map({
         seccion: '',

@@ -8,7 +8,12 @@ import CheckboxInput from '../common/CheckboxInput';
 import TextInputGroup from '../common/TextInputGroup';
 import NumberInput from '../common/NumberInput';
 import TextBoxInput from '../common/TextBoxInput';
+import Dropdown from '../common/Dropdown';
+import ApproverFirm from '../common/ApproverFirm';
 import moment from 'moment';
+
+var formApi = require('../../modules/FormApi');
+var formApiInstance = new formApi();
 
 let todayDate = moment();
 const footNotes = [
@@ -39,32 +44,105 @@ const footNotes = [
 ];
 const form = 'abbott101';
 
-const Abbott101 = ({ abbott101 }) => (
-    <div className='Form MainScreen'>
-        <form className='Form-container Abbot101' action="#">
-            <div className='Form-titleContainer'>
-                <span className='Form-text Form-title'>CACMP-DR ABBOTT 010.1</span>
-                <span className='Form-text Form-description'>FORMATO DE SOLICITUD SUBVENCIONES EDUCATIVAS (Becas, Stand, Organizacion de Congresos)/DONACIONES</span>
+export default class Abbott101 extends Component {
+    constructor(props) {
+        super(props);
+    }
+    componentDidMount(){
+        var formId = this.props.params.id;
+        if (formId){
+            this.getDataFromList(formId);
+        } else {
+            formApiInstance.getDataList('/sites/forms/',
+                'Approvers',
+                form,
+                'aprobadores',
+                this.props.setField.bind(this)
+            );
+        }
+    }
+    getDataFromList(formId) {
+        console.log('entered get');
+        let keysNames = ['fecha','nombreDelSolicitante','unidadDeNegocio', 'nombreBeneficiario', 'solicitudDeSubvencion', 'valorDeLaBeca', 'propositoBeneficio', 'solicitante','fechaFirmaDelSolicitante','gerenteDeProducto','fechaGerenteDeProducto','gerenteDeProductoAprobo',
+                         'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'directorFinanciero', 'fechaDirectorFinanciero', 'directorFinancieroAprobo',
+                         'directorLegal', 'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo',
+                         'estado'];
+        let data = formApiInstance.getData('/sites/forms/',
+            'Abbott101', 
+            keysNames, 
+            formId, 
+            form, 
+            this.props.setFormData.bind(this)
+            );
+    }
+    handleSubmit(e){
+        e.preventDefault();
+        var formApiInstance = new formApi();
+        let formState;
+        const formId = this.props.params.id;
+        if (formId && formId !== undefined && formId !== null && formId !== '' ){
+            formState = this.props.abbott101;    
+        } else {
+            formState = this.props.abbott101.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente');
+        }
+        formApiInstance.postData('/sites/forms',
+            'Abbott101',
+            'Abbott101',
+            formState,
+            this.props.params.id
+        );
+    }
+    render() {
+        let { abbott101, user } = this.props;
+        return (
+            <div className='Form MainScreen'>
+                <form className='Form-container Abbott101' action="#">
+                    <div className='Form-titleContainer'>
+                        <span className='Form-text Form-title'>CACMP-DR ABBOTT 010.1</span>
+                        <span className='Form-text Form-state'>Estado: {abbott101.get('estado')}</span>
+                        <span className='Form-text Form-description'>FORMATO DE SOLICITUD SUBVENCIONES EDUCATIVAS (Becas, Stand, Organizacion de Congresos)/DONACIONES</span>
+                    </div>
+                    <div className='Form-fieldSet'>
+                        <DateInput className='' label='Fecha de Solicitud:' stringDate={abbott101.get('fecha')} form={form} input='fecha'/>
+                        <TextInput label='Nombre del solicitante:' value={abbott101.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
+                        <TextInput label='Unidad de Negocio:' value={abbott101.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>
+                        <TextInput label='Nombre del Beneficiario de la Beca/Donación' value={abbott101.get('nombreBeneficiario')} id='nombreBeneficiario' form={form} className='Form-textInputBox'/>
+                        <TextInput label='Solicitud de Subvencion Educativa, Beca/Donación' value={abbott101.get('solicitudDeSubvencion')} id='solicitudDeSubvencion' form={form} className='Form-textInputBox'/>
+                        <NumberInput label='Valor de la Beca/Donación' id='valorDeLaBeca' value={abbott101.get('valorDeLaBeca')} className='Form-textInputBox' form={form}/>
+                        <span className='Form-label'>Descripción del propósito y beneficios de la Beca/Donación:</span>
+                        <TextBoxInput rows='4' id='propositoBeneficio' value={abbott101.get('propositoBeneficio')} form={form}/>
+                        <Firm label='Nombre del Solicitante:' user={user.get('displayName')} solicitante={abbott101.get('solicitante')} stringDate={abbott101.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
+                        <span className='Form-label Form-label--under'>Aprobaciones:</span>
+                        { (this.props.params.id) ?
+                            <ApproverFirm label='Gerente de producto o unidad de negocio:' aprobador={abbott101.get('gerenteDeProducto')} aprobado={abbott101.get('gerenteDeProductoAprobo')} stringDate={abbott101.get('fechaGerenteDeProducto')} form={form} dateInput='fechaGerenteDeProducto' approveInput='gerenteDeProductoAprobo' user={user.get('displayName')} />
+                            :
+                            <Dropdown options={abbott101.get('aprobadores')} label='Seleccione Gerente de Producto' selected={abbott101.get('gerenteDeProducto')} input='gerenteDeProducto' form={form} />
+                        }
+                        { (this.props.params.id) ?
+                            <ApproverFirm label='Director Legal*:' aprobador={abbott101.get('directorLegal')} aprobado={abbott101.get('directorLegalAprobo')} stringDate={abbott101.get('fechaDirectoLegal')} form={form} dateInput='fechaDirectoLegal' approveInput='directorLegalAprobo' user={user.get('displayName')} />
+                            :
+                            <Dropdown options={abbott101.get('aprobadores')} label='Seleccione Director Legal' selected={abbott101.get('directorLegal')} input='directorLegal' form={form} />
+                        }
+                        { (this.props.params.id) ?
+                            <ApproverFirm label='Director Finanzas**' aprobador={abbott101.get('directorFinanciero')} aprobado={abbott101.get('directorFinancieroAprobo')} stringDate={abbott101.get('fechaDirectorFinanciero')} form={form} dateInput='fechaDirectorFinanciero' approveInput='directorFinancieroAprobo' user={user.get('displayName')} />
+                            :
+                            <Dropdown options={abbott101.get('aprobadores')} label='Select Finance Signature' selected={abbott101.get('directorFinanciero')} input='directorFinanciero' form={form} />
+                        }
+                        { (this.props.params.id) ?
+                            <ApproverFirm label='Medical**:' aprobador={abbott101.get('gerenteMedico')} aprobado={abbott101.get('gerenteMedicoAprobo')} stringDate={abbott101.get('fechaGerenteMedico')} form={form} dateInput='fechaGerenteMedico' approveInput='gerenteMedicoAprobo' user={user.get('displayName')} />
+                            :
+                            <Dropdown options={abbott101.get('aprobadores')} label='Seleccione Gerente Medico' selected={abbott101.get('gerenteMedico')} input='gerenteMedico' form={form} />
+                        }
+                        { (this.props.params.id)  &&
+                            <ApproverFirm label='Gerente General:' aprobador={abbott101.get('gerenteGeneral')} aprobado={abbott101.get('gerenteGeneralAprobo')} stringDate={abbott101.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
+                        }
+                        <Notes notes={footNotes} />
+                        { (abbott101.get('estado') !== 'Aprobado' && abbott101.get('estado') !== 'Rechazado' ) &&
+                            <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                        }
+                    </div>
+                </form>
             </div>
-            <div className='Form-fieldSet'>
-                <DateInput className='' label='Fecha de Solicitud:' date={abbott101.get('date')} form={form} input='date'/>
-                <TextInputGroup fields='Applicant' />
-                <TextInput label='Nombre del Beneficiario de la Beca/Donación' className='Form-textInputBox'/>
-                <TextInput label='Solicitud de Subvencion Educativa, Beca/Donación' className='Form-textInputBox'/>
-                <NumberInput label='Valor de la Beca/Donación' className='Form-textInputBox'/>
-                <span className='Form-label'>Descripción del propósito y beneficios de la Beca/Donación:</span>
-                <TextBoxInput rows='4' />
-                <Firm label='Nombre del Solicitante y Cargo' date={todayDate} />
-                <span className='Form-label Form-label--under'>Aprobaciones:</span>
-                <Firm label='Gerente de producto o unidad de Negocio:' date={todayDate} />
-                <Firm label='Director Legal*' date={todayDate} />
-                <Firm label='Director Finanzas**' date={todayDate} />
-                <Firm label='Medical**' date={todayDate} />
-                <Firm label='Gerente General:' date={todayDate} />
-                <Notes notes={footNotes} />
-            </div>
-        </form>
-    </div>
-);
-
-export default Abbott101;
+        );
+    }
+}
