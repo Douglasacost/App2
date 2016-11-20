@@ -182,7 +182,29 @@ export default Map({
         estado: ''
     }),
     abbott06: Map({
-        date: today
+        name: '',
+        date: '',
+        phone: '',
+        manager: '',
+        email: '',
+        division: '',
+        nameHcp: '',
+        hcpTier: '',
+        amount: '',
+        explain: '',
+        signature: '',
+        dateSignature: '',
+        businessHead: '',
+        dateBusinessHead: '',
+        businessHeadApproved: '',
+        finance: '',
+        dateFinance: '',
+        financeApproved: '',
+        oecSignature: '',
+        dateOec: '',
+        oecApproved: '',
+        estado: '',
+        aprobadores: Map({})
     }),
     abbott10: Map({
         date: today
