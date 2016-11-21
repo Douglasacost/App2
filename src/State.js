@@ -207,7 +207,15 @@ export default Map({
         aprobadores: Map({})
     }),
     abbott10: Map({
-        date: today
+        nombre: '',
+        direccion: '',
+        nombreContacto: '',
+        numeroTelefono: '',
+        list: '',
+        solicitante: '',
+        cargo: '',
+        fechaFirmaDelSolicitante: '',
+        estado: ''
     }),
     abbott101: Map({
         fecha: '',
