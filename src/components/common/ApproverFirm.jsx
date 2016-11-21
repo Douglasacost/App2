@@ -30,28 +30,32 @@ class ApproverFirm extends Component {
         let handleReject = this.handleClick.bind(this, 'no');
         return (
             <div className={classes}>
-                <span className='Firm-label'>{label}</span>
-                <span className='Firm-label'><u>{aprobador}</u></span>
-                <DateInput className='' 
-                    label='Fecha:' 
-                    stringDate={today} 
-                    input=''
-                    form=''
-                    disabled={true} />
-                { (aprobado !== undefined && aprobado !== null) ?
-                    ( (aprobado === 'si') ?
-                        <span className='Firm-approvedImages'>aprobado</span>
+                <div className='Firm-top'>
+                    <span className='Firm-label'>{label}</span>
+                    <span className='Firm-label'><u>{aprobador}</u></span>
+                </div>
+                <div className='Firm-bottom' >
+                    <DateInput className='' 
+                        label='Fecha:' 
+                        stringDate={today} 
+                        input=''
+                        form=''
+                        disabled={true} />
+                    { (aprobado !== undefined && aprobado !== null) ?
+                        ( (aprobado === 'si') ?
+                            <span className='Firm-approvedImages'>aprobado</span>
+                            :
+                            <span className='Firm-approvedImages'>Rechazado</span>
+                        )
                         :
-                        <span className='Firm-approvedImages'>Rechazado</span>
-                    )
-                    :
-                    ( (aprobador === user) &&
-                        <div className='mui-container'>
-                            <button className="mui-btn mui-btn--primary" onClick={handleApprove}>Aprobar</button>
-                            <button className="mui-btn mui-btn--primary" onClick={handleReject}>Rechazar</button>
-                        </div>
-                    )
-                }
+                        ( (aprobador === user) &&
+                            <div className='mui-container'>
+                                <button className="mui-btn mui-btn--primary" onClick={handleApprove}>Aprobar</button>
+                                <button className="mui-btn mui-btn--primary" onClick={handleReject}>Rechazar</button>
+                            </div>
+                        )
+                    }
+                </div>
             </div>
         );
     }

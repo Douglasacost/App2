@@ -86,8 +86,11 @@
       margin-top: 50px;
     }
   }
-  .Firm-container {
-    .Firm-textInput {
+  .Firm {
+    &-container {
+      margin: 20px 0;
+    }
+    &-textInput {
       width: 300px;
       display: inline-block;
       margin: 0 20px 0 0;
@@ -96,8 +99,16 @@
       display: inline-block;
       margin: 0 10px;
     }
-    .Firm-label {
+    &-label {
       margin-right: 20px;
+    }
+    &-top{
+      display: block;
+      width: 95%;
+    }
+    &-bottom {
+      display: block;
+      width: 95%;
     }
   }
   .Checkbox-container {
@@ -140,7 +151,7 @@
         margin: 0;
         span {
           width: 95%;
-          white-space: nowrap;
+          white-space: normal;
           display: block;
         }
       }
