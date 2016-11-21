@@ -14,6 +14,7 @@ import moment from 'moment';
 var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
+const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const booleanOption = [ 'si', 'no'];
 const impactOptiones = [ 'Hospital', 'Regional', 'Nacional'];
@@ -36,7 +37,7 @@ export default class abbott05 extends Component {
         if (formId){
             this.getDataFromList(formId);
         } else {
-            formApiInstance.getDataList('/sites/forms/',
+            formApiInstance.getDataList(sharepointUrl,
                 'Approvers',
                 form,
                 'aprobadores',
@@ -51,7 +52,7 @@ export default class abbott05 extends Component {
                          'gerenteDeDistritoAprobo', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDelPaisAprobo', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal', 'fechaDirectoLegal',
                          'directorLegalAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'solicitante'
                           ];
-        let data = formApiInstance.getData('/sites/forms/',
+        let data = formApiInstance.getData(sharepointUrl,
             'abbott05', 
             keysNames, 
             formId, 
@@ -69,7 +70,7 @@ export default class abbott05 extends Component {
         } else {
             formState = this.props.abbott05.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente');
         }
-        formApiInstance.postData('/sites/forms',
+        formApiInstance.postData(sharepointUrl,
             'Abbott05',
             'Abbott05',
             formState,

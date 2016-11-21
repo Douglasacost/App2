@@ -17,6 +17,7 @@ import $ from "jquery";
 var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
+const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const requiereFirma = ['si', 'no'];
 const orderType = [ 'Orden de compra emitida después del evento', 'Proveedor único (no cotizaciones adicionales)'];
@@ -32,7 +33,7 @@ export default class AbbottExcepcionCompra extends Component {
         if (formId){
             this.getDataFromList(formId);
         } else {
-            formApiInstance.getDataList('/sites/forms/',
+            formApiInstance.getDataList(sharepointUrl,
                 'Approvers',
                 form,
                 'aprobadores',
@@ -44,7 +45,7 @@ export default class AbbottExcepcionCompra extends Component {
         console.log('entered get');
         const realURL = 'https://xourse.sharpoint.com/sites/forms/_vti_bin/listdata.svc/Excepci%C3%B3nDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepcion,FechaFirmaDelSolicitante';
         let keysNames = ['fecha','tipoDeOrden','ordenDeCompra','proveedor','bienesOServiciosSolicitados','monto','moneda','razonDeExcepcion','fechaFirmaDelSolicitante','fechaFirmaDelSolicitante','fechaFirmaDelJefeInmediato','fechaFirmaDelGerente', 'jefeInmediato', 'gerenteGeneral', 'requiereFirmaDirector', 'jefeInmediatoAprobo', 'gerenteGeneralAprobo', 'solicitante', 'estado'];
-        let data = formApiInstance.getData('/sites/forms/',
+        let data = formApiInstance.getData(sharepointUrl,
             'ExcepcionDeCompra', 
             keysNames, 
             formId, 
@@ -63,7 +64,7 @@ export default class AbbottExcepcionCompra extends Component {
             formState = this.props.abbottExcepcionCompra.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente');
         }
         let teststate = this.props.abbottExcepcionCompra.toJS();
-        formApiInstance.postData('/sites/forms',
+        formApiInstance.postData(sharepointUrl,
             'ExcepcionDeCompra',
             'Abbott01',
             formState,

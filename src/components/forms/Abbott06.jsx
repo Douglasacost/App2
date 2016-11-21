@@ -15,6 +15,7 @@ import moment from 'moment';
 var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
+const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const notes = {
         footNotes: [{text: 'Please note that consultant compensation must not be offered or given with the intent to induce, or in exchange for, an explicit agreement or understanding that Abbott products will be used, purchased, leased, ordered, prescribed, recommended, or arranged for or provided formulary or other preferential or qualified status.'}]
@@ -30,7 +31,7 @@ export default class Abbott06 extends Component {
         if (formId){
             this.getDataFromList(formId);
         } else {
-            formApiInstance.getDataList('/sites/forms/',
+            formApiInstance.getDataList(sharepointUrl,
                 'Approvers',
                 form,
                 'aprobadores',
@@ -43,7 +44,7 @@ export default class Abbott06 extends Component {
         let keysNames = ['name','date','phone','email','division','nameHcp','hcpTier','amount', 'explain',
                          'signature', 'dateSignature', 'businessHead', 'dateBusinessHead', 'businessHeadApproved', 'finance', 'dateFinance', 'financeApproved', 'oecSignature',
                          'dateOec', 'oecApproved', 'estado'];
-        let data = formApiInstance.getData('/sites/forms/',
+        let data = formApiInstance.getData(sharepointUrl,
             'Abbott06', 
             keysNames, 
             formId, 
@@ -61,7 +62,7 @@ export default class Abbott06 extends Component {
         } else {
             formState = this.props.abbott06.set('signature', this.props.user.get('displayName')).set('dateSignature', moment().toISOString()).set('estado', 'Pendiente');
         }
-        formApiInstance.postData('/sites/forms',
+        formApiInstance.postData(sharepointUrl,
             'Abbott06',
             'Abbott06',
             formState,
