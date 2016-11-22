@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import { Map, fromJS, List } from 'immutable';
 
+const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
+
 function formApi() {
   this.getData = function(url, listname, fields, formId, form, callback) {
     let mapped = Map({});
@@ -73,7 +75,7 @@ function formApi() {
             success: function(data){
                 var message = "Su aprobacion ha sido guardada";
                 alert(message);
-                window.location.href = "https://xourse.sharepoint.com/sites/forms"
+                window.location.href = sharepointUrl;
             },
             error:  function(data){console.log(data);}
         });
@@ -91,7 +93,7 @@ function formApi() {
                 var id = data.d.Id;
                 var message = "Su forma ha sido enviada correctamente. El id de la forma es '" + id + "'";
                 alert(message);
-                window.location.href = "https://xourse.sharepoint.com/sites/forms"
+                window.location.href = sharepointUrl;
             },
             error:  function(data){console.log(data);}
         });

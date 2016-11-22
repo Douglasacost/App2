@@ -211,7 +211,18 @@ export default Map({
         direccion: '',
         nombreContacto: '',
         numeroTelefono: '',
-        list: '',
+        list: List([
+            {
+                nombre: 'alberto',
+                cargo: 'dev',
+                gobierno: 'si',
+                rol: 'sup',
+                impacto: 'Hospital',
+                escala: 'nacional',
+                interes: 'si',
+                abbott: 'no'
+            }
+        ]),
         solicitante: '',
         cargo: '',
         fechaFirmaDelSolicitante: '',

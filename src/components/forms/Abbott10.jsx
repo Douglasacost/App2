@@ -5,6 +5,7 @@ import Firm from '../common/Firm';
 import Notes from '../common/Notes';
 import TextInputGroup from '../common/TextInputGroup';
 import SubsidiaryTable from '../common/SubsidiaryTable';
+import NumberInput from '../common/NumberInput';
 import moment from 'moment';
 
 var formApi = require('../../modules/FormApi');
@@ -32,13 +33,6 @@ export default class Abbott10 extends Component {
         var formId = this.props.params.id;
         if (formId){
             this.getDataFromList(formId);
-        } else {
-            formApiInstance.getDataList(sharepointUrl,
-                'Approvers',
-                form,
-                'aprobadores',
-                this.props.setField.bind(this)
-            );
         }
     }
     getDataFromList(formId) {
@@ -77,7 +71,7 @@ export default class Abbott10 extends Component {
         let { abbott10, user } = this.props;
         return (
             <div className='Form MainScreen'>
-                <form className='Form-container Abbot10' action="#">
+                <form className='Form-container Abbott10' action="#">
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CACMP-DR ABBOTT 010</span>
                         <span className='Form-text Form-state'>Estado: {abbott10.get('estado')}</span>
@@ -88,9 +82,9 @@ export default class Abbott10 extends Component {
                         <TextInput label='Nombre de la organización/beneficiario:' value={abbott10.get('nombre')} id='nombre' form={form} className='Form-textInputBox'/>
                         <TextInput label='Dirección de la organización/beneficiario:' value={abbott10.get('direccion')} id='direccion' form={form} className='Form-textInputBox'/>
                         <TextInput label='Nombre del contacto de la organización:' value={abbott10.get('nombreContacto')} id='nombreContacto' form={form} className='Form-textInputBox'/>
-                        <NumberInput label='Número de telefono de la organización:' id='numeroTelefono'value={abbottExcepcionCompra.get('numeroTelefono')} className='Form-textInputBox' form={form}/>
+                        <NumberInput label='Número de telefono de la organización:' id='numeroTelefono'value={abbott10.get('numeroTelefono')} className='Form-textInputBox' form={form}/>
                         <span className='Form-label'>Indique la lista de los nombres y solicitantes de los miembros de la Junta Directiva y/o Comité Ejecutivo:</span>
-                        <SubsidiaryTable className='Table'/>
+                        <SubsidiaryTable list={abbott10.get('list')} form={form} input='list' className='Table Table--Subsidiary'/>
                         <Notes notes={notes} />
                         <TextInput label='Cargo:' value={abbott10.get('cargo')} id='cargo' form={form} className='Form-textInputBox'/>
                         <Firm label='Cuestionario de Diligencia Debida completado por:' user={user.get('displayName')} solicitante={abbott10.get('solicitante')} stringDate={abbott10.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
