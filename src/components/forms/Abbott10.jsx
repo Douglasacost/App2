@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Map, fromJS, List } from 'immutable';
 import TextInput from '../common/TextInput';
 import DateInput from '../common/DateInput';
 import Firm from '../common/Firm';
@@ -60,12 +61,19 @@ export default class Abbott10 extends Component {
         } else {
             formState = this.props.abbott10.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente');
         }
+        formState = formState.delete('list');
         formApiInstance.postData(sharepointUrl,
             'Abbott10',
             'Abbott10',
             formState,
             this.props.params.id
         );
+    }
+    handleSubmitTable(e){
+        e.preventDefault();
+        let tableAsJson = this.props.abbott10.get('list').toJS();
+        console.log(tableAsJson);
+        formApiInstance.postBatchRequest(tableAsJson);
     }
     render() {
         let { abbott10, user } = this.props;
@@ -90,6 +98,12 @@ export default class Abbott10 extends Component {
                         <Firm label='Cuestionario de Diligencia Debida completado por:' user={user.get('displayName')} solicitante={abbott10.get('solicitante')} stringDate={abbott10.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
                     </div>
                 </form>
+                { (abbott10.get('estado') !== 'Aprobado' && abbott10.get('estado') !== 'Rechazado' ) &&
+                    <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                }
+                { (abbott10.get('estado') !== 'Aprobado' && abbott10.get('estado') !== 'Rechazado' ) &&
+                    <button className="mui-btn mui-btn--primary" onClick={this.handleSubmitTable.bind(this)}>Enviar</button>
+                }
             </div>
         );
     }

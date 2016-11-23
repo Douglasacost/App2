@@ -12,16 +12,8 @@ class SubsidiaryTable extends Component {
     }
     handleAdd(e){
         e.preventDefault();
-        console.log(this.props.listX);
-        // let nameVal = document.getElementById('nameSetter'),
-        //     cargoVal = document.getElementById('cargoSetter'),
-        //     gobiernoVal = document.getElementById('gobiernoSetter'),
-        //     rolVal = document.getElementById('rolSetter'),
-        //     impactoVal = document.getElementById('impactoSetter'),
-        //     escalaVal = document.getElementById('escalaSetter'),
-        //     interesVal = document.getElementById('interesSetter'),
-        //     abbottVal = document.getElementById('abbottSetter'),
         let formElements = document.getElementById('addItem').elements;
+        console.log(formElements);
         let data = {};
         let array = this.props.list.toArray();
         for (var i=0; i<formElements.length; i++) {
@@ -29,7 +21,9 @@ class SubsidiaryTable extends Component {
                 value = formElements[i].value;
             console.log(name);
             console.log(value);
-            data[name] = value;
+            if (value !== ''){
+                data[name] = value;
+            }
         }
         console.log(data);
         array.push(data);
@@ -39,7 +33,6 @@ class SubsidiaryTable extends Component {
     render() {
         let { className, label, list, form, input } = this.props;
         console.log(list);
-        var listX = {test: 'testText'};
         var tableFields = []; 
         var rows = [];
         for (var i=0; i < 8; i++) {
