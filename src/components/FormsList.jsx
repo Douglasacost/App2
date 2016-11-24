@@ -7,7 +7,6 @@ const formLinks = [
     {name: 'CACMP-DR ABBOTT 04 Racional del Evento.', route: 'abbott04'},
     {name: 'CACMP-DR ABBOTT 05 Racional de Servicios Profesionales a Contratar', route: 'abbott05'},
     {name: 'CACMP-DR ABBOTT 06.1 International FMV Exception Form_FINAL protected', route: 'abbott06'},
-    {name: 'CACMP-DR ABBOTT 10 Solicitud de Subvenciones Educativas, Becas y Donaciones a completar por el Beneficiario', route: 'abbott10'},
     {name: 'CACMP-DR ABBOTT 10.1 Solicitud de Becas y Donaciones a completar por Abbott', route: 'abbott10-1'},
     {name: 'CACMP-DR ABBOTT 11 Solicitud de Excepción', route: 'abbott11'},
     {name: 'Excepción de Compras - CFR', route: 'abbottExcepcionCompra'},
@@ -22,7 +21,7 @@ export default class FormsList extends Component {
     render() {
         return (
             <div>
-                <List style={{width: '500px'}}>
+                <List style={{width: '100%'}}>
                         {formLinks.map(function(form, i){
                             let href = '#/' + form.route
                             return (

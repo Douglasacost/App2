@@ -220,7 +220,8 @@ export default Map({
                 impacto: 'Hospital',
                 escala: 'nacional',
                 interes: 'si',
-                abbott: 'no'
+                abbott: 'no',
+                idPadre: '25'
             }
         ]),
         solicitante: '',
@@ -301,7 +302,36 @@ export default Map({
         estado: ''
     }),
     abbottObjetivosActividad: Map({
-        date: today
+        division: '',
+        linea: '',
+        fecha: '',
+        hora: '',
+        lugar: '',
+        pais: '',
+        objetivo: '',
+        list: '',
+        reunionHcp: '',
+        focus: '',
+        servicio: '',
+        promocion: '',
+        reunionEmpleados: '',
+        educacionPacientes: '',
+        educacionEmpleados: '',
+        reunionCliente: '',
+        otro: '',
+        otroComentario: '',
+        producto: '',
+        material: '',
+        accionesDeSeguimiento: '',
+        comentariosAdicionales: '',
+        montoTotal: '',
+        nombre: '',
+        fechaFirmaVentas: '',
+        gerenteDeDistrito: '',
+        fechaGerenteDeDistrito: '',
+        gerenteDeDistritoAprobo: '',
+        aprobadores: Map({}),
+        estado: ''
     }),
     abbottExpensesReport: Map({
         date: today

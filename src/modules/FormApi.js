@@ -162,7 +162,7 @@ function formApi() {
       // create request in batch to get all items after all are created
       endpoint = _spPageContextInfo.webAbsoluteUrl
                     + '/_api/web/lists/getbytitle(\'subvenciones\')'
-                    + '/items?$orderby=Title';
+                    + '/items?$filter=idPadre eq 25';
 
 
       batchContents.push('--batch_' + batchGuid);
@@ -178,7 +178,7 @@ function formApi() {
       batchBody = batchContents.join('\r\n');
 
       // create the batch
-      console.debug(batchBody);
+      console.log(batchBody);
 
       // create the request endpoint 
       var endpoint = _spPageContextInfo.webAbsoluteUrl
