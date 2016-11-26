@@ -9,7 +9,6 @@ function formApi() {
     let filteredData = Map({});
     let id = formId;
     let keysNames = [];
-    console.log('inside getData');
     fields.map(function(key){
         let val = firstToUpper(key);
         keysNames.push(val);
@@ -83,7 +82,6 @@ function formApi() {
         mapped = mapped.set(upperKey, value);
     });
     var data = mapped.remove('Aprobadores').toJS();
-    console.log(data);
     var item = $.extend({
         "__metadata": { "type": getListItemType(elementName)}
     }, data);
