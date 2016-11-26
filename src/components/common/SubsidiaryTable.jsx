@@ -33,22 +33,6 @@ class SubsidiaryTable extends Component {
     render() {
         let { className, label, list, form, input } = this.props;
         console.log(list);
-        var tableFields = []; 
-        var rows = [];
-        for (var i=0; i < 8; i++) {
-            var index = i + 1 ;
-            tableFields.push(
-                <td key={index}><TextInput label='' className='Table-textInputBox'/></td>
-            );
-        }
-        for (var i=0; i < 12; i++) {
-            var index = i + 1 ;
-            rows.push(
-                <tr key={index}>
-                    {tableFields}
-                </tr>
-            );
-        }
         return (
             <div className={className}>
                 <span className='Form-label'>{label}</span>

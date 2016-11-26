@@ -26,6 +26,7 @@ export default class abbottObjetivosActividad extends Component {
         var formId = this.props.params.id;
         if (formId){
             this.getDataFromList(formId);
+            this.getTableData(formId);
         } else {
             formApiInstance.getDataList(sharepointUrl,
                 'Approvers',
@@ -49,6 +50,17 @@ export default class abbottObjetivosActividad extends Component {
             this.props.setFormData.bind(this)
             );
     }
+    getTableData(formId){
+        let keysNames = ['numero','nombre','empleado','profesionalDeSalud', 'empleadoDelGobierno', 'institucion', 'puesto'];
+        let data = formApiInstance.getTableData(
+            'participantes', 
+            keysNames, 
+            formId, 
+            form,
+            'list',
+            this.props.setField.bind(this)
+            );
+    }
     handleSubmit(e){
         e.preventDefault();
         var formApiInstance = new formApi();
@@ -64,8 +76,14 @@ export default class abbottObjetivosActividad extends Component {
             'ObjetivosActividad',
             'ObjetivosActividad',
             formState,
-            this.props.params.id
+            this.props.params.id,
+            this.handleSubmitTable.bind(this)
         );
+    }
+    handleSubmitTable(id){
+        let tableAsJson = this.props.abbottObjetivosActividad.get('list').toJS();
+        console.log(tableAsJson);
+        formApiInstance.postBatchRequest( 'participantes', tableAsJson, id);
     }
     render() {
         let { abbottObjetivosActividad, user } = this.props;
@@ -88,7 +106,7 @@ export default class abbottObjetivosActividad extends Component {
                         <span className='Form-label'>Objetivo de la actividad o interacción, indicar el nombre del conferencista si aplica:</span>
                         <TextBoxInput rows='3' id='objetivo' value={abbottObjetivosActividad.get('objetivo')} form={form}/>
                         <span className='Form-label'>Participantes (Para actividades o eventos con participación mayor de 4 adjuntar lista de participantes)</span>
-                        <ActivityPeopleTable className='Table'/>
+                        <ActivityPeopleTable list={abbottObjetivosActividad.get('list')} form={form} input='list' className='Table'/>
                         <span className='Form-label'>Tipo de actividad</span>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'

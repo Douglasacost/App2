@@ -309,7 +309,7 @@ export default Map({
         lugar: '',
         pais: '',
         objetivo: '',
-        list: '',
+        list: List([]),
         reunionHcp: '',
         focus: '',
         servicio: '',

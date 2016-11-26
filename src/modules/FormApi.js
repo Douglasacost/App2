@@ -9,6 +9,7 @@ function formApi() {
     let filteredData = Map({});
     let id = formId;
     let keysNames = [];
+    console.log('inside getData');
     fields.map(function(key){
         let val = firstToUpper(key);
         keysNames.push(val);
@@ -50,7 +51,32 @@ function formApi() {
         }
     });
   }
-  this.postData = function(url, listname, elementName, metadata, id){
+  this.getTableData = function(listname, keysNames, formId, form, input, callback) {
+      let filteredArray = [];
+      let id = formId;
+      $.ajax({
+        url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('" + listname + "')/items?$filter=idPadre eq " + id,
+        method: "GET",
+        headers: { "Accept": "application/json; odata=verbose" },
+        success: function (data) {
+            console.log(data); // Returns JSON collection of the results
+            let dataArray = data.d.results;
+            dataArray.map(function(obj){
+                let rObj = {};
+                keysNames.map(function(key){
+                    rObj[key] = obj[key];
+                });
+                filteredArray.push(rObj);
+            });
+            let listData = List(filteredArray);
+            callback(form, input, listData);
+        },
+        error: function (data) {
+            failure(data);
+        }
+    });
+  }
+  this.postData = function(url, listname, elementName, metadata, id, callback){
     let mapped = Map({});
     metadata.map(function(value, key){
         let upperKey = firstToUpper(key);
@@ -92,17 +118,19 @@ function formApi() {
             success: function(data){
                 var id = data.d.Id;
                 var message = "Su forma ha sido enviada correctamente. El id de la forma es '" + id + "'";
-                alert(message);
-                window.location.href = sharepointUrl;
+                if (callback) {
+                    callback(id);
+                } else {
+                    alert(message);
+                    window.location.href = sharepointUrl;
+                }
             },
             error:  function(data){console.log(data);}
         });
     }
   }
-  this.postBatchRequest = function(driversAsJson) {
-      console.log('postBatchRequest()', driversAsJson);
-
-
+  this.postBatchRequest = function(listname, tableAsJson, parentId ) {
+      console.log('postBatchRequest()', tableAsJson);
       // generate a batch boundary
       var batchGuid = generateUUID();
 
@@ -115,19 +143,20 @@ function formApi() {
       temp.href = _spPageContextInfo.webAbsoluteUrl;
       var host = temp.hostname;
 
-      // for each driver...
-      for (var driverIndex = 0; driverIndex < driversAsJson.length; driverIndex++) {
+      // for each listItem...
+      for (var i = 0; i < tableAsJson.length; i++) {
 
-        var driver = driversAsJson[driverIndex];
+        var listItem = tableAsJson[i];
+        listItem.idPadre = parentId.toString();
 
         // create the request endpoint
         var endpoint = _spPageContextInfo.webAbsoluteUrl
-                       + '/_api/web/lists/getbytitle(\'subvenciones\')'
-                       + '/items';
+                       + "/_api/web/lists/getbytitle('" + listname + "')"
+                       + "/items";
 
         var item = $.extend({
-            "__metadata": { "type": "SP.Data.SubvencionesListItem"}
-        }, driver);
+            "__metadata": { "type": getListItemType(listname)}
+        }, listItem);
 
         // create the changeset
         batchContents.push('--changeset_' + changeSetId);
@@ -161,8 +190,8 @@ function formApi() {
 
       // create request in batch to get all items after all are created
       endpoint = _spPageContextInfo.webAbsoluteUrl
-                    + '/_api/web/lists/getbytitle(\'subvenciones\')'
-                    + '/items?$filter=idPadre eq 25';
+                    + "/_api/web/lists/getbytitle('" + listname + "')"
+                    + "/items?$filter=idPadre eq " + parentId;
 
 
       batchContents.push('--batch_' + batchGuid);
@@ -197,7 +226,7 @@ function formApi() {
         headers: batchRequestHeader,
         data: batchBody,
         success: function (response) {
-          console.log('.. create driver PASS ', response);
+          console.log('.. create listItem PASS ', response);
 
           var responseInLines = response.split('\n');
 
@@ -208,16 +237,19 @@ function formApi() {
               var tryParseJson = JSON.parse(responseInLines[currentLine]);
 
               // clear the view model
-              // set response > drivers collection
+              // set response > listItems collection
               console.log(tryParseJson.d.results);
 
             } catch (e) {
               // don't do anything... just keep moving
             }
           }
+          var message = "Su forma ha sido enviada correctamente. El id de la forma es '" + parentId + "'";
+          alert(message);
+          window.location.href = sharepointUrl;
         },
         fail: function (error) {
-          console.log('.. create driver FAIL ', error);
+          console.log('.. create listItem FAIL ', error);
         }
       });
     }
