@@ -19,7 +19,7 @@ var formApiInstance = new formApi();
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const eventoTo = [ 'Medicos', 'Publico general', 'Farmacias', 'Medios', 'Fuerza de Ventas'];
-const planedExpenses = ['Gatos Planificados', 'cantidad'];
+const planedExpenses = ['Gatos Planificados', 'Cantidad'];
 const expensesList = List([
     {label: 'Hotel/Alojamiento', id: 'hotel'},
     {label: 'Transporte Aereo', id: 'transporteAereo'},
@@ -166,7 +166,7 @@ export default class Abbott04 extends Component {
                         { (this.props.params.id) ?
                             <ApproverFirm label='Gerente Medico:' aprobador={abbott04.get('gerenteMedico')} aprobado={abbott04.get('gerenteMedicoAprobo')} stringDate={abbott04.get('fechaGerenteMedico')} form={form} dateInput='fechaGerenteMedico' approveInput='gerenteMedicoAprobo' user={user.get('displayName')} />
                             :
-                            <Dropdown options={abbott04.get('aprobadores')} label='Seleccione Gerente de Producto' selected={abbott04.get('gerenteMedico')} input='gerenteMedico' form={form} />
+                            <Dropdown options={abbott04.get('aprobadores')} label='Seleccione Gerente Medico' selected={abbott04.get('gerenteMedico')} input='gerenteMedico' form={form} />
                         }
                         <Notes notes={notes.medicManager} />
                         { (this.props.params.id)  &&
