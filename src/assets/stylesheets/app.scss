@@ -54,7 +54,7 @@
     &-textInputBox{
       display: block;
       margin-bottom: -20px;
-      width: 50%;
+      width: 100%;
       min-width: 200px;
     }
     &-textAreaBox {
@@ -155,6 +155,7 @@
   }
   .Note {
     &-container {
+      margin-bottom: -25px;
       .Note-list {
         margin: 0;
         span {
@@ -164,7 +165,9 @@
         }
       }
       .mdl-list__item {
-        font-size: 14px;
+        margin-bottom: -25px;
+        font-size: 10px;
+
       }
     }
   }
@@ -209,6 +212,20 @@
       margin-top: 10px;
     }
   }
+  .Abbott01{
+    .Form-dateInput--marginright{
+      .Form-dateLabel {
+        margin-right: 51px;
+      }
+    }
+  }
+  .Abbott04{
+    table{
+      input{
+        text-align: right;
+      }
+    }
+  }
   .Abbott06 {
     td {
       width: 400px;
@@ -241,6 +258,14 @@
       input{
         outline: none;
         border: none;
+      }
+    }
+    .Table{
+      table {
+          border-collapse: collapse;
+      }
+      table, th, td {
+          border: 1px solid black;
       }
     }
   }
