@@ -17,6 +17,7 @@ const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const booleanOption = [ 'si', 'no'];
 const impactOptiones = [ 'Hospital', 'Regional', 'Nacional'];
+const localidad = [ 'Nacional/Local', 'Internacional'];
 const footNotes = [
         {
             text: '* Requerido para oficiales de Gobierno.'
@@ -49,11 +50,11 @@ export default class Abbott01 extends Component {
     }
     getDataFromList(formId) {
         console.log('entered get');
-        let keysNames = ['nacional','internacional','fecha','nombreDelSolicitante','unidadDeNegocio','nombreHcp','especialidadHcp','paisDeResidencia','empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
+        let keysNames = ['localidad','fecha','nombreDelSolicitante','unidadDeNegocio','nombreHcp','especialidadHcp','paisDeResidencia','empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'asociacion', 'responsabilidades', 'pratrocinioIncluye', 'patrocinadoPreviamente', 'nombrePatrocinioPrevio', 'lugarPatrocinioPrevio', 'congreso', 'nombreDelCongreso', 'paisCiudad', 'lugar', 'fechaDeInicio',
                          'fechaDeFinalizacion', 'gerenteDeDistrito', 'fechaGerenteDeDistrito', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal',
                          'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'registro', 'transporte', 'hotel','comidas', 'eventoConsistente', 'contenidoDeEspecialidad', 'contenidoFuerte',
-                         'hcpNecesidadLegitima', 'hcpCompartira', 'conocimientoNecesario', 'gerenteDeDistritoAprobo', 'gerenteDelPaisAprobo'];
+                         'hcpNecesidadLegitima', 'hcpCompartira', 'conocimientoNecesario', 'gerenteDeDistritoAprobo', 'gerenteDelPaisAprobo', 'pais', 'division', 'producto'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott01', 
             keysNames, 
@@ -84,15 +85,23 @@ export default class Abbott01 extends Component {
         let { abbott01, user } = this.props;
         return (
             <div className='Form MainScreen'>
-                <form className='Form-container Abbot01' action="#">
+                <form className='Form-container Abbott01' action="#">
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CACMP-DR ABBOTT 001</span>
                         <span className='Form-text Form-state'>Estado: {abbott01.get('estado')}</span>
                         <span className='Form-text Form-description'>SOLICITUD DE PATROCINIO</span>
                     </div>
                     <div className='Form-fieldSet'>
-                        <TextInput label='Nacional/Local:' value={abbott01.get('nacional')} id='nacional' form={form} className='Form-textInputBox'/>
-                        <TextInput label='Internacional:' value={abbott01.get('internacional')} id='internacional' form={form} className='Form-textInputBox'/>
+                        <RadioInput 
+                            label='' 
+                            name='localidad'
+                            id='localidad'
+                            form={form}
+                            selected={abbott01.get('localidad')}
+                            options={localidad}/>
+                            <TextInput label='País:' value={abbott01.get('pais')} id='pais' form={form} className='Form-textInputBox'/>
+                            <TextInput label='Division:' value={abbott01.get('division')} id='division' form={form} className='Form-textInputBox'/>
+                            <TextInput label='Producto:' value={abbott01.get('producto')} id='producto' form={form} className='Form-textInputBox'/>
                         <DateInput className='' label='Fecha de Solicitud:' stringDate={abbott01.get('fecha')} form={form} input='fecha'/>
                         <TextInput label='Nombre del solicitante:' value={abbott01.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Unidad de Negocio:' value={abbott01.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>
@@ -124,7 +133,7 @@ export default class Abbott01 extends Component {
                             options={impactOptiones}/>
                         <TextInput label='Asociación Medica a la cual pertenece el HCP:' value={abbott01.get('asociacion')} id='asociacion' form={form} className='Form-textInputBox'/>
                         <TextInput label='Responsabilidades Academicas, si aplica:' value={abbott01.get('responsabilidades')} id='responsabilidades' form={form} className='Form-textInputBox'/>
-                        <span className='Form-label'>Aprobaciones:</span>
+                        <span className='Form-label'>El patrocinio incluye:</span>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='Registro/Inscripción'
@@ -197,9 +206,9 @@ export default class Abbott01 extends Component {
                         <TextInput label='Nombre del Congreso:' value={abbott01.get('nombreDelCongreso')} id='nombreDelCongreso' form={form} className='Form-textInputBox'/>
                         <TextInput label='Pais/Cuidad:' value={abbott01.get('paisCiudad')} id='paisCiudad' form={form} className='Form-textInputBox'/>
                         <TextInput label='Lugar:' value={abbott01.get('lugar')} id='lugar' form={form} className='Form-textInputBox'/>
-                        <DateInput className='Form-dateInput' label='Fecha de Inicio:' stringDate={abbott01.get('fechaDeInicio')} form={form} input='fechaDeInicio'/>
-                        <DateInput className='Form-dateInput' label='Fecha de Finalizacion:' stringDate={abbott01.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion'/>
-                        <span className='Form-label'>Solicitantes:</span>
+                        <DateInput className='Form-dateInput--marginright' label='Fecha de Inicio:' stringDate={abbott01.get('fechaDeInicio')} form={form} input='fechaDeInicio'/>
+                        <DateInput className='' label='Fecha de Finalizacion:' stringDate={abbott01.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion'/>
+                        <span className='Form-label Form-label--under '>Solicitantes:</span>
                         { (this.props.params.id) ?
                             <ApproverFirm label='Nombre del Gerente de Distrito:' aprobador={abbott01.get('gerenteDeDistrito')} aprobado={abbott01.get('gerenteDeDistritoAprobo')} stringDate={abbott01.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} />
                             :

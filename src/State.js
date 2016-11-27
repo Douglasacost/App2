@@ -10,8 +10,7 @@ export default Map({
     today: today,
     abbott01: Map({
         estado: '',
-        nacional: '',
-        internacional: '',
+        localida: '',
         fecha: '',
         nombreDelSolicitante: '',
         unidadDeNegocio: '',
