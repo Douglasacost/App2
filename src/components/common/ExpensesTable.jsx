@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextInput from '../common/TextInput';
 import CheckboxInput from '../common/CheckboxInput';
 import DateInput from '../common/DateInput';
+import DatePicker from 'react-datepicker';
 import { setField } from '../../actions/Actions';
 import { connect } from 'react-redux';
 import { Map, fromJS, List } from 'immutable';
@@ -53,7 +54,10 @@ class ExpensesTable extends Component {
                             {list.map(function(listItem, i){
                                         return (
                                             <tr key={i}>
-                                                <td>{listItem.fecha}</td>
+                                                <td><DatePicker
+                                                        todayButton={"Hoy"}
+                                                        selected={listItem.fecha}
+                                                        onChange={()=>{}} disabled={true}/></td>
                                                 <td>{listItem.factura}</td>
                                                 <td>{listItem.pais}</td>
                                                 <td>{listItem.descripcion}</td>
@@ -73,9 +77,14 @@ class ExpensesTable extends Component {
                             }
                             { (this.props.list.size < 12 ) &&
                                 <tr>
-                                    <td><input type="text" placeholder="" name='fecha' /></td>
-                                    <td><input type="text" placeholder="" name='factura' /></td>
-                                    <td><input type="text" placeholder="" name='pais' /></td>
+                                    <td><DatePicker
+                                            todayButton={"Hoy"}
+                                            selected=''
+                                            onChange={()=>{}}
+                                            name='fecha'
+                                            form='addItem' /></td>
+                                    <td><input type="text" placeholder="" name='factura' maxlength="7"/></td>
+                                    <td><input type="text" placeholder="" name='pais' maxlength="4" /></td>
                                     <td><input type="text" placeholder="" name='descripcion' /></td>
                                     <td><input type="text" placeholder="" name='tc' /></td>
                                     <td><input type="text" placeholder="" name='otraMoneda' /></td>

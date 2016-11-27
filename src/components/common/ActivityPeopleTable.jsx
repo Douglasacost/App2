@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextInput from '../common/TextInput';
 import { Textfield } from 'react-mdl';
+import { Checkbox } from 'react-mdl';
 import CheckboxInput from '../common/CheckboxInput';
 import { setField } from '../../actions/Actions';
 import { connect } from 'react-redux';
@@ -25,6 +26,9 @@ class ActivityPeopleTable extends Component {
                 data[name] = value;
             }
         }
+        console.log(data);
+        data[empleadoDelGobierno] = formElements[empleadoDelGobierno].checked;
+        console.log(data);
         let numero = this.props.list.size + 1;
         data.numero = numero.toString();
         console.log(data);
@@ -54,13 +58,14 @@ class ActivityPeopleTable extends Component {
                                 <th>Nombre del puesto en el Hospital o Institucion</th>
                             </tr>
                             {list.map(function(listItem, i){
+                                    let checked = listItem.empleadoDelGobierno;
                                     return (
                                         <tr key={i}>
                                             <td>{listItem.numero}</td>
                                             <td>{listItem.nombre}</td>
                                             <td>{listItem.empleado}</td>
                                             <td>{listItem.profesionalDeSalud}</td>
-                                            <td>{listItem.empleadoDelGobierno}</td>
+                                            <td><Checkbox label='' ripple onChange={()=>{}} checked={checked}/></td>
                                             <td>{listItem.institucion}</td>
                                             <td>{listItem.puesto}</td>
                                         </tr>
@@ -71,7 +76,7 @@ class ActivityPeopleTable extends Component {
                                 <td><input type="text" placeholder="" name='nombre' /></td>
                                 <td><input type="text" placeholder="" name='empleado' /></td>
                                 <td><input type="text" placeholder="" name='profesionalDeSalud' /></td>
-                                <td><input type="text" placeholder="" name='empleadoDelGobierno' /></td>
+                                <td><input type="checkbox" placeholder="" name='empleadoDelGobierno' /></td>
                                 <td><input type="text" placeholder="" name='institucion' /></td>
                                 <td><input type="text" placeholder="" name='puesto' /></td>
                             </tr>
