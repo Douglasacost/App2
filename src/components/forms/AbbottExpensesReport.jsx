@@ -32,6 +32,7 @@ export default class AbbottExpensesReport extends Component {
         var formId = this.props.params.id;
         if (formId){
             this.getDataFromList(formId);
+            this.getTableData(formId);
         } else {
             formApiInstance.getDataList(sharepointUrl,
                 'Approvers',
@@ -56,9 +57,9 @@ export default class AbbottExpensesReport extends Component {
             );
     }
     getTableData(formId){
-        let keysNames = ['numero','nombre','empleado','profesionalDeSalud', 'empleadoDelGobierno', 'institucion', 'puesto'];
+        let keysNames = ['fecha','factura','pais','descripcion', 'tc', 'otraMoneda', 'total'];
         let data = formApiInstance.getTableData(
-            'participantes', 
+            'ExpensesTable', 
             keysNames, 
             formId, 
             form,
@@ -81,13 +82,14 @@ export default class AbbottExpensesReport extends Component {
             'ExpensesReport',
             'ExpensesReport',
             formState,
-            this.props.params.id
+            this.props.params.id,
+            this.handleSubmitTable.bind(this)
         );
     }
     handleSubmitTable(id){
         let tableAsJson = this.props.abbottExpensesReport.get('list').toJS();
         console.log(tableAsJson);
-        formApiInstance.postBatchRequest( 'participantes', tableAsJson, id);
+        formApiInstance.postBatchRequest( 'ExpensesTable', tableAsJson, id);
     }
     render() {
         let { abbottExpensesReport, user } = this.props;
@@ -120,7 +122,7 @@ export default class AbbottExpensesReport extends Component {
                                 <span className='Divider-blue'></span>
                                 <span className='Form-label Form-label--leftAlign'>Descripcion del gasto (Motivo del gasto):</span>
                                 <TextBoxInput rows='3' id='descripcion' value={abbottExpensesReport.get('descripcion')} form={form}/>
-                                <ExpensesTable className='Table' form={form} date={abbottExpensesReport.get('date')} />
+                                <ExpensesTable list={abbottExpensesReport.get('list')} form={form} input='list' className='Table'/>
                                 <span className='Form-label Form-label--leftAlign'>TOTAL EN LETRAS:</span>
                                 <TextInput label='' value={abbottExpensesReport.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox'/>
                                 <Firm label='Firma de Titular:' user={user.get('displayName')} solicitante={abbottExpensesReport.get('titular')} stringDate={abbottExpensesReport.get('fechaFirmaTitular')} form={form} input='fechaFirmaTitular' />                

@@ -66,7 +66,7 @@ class ActivityPeopleTable extends Component {
                                         </tr>
                                     );
                                 })}
-                            <tr><td colSpan="4" scope="colgroup">Agregar nuevo registro</td></tr>
+                            <tr><td colSpan="7" scope="colgroup">Agregar nuevo registro</td></tr>
                             <tr>
                                 <td><input type="text" placeholder="" name='nombre' /></td>
                                 <td><input type="text" placeholder="" name='empleado' /></td>
