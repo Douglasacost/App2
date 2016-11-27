@@ -334,6 +334,25 @@ export default Map({
         estado: ''
     }),
     abbottExpensesReport: Map({
-        date: today
+        fecha: '',
+        solicitante: '',
+        puesto: '',
+        pais: '',
+        descripcion: '',
+        tipoDeGasto: '',
+        list: List([]),
+        totalEnLetras: '',
+        titular: '',
+        fechaFirmaTitular: '',
+        autorizacion: '',
+        fechaFirmaAutorizacion: '',
+        autorizacionAprobo: '',
+        nombreTransferencia: '',
+        aprobadores: Map({}),
+        cuentaBancaria: '',
+        anticipo: '',
+        gastos: '',
+        depositos: '',
+        totalLiquidacion: ''
     })
 });

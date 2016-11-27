@@ -31,7 +31,7 @@ const routes =
         <Route path="abbott11(/:id)" component={Abbott11Container}></Route>
         <Route path="abbottExcepcionCompra(/:id)" component={AbbottExcepcionCompraContainer}></Route>
         <Route path="AbbottObjetivosActividad(/:id)" component={AbbottObjetivosActividadContainer}></Route>
-        <Route path="AbbottExpensesReport" component={AbbottExpensesReportContainer}></Route>
+        <Route path="AbbottExpensesReport(/:id)" component={AbbottExpensesReportContainer}></Route>
     </Route>;
 
 export default routes;

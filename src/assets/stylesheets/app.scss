@@ -38,6 +38,14 @@
     &-container {
       padding: 50px;
     }
+    &-leftContainer {
+      float: left;
+      height: 60px;
+    }
+    &-rightContainer {
+      float: right;
+      height: 60px;
+    }
     &-text {
       font-size: 12px;
       font-family: Arial, Helvetica, sans-serif;
@@ -204,6 +212,36 @@
   .Abbott06 {
     td {
       width: 400px;
+    }
+  }
+  .AbbottExpensesReport{
+    .Form-seventy{
+      width: 90%;
+    }
+    .mui-paddingFix{
+      padding: 0;
+    }
+    .Form-liquidation{
+      table {
+          border-collapse: collapse;
+      }
+      table, th, td {
+          border: 1px solid black;
+      }
+      .mdl-textfield{
+        padding: 0;
+      }
+      .mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+        top: 10px;
+      }
+      .Form-textInputBox{
+        width: 100%;
+        min-width: 0;
+      }
+      input{
+        outline: none;
+        border: none;
+      }
     }
   }
 }

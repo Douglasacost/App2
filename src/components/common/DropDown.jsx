@@ -14,6 +14,8 @@ class Dropdown extends Component {
     render() {
         let { className, form, input, name, options, selected, label } = this.props;
         let handleClick = this.handleClick.bind(this);
+        console.log(options);
+        console.log(selected);
         return (
             <div className='Dropdown-container'>
                 <span className='Dropdown-label'>{label}</span>
