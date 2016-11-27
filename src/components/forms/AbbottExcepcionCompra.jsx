@@ -74,7 +74,7 @@ export default class AbbottExcepcionCompra extends Component {
     render() {
         let { abbottExcepcionCompra, user } = this.props;
         return (
-            <div className='Form mui-container'>
+            <div className='Form MainScreen'>
                 <form className='Form-container AbbottExcepcionCompra' name='AbbottExcepcionCompra'
                     onSubmit={this.handleSubmit.bind(this)}>
                     <div className='Form-titleContainer'>
