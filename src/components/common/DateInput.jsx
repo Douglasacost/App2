@@ -18,7 +18,6 @@ class DateInput extends Component {
         let stringDate = date.toISOString();
         this.props.setField(form, input, stringDate);
     }
-    
     render() {
         let defaultClasses = 'Form-dateInput ';
         let className = this.props.className;

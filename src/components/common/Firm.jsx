@@ -11,7 +11,7 @@ class FirmInput extends Component {
     }
     render() {
         let { className, id, label, stringDate, form, input, user, solicitante } = this.props;
-        let defaultClasses = 'Firm-container ';
+        let defaultClasses = 'Firm-container Firm';
         let classes = defaultClasses.concat(className);
         let today = moment();
         return (

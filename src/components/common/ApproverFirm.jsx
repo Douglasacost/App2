@@ -23,7 +23,7 @@ class ApproverFirm extends Component {
     }
     render() {
         let { className, id, label, stringDate, form, dateInput, approveInput, user, aprobador, aprobado } = this.props;
-        let defaultClasses = 'Firm-container ';
+        let defaultClasses = 'Firm-container Firm ';
         let classes = defaultClasses.concat(className);
         let today = moment();
         let handleApprove = this.handleClick.bind(this, 'si');
@@ -37,11 +37,12 @@ class ApproverFirm extends Component {
                 <div className='Firm-bottom' >
                     <DateInput className='' 
                         label='Fecha:' 
-                        stringDate={today} 
+                        stringDate={(stringDate !== undefined && stringDate !== null && stringDate !== '') ? moment(stringDate) : today } 
                         input=''
                         form=''
                         disabled={true} />
-                    { (aprobado !== undefined && aprobado !== null) ?
+                    {(stringDate !== undefined && stringDate !== null && stringDate !== '') && <span className='Firm-time'>Hora: {moment(stringDate).format("hh:mm:ss a")}</span> }
+                    { (aprobado !== undefined && aprobado !== null && aprobado!== '') ?
                         ( (aprobado === 'si') ?
                             <span className='Firm-approvedImages'>aprobado</span>
                             :

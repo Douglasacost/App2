@@ -105,10 +105,13 @@
     }
     .Form-dateInput {
       display: inline-block;
-      margin: 0 10px;
+      margin: 20px 10px 0 0;
     }
     &-label {
       margin-right: 20px;
+    }
+    &-time{
+      margin-right: 15px;
     }
     &-top{
       display: block;
@@ -155,7 +158,7 @@
   }
   .Note {
     &-container {
-      margin-bottom: -25px;
+      margin-bottom: 25px;
       .Note-list {
         margin: 0;
         span {
@@ -213,6 +216,9 @@
     }
   }
   .Abbott01{
+    .Form-dateInput--marginBottom{
+      margin-bottom: 20px;
+    }
     .Form-dateInput--marginright{
       .Form-dateLabel {
         margin-right: 51px;

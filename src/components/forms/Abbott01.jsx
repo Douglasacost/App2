@@ -15,7 +15,7 @@ var formApiInstance = new formApi();
 
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
-const booleanOption = [ 'si', 'no'];
+const booleanOption = [ 'Si', 'No'];
 const impactOptiones = [ 'Hospital', 'Regional', 'Nacional'];
 const localidad = [ 'Nacional/Local', 'Internacional'];
 const footNotes = [
@@ -71,7 +71,7 @@ export default class Abbott01 extends Component {
         if (formId && formId !== undefined && formId !== null && formId !== '' ){
             formState = this.props.abbott01;    
         } else {
-            formState = this.props.abbott01.set('estado', 'Pendiente');
+            formState = this.props.abbott01.set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
         formApiInstance.postData(sharepointUrl,
             'Abbott01',
@@ -83,6 +83,8 @@ export default class Abbott01 extends Component {
     }
     render() {
         let { abbott01, user } = this.props;
+        let fecha = abbott01.get('fecha');
+        let today = moment();
         return (
             <div className='Form MainScreen'>
                 <form className='Form-container Abbott01' action="#">
@@ -102,7 +104,7 @@ export default class Abbott01 extends Component {
                             <TextInput label='País:' value={abbott01.get('pais')} id='pais' form={form} className='Form-textInputBox'/>
                             <TextInput label='Division:' value={abbott01.get('division')} id='division' form={form} className='Form-textInputBox'/>
                             <TextInput label='Producto:' value={abbott01.get('producto')} id='producto' form={form} className='Form-textInputBox'/>
-                        <DateInput className='' label='Fecha de Solicitud:' stringDate={abbott01.get('fecha')} form={form} input='fecha'/>
+                        <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del solicitante:' value={abbott01.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Unidad de Negocio:' value={abbott01.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>
                         <TextInput label='Nombre del HCP:' value={abbott01.get('nombreHcp')} id='nombreHcp' form={form} className='Form-textInputBox'/>
@@ -207,7 +209,7 @@ export default class Abbott01 extends Component {
                         <TextInput label='Pais/Cuidad:' value={abbott01.get('paisCiudad')} id='paisCiudad' form={form} className='Form-textInputBox'/>
                         <TextInput label='Lugar:' value={abbott01.get('lugar')} id='lugar' form={form} className='Form-textInputBox'/>
                         <DateInput className='Form-dateInput--marginright' label='Fecha de Inicio:' stringDate={abbott01.get('fechaDeInicio')} form={form} input='fechaDeInicio'/>
-                        <DateInput className='' label='Fecha de Finalizacion:' stringDate={abbott01.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion'/>
+                        <DateInput className='Form-dateInput--marginBottom' label='Fecha de Finalizacion:' stringDate={abbott01.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion'/>
                         <span className='Form-label Form-label--under '>Solicitantes:</span>
                         { (this.props.params.id) ?
                             <ApproverFirm label='Nombre del Gerente de Distrito:' aprobador={abbott01.get('gerenteDeDistrito')} aprobado={abbott01.get('gerenteDeDistritoAprobo')} stringDate={abbott01.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} />
@@ -226,13 +228,11 @@ export default class Abbott01 extends Component {
                             <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Gerente de Producto' selected={abbott01.get('gerenteDeProducto')} input='gerenteDeProducto' form={form} />
                         }
                         { (this.props.params.id) ?
-                            <ApproverFirm label='Director Legal:' aprobador={abbott01.get('directorLegal')} aprobado={abbott01.get('directorLegalAprobo')} stringDate={abbott01.get('fechaDirectoLegal')} form={form} dateInput='fechaDirectoLegal' approveInput='directorLegalAprobo' user={user.get('displayName')} />
+                            <ApproverFirm label='*Director Legal:' aprobador={abbott01.get('directorLegal')} aprobado={abbott01.get('directorLegalAprobo')} stringDate={abbott01.get('fechaDirectoLegal')} form={form} dateInput='fechaDirectoLegal' approveInput='directorLegalAprobo' user={user.get('displayName')} />
                             :
                             <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Director Legal' selected={abbott01.get('directorLegal')} input='directorLegal' form={form} />
                         }
-                        { (this.props.params.id)  &&
-                            <ApproverFirm label='Gerente General:' aprobador={abbott01.get('gerenteGeneral')} aprobado={abbott01.get('gerenteGeneralAprobo')} stringDate={abbott01.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
-                        }
+                        <ApproverFirm label='**Gerente General:' aprobador={abbott01.get('gerenteGeneral')} aprobado={abbott01.get('gerenteGeneralAprobo')} stringDate={abbott01.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
                         <Notes notes={footNotes} />
                         { (abbott01.get('estado') !== 'Aprobado' && abbott01.get('estado') !== 'Rechazado' ) &&
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
