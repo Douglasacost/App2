@@ -28,6 +28,7 @@ class ApproverFirm extends Component {
         let today = moment();
         let handleApprove = this.handleClick.bind(this, 'si');
         let handleReject = this.handleClick.bind(this, 'no');
+        let disabled = (state.get('estado') === 'Rechazado') ? true : false ;
         if(flagGerente !== undefined && flagGerente !== null){
             return (
                 <div className={classes}>
@@ -45,12 +46,12 @@ class ApproverFirm extends Component {
                         {(stringDate !== undefined && stringDate !== null && stringDate !== '') && <span className='Firm-time'>Hora: {moment(stringDate).format("hh:mm:ss a")}</span> }
                         { (aprobado !== undefined && aprobado !== null && aprobado!== '') ?
                             ( (aprobado === 'si') ?
-                                <span className='Firm-approvedImages'>aprobado</span>
+                                <span className='Firm-approvedImages'>Aprobado</span>
                                 :
-                                <div>
+                                <span>
                                     <span className='Firm-approvedImages'>Rechazado</span>
-                                    <TextInput label='Comentario del rechazo:' value={state.get('comentarioRechazo')} id='comentarioRechazo' form={form} className='Form-textInputBox'/>
-                                </div>
+                                    <TextInput label='Comentario del rechazo:' value={state.get('comentarioRechazo')} id='comentarioRechazo' form={form} className='Form-textInputBox' disabled={disabled}/>
+                                </span>
                             )
                             :
                             ( (flagGerente) &&
@@ -80,12 +81,12 @@ class ApproverFirm extends Component {
                     {(stringDate !== undefined && stringDate !== null && stringDate !== '') && <span className='Firm-time'>Hora: {moment(stringDate).format("hh:mm:ss a")}</span> }
                     { (aprobado !== undefined && aprobado !== null && aprobado!== '') ?
                         ( (aprobado === 'si') ?
-                            <span className='Firm-approvedImages'>aprobado</span>
+                            <span className='Firm-approvedImages'>Aprobado</span>
                             :
-                            <div>
+                            <span>
                                 <span className='Firm-approvedImages'>Rechazado</span>
-                                <TextInput label='Comentario del rechazo:' value={state.get('comentarioRechazo')} id='comentarioRechazo' form={form} className='Form-textInputBox' disabled={true}/>
-                            </div>
+                                <TextInput label='Comentario del rechazo:' value={state.get('comentarioRechazo')} id='comentarioRechazo' form={form} className='Form-textInputBox' disabled={disabled}/>
+                            </span>
                         )
                         :
                         ( (aprobador === user) &&

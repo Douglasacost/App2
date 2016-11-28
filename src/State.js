@@ -59,6 +59,7 @@ export default Map({
         hcpNecesidadLegitima: '',
         hcpCompartira: '',
         conocimientoNecesario: '',
+        comentarioRechazo: '',
         aprobadores: Map({})
     }),
     abbott02: Map({
@@ -86,6 +87,7 @@ export default Map({
         fechaGerenteGeneral: '',
         gerenteGeneralAprobo: '',
         aprobadores: Map({}),
+        comentarioRechazo: '',
         estado: ''
     }),
     abbott04: Map({
@@ -182,6 +184,7 @@ export default Map({
         fechaGerenteMedico: '',
         gerenteMedicoAprobo: '',
         aprobadores: Map({}),
+        comentarioRechazo: '',
         estado: ''
     }),
     abbott06: Map({
@@ -207,6 +210,7 @@ export default Map({
         dateOec: '',
         oecApproved: '',
         estado: '',
+        comentarioRechazo: '',
         aprobadores: Map({})
     }),
     abbott10: Map({
@@ -230,6 +234,7 @@ export default Map({
         solicitante: '',
         cargo: '',
         fechaFirmaDelSolicitante: '',
+        comentarioRechazo: '',
         estado: ''
     }),
     abbott101: Map({
@@ -257,6 +262,7 @@ export default Map({
         gerenteGeneral: '',
         fechaGerenteGeneral: '',
         gerenteGeneralAprobo: '',
+        comentarioRechazo: '',
         aprobadores: Map({})
     }),
     abbott11: Map({
@@ -281,6 +287,7 @@ export default Map({
         fechaDirectorRegional: '',
         directorRegionalAprobo: '',
         estado: '',
+        comentarioRechazo: '',
         aprobadores: Map({})
     }),
     abbottExcepcionCompra: Map({
@@ -301,6 +308,7 @@ export default Map({
         gerenteGeneralAprobo: '',
         requiereFirmaDirector: '',
         aprobadores: Map({}),
+        comentarioRechazo: '',
         solicitante: '',
         estado: ''
     }),
@@ -334,6 +342,7 @@ export default Map({
         fechaGerenteDeDistrito: '',
         gerenteDeDistritoAprobo: '',
         aprobadores: Map({}),
+        comentarioRechazo: '',
         estado: ''
     }),
     abbottExpensesReport: Map({
@@ -356,6 +365,7 @@ export default Map({
         anticipo: '',
         gastos: '',
         depositos: '',
+        comentarioRechazo: '',
         totalLiquidacion: ''
     })
 });

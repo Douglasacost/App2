@@ -16,7 +16,7 @@ var formApiInstance = new formApi();
 
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
-const booleanOption = [ 'si', 'no'];
+const booleanOption = [ 'Si', 'No'];
 const impactOptiones = [ 'Hospital', 'Regional', 'Nacional'];
 const footNotes = [
         {

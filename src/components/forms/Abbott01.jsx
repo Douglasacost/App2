@@ -244,8 +244,8 @@ export default class Abbott01 extends Component {
                             :
                             <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Director Legal' selected={abbott01.get('directorLegal')} input='directorLegal' form={form} />
                         }
-                        <ApproverFirm label='*Gerente General:' aprobador={abbott01.get('gerenteGeneral')} aprobado={abbott01.get('gerenteGeneralAprobo')} stringDate={abbott01.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(abbott01.get('gerenteGeneral') === user.get('displayName') && abbott01.get('estado') === 'Pendiente' && abbott01.get('empleadoDelGobierno') === 'Si') ? true : false}/>
-                        <Notes notes={footNotes} state={abbott01}/>
+                        <ApproverFirm label='*Gerente General:' aprobador={abbott01.get('gerenteGeneral')} aprobado={abbott01.get('gerenteGeneralAprobo')} stringDate={abbott01.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(abbott01.get('gerenteGeneral') === user.get('displayName') && abbott01.get('estado') === 'Pendiente' && abbott01.get('empleadoDelGobierno') === 'Si') ? true : false} state={abbott01}/>
+                        <Notes notes={footNotes}/>
                         { (abbott01.get('estado') !== 'Aprobado' && abbott01.get('estado') !== 'Rechazado' ) &&
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                         }

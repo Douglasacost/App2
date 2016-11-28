@@ -61,7 +61,7 @@ export default class AbbottExcepcionCompra extends Component {
         if (formId && formId !== undefined && formId !== null && formId !== '' ){
             formState = this.props.abbottExcepcionCompra;    
         } else {
-            formState = this.props.abbottExcepcionCompra.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente');
+            formState = this.props.abbottExcepcionCompra.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
         let teststate = this.props.abbottExcepcionCompra.toJS();
         formApiInstance.postData(sharepointUrl,
@@ -71,8 +71,22 @@ export default class AbbottExcepcionCompra extends Component {
             this.props.params.id
         );
     }
+    setGerenteGenetal(){
+        console.log('set Gerente General');
+        let aprobadores = this.props.abbott04.get('aprobadores').toArray();
+        let gerenteGeneral;
+        console.log(aprobadores);
+        aprobadores.map(function(obj){
+            console.log(obj);
+            if(obj.Cargo === 'GerenteGeneral'){gerenteGeneral = obj.Title}
+        });
+        this.props.setField(form, 'gerenteGeneral', gerenteGeneral);
+    }
     render() {
         let { abbottExcepcionCompra, user } = this.props;
+        let fecha = abbott04.get('fecha');
+        let today = moment();
+        if(abbott04.get('aprobadores').size > 0 && abbott04.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
         return (
             <div className='Form MainScreen'>
                 <form className='Form-container AbbottExcepcionCompra' name='AbbottExcepcionCompra'
@@ -92,7 +106,7 @@ export default class AbbottExcepcionCompra extends Component {
                             form={form}
                             selected={abbottExcepcionCompra.get('tipoDeOrden')}
                             options={orderType}/>
-                        <DateInput className='' label='Fecha:' stringDate={abbottExcepcionCompra.get('fecha')} form={form} input='fecha' />
+                        <DateInput className='' label='Fecha:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <NumberInput label='Orden de Compra:' id='ordenDeCompra'value={abbottExcepcionCompra.get('ordenDeCompra')} className='Form-textInputBox' form={form}/>
                         <TextInput label='Nombre del Proveedor' value={abbottExcepcionCompra.get('proveedor')} id='proveedor' className='Form-textInputBox' form={form}/>
                         <TextInput label='Bienes o Servicios solicitados:' id='bienesOServiciosSolicitados' value={abbottExcepcionCompra.get('bienesOServiciosSolicitados')} className='Form-textInputBox' form={form}/>
