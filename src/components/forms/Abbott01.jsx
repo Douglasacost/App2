@@ -81,10 +81,22 @@ export default class Abbott01 extends Component {
             sharepointUrl
         );
     }
+    setGerenteGenetal(){
+        console.log('set Gerente General');
+        let aprobadores = this.props.abbott01.get('aprobadores').toArray();
+        let gerenteGeneral;
+        console.log(aprobadores);
+        aprobadores.map(function(obj){
+            console.log(obj);
+            if(obj.Cargo === 'GerenteGeneral'){gerenteGeneral = obj.Title}
+        });
+        this.props.setField(form, 'gerenteGeneral', gerenteGeneral);
+    }
     render() {
         let { abbott01, user } = this.props;
         let fecha = abbott01.get('fecha');
         let today = moment();
+        if(abbott01.get('aprobadores').size > 0 && abbott01.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
         return (
             <div className='Form MainScreen'>
                 <form className='Form-container Abbott01' action="#">
@@ -232,7 +244,7 @@ export default class Abbott01 extends Component {
                             :
                             <Dropdown options={abbott01.get('aprobadores')} label='Seleccione Director Legal' selected={abbott01.get('directorLegal')} input='directorLegal' form={form} />
                         }
-                        <ApproverFirm label='**Gerente General:' aprobador={abbott01.get('gerenteGeneral')} aprobado={abbott01.get('gerenteGeneralAprobo')} stringDate={abbott01.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
+                        <ApproverFirm label='*Gerente General:' aprobador={abbott01.get('gerenteGeneral')} aprobado={abbott01.get('gerenteGeneralAprobo')} stringDate={abbott01.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
                         <Notes notes={footNotes} />
                         { (abbott01.get('estado') !== 'Aprobado' && abbott01.get('estado') !== 'Rechazado' ) &&
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>

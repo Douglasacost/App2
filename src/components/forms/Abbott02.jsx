@@ -62,7 +62,7 @@ export default class Abbott02 extends Component {
         if (formId && formId !== undefined && formId !== null && formId !== '' ){
             formState = this.props.abbott02;    
         } else {
-            formState = this.props.abbott02.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente');
+            formState = this.props.abbott02.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
         formApiInstance.postData(sharepointUrl,
             'Abbott02',
@@ -71,8 +71,22 @@ export default class Abbott02 extends Component {
             this.props.params.id
         );
     }
+    setGerenteGenetal(){
+        console.log('set Gerente General');
+        let aprobadores = this.props.abbott02.get('aprobadores').toArray();
+        let gerenteGeneral;
+        console.log(aprobadores);
+        aprobadores.map(function(obj){
+            console.log(obj);
+            if(obj.Cargo === 'GerenteGeneral'){gerenteGeneral = obj.Title}
+        });
+        this.props.setField(form, 'gerenteGeneral', gerenteGeneral);
+    }
     render() {
         let { abbott02, user } = this.props;
+        let fecha = abbott02.get('fecha');
+        let today = moment();
+        if(abbott02.get('aprobadores').size > 0 && abbott02.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
         return (
             <div className='Form MainScreen'>
                 <form className='Form-container Abbott02' action="#">
@@ -82,7 +96,7 @@ export default class Abbott02 extends Component {
                         <span className='Form-text Form-description'>Cuestionario de Diligencia Debida para Individuales </span>
                     </div>
                     <div className='Form-fieldSet'>
-                        <DateInput className='' label='Fecha en la que se esta completando el Cuestionario de Diligencia Debida:' stringDate={abbott02.get('fecha')} form={form} input='fecha'/>
+                        <DateInput className='' label='Fecha Cuestionario de Diligencia:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del HCP:' value={abbott02.get('nombreHcp')} id='nombreHcp' form={form} className='Form-textInputBox'/>
                         <TextInput label='Especialidad del HCP:' value={abbott02.get('especialidadHcp')} id='especialidadHcp' form={form} className='Form-textInputBox'/>
                         <TextInput label='País de Residencia:' value={abbott02.get('paisDeResidencia')} id='paisDeResidencia' form={form} className='Form-textInputBox'/>
@@ -137,9 +151,7 @@ export default class Abbott02 extends Component {
                             :
                             <Dropdown options={abbott02.get('aprobadores')} label='Seleccione Director Legal' selected={abbott02.get('directorLegal')} input='directorLegal' form={form} />
                         }
-                        { (this.props.params.id)  &&
-                            <ApproverFirm label='Gerente General:' aprobador={abbott02.get('gerenteGeneral')} aprobado={abbott02.get('gerenteGeneralAprobo')} stringDate={abbott02.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
-                        }
+                        <ApproverFirm label='Gerente General:' aprobador={abbott02.get('gerenteGeneral')} aprobado={abbott02.get('gerenteGeneralAprobo')} stringDate={abbott02.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
                         <Notes notes={footNotes} />
                         { (abbott02.get('estado') !== 'Aprobado' && abbott02.get('estado') !== 'Rechazado' ) &&
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
