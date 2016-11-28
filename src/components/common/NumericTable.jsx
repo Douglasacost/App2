@@ -48,6 +48,7 @@ export default class NumericTable extends Component {
                                     name=''
                                     value={(totalValue === 0) ? '' : totalValue}
                                     floatingLabel
+                                    disabled={true}
                                 />
                             </td>
                         </tr>

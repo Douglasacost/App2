@@ -14,7 +14,13 @@ class TextInput extends Component {
         this.props.setField(form, input, value);
     }
     render() {
-        let { className, id, label, name, value } = this.props;
+        let { className, id, label, name, value, disabled } = this.props;
+        let disabledVal;
+        if(disabled !== undefined && disabled !== null){
+            disabledVal = disabled;
+        } else {
+            disabledVal = false;
+        }
         return (
             <div className={className}>
                 <Textfield
@@ -24,6 +30,7 @@ class TextInput extends Component {
                     name={name}
                     value={value}
                     floatingLabel
+                    disabled={disabledVal}
                 />
             </div>
         );

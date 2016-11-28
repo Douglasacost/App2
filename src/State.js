@@ -90,12 +90,15 @@ export default Map({
     }),
     abbott04: Map({
         fecha: '',
+        eventos: '',
         nombreDelEvento: '',
         unidadDeNegocio: '',
         localidadDelEvento: '',
         racionalDelNegocio: '',
         tipoDeEvento: '',
-        fechaDelEvento: '',
+        fechaDeInicio: '',
+        fechaDeFinalizacion: '',
+        producto: '',
         lugar: '',
         numeroDeAsistentes: '',
         numeroDeHcp: '',
@@ -135,6 +138,7 @@ export default Map({
         gerenteGeneral: '',
         fechaGerenteGeneral: '',
         gerenteGeneralAprobo: '',
+        comentarioRechazo: '',
         estado: ''
     }),
     abbott05: Map({

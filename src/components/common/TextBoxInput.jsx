@@ -29,7 +29,6 @@ class TextBoxInput extends Component {
                     name={name}
                     value={value}
                     inputClassName={className}
-                    rows={rows}
                 />
             </div>
         );

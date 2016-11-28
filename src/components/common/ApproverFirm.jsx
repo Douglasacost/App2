@@ -22,12 +22,48 @@ class ApproverFirm extends Component {
         this.props.setFormData(this.props.form, dataMap);
     }
     render() {
-        let { className, id, label, stringDate, form, dateInput, approveInput, user, aprobador, aprobado } = this.props;
+        let { className, id, label, stringDate, form, dateInput, approveInput, user, aprobador, aprobado, flagGerente, state } = this.props;
         let defaultClasses = 'Firm-container Firm ';
         let classes = defaultClasses.concat(className);
         let today = moment();
         let handleApprove = this.handleClick.bind(this, 'si');
         let handleReject = this.handleClick.bind(this, 'no');
+        if(flagGerente !== undefined && flagGerente !== null){
+            return (
+                <div className={classes}>
+                    <div className='Firm-top'>
+                        <span className='Firm-label'>{label}</span>
+                        <span className='Firm-label'><u>{aprobador}</u></span>
+                    </div>
+                    <div className='Firm-bottom' >
+                        <DateInput className='' 
+                            label='Fecha:' 
+                            stringDate={(stringDate !== undefined && stringDate !== null && stringDate !== '') ? moment(stringDate) : today } 
+                            input=''
+                            form=''
+                            disabled={true} />
+                        {(stringDate !== undefined && stringDate !== null && stringDate !== '') && <span className='Firm-time'>Hora: {moment(stringDate).format("hh:mm:ss a")}</span> }
+                        { (aprobado !== undefined && aprobado !== null && aprobado!== '') ?
+                            ( (aprobado === 'si') ?
+                                <span className='Firm-approvedImages'>aprobado</span>
+                                :
+                                <div>
+                                    <span className='Firm-approvedImages'>Rechazado</span>
+                                    <TextInput label='Comentario del rechazo:' value={state.get('comentarioRechazo')} id='comentarioRechazo' form={form} className='Form-textInputBox'/>
+                                </div>
+                            )
+                            :
+                            ( (flagGerente) &&
+                                <div className='mui-container'>
+                                    <button className="mui-btn mui-btn--primary" onClick={handleApprove}>Aprobar</button>
+                                    <button className="mui-btn mui-btn--primary" onClick={handleReject}>Rechazar</button>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+            );
+        }
         return (
             <div className={classes}>
                 <div className='Firm-top'>
@@ -46,7 +82,10 @@ class ApproverFirm extends Component {
                         ( (aprobado === 'si') ?
                             <span className='Firm-approvedImages'>aprobado</span>
                             :
-                            <span className='Firm-approvedImages'>Rechazado</span>
+                            <div>
+                                <span className='Firm-approvedImages'>Rechazado</span>
+                                <TextInput label='Comentario del rechazo:' value={state.get('comentarioRechazo')} id='comentarioRechazo' form={form} className='Form-textInputBox' disabled={true}/>
+                            </div>
                         )
                         :
                         ( (aprobador === user) &&

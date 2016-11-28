@@ -116,7 +116,7 @@ function formApi() {
             success: function(data){
                 var id = data.d.Id;
                 var message = "Su forma ha sido enviada correctamente. El id de la forma es '" + id + "'";
-                if (callback) {
+                if (callback !== undefined && callback !== null) {
                     callback(id);
                 } else {
                     alert(message);

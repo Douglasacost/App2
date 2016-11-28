@@ -45,7 +45,7 @@ export default class Abbott02 extends Component {
         console.log('entered get');
         let keysNames = ['fecha','nombreHcp','especialidadHcp','paisDeResidencia','empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'decisionNegocio', 'decisionAbbott', 'detalles', 'solicitante', 'fechaFirmaDelSolicitante', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal',
-                         'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado'];
+                         'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'comentarioRechazo'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott02', 
             keysNames, 
@@ -93,6 +93,7 @@ export default class Abbott02 extends Component {
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CACMP-DR ABBOTT 002</span>
                         <span className='Form-text Form-state'>Estado: {abbott02.get('estado')}</span>
+                        <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>Cuestionario de Diligencia Debida para Individuales </span>
                     </div>
                     <div className='Form-fieldSet'>
@@ -137,21 +138,22 @@ export default class Abbott02 extends Component {
                             form={form}
                             selected={abbott02.get('decisionAbbott')}
                             options={booleanOption}/>
+                        <span className='Form-spacer'></span>
                         <span className='Form-label'>En caso de que las respuestas de las ultimas 2 preguntas hayan sido afirmativas, por favor explique a continuacion proporcionando los detalles necesarios:</span>
                         <TextBoxInput rows='3' id='detalles' value={abbott02.get('detalles')} form={form}/>
                         <Firm label='Cuestionario de Diligencia Debida completado por:' user={user.get('displayName')} solicitante={abbott02.get('solicitante')} stringDate={abbott02.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
                         <span className='Form-label'>Aprobaciones:</span>
                         { (this.props.params.id) ?
-                            <ApproverFirm label='Gerente de producto o unidad de servicio:' aprobador={abbott02.get('gerenteDeProducto')} aprobado={abbott02.get('gerenteDeProductoAprobo')} stringDate={abbott02.get('fechaGerenteDeProducto')} form={form} dateInput='fechaGerenteDeProducto' approveInput='gerenteDeProductoAprobo' user={user.get('displayName')} />
+                            <ApproverFirm label='Gerente de producto o unidad de servicio:' aprobador={abbott02.get('gerenteDeProducto')} aprobado={abbott02.get('gerenteDeProductoAprobo')} stringDate={abbott02.get('fechaGerenteDeProducto')} form={form} dateInput='fechaGerenteDeProducto' approveInput='gerenteDeProductoAprobo' user={user.get('displayName')} state={abbott02}/>
                             :
                             <Dropdown options={abbott02.get('aprobadores')} label='Seleccione Gerente de Producto' selected={abbott02.get('gerenteDeProducto')} input='gerenteDeProducto' form={form} />
                         }
                         { (this.props.params.id) ?
-                            <ApproverFirm label='Director Legal:' aprobador={abbott02.get('directorLegal')} aprobado={abbott02.get('directorLegalAprobo')} stringDate={abbott02.get('fechaDirectoLegal')} form={form} dateInput='fechaDirectoLegal' approveInput='directorLegalAprobo' user={user.get('displayName')} />
+                            <ApproverFirm label='Director Legal:' aprobador={abbott02.get('directorLegal')} aprobado={abbott02.get('directorLegalAprobo')} stringDate={abbott02.get('fechaDirectoLegal')} form={form} dateInput='fechaDirectoLegal' approveInput='directorLegalAprobo' user={user.get('displayName')} state={abbott02}/>
                             :
                             <Dropdown options={abbott02.get('aprobadores')} label='Seleccione Director Legal' selected={abbott02.get('directorLegal')} input='directorLegal' form={form} />
                         }
-                        <ApproverFirm label='Gerente General:' aprobador={abbott02.get('gerenteGeneral')} aprobado={abbott02.get('gerenteGeneralAprobo')} stringDate={abbott02.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} />
+                        <ApproverFirm label='Gerente General:' aprobador={abbott02.get('gerenteGeneral')} aprobado={abbott02.get('gerenteGeneralAprobo')} stringDate={abbott02.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(abbott02.get('gerenteGeneral') === user.get('displayName') && abbott02.get('estado') === 'Pendiente' && abbott02.get('empleadoDelGobierno') === 'Si') ? true : false} state={abbott02}/>
                         <Notes notes={footNotes} />
                         { (abbott02.get('estado') !== 'Aprobado' && abbott02.get('estado') !== 'Rechazado' ) &&
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
