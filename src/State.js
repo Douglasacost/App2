@@ -148,6 +148,7 @@ export default Map({
         solicitante: '',
         nombreDelSolicitante: '',
         unidadDeNegocio: '',
+        informacionHcp: '',
         nombreHcp: '',
         especialidadHcp: '',
         paisDeResidencia: '',
