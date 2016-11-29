@@ -98,7 +98,7 @@ export default class formState extends Component {
         let today = moment();
         return (
             <div className='Form MainScreen'>
-                <form className='Form-container Abbot05' action="#">
+                <form className='Form-container Abbott05' action="#">
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CACMP-DR ABBOTT 005</span>
                         <span className='Form-text Form-state'>Estado: {formState.get('estado')}</span>

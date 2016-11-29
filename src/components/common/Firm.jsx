@@ -10,7 +10,7 @@ class FirmInput extends Component {
         super(props);
     }
     render() {
-        let { className, id, label, stringDate, form, input, user, solicitante } = this.props;
+        let { className, id, label, stringDate, form, input, user, solicitante, labelFecha } = this.props;
         let defaultClasses = 'Firm-container Firm';
         let classes = defaultClasses.concat(className);
         let today = moment();
@@ -19,7 +19,7 @@ class FirmInput extends Component {
                 <span className='Firm-label'>{label}</span>
                 <span className='Firm-label'><u>{(solicitante !== undefined && solicitante !== null && solicitante !== '') ? solicitante : user }</u></span>
                 <DateInput className='' 
-                    label='Fecha:' 
+                    label={(labelFecha !== undefined && labelFecha!== null) ? labelFecha : 'Fecha:'} 
                     stringDate={(stringDate !== undefined && stringDate !== null && stringDate !== '') ? moment(stringDate) : today } 
                     input=''
                     form=''

@@ -22,7 +22,7 @@ const notes = {
 };
 const form = 'abbott06';
 
-export default class Abbott06 extends Component {
+export default class formState extends Component {
     constructor(props) {
         super(props);
     }
@@ -58,9 +58,9 @@ export default class Abbott06 extends Component {
         let formState;
         const formId = this.props.params.id;
         if (formId && formId !== undefined && formId !== null && formId !== '' ){
-            formState = this.props.abbott06;    
+            formState = this.props.formState;    
         } else {
-            formState = this.props.abbott06.set('signature', this.props.user.get('displayName')).set('dateSignature', moment().toISOString()).set('estado', 'Pendiente');
+            formState = this.props.formState.set('signature', this.props.user.get('displayName')).set('dateSignature', moment().toISOString()).set('estado', 'Pendiente').set('date', moment().toISOString());
         }
         formApiInstance.postData(sharepointUrl,
             'Abbott06',
@@ -70,13 +70,16 @@ export default class Abbott06 extends Component {
         );
     }
     render() {
-        let { abbott06, user } = this.props;
+        let { formState, user } = this.props;
+        let fecha = formState.get('date');
+        let today = moment();
         return (
             <div className='Form MainScreen'>
                 <form className='Form-container Abbott06' action="#">
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>International Fair Market Value (FMV) Exception Form</span>
-                        <span className='Form-text Form-state'>Estado: {abbott06.get('estado')}</span>
+                        <span className='Form-text Form-state'>Estado: {formState.get('estado')}</span>
+                        <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>*This form should be used only after first consulting the FMV Tool.</span>
                     </div>
                     <div className='Form-fieldSet'>
@@ -86,26 +89,29 @@ export default class Abbott06 extends Component {
                                     <th>Requestor Information</th>
                                 </tr>
                                 <tr>
-                                    <td><TextInput label='Name / Title:' value={abbott06.get('name')} id='name' form={form} className='Form-textInputBox'/></td>
-                                    <td><DateInput className='' label='Date:' stringDate={abbott06.get('date')} form={form} input='date'/></td>
+                                    <td><TextInput label='Name / Title:' value={formState.get('name')} id='name' form={form} className='Form-textInputBox'/></td>
+                                    <td><DateInput className='' label='Date:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='date' disabled={true}/></td>
                                 </tr>
                                 <tr>
-                                    <td><NumberInput label='Phone Number:' id='phone' value={abbott06.get('phone')} className='Form-textInputBox' form={form}/></td>
-                                    <td><TextInput label='Manager:' value={abbott06.get('manager')} id='manager' form={form} className='Form-textInputBox'/></td>
+                                    <td><NumberInput label='Phone Number:' id='phone' value={formState.get('phone')} className='Form-textInputBox' form={form}/></td>
+                                    <td><TextInput label='Manager:' value={formState.get('manager')} id='manager' form={form} className='Form-textInputBox'/></td>
                                 </tr>
-                                <tr><td><TextInput label='Email:' value={abbott06.get('email')} id='email' form={form} className='Form-textInputBox'/></td>
-                                    <td><TextInput label='Division / Department:' value={abbott06.get('division')} id='division' form={form} className='Form-textInputBox'/></td>
+                                <tr><td><TextInput label='Email:' value={formState.get('email')} id='email' form={form} className='Form-textInputBox'/></td>
+                                    <td><TextInput label='Division / Department:' value={formState.get('division')} id='division' form={form} className='Form-textInputBox'/></td>
                                 </tr>
-                                <tr><td><TextInput label='Name of HCP/Customer:' value={abbott06.get('nameHcp')} id='nameHcp' form={form} className='Form-textInputBox'/></td>
-                                    <td><TextInput label='HCP Tier:' value={abbott06.get('hcpTier')} id='hcpTier' form={form} className='Form-textInputBox'/></td>
+                                <tr><td><TextInput label='Name of HCP/Customer:' value={formState.get('nameHcp')} id='nameHcp' form={form} className='Form-textInputBox'/></td>
+                                    <td><TextInput label='HCP Tier:' value={formState.get('hcpTier')} id='hcpTier' form={form} className='Form-textInputBox'/></td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td colSpan="2" scope="colgroup">
+                                        <span className='Form-spacer'></span>
                                         <span className='Form-label'>Please answer the following questions:</span>
+                                        <span className='Form-spacer'></span>
                                         <span className='Form-label'>1. What is the proposed FMV compensation for this HCP/Customer (“HCP”)? $</span>
-                                        <NumberInput label='Amount:' id='amount' value={abbott06.get('amount')} className='Form-textInputBox' form={form}/>
+                                        <NumberInput label='Amount:' id='amount' value={formState.get('amount')} className='Form-textInputBox' form={form}/>
+                                        <span className='Form-spacer'></span>
                                         <span className='Form-label'>2. Please explain why the proposed compensation is consistent with fair market value, focusing on factors such as the HCP’s unique qualifications and experience, the nature of the services to be provided, theHCP’s particular specialty or area of expertise, and any other relevant information to consider.</span>
-                                        <TextBoxInput rows='2' id='explain' value={abbott06.get('explain')} form={form}/>
+                                        <TextBoxInput rows='2' id='explain' value={formState.get('explain')} form={form}/>
                                         <span className='Form-label'>3. Please submit this request form and the following items to OEC:</span>
                                         <ul>
                                             <li>* The printout of the FMV Tool worksheet</li>
@@ -114,38 +120,38 @@ export default class Abbott06 extends Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><Firm label='HCP Tier:' user={user.get('displayName')} solicitante={abbott06.get('signature')} stringDate={abbott06.get('dateSignature')} form={form} input='dateSignature' /></td>
+                                    <td colSpan="2" scope="colgroup"><Firm label='Signature of Requestor:' fechaLabel='Date:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' /></td>
                                 </tr>
-                                <tr><th>Approvals (per local policy):</th></tr>
+                                <tr><th colSpan="2" scope="colgroup">Approvals (per local policy):</th></tr>
                                 <tr>
-                                    <td>
+                                    <td colSpan="2" scope="colgroup">
                                         { (this.props.params.id) ?
-                                            <ApproverFirm label='Business Head Signature:' aprobador={abbott06.get('businessHead')} aprobado={abbott06.get('businessHeadApproved')} stringDate={abbott06.get('dateBusinessHead')} form={form} dateInput='dateBusinessHead' approveInput='businessHeadApproved' user={user.get('displayName')} />
+                                            <ApproverFirm label='Business Head Signature:' aprobador={formState.get('businessHead')} aprobado={formState.get('businessHeadApproved')} stringDate={formState.get('dateBusinessHead')} form={form} dateInput='dateBusinessHead' approveInput='businessHeadApproved' user={user.get('displayName')} />
                                             :
-                                            <Dropdown options={abbott06.get('aprobadores')} label='Select Business Head Signature' selected={abbott06.get('businessHead')} input='businessHead' form={form} />
+                                            <Dropdown options={formState.get('aprobadores')} label='Select Business Head Signature' selected={formState.get('businessHead')} input='businessHead' form={form} />
                                         }
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td colSpan="2" scope="colgroup">
                                         { (this.props.params.id) ?
-                                            <ApproverFirm label='Finance Signature:' aprobador={abbott06.get('finance')} aprobado={abbott06.get('financeApproved')} stringDate={abbott06.get('dateFinance')} form={form} dateInput='dateFinance' approveInput='financeApproved' user={user.get('displayName')} />
+                                            <ApproverFirm label='Finance Signature:' aprobador={formState.get('finance')} aprobado={formState.get('financeApproved')} stringDate={formState.get('dateFinance')} form={form} dateInput='dateFinance' approveInput='financeApproved' user={user.get('displayName')} />
                                             :
-                                            <Dropdown options={abbott06.get('aprobadores')} label='Select Finance Signature' selected={abbott06.get('finance')} input='finance' form={form} />
+                                            <Dropdown options={formState.get('aprobadores')} label='Select Finance Signature' selected={formState.get('finance')} input='finance' form={form} />
                                         }
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td colSpan="2" scope="colgroup">
                                         { (this.props.params.id) ?
-                                            <ApproverFirm label='OEC Signature:' aprobador={abbott06.get('oecSignature')} aprobado={abbott06.get('oecApproved')} stringDate={abbott06.get('dateOec')} form={form} dateInput='dateOec' approveInput='oecApproved' user={user.get('displayName')} />
+                                            <ApproverFirm label='OEC Signature:' aprobador={formState.get('oecSignature')} aprobado={formState.get('oecApproved')} stringDate={formState.get('dateOec')} form={form} dateInput='dateOec' approveInput='oecApproved' user={user.get('displayName')} />
                                             :
-                                            <Dropdown options={abbott06.get('aprobadores')} label='Select OEC Signature' selected={abbott06.get('oecSignature')} input='oecSignature' form={form} />
+                                            <Dropdown options={formState.get('aprobadores')} label='Select OEC Signature' selected={formState.get('oecSignature')} input='oecSignature' form={form} />
                                         }
                                     </td>
                                 </tr>
                                 <tr>
-                                    { (abbott06.get('estado') !== 'Aprobado' && abbott06.get('estado') !== 'Rechazado' ) &&
+                                    { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) &&
                                         <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                                     }
                                 </tr>
