@@ -13,80 +13,121 @@ class ActivityPeopleTable extends Component {
     }
     handleAdd(e){
         e.preventDefault();
-        let formElements = document.getElementById('addItem').elements;
+        let addItemForm = document.getElementById('addItem');
+        let formElements = addItemForm.elements;
         console.log(formElements);
         let data = {};
         let array = this.props.list.toArray();
         for (var i=0; i<formElements.length; i++) {
             let name = formElements[i].name,
-                value = formElements[i].value;
-            console.log(name);
-            console.log(value);
+                value = formElements[i].value,
+                type = formElements[i].type;
             if (value !== ''){
+                console.log(name);
+                console.log(value);
                 data[name] = value;
+            }
+            if (type === 'checkbox'){
+                console.log(name);
+                console.log(type);
+                console.log(formElements[i].checked);
+                data[name] = (formElements[i].checked === true) ? 'si' : 'no';
             }
         }
         console.log(data);
-        data[empleadoDelGobierno] = formElements[empleadoDelGobierno].checked;
-        console.log(data);
-        let numero = this.props.list.size + 1;
-        data.numero = numero.toString();
-        console.log(data);
         array.push(data);
         let listData = List(array);
+        addItemForm.reset();
         this.props.setField(this.props.form, this.props.input, listData);
+    }
+    handleDelete(i){
+        let newList = this.props.list.delete(i);
+        this.props.setField(this.props.form, this.props.input, newList);
     }
     render() {
         let { className, label, list, form, input } = this.props;
+        let handleDelete = this.handleDelete.bind(this);
         return (
             <div className={className}>
                 <span className='Form-label'>{label}</span>
-                <form id='addItem'>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th colSpan="4" scope="colgroup">Participantes</th>
-                                <th colSpan="3" scope="colgroup">Complete esta parte si el participante es empleado del gobierno</th>
-                            </tr>
-                            <tr>
-                                <th>No.</th>
-                                <th>Nombre del Participante</th>
-                                <th>Maque si es Empleado</th>
-                                <th>Marque si es Profesional de Salud</th>
-                                <th>Indique si es empleado del Gobierno</th>
-                                <th>Nombre del Hospital o Institucion</th>
-                                <th>Nombre del puesto en el Hospital o Institucion</th>
-                            </tr>
-                            {list.map(function(listItem, i){
-                                    let checked = listItem.empleadoDelGobierno;
-                                    return (
-                                        <tr key={i}>
-                                            <td>{listItem.numero}</td>
-                                            <td>{listItem.nombre}</td>
-                                            <td>{listItem.empleado}</td>
-                                            <td>{listItem.profesionalDeSalud}</td>
-                                            <td><Checkbox label='' ripple onChange={()=>{}} checked={checked}/></td>
-                                            <td>{listItem.institucion}</td>
-                                            <td>{listItem.puesto}</td>
-                                        </tr>
-                                    );
-                                })}
-                            <tr><td colSpan="7" scope="colgroup">Agregar nuevo registro</td></tr>
-                            <tr>
-                                <td><input type="text" placeholder="" name='nombre' /></td>
-                                <td><input type="text" placeholder="" name='empleado' /></td>
-                                <td><input type="text" placeholder="" name='profesionalDeSalud' /></td>
-                                <td><input type="checkbox" placeholder="" name='empleadoDelGobierno' /></td>
-                                <td><input type="text" placeholder="" name='institucion' /></td>
-                                <td><input type="text" placeholder="" name='puesto' /></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    { (this.props.list.size < 4 ) &&
-                        <button className="mui-btn mui-btn--primary" onClick={this.handleAdd.bind(this)}>Agregar</button>
-                    }
-                    
-                </form>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th colSpan="4" scope="colgroup">Participantes</th>
+                            <th colSpan="3" scope="colgroup">Complete esta parte si el participante es empleado del gobierno</th>
+                        </tr>
+                        <tr>
+                            <th colSpan="2" scope="colgroup"></th>
+                            <th colSpan="3" scope="colgroup">Marque si</th>
+                            <th colSpan="2" scope="colgroup"></th>
+                        </tr>
+                        <tr>
+                            <th>No.</th>
+                            <th>Nombre del Participante</th>
+                            <th>Es Empleado</th>
+                            <th>Es Profesional de Salud</th>
+                            <th>Es empleado del Gobierno</th>
+                            <th>Nombre del Hospital o Institucion</th>
+                            <th>Nombre del puesto en el Hospital o Institucion</th>
+                            <th></th>
+                        </tr>
+                        {list.map(function(listItem, i){
+                                let empleadoChecked = (listItem.empleado === 'si') ? true : false;
+                                let saludChecked = (listItem.profesionalDeSalud === 'si') ? true : false;
+                                let gobiernoChecked = (listItem.empleadoDelGobierno === 'si') ? true : false;
+                                let numero = i + 1;
+                                return (
+                                    <tr key={i}>
+                                        <td>{numero}</td>
+                                        <td>{listItem.nombre}</td>
+                                        <td><Checkbox label='' ripple onChange={()=>{}} checked={empleadoChecked} disabled={true}/></td>
+                                        <td><Checkbox label='' ripple onChange={()=>{}} checked={saludChecked} disabled={true}/></td>
+                                        <td><Checkbox label='' ripple onChange={()=>{}} checked={gobiernoChecked} disabled={true}/></td>
+                                        <td>{listItem.institucion}</td>
+                                        <td>{listItem.puesto}</td>
+                                        <td onClick={handleDelete.bind(this, i)}>delete</td>
+                                    </tr>
+                                );
+                            })}
+                    </tbody>
+                </table>
+                <span className='Form-spacer'></span>
+                { (this.props.list.size < 4 ) &&
+                    <form id='addItem'>
+                        <legend>Agregar nuevo registro</legend>
+                        <div className="mui-textfield mui-textfield--float-label">
+                            <input type="text" name='nombre' />
+                            <label>Nombre del Participante</label>
+                        </div>
+                        <div className="mui-checkbox">
+                            <label>
+                                <input type="checkbox" value="" name='empleado'/>
+                                Maque si es Empleado
+                            </label>
+                        </div>
+                        <div className="mui-checkbox">
+                            <label>
+                                <input type="checkbox" value="" name='profesionalDeSalud'/>
+                                Maque si es Profesional de Salud
+                            </label>
+                        </div>
+                        <div className="mui-checkbox">
+                            <label>
+                                <input type="checkbox" value="" name='empleadoDelGobierno'/>
+                                Indique si es empleado del Gobierno
+                            </label>
+                        </div>
+                        <div className="mui-textfield mui-textfield--float-label">
+                            <input type="text" name='institucion' />
+                            <label>Nombre del Hospital o Institucion</label>
+                        </div>
+                        <div className="mui-textfield mui-textfield--float-label">
+                            <input type="text" name='puesto' />
+                            <label>Nombre del puesto en el Hospital o Institucion</label>
+                        </div>
+                        <button type="submit" className="mui-btn mui-btn--raised mui-btn--primary" onClick={this.handleAdd.bind(this)}>Agregar</button>
+                    </form>
+                }
             </div>
         );
     }

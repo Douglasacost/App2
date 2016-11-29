@@ -6,7 +6,7 @@ let { AbbottExcepcionCompra } = Components;
 
 const mapStateToProps = (state) => { 
     return {
-        abbottExcepcionCompra: state.get('abbottExcepcionCompra'),
+        formState: state.get('abbottExcepcionCompra'),
         user: state.get('user')
     };
 };

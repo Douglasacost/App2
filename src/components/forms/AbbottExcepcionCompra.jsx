@@ -19,7 +19,7 @@ var formApiInstance = new formApi();
 
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
-const requiereFirma = ['si', 'no'];
+const requiereFirma = ['Si', 'No'];
 const orderType = [ 'Orden de compra emitida después del evento', 'Proveedor único (no cotizaciones adicionales)'];
 
 const form = 'abbottExcepcionCompra';
@@ -29,10 +29,12 @@ export default class AbbottExcepcionCompra extends Component {
         super(props);
     }
     componentDidMount(){
+        console.log('entered didmount');
         var formId = this.props.params.id;
         if (formId){
             this.getDataFromList(formId);
         } else {
+            console.log('entered aprovers');
             formApiInstance.getDataList(sharepointUrl,
                 'Approvers',
                 form,
@@ -40,6 +42,10 @@ export default class AbbottExcepcionCompra extends Component {
                 this.props.setField.bind(this)
             );
         }
+    }
+    componentDidUpdate(){
+        console.log('component did update');
+        if(this.props.formState.get('aprobadores').size > 0 && this.props.formState.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
     }
     getDataFromList(formId) {
         console.log('entered get');
@@ -54,16 +60,17 @@ export default class AbbottExcepcionCompra extends Component {
             );
     }
     handleSubmit(e){
+        console.log('entered handle submit');
         e.preventDefault();
-        let solicitante = this.props.abbottExcepcionCompra.get('solicitante');
+        let solicitante = this.props.formState.get('solicitante');
         let formState;
         const formId = this.props.params.id;
         if (formId && formId !== undefined && formId !== null && formId !== '' ){
-            formState = this.props.abbottExcepcionCompra;    
+            formState = this.props.formState;    
         } else {
-            formState = this.props.abbottExcepcionCompra.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
+            formState = this.props.formState.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
-        let teststate = this.props.abbottExcepcionCompra.toJS();
+        let teststate = this.props.formState.toJS();
         formApiInstance.postData(sharepointUrl,
             'ExcepcionDeCompra',
             'Abbott01',
@@ -73,7 +80,7 @@ export default class AbbottExcepcionCompra extends Component {
     }
     setGerenteGenetal(){
         console.log('set Gerente General');
-        let aprobadores = this.props.abbott04.get('aprobadores').toArray();
+        let aprobadores = this.props.formState.get('aprobadores').toArray();
         let gerenteGeneral;
         console.log(aprobadores);
         aprobadores.map(function(obj){
@@ -83,17 +90,17 @@ export default class AbbottExcepcionCompra extends Component {
         this.props.setField(form, 'gerenteGeneral', gerenteGeneral);
     }
     render() {
-        let { abbottExcepcionCompra, user } = this.props;
-        let fecha = abbott04.get('fecha');
+        let { formState, user } = this.props;
+        let fecha = formState.get('fecha');
         let today = moment();
-        if(abbott04.get('aprobadores').size > 0 && abbott04.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
         return (
             <div className='Form MainScreen'>
                 <form className='Form-container AbbottExcepcionCompra' name='AbbottExcepcionCompra'
                     onSubmit={this.handleSubmit.bind(this)}>
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CFR CACM-P-RD</span>
-                        <span className='Form-text Form-state'>Estado: {abbottExcepcionCompra.get('estado')}</span>
+                        <span className='Form-text Form-state'>Estado: {formState.get('estado')}</span>
+                        <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>Solicitud de excepción en compra</span>
                     </div>
                     <div className='Form-fieldSet'>
@@ -104,38 +111,24 @@ export default class AbbottExcepcionCompra extends Component {
                             name='tipoDeOrden'
                             id='tipoDeOrden'
                             form={form}
-                            selected={abbottExcepcionCompra.get('tipoDeOrden')}
+                            selected={formState.get('tipoDeOrden')}
                             options={orderType}/>
                         <DateInput className='' label='Fecha:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
-                        <NumberInput label='Orden de Compra:' id='ordenDeCompra'value={abbottExcepcionCompra.get('ordenDeCompra')} className='Form-textInputBox' form={form}/>
-                        <TextInput label='Nombre del Proveedor' value={abbottExcepcionCompra.get('proveedor')} id='proveedor' className='Form-textInputBox' form={form}/>
-                        <TextInput label='Bienes o Servicios solicitados:' id='bienesOServiciosSolicitados' value={abbottExcepcionCompra.get('bienesOServiciosSolicitados')} className='Form-textInputBox' form={form}/>
-                        <NumberInput label='Monto:' id='monto' value={abbottExcepcionCompra.get('monto')} className='Form-textInputBox' form={form}/>
-                        <TextInput label='Moneda:' id='moneda' value={abbottExcepcionCompra.get('moneda')} className='Form-textInputBox' form={form}/>
+                        <NumberInput label='Orden de Compra:' id='ordenDeCompra'value={formState.get('ordenDeCompra')} className='Form-textInputBox' form={form}/>
+                        <TextInput label='Nombre del Proveedor' value={formState.get('proveedor')} id='proveedor' className='Form-textInputBox' form={form}/>
+                        <TextInput label='Bienes o Servicios solicitados:' id='bienesOServiciosSolicitados' value={formState.get('bienesOServiciosSolicitados')} className='Form-textInputBox' form={form}/>
+                        <NumberInput label='Monto:' id='monto' value={formState.get('monto')} className='Form-textInputBox' form={form}/>
+                        <TextInput label='Moneda:' id='moneda' value={formState.get('moneda')} className='Form-textInputBox' form={form}/>
                         <span className='Form-label'>Razón de la excepción:</span>
-                        <TextBoxInput rows='4' id='razonDeExcepcion' value={abbottExcepcionCompra.get('razonDeExcepcion')} form={form}/>
-                        <Firm label='Firma del Budgetary solicitante:' user={user.get('displayName')} solicitante={abbottExcepcionCompra.get('solicitante')} stringDate={abbottExcepcionCompra.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
+                        <TextBoxInput rows='4' id='razonDeExcepcion' value={formState.get('razonDeExcepcion')} form={form}/>
+                        <Firm label='Firma del Budgetary solicitante:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
                         { (this.props.params.id) ?
-                            <ApproverFirm label='Firma del jefe inmediato:' aprobador={abbottExcepcionCompra.get('jefeInmediato')} aprobado={abbottExcepcionCompra.get('jefeInmediatoAprobo')} stringDate={abbottExcepcionCompra.get('fechaFirmaDelJefeInmediato')} form={form} dateInput='fechaFirmaDelJefeInmediato' approveInput='jefeInmediatoAprobo' user={user.get('displayName')} />
+                            <ApproverFirm label='Firma del jefe inmediato:' aprobador={formState.get('jefeInmediato')} aprobado={formState.get('jefeInmediatoAprobo')} stringDate={formState.get('fechaFirmaDelJefeInmediato')} form={form} dateInput='fechaFirmaDelJefeInmediato' approveInput='jefeInmediatoAprobo' user={user.get('displayName')} state={formState} />
                             :
-                            <Dropdown options={abbottExcepcionCompra.get('aprobadores')} label='Seleccione jefe inmediato' selected={abbottExcepcionCompra.get('jefeInmediato')} input='jefeInmediato' form={form} />
+                            <Dropdown options={formState.get('aprobadores')} label='Seleccione jefe inmediato' selected={formState.get('jefeInmediato')} input='jefeInmediato' form={form} />
                         }
-                        { ((this.props.params.id && abbottExcepcionCompra.get('requiereFirmaDirector') === 'si' && abbottExcepcionCompra.get('gerenteGeneral') === user.get('displayName')) || (abbottExcepcionCompra.get('gerenteGeneralAprobo') === 'si' || abbottExcepcionCompra.get('gerenteGeneralAprobo') === 'no') ) ?
-                            <ApproverFirm label='Firma del Director o Gerente General del área:' aprobador={abbottExcepcionCompra.get('gerenteGeneral')} aprobado={abbottExcepcionCompra.get('gerenteGeneralAprobo')} stringDate={abbottExcepcionCompra.get('fechaFirmaDelGerente')} form={form} dateInput='fechaFirmaDelGerente' approveInput='gerenteGeneralAprobo' id='approvebtn' user={user.get('displayName')}/>
-                            :
-                            ( (!this.props.params.id) &&
-                                <RadioInput 
-                                    label='¿Requiere firma del gerente? (Requerida para Ordenes de Compra emitidas después del evento)' 
-                                    name='requiereFirmaDirector'
-                                    id='requiereFirmaDirector'
-                                    form={form}
-                                    selected={abbottExcepcionCompra.get('requiereFirmaDirector')}
-                                    options={requiereFirma}/>
-
-                             )
-                                
-                        }
-                        { (abbottExcepcionCompra.get('estado') !== 'Aprobado' && abbottExcepcionCompra.get('estado') !== 'Rechazado' ) &&
+                        <ApproverFirm label='Firma del Director o Gerente General del área:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaFirmaDelGerente')} form={form} dateInput='fechaFirmaDelGerente' approveInput='gerenteGeneralAprobo' id='approvebtn' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('tipoDeOrden') === 'Orden de compra emitida después del evento') ? true : false} state={formState}/>
+                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) && 
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                         }
                         

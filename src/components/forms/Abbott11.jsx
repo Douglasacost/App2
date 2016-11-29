@@ -5,6 +5,7 @@ import Firm from '../common/Firm';
 import Notes from '../common/Notes';
 import TextInputGroup from '../common/TextInputGroup';
 import Reviewer from '../common/Reviewer';
+import DateInput from '../common/DateInput';
 import Dropdown from '../common/Dropdown';
 import ApproverFirm from '../common/ApproverFirm';
 import moment from 'moment';
@@ -13,7 +14,7 @@ var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
-const booleanOption = [ 'si', 'no'];
+const booleanOption = [ 'Si', 'No'];
 const impactOptiones = [ 'Hospital', 'Regional', 'Nacional'];
 const patrocinioIncluye = [ 'Registro/Inscripción', 'Hotel', 'Transporte', 'Comidas'];
 const notes = {
@@ -39,6 +40,10 @@ export default class formState extends Component {
                 this.props.setField.bind(this)
             );
         }
+    }
+    componentDidUpdate(){
+        console.log('component did update');
+        if(this.props.formState.get('aprobadores').size > 0 && this.props.formState.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
     }
     getDataFromList(formId) {
         console.log('entered get');
@@ -71,6 +76,17 @@ export default class formState extends Component {
             this.props.params.id
         );
     }
+    setGerenteGenetal(){
+        console.log('set Gerente General');
+        let aprobadores = this.props.formState.get('aprobadores').toArray();
+        let gerenteGeneral;
+        console.log(aprobadores);
+        aprobadores.map(function(obj){
+            console.log(obj);
+            if(obj.Cargo === 'GerenteGeneral'){gerenteGeneral = obj.Title}
+        });
+        this.props.setField(form, 'gerenteGeneral', gerenteGeneral);
+    }
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
@@ -81,6 +97,7 @@ export default class formState extends Component {
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CACMP-DR ABBOTT 011</span>
                         <span className='Form-text Form-state'>Estado: {formState.get('estado')}</span>
+                        <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>SOLICITUD DE EXCEPCIÓN</span>
                     </div>
                     <div className='Form-fieldSet'>

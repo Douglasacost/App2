@@ -67,9 +67,9 @@ export default class abbottObjetivosActividad extends Component {
         let formState;
         const formId = this.props.params.id;
         if (formId && formId !== undefined && formId !== null && formId !== '' ){
-            formState = this.props.abbottObjetivosActividad;    
+            formState = this.props.formState;    
         } else {
-            formState = this.props.abbottObjetivosActividad.set('nombre', this.props.user.get('displayName')).set('fechaFirmaVentas', moment().toISOString()).set('estado', 'Pendiente');
+            formState = this.props.formState.set('nombre', this.props.user.get('displayName')).set('fechaFirmaVentas', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
         formState = formState.delete('list');
         formApiInstance.postData(sharepointUrl,
@@ -81,104 +81,107 @@ export default class abbottObjetivosActividad extends Component {
         );
     }
     handleSubmitTable(id){
-        let tableAsJson = this.props.abbottObjetivosActividad.get('list').toJS();
+        let tableAsJson = this.props.formState.get('list').toJS();
         console.log(tableAsJson);
         formApiInstance.postBatchRequest( 'participantes', tableAsJson, id);
     }
     render() {
-        let { abbottObjetivosActividad, user } = this.props;
+        let { formState, user } = this.props;
+        let fecha = formState.get('fecha');
+        let today = moment();
         return (
             <div className='Form MainScreen'>
                 <form className='Form-container AbbottObjetivosActividad' action="#">
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CACMP-DR</span>
-                        <span className='Form-text Form-state'>Estado: {abbottObjetivosActividad.get('estado')}</span>
+                        <span className='Form-text Form-state'>Estado: {formState.get('estado')}</span>
+                        <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>OBJETIVOS DE LA ACTIVIDAD</span>
                     </div>
                     <div className='Form-fieldSet'>
-                        <TextInput label='Division:' value={abbottObjetivosActividad.get('division')} id='division' form={form} className='Form-textInputBox'/>
-                        <TextInput label='Linea:' value={abbottObjetivosActividad.get('linea')} id='linea' form={form} className='Form-textInputBox'/>
+                        <TextInput label='Division:' value={formState.get('division')} id='division' form={form} className='Form-textInputBox'/>
+                        <TextInput label='Linea:' value={formState.get('linea')} id='linea' form={form} className='Form-textInputBox'/>
                         <span className='Form-label'>DATOS DEL EVENTO:</span>
-                        <DateInput className='' label='Fecha:' stringDate={abbottObjetivosActividad.get('fecha')} form={form} input='fecha'/>
-                        <NumberInput label='Hora:' id='hora' value={abbottObjetivosActividad.get('hora')} className='Form-textInputBox' form={form}/>
-                        <TextInput label='Lugar:' value={abbottObjetivosActividad.get('lugar')} id='lugar' form={form} className='Form-textInputBox'/>
-                        <TextInput label='País:' value={abbottObjetivosActividad.get('pais')} id='pais' form={form} className='Form-textInputBox'/>
+                        <DateInput className='' label='Fecha:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
+                        <NumberInput label='Hora:' id='hora' value={formState.get('hora')} className='Form-textInputBox' form={form}/>
+                        <TextInput label='Lugar:' value={formState.get('lugar')} id='lugar' form={form} className='Form-textInputBox'/>
+                        <TextInput label='País:' value={formState.get('pais')} id='pais' form={form} className='Form-textInputBox'/>
                         <span className='Form-label'>Objetivo de la actividad o interacción, indicar el nombre del conferencista si aplica:</span>
-                        <TextBoxInput rows='3' id='objetivo' value={abbottObjetivosActividad.get('objetivo')} form={form}/>
+                        <TextBoxInput rows='3' id='objetivo' value={formState.get('objetivo')} form={form}/>
                         <span className='Form-label'>Participantes (Para actividades o eventos con participación mayor de 4 adjuntar lista de participantes)</span>
-                        <ActivityPeopleTable list={abbottObjetivosActividad.get('list')} form={form} input='list' className='Table'/>
+                        <ActivityPeopleTable list={formState.get('list')} form={form} input='list' className='Table'/>
                         <span className='Form-label'>Tipo de actividad</span>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='Reunion HCP'
                             id='reunionHcp'
-                            value={abbottObjetivosActividad.get('reunionHcp')} 
+                            value={formState.get('reunionHcp')} 
                             form={form}/>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='Focus Group HCP'
                             id='focus'
-                            value={abbottObjetivosActividad.get('focus')} 
+                            value={formState.get('focus')} 
                             form={form}/>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='Servicio Hospital HCP'
                             id='servicio'
-                            value={abbottObjetivosActividad.get('servicio')} 
+                            value={formState.get('servicio')} 
                             form={form}/>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='Promocion Trade'
                             id='promocion'
-                            value={abbottObjetivosActividad.get('promocion')} 
+                            value={formState.get('promocion')} 
                             form={form}/>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='Reunion Empleados'
                             id='reunionEmpleados'
-                            value={abbottObjetivosActividad.get('reunionEmpleados')} 
+                            value={formState.get('reunionEmpleados')} 
                             form={form}/>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='Educacion a Pacientes'
                             id='educacionPacientes'
-                            value={abbottObjetivosActividad.get('educacionPacientes')} 
+                            value={formState.get('educacionPacientes')} 
                             form={form}/>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='Educacion Empleados'
                             id='educacionEmpleados'
-                            value={abbottObjetivosActividad.get('educacionEmpleados')} 
+                            value={formState.get('educacionEmpleados')} 
                             form={form}/>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='Reunion Cliente No HCP'
                             id='reunionCliente'
-                            value={abbottObjetivosActividad.get('reunionCliente')} 
+                            value={formState.get('reunionCliente')} 
                             form={form}/>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'
                             label='otro'
                             id='otro'
-                            value={abbottObjetivosActividad.get('otro')} 
+                            value={formState.get('otro')} 
                             form={form}/>
-                        <TextInput label='otro:' value={abbottObjetivosActividad.get('otroComentario')} id='otroComentario' form={form} className='Form-textInputBox'/>
+                        <TextInput label='otro:' value={formState.get('otroComentario')} id='otroComentario' form={form} className='Form-textInputBox'/>
                         <span className='Form-label'>Productos relacionados, describa:</span>
-                        <TextBoxInput rows='3' id='producto' value={abbottObjetivosActividad.get('producto')} form={form}/>
+                        <TextBoxInput rows='3' id='producto' value={formState.get('producto')} form={form}/>
                         <span className='Form-label'>Material Entregado:</span>
-                        <TextBoxInput rows='3' id='material' value={abbottObjetivosActividad.get('material')} form={form}/>
+                        <TextBoxInput rows='3' id='material' value={formState.get('material')} form={form}/>
                         <span className='Form-label'>Acciones de Seguimient: (Si fueron consideradas)</span>
-                        <TextBoxInput rows='3' id='accionesDeSeguimiento' value={abbottObjetivosActividad.get('accionesDeSeguimiento')} form={form}/>
+                        <TextBoxInput rows='3' id='accionesDeSeguimiento' value={formState.get('accionesDeSeguimiento')} form={form}/>
                         <span className='Form-label'>Comentarios Adicionales:</span>
-                        <TextBoxInput rows='3' id='comentariosAdicionales' value={abbottObjetivosActividad.get('comentariosAdicionales')} form={form}/>
-                        <NumberInput label='Monto Total:' id='montoTotal' value={abbottObjetivosActividad.get('montoTotal')} className='Form-textInputBox' form={form}/>
-                        <Firm label='Representante de Ventas:' user={user.get('displayName')} solicitante={abbottObjetivosActividad.get('nombre')} stringDate={abbottObjetivosActividad.get('fechaFirmaVentas')} form={form} input='fechaFirmaVentas' />
+                        <TextBoxInput rows='3' id='comentariosAdicionales' value={formState.get('comentariosAdicionales')} form={form}/>
+                        <NumberInput label='Monto Total:' id='montoTotal' value={formState.get('montoTotal')} className='Form-textInputBox' form={form}/>
+                        <Firm label='Representante de Ventas:' user={user.get('displayName')} solicitante={formState.get('nombre')} stringDate={formState.get('fechaFirmaVentas')} form={form} input='fechaFirmaVentas' />
                         { (this.props.params.id) ?
-                            <ApproverFirm label='Nombre del Gerente de Distrito:' aprobador={abbottObjetivosActividad.get('gerenteDeDistrito')} aprobado={abbottObjetivosActividad.get('gerenteDeDistritoAprobo')} stringDate={abbottObjetivosActividad.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} />
+                            <ApproverFirm label='Nombre del Gerente de Distrito:' aprobador={formState.get('gerenteDeDistrito')} aprobado={formState.get('gerenteDeDistritoAprobo')} stringDate={formState.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} state={formState}/>
                             :
-                            <Dropdown options={abbottObjetivosActividad.get('aprobadores')} label='Seleccione Gerente de Distrito' selected={abbottObjetivosActividad.get('gerenteDeDistrito')} input='gerenteDeDistrito' form={form} />
+                            <Dropdown options={formState.get('aprobadores')} label='Seleccione Gerente de Distrito' selected={formState.get('gerenteDeDistrito')} input='gerenteDeDistrito' form={form} />
                         }
-                        { (abbottObjetivosActividad.get('estado') !== 'Aprobado' && abbottObjetivosActividad.get('estado') !== 'Rechazado' ) &&
+                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) &&
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                         }
                     </div>
