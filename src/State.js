@@ -264,7 +264,9 @@ export default Map({
         fechaGerenteGeneral: '',
         gerenteGeneralAprobo: '',
         comentarioRechazo: '',
-        aprobadores: Map({})
+        donacionProducto: '',
+        aprobadores: Map({}),
+        estado: ''
     }),
     abbott11: Map({
         seccion: '',
