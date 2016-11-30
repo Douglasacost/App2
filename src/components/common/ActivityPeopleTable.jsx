@@ -85,7 +85,7 @@ class ActivityPeopleTable extends Component {
                                         <td><Checkbox label='' ripple onChange={()=>{}} checked={gobiernoChecked} disabled={true}/></td>
                                         <td>{listItem.institucion}</td>
                                         <td>{listItem.puesto}</td>
-                                        <td onClick={handleDelete.bind(this, i)}>delete</td>
+                                        <td onClick={handleDelete.bind(this, i)}>borrar</td>
                                     </tr>
                                 );
                             })}

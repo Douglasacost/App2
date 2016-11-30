@@ -279,6 +279,20 @@
       table, th, td {
           border: 1px solid black;
       }
+      table td {
+        vertical-align: top;
+        height: 42px;
+      }
+      table tr td:nth-child(4) {
+        width: 210px;
+        display: inline-block;
+        border: none;
+      }
+      input {
+        height: 42px;
+        outline: none;
+        border: none;
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ import TextInput from '../common/TextInput';
 import CheckboxInput from '../common/CheckboxInput';
 import DateInput from '../common/DateInput';
 import DatePicker from 'react-datepicker';
+import moment from 'moment';
 import { setField } from '../../actions/Actions';
 import { connect } from 'react-redux';
 import { Map, fromJS, List } from 'immutable';
@@ -13,7 +14,8 @@ class ExpensesTable extends Component {
     }
     handleAdd(e){
         e.preventDefault();
-        let formElements = document.getElementById('addItem').elements;
+        let addItemForm = document.getElementById('addItem');
+        let formElements = addItemForm.elements;
         console.log(formElements);
         let data = {};
         let array = this.props.list.toArray();
@@ -22,16 +24,38 @@ class ExpensesTable extends Component {
                 value = formElements[i].value;
             console.log(name);
             console.log(value);
-            if (value !== ''){
+            if (value !== '' && name !== ''){
                 data[name] = value;
             }
         }
         array.push(data);
         let listData = List(array);
+        addItemForm.reset();
         this.props.setField(this.props.form, this.props.input, listData);
     }
+    setLocalDate(date){
+        this.props.setField(this.props.form, 'tempDate', date);
+    }
+    handleDelete(i){
+        let newList = this.props.list.delete(i);
+        this.props.setField(this.props.form, this.props.input, newList);
+    }
     render() {
-        let { className, label, list, form, input } = this.props;
+        let { className, label, list, form, input, selectedDate } = this.props;
+        let setLocalDate = this.setLocalDate.bind(this);
+        let today = moment();
+        let totalMoneda = 0;
+        let total = 0;
+        let handleDelete = this.handleDelete.bind(this);
+        let descripcionWidth = '200px';
+        list.map(function(listItem, i){
+            let otraMonedaNumber = parseFloat(listItem.otraMoneda);
+            let otraMonedaProcessed = (isNaN(otraMonedaNumber)) ? 0 : otraMonedaNumber;
+            let totalNumber = parseFloat(listItem.total);
+            let totalProcessed = (isNaN(totalNumber)) ? 0 : totalNumber;
+            totalMoneda += otraMonedaProcessed;
+            total += totalProcessed;
+        });
         return (
             <div className={className}>
                 <span className='Form-label'>{label}</span>
@@ -50,13 +74,14 @@ class ExpensesTable extends Component {
                                 <th>T/C</th>
                                 <th>OTRA MONEDA</th>
                                 <th>TOTAL</th>
+                                <th></th>
                             </tr>
                             {list.map(function(listItem, i){
                                         return (
                                             <tr key={i}>
                                                 <td><DatePicker
                                                         todayButton={"Hoy"}
-                                                        selected={listItem.fecha}
+                                                        selected={moment(listItem.fecha)}
                                                         onChange={()=>{}} disabled={true}/></td>
                                                 <td>{listItem.factura}</td>
                                                 <td>{listItem.pais}</td>
@@ -64,13 +89,14 @@ class ExpensesTable extends Component {
                                                 <td>{listItem.tc}</td>
                                                 <td>{listItem.otraMoneda}</td>
                                                 <td>{listItem.total}</td>
+                                                <td onClick={handleDelete.bind(this, i)}>borrar</td>
                                             </tr>
                                         );
                                     })}
                             <tr>
                                 <td colSpan='5'>TOTALES</td>
-                                <td>test</td>
-                                <td>test</td>
+                                <td>{totalMoneda}</td>
+                                <td>{total}</td>
                             </tr>
                             { (this.props.list.size < 12 ) &&
                                 <tr><td colSpan="7" scope="colgroup">Agregar nuevo registro</td></tr>
@@ -79,12 +105,11 @@ class ExpensesTable extends Component {
                                 <tr>
                                     <td><DatePicker
                                             todayButton={"Hoy"}
-                                            selected=''
-                                            onChange={()=>{}}
-                                            name='fecha'
-                                            form='addItem' /></td>
-                                    <td><input type="text" placeholder="" name='factura' maxlength="7"/></td>
-                                    <td><input type="text" placeholder="" name='pais' maxlength="4" /></td>
+                                            selected={(selectedDate !== undefined && selectedDate !== null && selectedDate !== '') ? moment(selectedDate) : today}
+                                            onChange={setLocalDate.bind(this)}
+                                            name='fecha' /></td>
+                                    <td><input type="text" placeholder="" name='factura' maxLength="7"/></td>
+                                    <td><input type="text" placeholder="" name='pais' maxLength="4" /></td>
                                     <td><input type="text" placeholder="" name='descripcion' /></td>
                                     <td><input type="text" placeholder="" name='tc' /></td>
                                     <td><input type="text" placeholder="" name='otraMoneda' /></td>

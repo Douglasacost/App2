@@ -81,7 +81,7 @@ export default class AbbottExpensesReport extends Component {
         } else {
             formState = this.props.formState.set('titular', this.props.user.get('displayName')).set('fechaFirmaTitular', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
-        formState = formState.delete('list');
+        formState = formState.delete('list').delete('tempDate');
         formApiInstance.postData(sharepointUrl,
             'ExpensesReport',
             'ExpensesReport',
@@ -130,7 +130,7 @@ export default class AbbottExpensesReport extends Component {
                                 <span className='Divider-blue'></span>
                                 <span className='Form-label Form-label--leftAlign'>Descripcion del gasto (Motivo del gasto):</span>
                                 <TextBoxInput rows='3' id='descripcion' value={formState.get('descripcion')} form={form}/>
-                                <ExpensesTable list={formState.get('list')} form={form} input='list' className='Table'/>
+                                <ExpensesTable list={formState.get('list')} form={form} input='list' className='Table' selectedDate={formState.get('tempDate')}/>
                                 <span className='Form-label Form-label--leftAlign'>TOTAL EN LETRAS:</span>
                                 <TextInput label='' value={formState.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox'/>
                                 <Firm label='Firma de Titular:' user={user.get('displayName')} solicitante={formState.get('titular')} stringDate={formState.get('fechaFirmaTitular')} form={form} input='fechaFirmaTitular' />                

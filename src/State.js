@@ -375,6 +375,7 @@ export default Map({
         gastos: '',
         depositos: '',
         comentarioRechazo: '',
-        totalLiquidacion: ''
+        totalLiquidacion: '',
+        tempDate: ''
     })
 });
