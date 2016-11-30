@@ -38,6 +38,8 @@ export default class abbottObjetivosActividad extends Component {
     }
     getDataFromList(formId) {
         console.log('entered get');
+        // disable inputs when getting data because they are no longer editable
+        document.getElementsByClassName('fieldset-to-disable').disabled = true;
         let keysNames = ['fecha','division','linea','hora','lugar','pais','objetivo','reunionHcp', 'focus',
                          'servicio', 'promocion', 'reunionEmpleados', 'educacionPacientes', 'educacionEmpleados', 'reunionCliente', 'otro', 'otroComentario', 'producto',
                          'material', 'accionesDeSeguimiento', 'comentariosAdicionales', 'montoTotal', 'nombre', 'fechaFirmaVentas', 'gerenteDeDistrito', 'fechaGerenteDeDistrito',
@@ -98,7 +100,7 @@ export default class abbottObjetivosActividad extends Component {
                         <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>OBJETIVOS DE LA ACTIVIDAD</span>
                     </div>
-                    <div className='Form-fieldSet'>
+                    <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <TextInput label='Division:' value={formState.get('division')} id='division' form={form} className='Form-textInputBox'/>
                         <TextInput label='Linea:' value={formState.get('linea')} id='linea' form={form} className='Form-textInputBox'/>
                         <span className='Form-label'>DATOS DEL EVENTO:</span>
@@ -175,16 +177,20 @@ export default class abbottObjetivosActividad extends Component {
                         <span className='Form-label'>Comentarios Adicionales:</span>
                         <TextBoxInput rows='3' id='comentariosAdicionales' value={formState.get('comentariosAdicionales')} form={form}/>
                         <NumberInput label='Monto Total:' id='montoTotal' value={formState.get('montoTotal')} className='Form-textInputBox' form={form}/>
+                    </fieldset>
+                    <fieldset className='Form-fieldSet'>
                         <Firm label='Representante de Ventas:' user={user.get('displayName')} solicitante={formState.get('nombre')} stringDate={formState.get('fechaFirmaVentas')} form={form} input='fechaFirmaVentas' />
                         { (this.props.params.id) ?
                             <ApproverFirm label='Nombre del Gerente de Distrito:' aprobador={formState.get('gerenteDeDistrito')} aprobado={formState.get('gerenteDeDistritoAprobo')} stringDate={formState.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} state={formState}/>
                             :
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Gerente de Distrito' selected={formState.get('gerenteDeDistrito')} input='gerenteDeDistrito' form={form} />
                         }
-                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) &&
+                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                            :
+                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
-                    </div>
+                    </fieldset>
                 </form>
             </div>
         );

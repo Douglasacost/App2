@@ -54,6 +54,11 @@ export default class Abbott01 extends Component {
     }
     getDataFromList(formId) {
         console.log('entered get');
+        // disable inputs when getting data because they are no longer editable
+        let fielsetEl = document.getElementById('fieldset-to-disable');
+        console.log(fielsetEl);
+        fielsetEl.disabled = true;
+        console.log(fielsetEl);
         let keysNames = ['localidad','fecha','nombreDelSolicitante','unidadDeNegocio','nombreHcp','especialidadHcp','paisDeResidencia','empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'asociacion', 'responsabilidades', 'pratrocinioIncluye', 'patrocinadoPreviamente', 'nombrePatrocinioPrevio', 'lugarPatrocinioPrevio', 'congreso', 'nombreDelCongreso', 'paisCiudad', 'lugar', 'fechaDeInicio',
                          'fechaDeFinalizacion', 'gerenteDeDistrito', 'fechaGerenteDeDistrito', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal',
@@ -84,6 +89,11 @@ export default class Abbott01 extends Component {
             this.props.params.id
         );
     }
+    handlePrint(e){
+        e.preventDefault();
+        window.focus();
+        window.print();
+    }
     setGerenteGenetal(){
         console.log('set Gerente General');
         let aprobadores = this.props.formState.get('aprobadores').toArray();
@@ -108,7 +118,7 @@ export default class Abbott01 extends Component {
                         <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>SOLICITUD DE PATROCINIO</span>
                     </div>
-                    <div className='Form-fieldSet'>
+                    <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <RadioInput 
                             label='' 
                             name='localidad'
@@ -225,6 +235,8 @@ export default class Abbott01 extends Component {
                         <TextInput label='Lugar:' value={formState.get('lugar')} id='lugar' form={form} className='Form-textInputBox'/>
                         <DateInput className='Form-dateInput--marginright' label='Fecha de Inicio:' stringDate={formState.get('fechaDeInicio')} form={form} input='fechaDeInicio'/>
                         <DateInput className='Form-dateInput--marginBottom' label='Fecha de Finalizacion:' stringDate={formState.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion'/>
+                    </fieldset>
+                    <fieldset className='Form-fieldSet'>
                         <span className='Form-label Form-label--under '>Solicitantes:</span>
                         { (this.props.params.id) ?
                             <ApproverFirm label='Nombre del Gerente de Distrito:' aprobador={formState.get('gerenteDeDistrito')} aprobado={formState.get('gerenteDeDistritoAprobo')} stringDate={formState.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} state={formState}/>
@@ -249,10 +261,12 @@ export default class Abbott01 extends Component {
                         }
                         <ApproverFirm label='*Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('empleadoDelGobierno') === 'Si') ? true : false} state={formState}/>
                         <Notes notes={footNotes}/>
-                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) &&
+                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                            :
+                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
-                    </div>
+                    </fieldset>
                 </form>
             </div>
         );

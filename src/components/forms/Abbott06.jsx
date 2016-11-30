@@ -41,6 +41,8 @@ export default class formState extends Component {
     }
     getDataFromList(formId) {
         console.log('entered get');
+        // disable inputs when getting data because they are no longer editable
+        document.getElementsByClassName('fieldset-to-disable').disabled = true;
         let keysNames = ['name','date','phone','email','division','nameHcp','hcpTier','amount', 'explain',
                          'signature', 'dateSignature', 'businessHead', 'dateBusinessHead', 'businessHeadApproved', 'finance', 'dateFinance', 'financeApproved', 'oecSignature',
                          'dateOec', 'oecApproved', 'estado'];
@@ -82,7 +84,7 @@ export default class formState extends Component {
                         <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>*This form should be used only after first consulting the FMV Tool.</span>
                     </div>
-                    <div className='Form-fieldSet'>
+                    <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <table>
                             <tbody>
                                 <tr>
@@ -102,63 +104,47 @@ export default class formState extends Component {
                                 <tr><td><TextInput label='Name of HCP/Customer:' value={formState.get('nameHcp')} id='nameHcp' form={form} className='Form-textInputBox'/></td>
                                     <td><TextInput label='HCP Tier:' value={formState.get('hcpTier')} id='hcpTier' form={form} className='Form-textInputBox'/></td>
                                 </tr>
-                                <tr>
-                                    <td colSpan="2" scope="colgroup">
-                                        <span className='Form-spacer'></span>
-                                        <span className='Form-label'>Please answer the following questions:</span>
-                                        <span className='Form-spacer'></span>
-                                        <span className='Form-label'>1. What is the proposed FMV compensation for this HCP/Customer (“HCP”)? $</span>
-                                        <NumberInput label='Amount:' id='amount' value={formState.get('amount')} className='Form-textInputBox' form={form}/>
-                                        <span className='Form-spacer'></span>
-                                        <span className='Form-label'>2. Please explain why the proposed compensation is consistent with fair market value, focusing on factors such as the HCP’s unique qualifications and experience, the nature of the services to be provided, theHCP’s particular specialty or area of expertise, and any other relevant information to consider.</span>
-                                        <TextBoxInput rows='2' id='explain' value={formState.get('explain')} form={form}/>
-                                        <span className='Form-label'>3. Please submit this request form and the following items to OEC:</span>
-                                        <ul>
-                                            <li>* The printout of the FMV Tool worksheet</li>
-                                            <li>* A copy of the HCP’s CV</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="2" scope="colgroup"><Firm label='Signature of Requestor:' fechaLabel='Date:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' /></td>
-                                </tr>
-                                <tr><th colSpan="2" scope="colgroup">Approvals (per local policy):</th></tr>
-                                <tr>
-                                    <td colSpan="2" scope="colgroup">
-                                        { (this.props.params.id) ?
-                                            <ApproverFirm label='Business Head Signature:' aprobador={formState.get('businessHead')} aprobado={formState.get('businessHeadApproved')} stringDate={formState.get('dateBusinessHead')} form={form} dateInput='dateBusinessHead' approveInput='businessHeadApproved' user={user.get('displayName')} />
-                                            :
-                                            <Dropdown options={formState.get('aprobadores')} label='Select Business Head Signature' selected={formState.get('businessHead')} input='businessHead' form={form} />
-                                        }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="2" scope="colgroup">
-                                        { (this.props.params.id) ?
-                                            <ApproverFirm label='Finance Signature:' aprobador={formState.get('finance')} aprobado={formState.get('financeApproved')} stringDate={formState.get('dateFinance')} form={form} dateInput='dateFinance' approveInput='financeApproved' user={user.get('displayName')} />
-                                            :
-                                            <Dropdown options={formState.get('aprobadores')} label='Select Finance Signature' selected={formState.get('finance')} input='finance' form={form} />
-                                        }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="2" scope="colgroup">
-                                        { (this.props.params.id) ?
-                                            <ApproverFirm label='OEC Signature:' aprobador={formState.get('oecSignature')} aprobado={formState.get('oecApproved')} stringDate={formState.get('dateOec')} form={form} dateInput='dateOec' approveInput='oecApproved' user={user.get('displayName')} />
-                                            :
-                                            <Dropdown options={formState.get('aprobadores')} label='Select OEC Signature' selected={formState.get('oecSignature')} input='oecSignature' form={form} />
-                                        }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) &&
-                                        <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
-                                    }
-                                </tr>
                             </tbody>
                         </table>
+                        <span className='Form-spacer'></span>
+                        <span className='Form-label'>Please answer the following questions:</span>
+                        <span className='Form-spacer'></span>
+                        <span className='Form-label'>1. What is the proposed FMV compensation for this HCP/Customer (“HCP”)? $</span>
+                        <NumberInput label='Amount:' id='amount' value={formState.get('amount')} className='Form-textInputBox' form={form}/>
+                        <span className='Form-spacer'></span>
+                        <span className='Form-label'>2. Please explain why the proposed compensation is consistent with fair market value, focusing on factors such as the HCP’s unique qualifications and experience, the nature of the services to be provided, theHCP’s particular specialty or area of expertise, and any other relevant information to consider.</span>
+                        <TextBoxInput rows='2' id='explain' value={formState.get('explain')} form={form}/>
+                        <span className='Form-label'>3. Please submit this request form and the following items to OEC:</span>
+                        <ul>
+                            <li>* The printout of the FMV Tool worksheet</li>
+                            <li>* A copy of the HCP’s CV</li>
+                        </ul>
+                    </fieldset>
+                    <fieldset className='Form-fieldSet'>
+                        <Firm label='Signature of Requestor:' fechaLabel='Date:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' /></td>
+                        <span className='Form-label'>Approvals (per local policy):</span>
+                        { (this.props.params.id) ?
+                            <ApproverFirm label='Business Head Signature:' aprobador={formState.get('businessHead')} aprobado={formState.get('businessHeadApproved')} stringDate={formState.get('dateBusinessHead')} form={form} dateInput='dateBusinessHead' approveInput='businessHeadApproved' user={user.get('displayName')} state={formState}/>
+                            :
+                            <Dropdown options={formState.get('aprobadores')} label='Select Business Head Signature' selected={formState.get('businessHead')} input='businessHead' form={form} />
+                        }
+                        { (this.props.params.id) ?
+                            <ApproverFirm label='Finance Signature:' aprobador={formState.get('finance')} aprobado={formState.get('financeApproved')} stringDate={formState.get('dateFinance')} form={form} dateInput='dateFinance' approveInput='financeApproved' user={user.get('displayName')} state={formState}/>
+                            :
+                            <Dropdown options={formState.get('aprobadores')} label='Select Finance Signature' selected={formState.get('finance')} input='finance' form={form} />
+                        }
+                        { (this.props.params.id) ?
+                            <ApproverFirm label='OEC Signature:' aprobador={formState.get('oecSignature')} aprobado={formState.get('oecApproved')} stringDate={formState.get('dateOec')} form={form} dateInput='dateOec' approveInput='oecApproved' user={user.get('displayName')} state={formState}/>
+                            :
+                            <Dropdown options={formState.get('aprobadores')} label='Select OEC Signature' selected={formState.get('oecSignature')} input='oecSignature' form={form} />
+                        }
+                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
+                            <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                            :
+                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                        }
                         <Notes notes={notes.footNotes} />
-                    </div>
+                    </fieldset>
                 </form>
             </div>
         );

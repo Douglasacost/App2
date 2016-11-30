@@ -60,6 +60,8 @@ export default class AbbottExpensesReport extends Component {
     }
     getTableData(formId){
         console.log('entered tabledata');
+        // disable inputs when getting data because they are no longer editable
+        document.getElementsByClassName('fieldset-to-disable').disabled = true;
         let keysNames = ['fecha','factura','pais','descripcion', 'tc', 'otraMoneda', 'total'];
         let data = formApiInstance.getTableData(
             'ExpensesTable', 
@@ -114,7 +116,7 @@ export default class AbbottExpensesReport extends Component {
                         </div>
                     </div>
                     <div className='mui-row'>
-                        <div className='Form-fieldSet'>
+                        <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                             <div className='mui-row'>
                                 <div className='mui-col-md-8 mui-paddingFix'>
                                     <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
@@ -133,6 +135,10 @@ export default class AbbottExpensesReport extends Component {
                                 <ExpensesTable list={formState.get('list')} form={form} input='list' className='Table' selectedDate={formState.get('tempDate')}/>
                                 <span className='Form-label Form-label--leftAlign'>TOTAL EN LETRAS:</span>
                                 <TextInput label='' value={formState.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox'/>
+                            </div>
+                        </fieldset>
+                        <fieldset className='Form-fieldSet'>
+                            <div className='mui-row'>
                                 <Firm label='Firma de Titular:' user={user.get('displayName')} solicitante={formState.get('titular')} stringDate={formState.get('fechaFirmaTitular')} form={form} input='fechaFirmaTitular' />                
                                 { (this.props.params.id) ?
                                     <ApproverFirm label='Firma de Autoricacion (Jefatura Inmediata)' aprobador={formState.get('autorizacion')} aprobado={formState.get('autorizacionAprobo')} stringDate={formState.get('fechaFirmaAutorizacion')} form={form} dateInput='fechaFirmaAutorizacion' approveInput='autorizacionAprobo' user={user.get('displayName')} state={formState}/>
@@ -143,11 +149,13 @@ export default class AbbottExpensesReport extends Component {
                                 <TextInput label='HACER TRANSFERENCIA A NOMBRE:' value={formState.get('nombreTransferencia')} id='nombreTransferencia' form={form} className='Form-textInputBox'/>                
                                 <TextInput label='CUENTA BANCARIA:' value={formState.get('cuentaBancaria')} id='cuentaBancaria' form={form} className='Form-textInputBox'/>
                             </div>
-                        </div>
+                        </fieldset>
                     </div>
                 </form>
-                { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) &&
+                { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                     <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                    :
+                    <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                 }
             </div>
         );

@@ -49,7 +49,8 @@ export default class AbbottExcepcionCompra extends Component {
     }
     getDataFromList(formId) {
         console.log('entered get');
-        const realURL = 'https://xourse.sharpoint.com/sites/forms/_vti_bin/listdata.svc/Excepci%C3%B3nDeCompra(1)?$select=Fecha,TipoDeOrden,OrdenDeCompra,Proveedores,BienesOServiciosSolicitados,Monto,Moneda,RazonDeExcepcion,FechaFirmaDelSolicitante';
+        // disable inputs when getting data because they are no longer editable
+        document.getElementsByClassName('fieldset-to-disable').disabled = true;
         let keysNames = ['fecha','tipoDeOrden','ordenDeCompra','proveedor','bienesOServiciosSolicitados','monto','moneda','razonDeExcepcion','fechaFirmaDelSolicitante','fechaFirmaDelSolicitante','fechaFirmaDelJefeInmediato','fechaFirmaDelGerente', 'jefeInmediato', 'gerenteGeneral', 'requiereFirmaDirector', 'jefeInmediatoAprobo', 'gerenteGeneralAprobo', 'solicitante', 'estado'];
         let data = formApiInstance.getData(sharepointUrl,
             'ExcepcionDeCompra', 
@@ -103,7 +104,7 @@ export default class AbbottExcepcionCompra extends Component {
                         <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>Solicitud de excepción en compra</span>
                     </div>
-                    <div className='Form-fieldSet'>
+                    <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <span className='Form-label'>Nota: Adjuntar este documento a la orden de compra para la aprobación de finanzas.</span>
                         <span className='Form-label'>Por este medio solicito autorización para la siguiente excepción en compras:</span>
                         <RadioInput 
@@ -121,6 +122,8 @@ export default class AbbottExcepcionCompra extends Component {
                         <TextInput label='Moneda:' id='moneda' value={formState.get('moneda')} className='Form-textInputBox' form={form}/>
                         <span className='Form-label'>Razón de la excepción:</span>
                         <TextBoxInput rows='4' id='razonDeExcepcion' value={formState.get('razonDeExcepcion')} form={form}/>
+                    </fieldset>
+                    <fieldset className='Form-fieldSet'>
                         <Firm label='Firma del Budgetary solicitante:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
                         { (this.props.params.id) ?
                             <ApproverFirm label='Firma del jefe inmediato:' aprobador={formState.get('jefeInmediato')} aprobado={formState.get('jefeInmediatoAprobo')} stringDate={formState.get('fechaFirmaDelJefeInmediato')} form={form} dateInput='fechaFirmaDelJefeInmediato' approveInput='jefeInmediatoAprobo' user={user.get('displayName')} state={formState} />
@@ -128,11 +131,13 @@ export default class AbbottExcepcionCompra extends Component {
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione jefe inmediato' selected={formState.get('jefeInmediato')} input='jefeInmediato' form={form} />
                         }
                         <ApproverFirm label='Firma del Director o Gerente General del área:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaFirmaDelGerente')} form={form} dateInput='fechaFirmaDelGerente' approveInput='gerenteGeneralAprobo' id='approvebtn' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('tipoDeOrden') === 'Orden de compra emitida después del evento') ? true : false} state={formState}/>
-                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) && 
+                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                            :
+                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
                         
-                    </div>
+                    </fieldset>
                 </form>
             </div>
         );

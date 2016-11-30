@@ -19,7 +19,7 @@
   li {
       list-style-type: none;
   }
-
+  
   .mdl-textfield.is-invalid .mdl-textfield__error {
     position: relative;
   }
@@ -37,6 +37,11 @@
   .Form {
     &-container {
       padding: 50px;
+    }
+    &-fieldSet{
+      margin: 0;
+      padding: 0;
+      border: none;
     }
     &-leftContainer {
       float: left;

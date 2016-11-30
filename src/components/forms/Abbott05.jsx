@@ -51,6 +51,8 @@ export default class formState extends Component {
     }
     getDataFromList(formId) {
         console.log('entered get');
+        // disable inputs when getting data because they are no longer editable
+        document.getElementsByClassName('fieldset-to-disable').disabled = true;
         let keysNames = ['fecha','nombreDelSolicitante','unidadDeNegocio','nombreHcp','especialidadHcp','paisDeResidencia', 'tipoDeServicio', 'empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'asociacion', 'responsabilidades', 'comentarios', 'experienciaServicio', 'reconocidoLider', 'experienciaSolicitada', 'otros', 'fechaFirmaDelSolicitante', 'gerenteDeDistrito', 'fechaGerenteDeDistrito',
                          'gerenteDeDistritoAprobo', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDelPaisAprobo', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal', 'fechaDirectoLegal',
@@ -105,7 +107,7 @@ export default class formState extends Component {
                         <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>RACIONAL DE SERVICIOS PROFESIONALES A CONTRATAR</span>
                     </div>
-                    <div className='Form-fieldSet'>
+                    <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del solicitante:' value={formState.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Unidad de Negocio:' value={formState.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>
@@ -162,6 +164,8 @@ export default class formState extends Component {
                             form={form} />
                         <span className='Form-label'>Otros. Explica:</span>
                         <TextBoxInput rows='3' id='otros' value={formState.get('otros')} form={form}/>
+                    </fieldset>
+                    <fieldset className='Form-fieldSet'>
                         <span className='Form-label'>Solicitantes:</span>
                         <Firm label='Nombre del Solicitante:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
                         { (this.props.params.id) ?
@@ -194,10 +198,12 @@ export default class formState extends Component {
                         <ApproverFirm label='*Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('empleadoDelGobierno') === 'Si') ? true : false} state={formState}/>
                         <Notes notes={notes.manager} />
                         <Notes notes={notes.footNotes} />
-                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) &&
+                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                            :
+                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
-                    </div>
+                    </fieldset>
                 </form>
             </div>
         );

@@ -63,6 +63,8 @@ export default class Abbott04 extends Component {
     }
     getDataFromList(formId) {
         console.log('entered get');
+        // disable inputs when getting data because they are no longer editable
+        document.getElementsByClassName('fieldset-to-disable').disabled = true;
         let keysNames = ['fecha','nombreDelEvento','unidadDeNegocio','localidadDelEvento','racionalDelNegocio','tipoDeEvento','fechaDelEvento','lugar', 'numeroDeAsistentes',
                          'numeroDeHcp', 'empleadosAbbott', 'aMedicos', 'aPublicoGeneral', 'aFarmacias', 'aMedios', 'aFuerzaDeVentas', 'aOtro', 'hotel',
                          'transporteAereo', 'transporteTerrestre', 'registro', 'speakers', 'otrosServicios', 'comidas', 'salones', 'equipo', 'materiales', 'otros',
@@ -118,7 +120,7 @@ export default class Abbott04 extends Component {
                         <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>Racional Del Evento</span>
                     </div>
-                    <div className='Form-fieldSet'>
+                    <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <RadioInput 
                             label='Eventos regionales organizados por Abbott' 
@@ -182,6 +184,8 @@ export default class Abbott04 extends Component {
                             form={form}/>
                         <TextInput label='Otro' value={formState.get('aOtro')} id='aOtro' form={form} className='Form-textInputBox'/>
                         <NumericTable className='Form-expensesTable' headerArray={planedExpenses} fields={expensesList} state={formState} form={form}/>
+                    </fieldset>
+                    <fieldset className='Form-fieldSet'>
                         <Firm label='Nombre del Solicitante' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
                         { (this.props.params.id) ?
                             <ApproverFirm label='Nombre del Gerente de Distrito:' aprobador={formState.get('gerenteDeDistrito')} aprobado={formState.get('gerenteDeDistritoAprobo')} stringDate={formState.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} state={formState} />
@@ -206,10 +210,12 @@ export default class Abbott04 extends Component {
                         }
                         <Notes notes={notes.medicManager} />
                         <ApproverFirm label='Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('eventos') === 'Si') ? true : false} state={formState}/>
-                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) &&
+                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                            :
+                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
-                    </div>
+                    </fieldset>
                 </form>
             </div>
         );

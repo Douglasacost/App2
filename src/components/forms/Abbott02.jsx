@@ -47,6 +47,8 @@ export default class Abbott02 extends Component {
     }
     getDataFromList(formId) {
         console.log('entered get');
+        // disable inputs when getting data because they are no longer editable
+        document.getElementsByClassName('fieldset-to-disable').disabled = true;
         let keysNames = ['fecha','nombreHcp','especialidadHcp','paisDeResidencia','empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'decisionNegocio', 'decisionAbbott', 'detalles', 'solicitante', 'fechaFirmaDelSolicitante', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal',
                          'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'comentarioRechazo'];
@@ -99,7 +101,7 @@ export default class Abbott02 extends Component {
                         <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         <span className='Form-text Form-description'>Cuestionario de Diligencia Debida para Individuales </span>
                     </div>
-                    <div className='Form-fieldSet'>
+                    <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <DateInput className='' label='Fecha Cuestionario de Diligencia:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del HCP:' value={formState.get('nombreHcp')} id='nombreHcp' form={form} className='Form-textInputBox'/>
                         <TextInput label='Especialidad del HCP:' value={formState.get('especialidadHcp')} id='especialidadHcp' form={form} className='Form-textInputBox'/>
@@ -144,6 +146,8 @@ export default class Abbott02 extends Component {
                         <span className='Form-spacer'></span>
                         <span className='Form-label'>En caso de que las respuestas de las ultimas 2 preguntas hayan sido afirmativas, por favor explique a continuacion proporcionando los detalles necesarios:</span>
                         <TextBoxInput rows='3' id='detalles' value={formState.get('detalles')} form={form}/>
+                    </fieldset>
+                    <fieldset className='Form-fieldSet'>
                         <Firm label='Cuestionario de Diligencia Debida completado por:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
                         <span className='Form-label'>Aprobaciones:</span>
                         { (this.props.params.id) ?
@@ -158,10 +162,12 @@ export default class Abbott02 extends Component {
                         }
                         <ApproverFirm label='Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('empleadoDelGobierno') === 'Si') ? true : false} state={formState}/>
                         <Notes notes={footNotes} />
-                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) &&
+                        { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                            :
+                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
-                    </div>
+                    </fieldset>
                 </form>
             </div>
         );

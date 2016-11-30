@@ -85,7 +85,7 @@ export default class Abbott10 extends Component {
                         <span className='Form-text Form-state'>Estado: {abbott10.get('estado')}</span>
                         <span className='Form-text Form-description'>Solicitud de Subvenciones Educativas, Becas/Donaciones a completar por el Beneficiario</span>
                     </div>
-                    <div className='Form-fieldSet'>
+                    <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <span className='Form-label'>Con el propósito que Abbott pueda evaluar su solicitud de soporte,  es necesario que complete la siguiente información:</span>
                         <TextInput label='Nombre de la organización/beneficiario:' value={abbott10.get('nombre')} id='nombre' form={form} className='Form-textInputBox'/>
                         <TextInput label='Dirección de la organización/beneficiario:' value={abbott10.get('direccion')} id='direccion' form={form} className='Form-textInputBox'/>
@@ -96,7 +96,7 @@ export default class Abbott10 extends Component {
                         <Notes notes={notes} />
                         <TextInput label='Cargo:' value={abbott10.get('cargo')} id='cargo' form={form} className='Form-textInputBox'/>
                         <Firm label='Cuestionario de Diligencia Debida completado por:' user={user.get('displayName')} solicitante={abbott10.get('solicitante')} stringDate={abbott10.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
-                    </div>
+                    </fieldset>
                 </form>
                 { (abbott10.get('estado') !== 'Aprobado' && abbott10.get('estado') !== 'Rechazado' ) &&
                     <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
