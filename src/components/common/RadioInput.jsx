@@ -8,6 +8,13 @@ class RadioInput extends Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount(){
+        let selected = this.props.selected;
+        if (selected === undefined || selected === null || selected === ''){
+            let value = this.props.options[0];
+            this.props.setField(this.props.form, this.props.name, value);
+        }
+    }
     handleChange(e){
         let value = e.currentTarget.value,
             form = this.props.form,
