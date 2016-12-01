@@ -32,7 +32,7 @@ class DateInput extends Component {
         } else {
             date = moment(stringDate);
         }
-        if (this.props.disabled) {
+        if (this.props.disabled === true) {
             disabled = true;
         } else {
             disabled = false;

@@ -107,7 +107,7 @@ export default class AbbottExpensesReport extends Component {
                 <form className='Form-container AbbottExpensesReport' action="#">
                     <div className='mui-row'>
                         <div className='mui-col-md-6 mui-paddingFix'>
-                            <span className='Form-text Form-title'>Img</span>
+                            <span className='Form-text Form-title'>ABBOTT CACMP-DR</span>
                             <span className='Form-text Form-state'>Estado: {formState.get('estado')}</span>
                             <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         </div>

@@ -110,6 +110,8 @@ export default class Abbott04 extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -142,8 +144,8 @@ export default class Abbott04 extends Component {
                         <span className='Form-label'>Racional del negocio para organizar/patrocinar el evento:</span>
                         <TextBoxInput rows='4' id='racionalDelNegocio' value={formState.get('racionalDelNegocio')} form={form}/>
                         <TextInput label='Tipo del Evento:' value={formState.get('tipoDeEvento')} id='tipoDeEvento' form={form} className='Form-textInputBox'/>
-                        <DateInput className='' label='Fecha de Inicio:' stringDate={formState.get('fechaDeInicio')} form={form} input='fechaDeInicio'/>
-                        <DateInput className='' label='Fecha de Finalizacion:' stringDate={formState.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion'/>
+                        <DateInput className='' label='Fecha de Inicio:' stringDate={formState.get('fechaDeInicio')} form={form} input='fechaDeInicio' disabled={disableInputs} />
+                        <DateInput className='' label='Fecha de Finalizacion:' stringDate={formState.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion' disabled={disableInputs} />
                         <span className='Form-spacer'></span>
                         <span className='Form-label'>Producto o línea de negocio que patrocina:</span>
                         <TextBoxInput rows='3' id='producto' value={formState.get('producto')} form={form}/>

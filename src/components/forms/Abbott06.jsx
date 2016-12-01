@@ -121,7 +121,7 @@ export default class formState extends Component {
                         </ul>
                     </fieldset>
                     <fieldset className='Form-fieldSet'>
-                        <Firm label='Signature of Requestor:' fechaLabel='Date:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' /></td>
+                        <Firm label='Signature of Requestor:' fechaLabel='Date:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
                         <span className='Form-label'>Approvals (per local policy):</span>
                         { (this.props.params.id) ?
                             <ApproverFirm label='Business Head Signature:' aprobador={formState.get('businessHead')} aprobado={formState.get('businessHeadApproved')} stringDate={formState.get('dateBusinessHead')} form={form} dateInput='dateBusinessHead' approveInput='businessHeadApproved' user={user.get('displayName')} state={formState}/>

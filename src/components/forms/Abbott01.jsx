@@ -108,6 +108,8 @@ export default class Abbott01 extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -233,8 +235,8 @@ export default class Abbott01 extends Component {
                         <TextInput label='Nombre del Congreso:' value={formState.get('nombreDelCongreso')} id='nombreDelCongreso' form={form} className='Form-textInputBox'/>
                         <TextInput label='Pais/Cuidad:' value={formState.get('paisCiudad')} id='paisCiudad' form={form} className='Form-textInputBox'/>
                         <TextInput label='Lugar:' value={formState.get('lugar')} id='lugar' form={form} className='Form-textInputBox'/>
-                        <DateInput className='Form-dateInput--marginright' label='Fecha de Inicio:' stringDate={formState.get('fechaDeInicio')} form={form} input='fechaDeInicio'/>
-                        <DateInput className='Form-dateInput--marginBottom' label='Fecha de Finalizacion:' stringDate={formState.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion'/>
+                        <DateInput className='Form-dateInput--marginright' label='Fecha de Inicio:' stringDate={formState.get('fechaDeInicio')} form={form} input='fechaDeInicio' disabled={disableInputs} />
+                        <DateInput className='Form-dateInput--marginBottom' label='Fecha de Finalizacion:' stringDate={formState.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion' disabled={disableInputs} />
                     </fieldset>
                     <fieldset className='Form-fieldSet'>
                         <span className='Form-label Form-label--under '>Solicitantes:</span>
