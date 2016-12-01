@@ -59,18 +59,19 @@ export default class Abbott04 extends Component {
     }
     componentDidUpdate(){
         console.log('component did update');
-        if(this.props.abbott02.get('aprobadores').size > 0 && this.props.abbott02.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
+        if(this.props.formState.get('aprobadores').size > 0 && this.props.formState.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
     }
     getDataFromList(formId) {
         console.log('entered get');
         // disable inputs when getting data because they are no longer editable
-        document.getElementsByClassName('fieldset-to-disable').disabled = true;
+        let fielsetEl = document.getElementById('fieldset-to-disable');
+        fielsetEl.disabled = true;
         let keysNames = ['fecha','nombreDelEvento','unidadDeNegocio','localidadDelEvento','racionalDelNegocio','tipoDeEvento','fechaDelEvento','lugar', 'numeroDeAsistentes',
                          'numeroDeHcp', 'empleadosAbbott', 'aMedicos', 'aPublicoGeneral', 'aFarmacias', 'aMedios', 'aFuerzaDeVentas', 'aOtro', 'hotel',
                          'transporteAereo', 'transporteTerrestre', 'registro', 'speakers', 'otrosServicios', 'comidas', 'salones', 'equipo', 'materiales', 'otros',
                          'solicitante', 'fechaFirmaDelSolicitante', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'gerenteDeDistrito', 'fechaGerenteDeDistrito',
                          'gerenteDeDistritoAprobo', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDelPaisAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo',
-                         'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'eventos', 'producto', 'comentarioRechazo'];
+                         'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'eventos', 'producto', 'comentarioRechazo', 'fechaDeInicio', 'fechaDeFinalizacion'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott04', 
             keysNames, 
@@ -95,6 +96,11 @@ export default class Abbott04 extends Component {
             formState,
             this.props.params.id
         );
+    }
+    handlePrint(e){
+        e.preventDefault();
+        window.focus();
+        window.print();
     }
     setGerenteGenetal(){
         console.log('set Gerente General');

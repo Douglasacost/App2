@@ -70,7 +70,8 @@ export default class formState extends Component {
     getDataFromList(formId) {
         console.log('entered get');
         // disable inputs when getting data because they are no longer editable
-        document.getElementsByClassName('fieldset-to-disable').disabled = true;
+        let fielsetEl = document.getElementById('fieldset-to-disable');
+        fielsetEl.disabled = true;
         let keysNames = ['fecha','nombreDelSolicitante','unidadDeNegocio', 'nombreBeneficiario', 'solicitudDeSubvencion', 'valorDeLaBeca', 'propositoBeneficio', 'solicitante','fechaFirmaDelSolicitante','gerenteDeProducto','fechaGerenteDeProducto','gerenteDeProductoAprobo',
                          'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'directorFinanciero', 'fechaDirectorFinanciero', 'directorFinancieroAprobo',
                          'directorLegal', 'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo',
@@ -99,6 +100,11 @@ export default class formState extends Component {
             formState,
             this.props.params.id
         );
+    }
+    handlePrint(e){
+        e.preventDefault();
+        window.focus();
+        window.print();
     }
     setGerenteGenetal(){
         console.log('set Gerente General');
@@ -155,12 +161,12 @@ export default class formState extends Component {
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Director Legal' selected={formState.get('directorLegal')} input='directorLegal' form={form} />
                         }
                         { (this.props.params.id) ?
-                            <ApproverFirm label='Director Finanzas**' aprobador={formState.get('directorFinanciero')} aprobado={formState.get('directorFinancieroAprobo')} stringDate={formState.get('fechaDirectorFinanciero')} form={form} dateInput='fechaDirectorFinanciero' approveInput='directorFinancieroAprobo' user={user.get('displayName')} flagGerente={(formState.get('directorLegal') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('donacionProducto') === 'Si') ? true : false} state={formState}/>
+                            <ApproverFirm label='Director Finanzas**' aprobador={formState.get('directorFinanciero')} aprobado={formState.get('directorFinancieroAprobo')} stringDate={formState.get('fechaDirectorFinanciero')} form={form} dateInput='fechaDirectorFinanciero' approveInput='directorFinancieroAprobo' user={user.get('displayName')} flagGerente={(formState.get('directorFinanciero') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('donacionProducto') === 'Si') ? true : false} state={formState}/>
                             :
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Director Finanzas' selected={formState.get('directorFinanciero')} input='directorFinanciero' form={form} />
                         }
                         { (this.props.params.id) ?
-                            <ApproverFirm label='Medical**:' aprobador={formState.get('gerenteMedico')} aprobado={formState.get('gerenteMedicoAprobo')} stringDate={formState.get('fechaGerenteMedico')} form={form} dateInput='fechaGerenteMedico' approveInput='gerenteMedicoAprobo' user={user.get('displayName')} flagGerente={(formState.get('directorLegal') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('donacionProducto') === 'Si') ? true : false} state={formState}/>
+                            <ApproverFirm label='Medical**:' aprobador={formState.get('gerenteMedico')} aprobado={formState.get('gerenteMedicoAprobo')} stringDate={formState.get('fechaGerenteMedico')} form={form} dateInput='fechaGerenteMedico' approveInput='gerenteMedicoAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteMedico') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('donacionProducto') === 'Si') ? true : false} state={formState}/>
                             :
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Gerente Medico' selected={formState.get('gerenteMedico')} input='gerenteMedico' form={form} />
                         }

@@ -23,6 +23,8 @@ class Liquidation extends Component {
         let { className, form, state } = this.props;
         let totalValue = this.netVal(state.get('anticipo')) - this.netVal(state.get('gastos')) - this.netVal(state.get('depositos'));
         let handleChange = this.handleChange.bind(this);
+        let estadoActual = state.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         return (
             <div className={className}>
                 <table>
@@ -34,21 +36,21 @@ class Liquidation extends Component {
                             <td>Anticipo Otorgado</td>
                             <td><input type="text" name='anticipo'
                                         value={state.get('anticipo')}
-                                        onChange={handleChange} />
+                                        onChange={handleChange} disabled={disableInputs}/>
                             </td>
                         </tr>
                         <tr>
                             <td>(-)Total de Gasto</td>
                             <td><input type="text" name='gastos'
                                         value={state.get('gastos')}
-                                        onChange={handleChange} />
+                                        onChange={handleChange} disabled={disableInputs}/>
                             </td>
                         </tr>
                         <tr>
                             <td>(-)Total de Depósitos</td>
                             <td><input type="text" name='depositos'
                                         value={state.get('depositos')}
-                                        onChange={handleChange} />
+                                        onChange={handleChange} disabled={disableInputs}/>
                             </td>
                         </tr>
                         <tr>
@@ -60,6 +62,7 @@ class Liquidation extends Component {
                                     name=''
                                     value={(totalValue === 0) ? '' : totalValue}
                                     floatingLabel
+                                    disabled={disableInputs}
                                 />
                             </td>
                         </tr>

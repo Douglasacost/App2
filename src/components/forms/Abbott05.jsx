@@ -52,11 +52,12 @@ export default class formState extends Component {
     getDataFromList(formId) {
         console.log('entered get');
         // disable inputs when getting data because they are no longer editable
-        document.getElementsByClassName('fieldset-to-disable').disabled = true;
+        let fielsetEl = document.getElementById('fieldset-to-disable');
+        fielsetEl.disabled = true;
         let keysNames = ['fecha','nombreDelSolicitante','unidadDeNegocio','nombreHcp','especialidadHcp','paisDeResidencia', 'tipoDeServicio', 'empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'asociacion', 'responsabilidades', 'comentarios', 'experienciaServicio', 'reconocidoLider', 'experienciaSolicitada', 'otros', 'fechaFirmaDelSolicitante', 'gerenteDeDistrito', 'fechaGerenteDeDistrito',
                          'gerenteDeDistritoAprobo', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDelPaisAprobo', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal', 'fechaDirectoLegal',
-                         'directorLegalAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'solicitante', 'informacionHcp'
+                         'directorLegalAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'solicitante', 'informacionHcp', 'comentarioRechazo'
                           ];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott05', 
@@ -82,6 +83,11 @@ export default class formState extends Component {
             formState,
             this.props.params.id
         );
+    }
+    handlePrint(e){
+        e.preventDefault();
+        window.focus();
+        window.print();
     }
     setGerenteGenetal(){
         console.log('set Gerente General');

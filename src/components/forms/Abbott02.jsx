@@ -48,7 +48,8 @@ export default class Abbott02 extends Component {
     getDataFromList(formId) {
         console.log('entered get');
         // disable inputs when getting data because they are no longer editable
-        document.getElementsByClassName('fieldset-to-disable').disabled = true;
+        let fielsetEl = document.getElementById('fieldset-to-disable');
+        fielsetEl.disabled = true;
         let keysNames = ['fecha','nombreHcp','especialidadHcp','paisDeResidencia','empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'decisionNegocio', 'decisionAbbott', 'detalles', 'solicitante', 'fechaFirmaDelSolicitante', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal',
                          'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'comentarioRechazo'];
@@ -76,6 +77,11 @@ export default class Abbott02 extends Component {
             formState,
             this.props.params.id
         );
+    }
+    handlePrint(e){
+        e.preventDefault();
+        window.focus();
+        window.print();
     }
     setGerenteGenetal(){
         console.log('set Gerente General');

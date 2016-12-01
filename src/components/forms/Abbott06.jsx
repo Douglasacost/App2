@@ -42,10 +42,11 @@ export default class formState extends Component {
     getDataFromList(formId) {
         console.log('entered get');
         // disable inputs when getting data because they are no longer editable
-        document.getElementsByClassName('fieldset-to-disable').disabled = true;
+        let fielsetEl = document.getElementById('fieldset-to-disable');
+        fielsetEl.disabled = true;
         let keysNames = ['name','date','phone','email','division','nameHcp','hcpTier','amount', 'explain',
                          'signature', 'dateSignature', 'businessHead', 'dateBusinessHead', 'businessHeadApproved', 'finance', 'dateFinance', 'financeApproved', 'oecSignature',
-                         'dateOec', 'oecApproved', 'estado'];
+                         'dateOec', 'oecApproved', 'estado', 'comentarioRechazo'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott06', 
             keysNames, 
@@ -70,6 +71,11 @@ export default class formState extends Component {
             formState,
             this.props.params.id
         );
+    }
+    handlePrint(e){
+        e.preventDefault();
+        window.focus();
+        window.print();
     }
     render() {
         let { formState, user } = this.props;

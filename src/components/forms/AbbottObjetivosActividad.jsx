@@ -39,11 +39,12 @@ export default class abbottObjetivosActividad extends Component {
     getDataFromList(formId) {
         console.log('entered get');
         // disable inputs when getting data because they are no longer editable
-        document.getElementsByClassName('fieldset-to-disable').disabled = true;
+        let fielsetEl = document.getElementById('fieldset-to-disable');
+        fielsetEl.disabled = true;
         let keysNames = ['fecha','division','linea','hora','lugar','pais','objetivo','reunionHcp', 'focus',
                          'servicio', 'promocion', 'reunionEmpleados', 'educacionPacientes', 'educacionEmpleados', 'reunionCliente', 'otro', 'otroComentario', 'producto',
                          'material', 'accionesDeSeguimiento', 'comentariosAdicionales', 'montoTotal', 'nombre', 'fechaFirmaVentas', 'gerenteDeDistrito', 'fechaGerenteDeDistrito',
-                         'gerenteDeDistritoAprobo', 'estado'];
+                         'gerenteDeDistritoAprobo', 'estado', 'comentarioRechazo'];
         let data = formApiInstance.getData(sharepointUrl,
             'ObjetivosActividad', 
             keysNames, 
@@ -87,6 +88,11 @@ export default class abbottObjetivosActividad extends Component {
         console.log(tableAsJson);
         formApiInstance.postBatchRequest( 'participantes', tableAsJson, id);
     }
+    handlePrint(e){
+        e.preventDefault();
+        window.focus();
+        window.print();
+    }
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
@@ -111,7 +117,7 @@ export default class abbottObjetivosActividad extends Component {
                         <span className='Form-label'>Objetivo de la actividad o interacción, indicar el nombre del conferencista si aplica:</span>
                         <TextBoxInput rows='3' id='objetivo' value={formState.get('objetivo')} form={form}/>
                         <span className='Form-label'>Participantes (Para actividades o eventos con participación mayor de 4 adjuntar lista de participantes)</span>
-                        <ActivityPeopleTable list={formState.get('list')} form={form} input='list' className='Table'/>
+                        <ActivityPeopleTable list={formState.get('list')} form={form} input='list' className='Table' state={formState}/>
                         <span className='Form-label'>Tipo de actividad</span>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption'

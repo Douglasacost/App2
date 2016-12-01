@@ -45,8 +45,9 @@ class ActivityPeopleTable extends Component {
         this.props.setField(this.props.form, this.props.input, newList);
     }
     render() {
-        let { className, label, list, form, input } = this.props;
+        let { className, label, list, form, input, state } = this.props;
         let handleDelete = this.handleDelete.bind(this);
+        let estadoActual = state.get('estado');
         return (
             <div className={className}>
                 <span className='Form-label'>{label}</span>
@@ -92,7 +93,7 @@ class ActivityPeopleTable extends Component {
                     </tbody>
                 </table>
                 <span className='Form-spacer'></span>
-                { (this.props.list.size < 4 ) &&
+                { (this.props.list.size < 4 && estadoActual !== 'Pendiente' && estadoActual !== 'Aprobado' && estadoActual !== 'Rechazado' ) &&
                     <form id='addItem'>
                         <legend>Agregar nuevo registro</legend>
                         <div className="mui-textfield mui-textfield--float-label">

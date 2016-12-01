@@ -49,7 +49,7 @@ export default class AbbottExpensesReport extends Component {
         let keysNames = ['fecha','solicitante','puesto','pais','descripcion', 'tipoDeGasto', 'anticipo', 'gastos', 'depositos', 'total',
                         'totalEnLetras', 'titular', 'fechaFirmaTitular', 'autorizacion',
                         'fechaFirmaAutorizacion', 'autorizacionAprobo', 'nombreTransferencia',
-                        'cuentaBancaria', 'estado'];
+                        'cuentaBancaria', 'estado', 'comentarioRechazo'];
         let data = formApiInstance.getData(sharepointUrl,
             'ExpensesReport', 
             keysNames, 
@@ -61,7 +61,10 @@ export default class AbbottExpensesReport extends Component {
     getTableData(formId){
         console.log('entered tabledata');
         // disable inputs when getting data because they are no longer editable
-        document.getElementsByClassName('fieldset-to-disable').disabled = true;
+        let fielsetEl = document.getElementById('fieldset-to-disable');
+        fielsetEl.disabled = true;
+        let fielsetTwoEl = document.getElementById('fieldset-to-disableTwo');
+        fielsetTwoEl.disabled = true;
         let keysNames = ['fecha','factura','pais','descripcion', 'tc', 'otraMoneda', 'total'];
         let data = formApiInstance.getTableData(
             'ExpensesTable', 
@@ -98,10 +101,17 @@ export default class AbbottExpensesReport extends Component {
         console.log(tableAsJson);
         formApiInstance.postBatchRequest( 'ExpensesTable', tableAsJson, id);
     }
+    handlePrint(e){
+        e.preventDefault();
+        window.focus();
+        window.print();
+    }
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
         let today = moment();
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         return (
             <div className='Form MainScreen mui-container-fluid'>
                 <form className='Form-container AbbottExpensesReport' action="#">
@@ -132,7 +142,7 @@ export default class AbbottExpensesReport extends Component {
                                 <span className='Divider-blue'></span>
                                 <span className='Form-label Form-label--leftAlign'>Descripcion del gasto (Motivo del gasto):</span>
                                 <TextBoxInput rows='3' id='descripcion' value={formState.get('descripcion')} form={form}/>
-                                <ExpensesTable list={formState.get('list')} form={form} input='list' className='Table' selectedDate={formState.get('tempDate')}/>
+                                <ExpensesTable list={formState.get('list')} form={form} input='list' className='Table' selectedDate={formState.get('tempDate')} state={formState}/>
                                 <span className='Form-label Form-label--leftAlign'>TOTAL EN LETRAS:</span>
                                 <TextInput label='' value={formState.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox'/>
                             </div>
@@ -146,8 +156,8 @@ export default class AbbottExpensesReport extends Component {
                                     <Dropdown options={formState.get('aprobadores')} label='Seleccione Jefatura Inmediata' selected={formState.get('autorizacion')} input='autorizacion' form={form} />
                                 }
                                 <Notes notes={notes} className='Note-container--blueBG' />
-                                <TextInput label='HACER TRANSFERENCIA A NOMBRE:' value={formState.get('nombreTransferencia')} id='nombreTransferencia' form={form} className='Form-textInputBox'/>                
-                                <TextInput label='CUENTA BANCARIA:' value={formState.get('cuentaBancaria')} id='cuentaBancaria' form={form} className='Form-textInputBox'/>
+                                <TextInput label='HACER TRANSFERENCIA A NOMBRE:' value={formState.get('nombreTransferencia')} id='nombreTransferencia' form={form} className='Form-textInputBox' disabled={disableInputs}/>                
+                                <TextInput label='CUENTA BANCARIA:' value={formState.get('cuentaBancaria')} id='cuentaBancaria' form={form} className='Form-textInputBox' disabled={disableInputs}/>
                             </div>
                         </fieldset>
                     </div>

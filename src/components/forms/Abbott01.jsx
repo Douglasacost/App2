@@ -56,9 +56,7 @@ export default class Abbott01 extends Component {
         console.log('entered get');
         // disable inputs when getting data because they are no longer editable
         let fielsetEl = document.getElementById('fieldset-to-disable');
-        console.log(fielsetEl);
         fielsetEl.disabled = true;
-        console.log(fielsetEl);
         let keysNames = ['localidad','fecha','nombreDelSolicitante','unidadDeNegocio','nombreHcp','especialidadHcp','paisDeResidencia','empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'asociacion', 'responsabilidades', 'pratrocinioIncluye', 'patrocinadoPreviamente', 'nombrePatrocinioPrevio', 'lugarPatrocinioPrevio', 'congreso', 'nombreDelCongreso', 'paisCiudad', 'lugar', 'fechaDeInicio',
                          'fechaDeFinalizacion', 'gerenteDeDistrito', 'fechaGerenteDeDistrito', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal',

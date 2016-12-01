@@ -41,8 +41,9 @@ class ExpensesTable extends Component {
         this.props.setField(this.props.form, this.props.input, newList);
     }
     render() {
-        let { className, label, list, form, input, selectedDate } = this.props;
+        let { className, label, list, form, input, selectedDate, state } = this.props;
         let setLocalDate = this.setLocalDate.bind(this);
+        let estadoActual = state.get('estado');
         let today = moment();
         let totalMoneda = 0;
         let total = 0;
@@ -74,7 +75,9 @@ class ExpensesTable extends Component {
                                 <th>T/C</th>
                                 <th>OTRA MONEDA</th>
                                 <th>TOTAL</th>
-                                <th></th>
+                                { (estadoActual !== 'Pendiente' && estadoActual !== 'Aprobado' && estadoActual !== 'Rechazado') &&
+                                    <th></th>
+                                }
                             </tr>
                             {list.map(function(listItem, i){
                                         return (
@@ -89,7 +92,9 @@ class ExpensesTable extends Component {
                                                 <td>{listItem.tc}</td>
                                                 <td>{listItem.otraMoneda}</td>
                                                 <td>{listItem.total}</td>
-                                                <td onClick={handleDelete.bind(this, i)}>borrar</td>
+                                                { (estadoActual !== 'Pendiente' && estadoActual !== 'Aprobado' && estadoActual !== 'Rechazado') &&
+                                                    <td onClick={handleDelete.bind(this, i)}>borrar</td>
+                                                }
                                             </tr>
                                         );
                                     })}
@@ -98,10 +103,10 @@ class ExpensesTable extends Component {
                                 <td>{totalMoneda}</td>
                                 <td>{total}</td>
                             </tr>
-                            { (this.props.list.size < 12 ) &&
+                            { (this.props.list.size < 12 && estadoActual !== 'Pendiente' && estadoActual !== 'Aprobado' && estadoActual !== 'Rechazado' ) &&
                                 <tr><td colSpan="7" scope="colgroup">Agregar nuevo registro</td></tr>
                             }
-                            { (this.props.list.size < 12 ) &&
+                            { (this.props.list.size < 12 && estadoActual !== 'Pendiente' && estadoActual !== 'Aprobado' && estadoActual !== 'Rechazado' ) &&
                                 <tr>
                                     <td><DatePicker
                                             todayButton={"Hoy"}
@@ -118,7 +123,7 @@ class ExpensesTable extends Component {
                             }
                         </tbody>
                     </table>
-                    { (this.props.list.size < 12 ) &&
+                    { (this.props.list.size < 12 && estadoActual !== 'Pendiente' && estadoActual !== 'Aprobado' && estadoActual !== 'Rechazado' ) &&
                         <button className="mui-btn mui-btn--primary" onClick={this.handleAdd.bind(this)}>Agregar</button>
                     }
                 </form>

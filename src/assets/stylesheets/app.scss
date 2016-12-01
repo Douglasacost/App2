@@ -1,5 +1,13 @@
 //Styles go here
 
+//Print media query
+@media print{
+  #s4-titlerow{
+    display: none;
+  }
+}
+// end of print section
+
 #app {
   .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
     padding-right: 0;

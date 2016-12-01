@@ -48,11 +48,12 @@ export default class formState extends Component {
     getDataFromList(formId) {
         console.log('entered get');
         // disable inputs when getting data because they are no longer editable
-        document.getElementsByClassName('fieldset-to-disable').disabled = true;
+        let fielsetEl = document.getElementById('fieldset-to-disable');
+        fielsetEl.disabled = true;
         let keysNames = ['seccion','base', 'nombreDelSolicitante', 'division', 'fecha', 'solicitante','fechaFirmaDelSolicitante','gerenteDeProducto','fechaGerenteDeProducto','gerenteDeProductoAprobo',
                          'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'directorFinanciero', 'fechaDirectorFinanciero', 'directorFinancieroAprobo',
                          'gerenteCumplimiento', 'fechaGerenteCumplimiento', 'gerenteCumplimientoAprobo', 'directorRegional', 'fechaDirectorRegional', 'directorRegionalAprobo',
-                         'estado', 'condicionesGeneral', 'condicionesFinanciero', 'condicionesCumplimiento', 'condicionesEtica'];
+                         'estado', 'condicionesGeneral', 'condicionesFinanciero', 'condicionesCumplimiento', 'condicionesEtica', 'comentarioRechazo'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott11', 
             keysNames, 
@@ -78,6 +79,11 @@ export default class formState extends Component {
             this.props.params.id
         );
     }
+    handlePrint(e){
+        e.preventDefault();
+        window.focus();
+        window.print();
+    }
     setGerenteGenetal(){
         console.log('set Gerente General');
         let aprobadores = this.props.formState.get('aprobadores').toArray();
@@ -92,8 +98,6 @@ export default class formState extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
-        let estadoActual = formState.get('estado')
-        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -122,12 +126,12 @@ export default class formState extends Component {
                         }
                         <Notes notes={notes.completeDisclaimer} />
                         <span className='Form-label'>Revisado por:</span>
-                        <ApproverFirm label='Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('donacionProducto') === 'Si') ? true : false} state={formState} />
-                        <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesGeneral')} id='condicionesGeneral' form={form} className='Form-textInputBox' disabled={disableInputs}/>
+                        <ApproverFirm label='Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} state={formState} />
+                        <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesGeneral')} id='condicionesGeneral' form={form} className='Form-textInputBox' disabled={(formState.get('gerenteGeneralAprobo') === 'si' || formState.get('gerenteGeneralAprobo') === 'no' ) ? true : false }/>
                         { (this.props.params.id) ?
                             <div>
                                 <ApproverFirm label='Director Financiero (de acuerdo a lo querido en la politica de la Afiliada):' aprobador={formState.get('directorFinanciero')} aprobado={formState.get('directorFinancieroAprobo')} stringDate={formState.get('fechaDirectorFinanciero')} form={form} dateInput='fechaDirectorFinanciero' approveInput='directorFinancieroAprobo' user={user.get('displayName')} state={formState} />
-                                <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesFinanciero')} id='condicionesFinanciero' form={form} className='Form-textInputBox' disabled={disableInputs}/>
+                                <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesFinanciero')} id='condicionesFinanciero' form={form} className='Form-textInputBox' disabled={(formState.get('directorFinancieroAprobo') === 'si' || formState.get('directorFinancieroAprobo') === 'no' ) ? true : false }/>
                             </div>
                             :
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Director Financiero' selected={formState.get('directorFinanciero')} input='directorFinanciero' form={form} />
@@ -135,7 +139,7 @@ export default class formState extends Component {
                         { (this.props.params.id) ?
                             <div>
                                 <ApproverFirm label='Gerente de Cumplimiento (de acuerdo a lo querido en la politica de la Afiliada):' aprobador={formState.get('gerenteCumplimiento')} aprobado={formState.get('gerenteCumplimientoAprobo')} stringDate={formState.get('fechaGerenteCumplimiento')} form={form} dateInput='fechaGerenteCumplimiento' approveInput='gerenteCumplimientoAprobo' user={user.get('displayName')} state={formState} />
-                                <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesCumplimiento')} id='condicionesCumplimiento' form={form} className='Form-textInputBox' disabled={disableInputs}/>
+                                <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesCumplimiento')} id='condicionesCumplimiento' form={form} className='Form-textInputBox' disabled={(formState.get('gerenteCumplimientoAprobo') === 'si' || formState.get('gerenteCumplimientoAprobo') === 'no' ) ? true : false }/>
                             </div>
                             :
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Gerente de Cumplimiento' selected={formState.get('gerenteCumplimiento')} input='gerenteCumplimiento' form={form} />
@@ -143,7 +147,7 @@ export default class formState extends Component {
                         { (this.props.params.id) ?
                             <div>
                                 <ApproverFirm label='Directore Regional de la Oficina de Etica y Cumplimiento (o delegado)' aprobador={formState.get('directorRegional')} aprobado={formState.get('directorRegionalAprobo')} stringDate={formState.get('fechaDirectorRegional')} form={form} dateInput='fechaDirectorRegional' approveInput='directorRegionalAprobo' user={user.get('displayName')} state={formState} />
-                                <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesEtica')} id='condicionesEtica' form={form} className='Form-textInputBox' disabled={disableInputs}/>
+                                <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesEtica')} id='condicionesEtica' form={form} className='Form-textInputBox' disabled={(formState.get('directorRegionalAprobo') === 'si' || formState.get('directorRegionalAprobo') === 'no' ) ? true : false }/>
                             </div>
                             :
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Directore Regional de Etica y Cumplimiento' selected={formState.get('directorRegional')} input='directorRegional' form={form} />
