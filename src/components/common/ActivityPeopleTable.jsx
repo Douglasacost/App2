@@ -70,7 +70,9 @@ class ActivityPeopleTable extends Component {
                             <th>Es empleado del Gobierno</th>
                             <th>Nombre del Hospital o Institucion</th>
                             <th>Nombre del puesto en el Hospital o Institucion</th>
-                            <th></th>
+                            { (estadoActual !== 'Pendiente' && estadoActual !== 'Aprobado' && estadoActual !== 'Rechazado') &&
+                                <th></th>
+                            }
                         </tr>
                         {list.map(function(listItem, i){
                                 let empleadoChecked = (listItem.empleado === 'si') ? true : false;
@@ -86,7 +88,9 @@ class ActivityPeopleTable extends Component {
                                         <td><Checkbox label='' ripple onChange={()=>{}} checked={gobiernoChecked} disabled={true}/></td>
                                         <td>{listItem.institucion}</td>
                                         <td>{listItem.puesto}</td>
-                                        <td onClick={handleDelete.bind(this, i)}>borrar</td>
+                                        { (estadoActual !== 'Pendiente' && estadoActual !== 'Aprobado' && estadoActual !== 'Rechazado') &&
+                                            <td onClick={handleDelete.bind(this, i)}>borrar</td>
+                                        }
                                     </tr>
                                 );
                             })}

@@ -34,11 +34,11 @@ let common = {
     filename: 'bundle.js'
   },
   plugins: [
-    // new webpack.DefinePlugin({
-    //     'process.env': {
-    //     'NODE_ENV': JSON.stringify('production')
-    //     }
-    // }),
+    new webpack.DefinePlugin({
+        'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+        }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('app.css', {
       allChunks: true

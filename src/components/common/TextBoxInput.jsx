@@ -14,10 +14,16 @@ class TextBoxInput extends Component {
         this.props.setField(form, input, value);
     }
     render() {
-        let { className, id, name, rows, value } = this.props;
+        let { className, id, name, rows, value, disabled } = this.props;
         let classes = 'Form-textAreaBox ';
+        let disabledVal;
         if (className) {
             classes = classes.concat(className);
+        }
+        if(disabled !== undefined && disabled !== null){
+            disabledVal = disabled;
+        } else {
+            disabledVal = false;
         }
         rows = parseInt(rows);
         return (
@@ -29,6 +35,7 @@ class TextBoxInput extends Component {
                     name={name}
                     value={value}
                     inputClassName={className}
+                    disabled={disabledVal}
                 />
             </div>
         );

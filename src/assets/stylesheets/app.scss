@@ -288,6 +288,14 @@
     .Table{
       table {
           border-collapse: collapse;
+          input {
+            height: 42px;
+            outline: none;
+            border: none;
+          }
+          th{
+            min-width: 100px;
+          }
       }
       table, th, td {
           border: 1px solid black;
@@ -295,16 +303,11 @@
       table td {
         vertical-align: top;
         height: 42px;
+        min-width: 100px;
       }
       table tr td:nth-child(4) {
-        width: 210px;
-        display: inline-block;
-        border: none;
-      }
-      input {
-        height: 42px;
-        outline: none;
-        border: none;
+        max-width: 210px;
+        word-wrap: break-word;
       }
     }
   }

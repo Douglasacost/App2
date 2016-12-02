@@ -63,8 +63,6 @@ export default class AbbottExpensesReport extends Component {
         // disable inputs when getting data because they are no longer editable
         let fielsetEl = document.getElementById('fieldset-to-disable');
         fielsetEl.disabled = true;
-        let fielsetTwoEl = document.getElementById('fieldset-to-disableTwo');
-        fielsetTwoEl.disabled = true;
         let keysNames = ['fecha','factura','pais','descripcion', 'tc', 'otraMoneda', 'total'];
         let data = formApiInstance.getTableData(
             'ExpensesTable', 
@@ -130,21 +128,21 @@ export default class AbbottExpensesReport extends Component {
                             <div className='mui-row'>
                                 <div className='mui-col-md-8 mui-paddingFix'>
                                     <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
-                                    <TextInput label='Nombre del Solicitante:' value={formState.get('solicitante')} id='solicitante' form={form} className='Form-textInputBox Form-seventy'/>
-                                    <TextInput label='Puesto:' value={formState.get('puesto')} id='puesto' form={form} className='Form-textInputBox Form-seventy'/>
-                                    <TextInput label='Pais - Presupuesto:' value={formState.get('pais')} id='pais' form={form} className='Form-textInputBox Form-seventy'/>
+                                    <TextInput label='Nombre del Solicitante:' value={formState.get('solicitante')} id='solicitante' form={form} className='Form-textInputBox Form-seventy' disabled={disableInputs}/>
+                                    <TextInput label='Puesto:' value={formState.get('puesto')} id='puesto' form={form} className='Form-textInputBox Form-seventy' disabled={disableInputs}/>
+                                    <TextInput label='Pais - Presupuesto:' value={formState.get('pais')} id='pais' form={form} className='Form-textInputBox Form-seventy' disabled={disableInputs}/>
                                 </div>
                                 <div className='mui-col-md-4 mui-paddingFix'>
-                                    <Dropdown options={expenseType} label='Tipo de Gasto' selected={formState.get('tipoDeGasto')} input='tipoDeGasto' form={form} />
+                                    <Dropdown options={expenseType} label='Tipo de Gasto' selected={formState.get('tipoDeGasto')} input='tipoDeGasto' form={form} disabled={disableInputs}/>
                                 </div>   
                             </div>
                             <div className='mui-row'> 
                                 <span className='Divider-blue'></span>
                                 <span className='Form-label Form-label--leftAlign'>Descripcion del gasto (Motivo del gasto):</span>
-                                <TextBoxInput rows='3' id='descripcion' value={formState.get('descripcion')} form={form}/>
+                                <TextBoxInput rows='3' id='descripcion' value={formState.get('descripcion')} form={form} disabled={disableInputs}/>
                                 <ExpensesTable list={formState.get('list')} form={form} input='list' className='Table' selectedDate={formState.get('tempDate')} state={formState}/>
                                 <span className='Form-label Form-label--leftAlign'>TOTAL EN LETRAS:</span>
-                                <TextInput label='' value={formState.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox'/>
+                                <TextInput label='' value={formState.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox' disabled={disableInputs}/>
                             </div>
                         </fieldset>
                         <fieldset className='Form-fieldSet'>

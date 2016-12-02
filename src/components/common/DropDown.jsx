@@ -12,7 +12,7 @@ class Dropdown extends Component {
         this.props.setField(this.props.form, this.props.input, name);
     }
     render() {
-        let { className, form, input, name, options, selected, label } = this.props;
+        let { className, form, input, name, options, selected, label, disabled } = this.props;
         let handleClick = this.handleClick.bind(this);
         console.log(options);
         console.log(selected);
@@ -28,12 +28,14 @@ class Dropdown extends Component {
                         }
                         <span className="mui-caret"></span>
                     </button>
-                    <ul className="mui-dropdown__menu">
-                        {options.map((option, i) => {
-                            console.log(option);
-                            return <li key={i} onClick={handleClick.bind(this, option.Title)}>{option.Title}</li>;
-                        })}
-                    </ul>
+                    { (!disabled) &&
+                        <ul className="mui-dropdown__menu">
+                            {options.map((option, i) => {
+                                console.log(option);
+                                return <li key={i} onClick={handleClick.bind(this, option.Title)}>{option.Title}</li>;
+                            })}
+                        </ul>    
+                    }
                 </div>
             </div>
         );
