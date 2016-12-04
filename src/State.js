@@ -121,6 +121,8 @@ export default Map({
         salones: '',
         equipo: '',
         materiales: '',
+        moneda: '',
+        totalEnLetras: '',
         otros: '',
         solicitante: '',
         fechaFirmaDelSolicitante: '',

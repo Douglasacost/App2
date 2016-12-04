@@ -71,7 +71,7 @@ export default class Abbott04 extends Component {
                          'transporteAereo', 'transporteTerrestre', 'registro', 'speakers', 'otrosServicios', 'comidas', 'salones', 'equipo', 'materiales', 'otros',
                          'solicitante', 'fechaFirmaDelSolicitante', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'gerenteDeDistrito', 'fechaGerenteDeDistrito',
                          'gerenteDeDistritoAprobo', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDelPaisAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo',
-                         'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'eventos', 'producto', 'comentarioRechazo', 'fechaDeInicio', 'fechaDeFinalizacion'];
+                         'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'eventos', 'producto', 'comentarioRechazo', 'fechaDeInicio', 'fechaDeFinalizacion', 'moneda', 'totalEnLetras'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott04', 
             keysNames, 
@@ -150,7 +150,7 @@ export default class Abbott04 extends Component {
                         <span className='Form-label'>Racional del negocio para organizar/patrocinar el evento:</span>
                         <TextBoxInput rows='4' id='racionalDelNegocio' value={formState.get('racionalDelNegocio')} form={form}/>
                         <TextInput label='Tipo del Evento:' value={formState.get('tipoDeEvento')} id='tipoDeEvento' form={form} className='Form-textInputBox'/>
-                        <DateInput className='' label='Fecha de Inicio:' stringDate={formState.get('fechaDeInicio')} form={form} input='fechaDeInicio' disabled={disableInputs} />
+                        <DateInput className='Form-dateInput--marginright' label='Fecha de Inicio:' stringDate={formState.get('fechaDeInicio')} form={form} input='fechaDeInicio' disabled={disableInputs} />
                         <DateInput className='' label='Fecha de Finalizacion:' stringDate={formState.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion' disabled={disableInputs} />
                         <span className='Form-spacer'></span>
                         <span className='Form-label'>Producto o línea de negocio que patrocina:</span>
@@ -192,6 +192,8 @@ export default class Abbott04 extends Component {
                             form={form}/>
                         <TextInput label='Otro' value={formState.get('aOtro')} id='aOtro' form={form} className='Form-textInputBox'/>
                         <NumericTable className='Form-expensesTable' headerArray={planedExpenses} fields={expensesList} state={formState} form={form}/>
+                        <TextInput label='Moneda' value={formState.get('moneda')} id='moneda' form={form} className='Form-textInputBox'/>
+                        <TextInput label='Total en letras' value={formState.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox'/>
                     </fieldset>
                     <fieldset className='Form-fieldSet'>
                         <Firm label='Nombre del Solicitante' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />

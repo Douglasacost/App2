@@ -245,9 +245,17 @@
     }
   }
   .Abbott04{
+    .Form-dateInput--marginright{
+      .Form-dateLabel {
+        margin-right: 51px;
+      }
+    }
     table{
       input{
         text-align: right;
+      }
+      .mdl-textfield{
+        padding-top: 0;
       }
     }
   }

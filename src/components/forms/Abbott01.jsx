@@ -193,7 +193,7 @@ export default class Abbott01 extends Component {
                             selected={formState.get('patrocinadoPreviamente')}
                             options={booleanOption}/>
                         <TextInput label='Nombre del evento/congreso al cual fue patrocinado previamente:' value={formState.get('nombrePatrocinioPrevio')} id='nombrePatrocinioPrevio' form={form} className='Form-textInputBox'/>
-                        <TextInput label='Lugal del evento/congreso a donde fue patrocinado previamente:' value={formState.get('lugarPatrocinioPrevio')} id='lugarPatrocinioPrevio' form={form} className='Form-textInputBox'/>
+                        <TextInput label='Lugar del evento/congreso a donde fue patrocinado previamente:' value={formState.get('lugarPatrocinioPrevio')} id='lugarPatrocinioPrevio' form={form} className='Form-textInputBox'/>
                         <CheckboxInput 
                             className='Checkbox-container--singleOption Checkbox-container--first'
                             label='El Congreso/evento es consistente con las áreas terapeuticas de interés de Abbott'
@@ -257,7 +257,7 @@ export default class Abbott01 extends Component {
                         { (this.props.params.id) ?
                             <ApproverFirm label='*Director Legal:' aprobador={formState.get('directorLegal')} aprobado={formState.get('directorLegalAprobo')} stringDate={formState.get('fechaDirectoLegal')} form={form} dateInput='fechaDirectoLegal' approveInput='directorLegalAprobo' user={user.get('displayName')} state={formState} />
                             :
-                            <Dropdown options={formState.get('aprobadores')} label='Seleccione Director Legal' selected={formState.get('directorLegal')} input='directorLegal' form={form} />
+                            <Dropdown options={formState.get('aprobadores')} label='* Seleccione Director Legal' selected={formState.get('directorLegal')} input='directorLegal' form={form} />
                         }
                         <ApproverFirm label='*Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('empleadoDelGobierno') === 'Si') ? true : false} state={formState}/>
                         <Notes notes={footNotes}/>
