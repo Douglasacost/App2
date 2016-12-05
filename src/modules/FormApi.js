@@ -24,7 +24,7 @@ function formApi() {
                 let value = listData.get(key);
                 filteredData = filteredData.set(key, value);
             });
-            listData.map(function(value, key){
+            filteredData.map(function(value, key){
                 let lowKey = firstToLower(key);
                 mapped = mapped.set(lowKey, value); 
             });

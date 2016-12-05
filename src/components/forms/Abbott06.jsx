@@ -10,6 +10,7 @@ import TextBoxInput from '../common/TextBoxInput';
 import NumberInput from '../common/NumberInput';
 import Dropdown from '../common/Dropdown';
 import ApproverFirm from '../common/ApproverFirm';
+import MetadataFields from '../common/MetadataFields';
 import moment from 'moment';
 
 var formApi = require('../../modules/FormApi');
@@ -35,6 +36,24 @@ export default class formState extends Component {
                 'Approvers',
                 form,
                 'aprobadores',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
                 this.props.setField.bind(this)
             );
         }
@@ -65,6 +84,7 @@ export default class formState extends Component {
         } else {
             formState = this.props.formState.set('signature', this.props.user.get('displayName')).set('dateSignature', moment().toISOString()).set('estado', 'Pendiente').set('date', moment().toISOString());
         }
+        formState = formState.delete('paises').delete('divisiones').delete('productos');
         formApiInstance.postData(sharepointUrl,
             'Abbott06',
             'Abbott06',
@@ -80,6 +100,8 @@ export default class formState extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('date');
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -91,6 +113,7 @@ export default class formState extends Component {
                         <span className='Form-text Form-description'>*This form should be used only after first consulting the FMV Tool.</span>
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
+                        <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <table>
                             <tbody>
                                 <tr>

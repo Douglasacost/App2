@@ -11,6 +11,7 @@ import NumberInput from '../common/NumberInput';
 import NumericTable from '../common/NumericTable';
 import TextBoxInput from '../common/TextBoxInput';
 import Dropdown from '../common/Dropdown';
+import MetadataFields from '../common/MetadataFields';
 import moment from 'moment';
 import $ from "jquery";
 
@@ -41,18 +42,37 @@ export default class AbbottExcepcionCompra extends Component {
                 'aprobadores',
                 this.props.setField.bind(this)
             );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
+                this.props.setField.bind(this)
+            );
         }
     }
     componentDidUpdate(){
         console.log('component did update');
-        if(this.props.formState.get('aprobadores').size > 0 && this.props.formState.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
+        var formId = this.props.params.id;
+        if( !formId && this.props.formState.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
     }
     getDataFromList(formId) {
         console.log('entered get');
         // disable inputs when getting data because they are no longer editable
         let fielsetEl = document.getElementById('fieldset-to-disable');
         fielsetEl.disabled = true;
-        let keysNames = ['fecha','tipoDeOrden','ordenDeCompra','proveedor','bienesOServiciosSolicitados','monto','moneda','razonDeExcepcion','fechaFirmaDelSolicitante','fechaFirmaDelSolicitante','fechaFirmaDelJefeInmediato','fechaFirmaDelGerente', 'jefeInmediato', 'gerenteGeneral', 'requiereFirmaDirector', 'jefeInmediatoAprobo', 'gerenteGeneralAprobo', 'solicitante', 'estado', 'comentarioRechazo'];
+        let keysNames = ['fecha','tipoDeOrden','ordenDeCompra','proveedor','bienesOServiciosSolicitados','monto','moneda','razonDeExcepcion','fechaFirmaDelSolicitante','fechaFirmaDelSolicitante','fechaFirmaDelJefeInmediato','fechaFirmaDelGerente', 'jefeInmediato', 'gerenteGeneral', 'requiereFirmaDirector', 'jefeInmediatoAprobo', 'gerenteGeneralAprobo', 'solicitante', 'estado', 'comentarioRechazo', 'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'ExcepcionDeCompra', 
             keysNames, 
@@ -72,6 +92,7 @@ export default class AbbottExcepcionCompra extends Component {
         } else {
             formState = this.props.formState.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
+        formState = formState.delete('paises').delete('divisiones').delete('productos');
         let teststate = this.props.formState.toJS();
         formApiInstance.postData(sharepointUrl,
             'ExcepcionDeCompra',
@@ -99,6 +120,8 @@ export default class AbbottExcepcionCompra extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -111,6 +134,7 @@ export default class AbbottExcepcionCompra extends Component {
                         <span className='Form-text Form-description'>Solicitud de excepción en compra</span>
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
+                        <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <span className='Form-label'>Nota: Adjuntar este documento a la orden de compra para la aprobación de finanzas.</span>
                         <span className='Form-label'>Por este medio solicito autorización para la siguiente excepción en compras:</span>
                         <RadioInput 

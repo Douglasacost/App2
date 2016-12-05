@@ -9,6 +9,7 @@ import TextInputGroup from '../common/TextInputGroup';
 import TextBoxInput from '../common/TextBoxInput';
 import Dropdown from '../common/Dropdown';
 import ApproverFirm from '../common/ApproverFirm';
+import MetadataFields from '../common/MetadataFields';
 import moment from 'moment';
 
 var formApi = require('../../modules/FormApi');
@@ -43,6 +44,24 @@ export default class formState extends Component {
                 'aprobadores',
                 this.props.setField.bind(this)
             );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
+                this.props.setField.bind(this)
+            );
         }
     }
     componentDidUpdate(){
@@ -57,8 +76,8 @@ export default class formState extends Component {
         let keysNames = ['fecha','nombreDelSolicitante','unidadDeNegocio','nombreHcp','especialidadHcp','paisDeResidencia', 'tipoDeServicio', 'empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'asociacion', 'responsabilidades', 'comentarios', 'experienciaServicio', 'reconocidoLider', 'experienciaSolicitada', 'otros', 'fechaFirmaDelSolicitante', 'gerenteDeDistrito', 'fechaGerenteDeDistrito',
                          'gerenteDeDistritoAprobo', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDelPaisAprobo', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal', 'fechaDirectoLegal',
-                         'directorLegalAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'solicitante', 'informacionHcp', 'comentarioRechazo'
-                          ];
+                         'directorLegalAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'solicitante', 'informacionHcp', 'comentarioRechazo', 
+                         'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott05', 
             keysNames, 
@@ -77,6 +96,7 @@ export default class formState extends Component {
         } else {
             formState = this.props.formState.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
+        formState = formState.delete('paises').delete('divisiones').delete('productos');
         formApiInstance.postData(sharepointUrl,
             'Abbott05',
             'Abbott05',
@@ -103,6 +123,8 @@ export default class formState extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -114,6 +136,7 @@ export default class formState extends Component {
                         <span className='Form-text Form-description'>RACIONAL DE SERVICIOS PROFESIONALES A CONTRATAR</span>
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
+                        <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del solicitante:' value={formState.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Unidad de Negocio:' value={formState.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>

@@ -8,6 +8,7 @@ import Reviewer from '../common/Reviewer';
 import DateInput from '../common/DateInput';
 import Dropdown from '../common/Dropdown';
 import ApproverFirm from '../common/ApproverFirm';
+import MetadataFields from '../common/MetadataFields';
 import moment from 'moment';
 
 var formApi = require('../../modules/FormApi');
@@ -39,6 +40,24 @@ export default class formState extends Component {
                 'aprobadores',
                 this.props.setField.bind(this)
             );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
+                this.props.setField.bind(this)
+            );
         }
     }
     componentDidUpdate(){
@@ -53,7 +72,7 @@ export default class formState extends Component {
         let keysNames = ['seccion','base', 'nombreDelSolicitante', 'division', 'fecha', 'solicitante','fechaFirmaDelSolicitante','gerenteDeProducto','fechaGerenteDeProducto','gerenteDeProductoAprobo',
                          'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'directorFinanciero', 'fechaDirectorFinanciero', 'directorFinancieroAprobo',
                          'gerenteCumplimiento', 'fechaGerenteCumplimiento', 'gerenteCumplimientoAprobo', 'directorRegional', 'fechaDirectorRegional', 'directorRegionalAprobo',
-                         'estado', 'condicionesGeneral', 'condicionesFinanciero', 'condicionesCumplimiento', 'condicionesEtica', 'comentarioRechazo'];
+                         'estado', 'condicionesGeneral', 'condicionesFinanciero', 'condicionesCumplimiento', 'condicionesEtica', 'comentarioRechazo', 'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott11', 
             keysNames, 
@@ -72,6 +91,7 @@ export default class formState extends Component {
         } else {
             formState = this.props.formState.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
+        formState = formState.delete('paises').delete('divisiones').delete('productos');
         formApiInstance.postData(sharepointUrl,
             'Abbott11',
             'Abbott11',
@@ -98,6 +118,8 @@ export default class formState extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -109,6 +131,7 @@ export default class formState extends Component {
                         <span className='Form-text Form-description'>SOLICITUD DE EXCEPCIÓN</span>
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
+                        <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <span className='Form-label'>Excepción Solicitada para la Sección: (incluir nombre y especificar la razón de la excepción)</span>
                         <TextInput label='' value={formState.get('seccion')} id='seccion' form={form} className='Form-textInputBox'/>
                         <span className='Form-label'>Base de la Solicitud: (adjuntar cualquier documentación que respalde el presente formulario)</span>

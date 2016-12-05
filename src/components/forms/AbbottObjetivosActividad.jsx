@@ -11,6 +11,7 @@ import TextBoxInput from '../common/TextBoxInput';
 import ActivityPeopleTable from '../common/ActivityPeopleTable';
 import Dropdown from '../common/Dropdown';
 import ApproverFirm from '../common/ApproverFirm';
+import MetadataFields from '../common/MetadataFields';
 import moment from 'moment';
 
 var formApi = require('../../modules/FormApi');
@@ -34,6 +35,24 @@ export default class abbottObjetivosActividad extends Component {
                 'aprobadores',
                 this.props.setField.bind(this)
             );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
+                this.props.setField.bind(this)
+            );
         }
     }
     getDataFromList(formId) {
@@ -44,7 +63,7 @@ export default class abbottObjetivosActividad extends Component {
         let keysNames = ['fecha','division','linea','hora','lugar','pais','objetivo','reunionHcp', 'focus',
                          'servicio', 'promocion', 'reunionEmpleados', 'educacionPacientes', 'educacionEmpleados', 'reunionCliente', 'otro', 'otroComentario', 'producto',
                          'material', 'accionesDeSeguimiento', 'comentariosAdicionales', 'montoTotal', 'nombre', 'fechaFirmaVentas', 'gerenteDeDistrito', 'fechaGerenteDeDistrito',
-                         'gerenteDeDistritoAprobo', 'estado', 'comentarioRechazo'];
+                         'gerenteDeDistritoAprobo', 'estado', 'comentarioRechazo', 'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'ObjetivosActividad', 
             keysNames, 
@@ -74,7 +93,7 @@ export default class abbottObjetivosActividad extends Component {
         } else {
             formState = this.props.formState.set('nombre', this.props.user.get('displayName')).set('fechaFirmaVentas', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
-        formState = formState.delete('list');
+        formState = formState.delete('list').delete('paises').delete('divisiones').delete('productos');
         formApiInstance.postData(sharepointUrl,
             'ObjetivosActividad',
             'ObjetivosActividad',
@@ -96,6 +115,8 @@ export default class abbottObjetivosActividad extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -107,6 +128,7 @@ export default class abbottObjetivosActividad extends Component {
                         <span className='Form-text Form-description'>OBJETIVOS DE LA ACTIVIDAD</span>
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
+                        <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <TextInput label='Division:' value={formState.get('division')} id='division' form={form} className='Form-textInputBox'/>
                         <TextInput label='Linea:' value={formState.get('linea')} id='linea' form={form} className='Form-textInputBox'/>
                         <span className='Form-label'>DATOS DEL EVENTO:</span>

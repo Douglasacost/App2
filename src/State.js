@@ -94,7 +94,13 @@ export default Map({
         gerenteGeneralAprobo: '',
         aprobadores: Map({}),
         comentarioRechazo: '',
-        estado: ''
+        estado: '',
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbott04: Map({
         fecha: '',
@@ -149,7 +155,13 @@ export default Map({
         fechaGerenteGeneral: '',
         gerenteGeneralAprobo: '',
         comentarioRechazo: '',
-        estado: ''
+        estado: '',
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbott05: Map({
         fecha: '',
@@ -194,7 +206,13 @@ export default Map({
         gerenteMedicoAprobo: '',
         aprobadores: Map({}),
         comentarioRechazo: '',
-        estado: ''
+        estado: '',
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbott06: Map({
         name: '',
@@ -220,7 +238,13 @@ export default Map({
         oecApproved: '',
         estado: '',
         comentarioRechazo: '',
-        aprobadores: Map({})
+        aprobadores: Map({}),
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbott10: Map({
         nombre: '',
@@ -244,7 +268,13 @@ export default Map({
         cargo: '',
         fechaFirmaDelSolicitante: '',
         comentarioRechazo: '',
-        estado: ''
+        estado: '',
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbott101: Map({
         fecha: '',
@@ -274,7 +304,13 @@ export default Map({
         comentarioRechazo: '',
         donacionProducto: '',
         aprobadores: Map({}),
-        estado: ''
+        estado: '',
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbott11: Map({
         seccion: '',
@@ -305,7 +341,13 @@ export default Map({
         condicionesEtica: '',
         estado: '',
         comentarioRechazo: '',
-        aprobadores: Map({})
+        aprobadores: Map({}),
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbottExcepcionCompra: Map({
         fecha: '',
@@ -327,7 +369,13 @@ export default Map({
         aprobadores: Map({}),
         comentarioRechazo: '',
         solicitante: '',
-        estado: ''
+        estado: '',
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbottObjetivosActividad: Map({
         division: '',
@@ -360,7 +408,13 @@ export default Map({
         gerenteDeDistritoAprobo: '',
         aprobadores: Map({}),
         comentarioRechazo: '',
-        estado: ''
+        estado: '',
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbottExpensesReport: Map({
         fecha: '',
@@ -384,6 +438,12 @@ export default Map({
         depositos: '',
         comentarioRechazo: '',
         totalLiquidacion: '',
-        tempDate: ''
+        tempDate: '',
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     })
 });

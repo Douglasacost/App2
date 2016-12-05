@@ -80,7 +80,7 @@ export default class Abbott01 extends Component {
                          'asociacion', 'responsabilidades', 'pratrocinioIncluye', 'patrocinadoPreviamente', 'nombrePatrocinioPrevio', 'lugarPatrocinioPrevio', 'congreso', 'nombreDelCongreso', 'paisCiudad', 'lugar', 'fechaDeInicio',
                          'fechaDeFinalizacion', 'gerenteDeDistrito', 'fechaGerenteDeDistrito', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal',
                          'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'registro', 'transporte', 'hotel','comidas', 'eventoConsistente', 'contenidoDeEspecialidad', 'contenidoFuerte',
-                         'hcpNecesidadLegitima', 'hcpCompartira', 'conocimientoNecesario', 'gerenteDeDistritoAprobo', 'gerenteDelPaisAprobo', 'pais', 'division', 'producto', 'comentarioRechazo'];
+                         'hcpNecesidadLegitima', 'hcpCompartira', 'conocimientoNecesario', 'gerenteDeDistritoAprobo', 'gerenteDelPaisAprobo', 'comentarioRechazo', 'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott01', 
             keysNames, 
@@ -146,7 +146,7 @@ export default class Abbott01 extends Component {
                             form={form}
                             selected={formState.get('localidad')}
                             options={localidad}/>
-                        <MetadataFields state={formState} form={form}/>
+                        <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del solicitante:' value={formState.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Unidad de Negocio:' value={formState.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>

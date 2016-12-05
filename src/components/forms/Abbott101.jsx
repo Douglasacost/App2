@@ -10,6 +10,7 @@ import NumberInput from '../common/NumberInput';
 import TextBoxInput from '../common/TextBoxInput';
 import Dropdown from '../common/Dropdown';
 import ApproverFirm from '../common/ApproverFirm';
+import MetadataFields from '../common/MetadataFields';
 import moment from 'moment';
 
 var formApi = require('../../modules/FormApi');
@@ -61,6 +62,24 @@ export default class formState extends Component {
                 'aprobadores',
                 this.props.setField.bind(this)
             );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
+                this.props.setField.bind(this)
+            );
         }
     }
     componentDidUpdate(){
@@ -75,7 +94,7 @@ export default class formState extends Component {
         let keysNames = ['fecha','nombreDelSolicitante','unidadDeNegocio', 'nombreBeneficiario', 'solicitudDeSubvencion', 'valorDeLaBeca', 'propositoBeneficio', 'solicitante','fechaFirmaDelSolicitante','gerenteDeProducto','fechaGerenteDeProducto','gerenteDeProductoAprobo',
                          'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'directorFinanciero', 'fechaDirectorFinanciero', 'directorFinancieroAprobo',
                          'directorLegal', 'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo',
-                         'estado', 'donacionProducto', 'comentarioRechazo'];
+                         'estado', 'donacionProducto', 'comentarioRechazo', 'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott101', 
             keysNames, 
@@ -94,6 +113,7 @@ export default class formState extends Component {
         } else {
             formState = this.props.formState.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente');
         }
+        formState = formState.delete('paises').delete('divisiones').delete('productos');
         formApiInstance.postData(sharepointUrl,
             'Abbott101',
             'Abbott101',
@@ -120,6 +140,8 @@ export default class formState extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -131,6 +153,7 @@ export default class formState extends Component {
                         <span className='Form-text Form-description'>FORMATO DE SOLICITUD SUBVENCIONES EDUCATIVAS (Becas, Stand, Organizacion de Congresos)/DONACIONES</span>
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
+                        <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del solicitante:' value={formState.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Unidad de Negocio:' value={formState.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>

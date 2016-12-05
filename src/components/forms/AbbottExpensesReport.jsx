@@ -9,6 +9,7 @@ import ExpensesTable from '../common/ExpensesTable';
 import Dropdown from '../common/Dropdown';
 import ApproverFirm from '../common/ApproverFirm';
 import Liquidation from '../common/Liquidation';
+import MetadataFields from '../common/MetadataFields';
 import { Map, fromJS, List } from 'immutable';
 import moment from 'moment';
 
@@ -42,6 +43,24 @@ export default class AbbottExpensesReport extends Component {
                 'aprobadores',
                 this.props.setField.bind(this)
             );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
+                this.props.setField.bind(this)
+            );
         }
     }
     getDataFromList(formId) {
@@ -49,7 +68,7 @@ export default class AbbottExpensesReport extends Component {
         let keysNames = ['fecha','solicitante','puesto','pais','descripcion', 'tipoDeGasto', 'anticipo', 'gastos', 'depositos', 'total',
                         'totalEnLetras', 'titular', 'fechaFirmaTitular', 'autorizacion',
                         'fechaFirmaAutorizacion', 'autorizacionAprobo', 'nombreTransferencia',
-                        'cuentaBancaria', 'estado', 'comentarioRechazo'];
+                        'cuentaBancaria', 'estado', 'comentarioRechazo', 'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'ExpensesReport', 
             keysNames, 
@@ -84,7 +103,7 @@ export default class AbbottExpensesReport extends Component {
         } else {
             formState = this.props.formState.set('titular', this.props.user.get('displayName')).set('fechaFirmaTitular', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
-        formState = formState.delete('list').delete('tempDate');
+        formState = formState.delete('list').delete('tempDate').delete('paises').delete('divisiones').delete('productos');
         formApiInstance.postData(sharepointUrl,
             'ExpensesReport',
             'ExpensesReport',
@@ -125,6 +144,7 @@ export default class AbbottExpensesReport extends Component {
                     </div>
                     <div className='mui-row'>
                         <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
+                            <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                             <div className='mui-row'>
                                 <div className='mui-col-md-8 mui-paddingFix'>
                                     <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>

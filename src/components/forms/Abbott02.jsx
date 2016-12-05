@@ -9,6 +9,7 @@ import CheckboxInput from '../common/CheckboxInput';
 import TextBoxInput from '../common/TextBoxInput';
 import TextInputGroup from '../common/TextInputGroup';
 import Dropdown from '../common/Dropdown';
+import MetadataFields from '../common/MetadataFields';
 import moment from 'moment';
 
 var formApi = require('../../modules/FormApi');
@@ -39,6 +40,24 @@ export default class Abbott02 extends Component {
                 'aprobadores',
                 this.props.setField.bind(this)
             );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
+                this.props.setField.bind(this)
+            );
         }
     }
     componentDidUpdate(){
@@ -52,7 +71,7 @@ export default class Abbott02 extends Component {
         fielsetEl.disabled = true;
         let keysNames = ['fecha','nombreHcp','especialidadHcp','paisDeResidencia','empleadoDelGobierno','nombreDelHospital','rolEnGobierno','impacto', 'escala',
                          'decisionNegocio', 'decisionAbbott', 'detalles', 'solicitante', 'fechaFirmaDelSolicitante', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'directorLegal',
-                         'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'comentarioRechazo'];
+                         'fechaDirectoLegal', 'directorLegalAprobo', 'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'comentarioRechazo', 'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott02', 
             keysNames, 
@@ -71,6 +90,7 @@ export default class Abbott02 extends Component {
         } else {
             formState = this.props.formState.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
+        formState = formState.delete('paises').delete('divisiones').delete('productos');
         formApiInstance.postData(sharepointUrl,
             'Abbott02',
             'Abbott02',
@@ -97,6 +117,8 @@ export default class Abbott02 extends Component {
     render() {
         let { formState, user } = this.props;
         let fecha = formState.get('fecha');
+        let estadoActual = formState.get('estado');
+        let disableInputs = (estadoActual !== '' && estadoActual !== undefined && estadoActual !== null) ? true : false ;
         let today = moment();
         return (
             <div className='Form MainScreen'>
@@ -108,6 +130,7 @@ export default class Abbott02 extends Component {
                         <span className='Form-text Form-description'>Cuestionario de Diligencia Debida para Individuales </span>
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
+                        <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <DateInput className='' label='Fecha Cuestionario de Diligencia:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del HCP:' value={formState.get('nombreHcp')} id='nombreHcp' form={form} className='Form-textInputBox'/>
                         <TextInput label='Especialidad del HCP:' value={formState.get('especialidadHcp')} id='especialidadHcp' form={form} className='Form-textInputBox'/>

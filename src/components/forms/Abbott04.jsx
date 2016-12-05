@@ -11,6 +11,7 @@ import NumberInput from '../common/NumberInput';
 import NumericTable from '../common/NumericTable';
 import TextBoxInput from '../common/TextBoxInput';
 import Dropdown from '../common/Dropdown';
+import MetadataFields from '../common/MetadataFields';
 import moment from 'moment';
 
 var formApi = require('../../modules/FormApi');
@@ -55,6 +56,24 @@ export default class Abbott04 extends Component {
                 'aprobadores',
                 this.props.setField.bind(this)
             );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
+                this.props.setField.bind(this)
+            );
         }
     }
     componentDidUpdate(){
@@ -71,7 +90,8 @@ export default class Abbott04 extends Component {
                          'transporteAereo', 'transporteTerrestre', 'registro', 'speakers', 'otrosServicios', 'comidas', 'salones', 'equipo', 'materiales', 'otros',
                          'solicitante', 'fechaFirmaDelSolicitante', 'gerenteDeProducto', 'fechaGerenteDeProducto', 'gerenteDeProductoAprobo', 'gerenteDeDistrito', 'fechaGerenteDeDistrito',
                          'gerenteDeDistritoAprobo', 'gerenteDelPais', 'fechaGerenteDelPais', 'gerenteDelPaisAprobo', 'gerenteMedico', 'fechaGerenteMedico', 'gerenteMedicoAprobo',
-                         'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'eventos', 'producto', 'comentarioRechazo', 'fechaDeInicio', 'fechaDeFinalizacion', 'moneda', 'totalEnLetras'];
+                         'gerenteGeneral', 'fechaGerenteGeneral', 'gerenteGeneralAprobo', 'estado', 'eventos', 'producto', 'comentarioRechazo', 'fechaDeInicio', 'fechaDeFinalizacion', 'moneda', 'totalEnLetras'
+                         , 'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott04', 
             keysNames, 
@@ -90,6 +110,7 @@ export default class Abbott04 extends Component {
         } else {
             formState = this.props.formState.set('solicitante', this.props.user.get('displayName')).set('fechaFirmaDelSolicitante', moment().toISOString()).set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
+        formState = formState.delete('paises').delete('divisiones').delete('productos');
         formApiInstance.postData(sharepointUrl,
             'Abbott04',
             'Abbott04',
@@ -129,6 +150,7 @@ export default class Abbott04 extends Component {
                         <span className='Form-text Form-description'>Racional Del Evento</span>
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
+                        <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <RadioInput 
                             label='Eventos regionales organizados por Abbott' 
