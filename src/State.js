@@ -60,7 +60,13 @@ export default Map({
         hcpCompartira: '',
         conocimientoNecesario: '',
         comentarioRechazo: '',
-        aprobadores: Map({})
+        aprobadores: Map({}),
+        paisProceso: '',
+        divisionProceso: '',
+        productoProceso: '',
+        paises: Map({}),
+        divisiones: Map({}),
+        productos: Map({})
     }),
     abbott02: Map({
         fecha: '',

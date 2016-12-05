@@ -8,6 +8,7 @@ import Notes from '../common/Notes';
 import CheckboxInput from '../common/CheckboxInput';
 import TextInputGroup from '../common/TextInputGroup';
 import Dropdown from '../common/Dropdown';
+import MetadataFields from '../common/MetadataFields';
 import moment from 'moment';
 
 var formApi = require('../../modules/FormApi');
@@ -46,6 +47,24 @@ export default class Abbott01 extends Component {
                 'aprobadores',
                 this.props.setField.bind(this)
             );
+            formApiInstance.getDataList(sharepointUrl,
+                'Paises',
+                form,
+                'paises',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Producto',
+                form,
+                'productos',
+                this.props.setField.bind(this)
+            );
+            formApiInstance.getDataList(sharepointUrl,
+                'Divisiones',
+                form,
+                'divisiones',
+                this.props.setField.bind(this)
+            );
         }
     }
     componentDidUpdate(){
@@ -80,6 +99,7 @@ export default class Abbott01 extends Component {
         } else {
             formState = this.props.formState.set('estado', 'Pendiente').set('fecha', moment().toISOString());
         }
+        formState = formState.delete('paises').delete('divisiones').delete('productos');
         formApiInstance.postData(sharepointUrl,
             'Abbott01',
             'Abbott011',
@@ -126,9 +146,7 @@ export default class Abbott01 extends Component {
                             form={form}
                             selected={formState.get('localidad')}
                             options={localidad}/>
-                        <TextInput label='País:' value={formState.get('pais')} id='pais' form={form} className='Form-textInputBox'/>
-                        <TextInput label='Division:' value={formState.get('division')} id='division' form={form} className='Form-textInputBox'/>
-                        <TextInput label='Producto:' value={formState.get('producto')} id='producto' form={form} className='Form-textInputBox'/>
+                        <MetadataFields state={formState} form={form}/>
                         <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del solicitante:' value={formState.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Unidad de Negocio:' value={formState.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>
