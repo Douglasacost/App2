@@ -21,7 +21,7 @@ let todayDate = moment();
 const booleanOption = [ 'Si', 'No'];
 const footNotes = [
         {
-            text: '* El solicitante debe adjuntar los siguientes documentos para el proceso interno:'
+            text: 'El solicitante debe adjuntar los siguientes documentos para el proceso interno:'
         },
         {
             text: '1. Carta de solicitud firmada por el requiriente. '
@@ -181,17 +181,17 @@ export default class formState extends Component {
                         { (this.props.params.id) ?
                             <ApproverFirm label='Director Legal*:' aprobador={formState.get('directorLegal')} aprobado={formState.get('directorLegalAprobo')} stringDate={formState.get('fechaDirectoLegal')} form={form} dateInput='fechaDirectoLegal' approveInput='directorLegalAprobo' user={user.get('displayName')} state={formState} />
                             :
-                            <Dropdown options={formState.get('aprobadores')} label='Seleccione Director Legal' selected={formState.get('directorLegal')} input='directorLegal' form={form} />
+                            <Dropdown options={formState.get('aprobadores')} label='**Seleccione Director Legal' selected={formState.get('directorLegal')} input='directorLegal' form={form} />
                         }
                         { (this.props.params.id) ?
                             <ApproverFirm label='Director Finanzas**' aprobador={formState.get('directorFinanciero')} aprobado={formState.get('directorFinancieroAprobo')} stringDate={formState.get('fechaDirectorFinanciero')} form={form} dateInput='fechaDirectorFinanciero' approveInput='directorFinancieroAprobo' user={user.get('displayName')} flagGerente={(formState.get('directorFinanciero') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('donacionProducto') === 'Si') ? true : false} state={formState}/>
                             :
-                            <Dropdown options={formState.get('aprobadores')} label='Seleccione Director Finanzas' selected={formState.get('directorFinanciero')} input='directorFinanciero' form={form} />
+                            <Dropdown options={formState.get('aprobadores')} label='**Seleccione Director Finanzas' selected={formState.get('directorFinanciero')} input='directorFinanciero' form={form} />
                         }
                         { (this.props.params.id) ?
                             <ApproverFirm label='Medical**:' aprobador={formState.get('gerenteMedico')} aprobado={formState.get('gerenteMedicoAprobo')} stringDate={formState.get('fechaGerenteMedico')} form={form} dateInput='fechaGerenteMedico' approveInput='gerenteMedicoAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteMedico') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('donacionProducto') === 'Si') ? true : false} state={formState}/>
                             :
-                            <Dropdown options={formState.get('aprobadores')} label='Seleccione Gerente Medico' selected={formState.get('gerenteMedico')} input='gerenteMedico' form={form} />
+                            <Dropdown options={formState.get('aprobadores')} label='**Seleccione Gerente Medico' selected={formState.get('gerenteMedico')} input='gerenteMedico' form={form} />
                         }
                         <ApproverFirm label='Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('donacionProducto') === 'Si') ? true : false} state={formState} />
                         <Notes notes={footNotes} />

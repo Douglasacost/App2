@@ -21,7 +21,7 @@ var formApiInstance = new formApi();
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const requiereFirma = ['Si', 'No'];
-const orderType = [ 'Orden de compra emitida después del evento', 'Proveedor único (no cotizaciones adicionales)'];
+const orderType = [ 'Orden de compra emitida después del evento (Forma no aplica para servicios bajo contrato).', 'Proveedor único (no cotizaciones adicionales) (No clasificado como Proveedor Preferido).'];
 
 const form = 'abbottExcepcionCompra';
 
@@ -135,7 +135,8 @@ export default class AbbottExcepcionCompra extends Component {
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <MetadataFields state={formState} form={form} disabled={disableInputs}/>
-                        <span className='Form-label'>Nota: Adjuntar este documento a la orden de compra para la aprobación de finanzas.</span>
+                        <span className='Form-label Form-label--singleLine'>Nota: Adjuntar este documento a la orden de compra para la aprobación de finanzas.</span>
+                        <span className='Form-spacer'></span>
                         <span className='Form-label'>Por este medio solicito autorización para la siguiente excepción en compras:</span>
                         <RadioInput 
                             label='Marcar una de las dos op.:' 

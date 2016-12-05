@@ -264,14 +264,27 @@
       width: 400px;
     }
   }
+  .AbbottExcepcionCompra{
+    .Form-label--singleLine{
+      display: block;
+    }
+  }
   .AbbottExpensesReport{
     .Form-seventy{
       width: 90%;
+    }
+    .Form-topOptions{
+      .Dropdown-container{
+        display: inline-block;
+        vertical-align: top;
+      }
     }
     .mui-paddingFix{
       padding: 0;
     }
     .Form-liquidation{
+      display: inline-block;
+      margin-right: 10px;
       table {
           border-collapse: collapse;
       }

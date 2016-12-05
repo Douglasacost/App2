@@ -207,11 +207,11 @@ export default class abbottObjetivosActividad extends Component {
                         <NumberInput label='Monto Total:' id='montoTotal' value={formState.get('montoTotal')} className='Form-textInputBox' form={form}/>
                     </fieldset>
                     <fieldset className='Form-fieldSet'>
-                        <Firm label='Representante de Ventas:' user={user.get('displayName')} solicitante={formState.get('nombre')} stringDate={formState.get('fechaFirmaVentas')} form={form} input='fechaFirmaVentas' />
+                        <Firm label='Solicitante:' user={user.get('displayName')} solicitante={formState.get('nombre')} stringDate={formState.get('fechaFirmaVentas')} form={form} input='fechaFirmaVentas' />
                         { (this.props.params.id) ?
-                            <ApproverFirm label='Nombre del Gerente de Distrito:' aprobador={formState.get('gerenteDeDistrito')} aprobado={formState.get('gerenteDeDistritoAprobo')} stringDate={formState.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} state={formState}/>
+                            <ApproverFirm label='Jefe inmediato:' aprobador={formState.get('gerenteDeDistrito')} aprobado={formState.get('gerenteDeDistritoAprobo')} stringDate={formState.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} state={formState}/>
                             :
-                            <Dropdown options={formState.get('aprobadores')} label='Seleccione Gerente de Distrito' selected={formState.get('gerenteDeDistrito')} input='gerenteDeDistrito' form={form} />
+                            <Dropdown options={formState.get('aprobadores')} label='Seleccione Jefe inmediato' selected={formState.get('gerenteDeDistrito')} input='gerenteDeDistrito' form={form} />
                         }
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>

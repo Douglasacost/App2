@@ -133,28 +133,26 @@ export default class AbbottExpensesReport extends Component {
             <div className='Form MainScreen mui-container-fluid'>
                 <form className='Form-container AbbottExpensesReport' action="#">
                     <div className='mui-row'>
-                        <div className='mui-col-md-6 mui-paddingFix'>
+                        <div className='mui-col-md-4 mui-paddingFix'>
                             <span className='Form-text Form-title'>ABBOTT CACMP-DR</span>
                             <span className='Form-text Form-state'>Estado: {formState.get('estado')}</span>
                             <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         </div>
-                        <div className='mui-col-md-6 mui-paddingFix'>
+                        <div className='mui-col-md-8 mui-paddingFix Form-topOptions'>
                             <Liquidation state={formState} form={form} className='Form-liquidation' />
+                            <Dropdown options={expenseType} label='Tipo de Gasto' selected={formState.get('tipoDeGasto')} input='tipoDeGasto' form={form} disabled={disableInputs}/>
                         </div>
                     </div>
                     <div className='mui-row'>
                         <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                             <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                             <div className='mui-row'>
-                                <div className='mui-col-md-8 mui-paddingFix'>
+                                <div className='mui-col-md-12 mui-paddingFix'>
                                     <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                                     <TextInput label='Nombre del Solicitante:' value={formState.get('solicitante')} id='solicitante' form={form} className='Form-textInputBox Form-seventy' disabled={disableInputs}/>
                                     <TextInput label='Puesto:' value={formState.get('puesto')} id='puesto' form={form} className='Form-textInputBox Form-seventy' disabled={disableInputs}/>
                                     <TextInput label='Pais - Presupuesto:' value={formState.get('pais')} id='pais' form={form} className='Form-textInputBox Form-seventy' disabled={disableInputs}/>
-                                </div>
-                                <div className='mui-col-md-4 mui-paddingFix'>
-                                    <Dropdown options={expenseType} label='Tipo de Gasto' selected={formState.get('tipoDeGasto')} input='tipoDeGasto' form={form} disabled={disableInputs}/>
-                                </div>   
+                                </div>  
                             </div>
                             <div className='mui-row'> 
                                 <span className='Divider-blue'></span>
