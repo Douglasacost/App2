@@ -64,8 +64,9 @@ export default class AbbottExcepcionCompra extends Component {
     }
     componentDidUpdate(){
         console.log('component did update');
-        var formId = this.props.params.id;
-        if( !formId && this.props.formState.get('gerenteGeneral') === ''){ this.setGerenteGenetal(); }
+        var formId = this.props.params.id,
+            gerenteGeneral = this.props.formState.get('gerenteGeneral');
+        if( !formId && (gerenteGeneral === '' || gerenteGeneral === undefined || gerenteGeneral === null)){ this.setGerenteGenetal(); }
     }
     getDataFromList(formId) {
         console.log('entered get');
@@ -161,7 +162,7 @@ export default class AbbottExcepcionCompra extends Component {
                             :
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione jefe inmediato' selected={formState.get('jefeInmediato')} input='jefeInmediato' form={form} />
                         }
-                        <ApproverFirm label='Firma del Director o Gerente General del área:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaFirmaDelGerente')} form={form} dateInput='fechaFirmaDelGerente' approveInput='gerenteGeneralAprobo' id='approvebtn' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('tipoDeOrden') === 'Orden de compra emitida después del evento') ? true : false} state={formState}/>
+                        <ApproverFirm label='Firma del Director o Gerente General del área:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaFirmaDelGerente')} form={form} dateInput='fechaFirmaDelGerente' approveInput='gerenteGeneralAprobo' id='approvebtn' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('tipoDeOrden') === orderType[0]) ? true : false} state={formState}/>
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                             :
