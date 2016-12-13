@@ -2,8 +2,16 @@
 
 //Print media query
 @media print{
-  #s4-titlerow{
-    display: none;
+  #asociacion{
+    margin-top: 50px!important;
+  }
+  body{
+    visibility: hidden;
+  }
+  #app{
+    visibility: visible;
+    padding-top: 0;
+    margin-top: -170px;
   }
 }
 // end of print section

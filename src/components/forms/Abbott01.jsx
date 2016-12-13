@@ -213,37 +213,37 @@ export default class Abbott01 extends Component {
                         <TextInput label='Nombre del evento/congreso al cual fue patrocinado previamente:' value={formState.get('nombrePatrocinioPrevio')} id='nombrePatrocinioPrevio' form={form} className='Form-textInputBox'/>
                         <TextInput label='Lugar del evento/congreso a donde fue patrocinado previamente:' value={formState.get('lugarPatrocinioPrevio')} id='lugarPatrocinioPrevio' form={form} className='Form-textInputBox'/>
                         <CheckboxInput 
-                            className='Checkbox-container--singleOption Checkbox-container--first'
+                            className='Checkbox-container--first'
                             label='El Congreso/evento es consistente con las áreas terapeuticas de interés de Abbott'
                             id='eventoConsistente'
                             value={formState.get('eventoConsistente')} 
                             form={form} />
                         <CheckboxInput 
-                            className='Checkbox-container--singleOption'
+                            className=''
                             label='El contenido del Congreso/Evento está alineado con la especialidad/área práctica del HCP'
                             id='contenidoDeEspecialidad'
                             value={formState.get('contenidoDeEspecialidad')} 
                             form={form} />
                         <CheckboxInput 
-                            className='Checkbox-container--singleOption'
+                            className=''
                             label='El Congreso/evento tiene un fuerte y legítimo contenido científico'
                             id='contenidoFuerte'
                             value={formState.get('contenidoFuerte')} 
                             form={form} />
                         <CheckboxInput 
-                            className='Checkbox-container--singleOption'
+                            className=''
                             label='El HCP tiene una necesidad legítima de entrenamiento/educación.'
                             id='hcpNecesidadLegitima'
                             value={formState.get('hcpNecesidadLegitima')} 
                             form={form} />
                         <CheckboxInput 
-                            className='Checkbox-container--singleOption'
+                            className=''
                             label='El HCP compartirá el conocimiento y actualización adquirida con otros HCPs en su país.'
                             id='hcpCompartira'
                             value={formState.get('hcpCompartira')} 
                             form={form} />
                         <CheckboxInput 
-                            className='Checkbox-container--singleOption'
+                            className=''
                             label='Es necesario en el país incrementar el conocimiento sobre esta área terapeútica.'
                             id='conocimientoNecesario'
                             value={formState.get('conocimientoNecesario')} 
