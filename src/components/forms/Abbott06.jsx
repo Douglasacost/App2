@@ -16,12 +16,16 @@ import moment from 'moment';
 var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
+var verifyRequired = require('../../modules/RequiredFields');
+var verifyRequiredInstance = new verifyRequired();
+
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const notes = {
         footNotes: [{text: 'Please note that consultant compensation must not be offered or given with the intent to induce, or in exchange for, an explicit agreement or understanding that Abbott products will be used, purchased, leased, ordered, prescribed, recommended, or arranged for or provided formulary or other preferential or qualified status.'}]
 };
 const form = 'abbott06';
+const fieldsToVerify = ['businessHead', 'finance', 'oecSignature'];
 
 export default class formState extends Component {
     constructor(props) {
@@ -74,8 +78,7 @@ export default class formState extends Component {
             this.props.setFormData.bind(this)
             );
     }
-    handleSubmit(e){
-        e.preventDefault();
+    handlePost(){
         var formApiInstance = new formApi();
         let formState;
         const formId = this.props.params.id;
@@ -91,6 +94,10 @@ export default class formState extends Component {
             formState,
             this.props.params.id
         );
+    }
+    handleSubmit(e){
+        e.preventDefault();
+        verifyRequiredInstance.verify(fieldsToVerify,this.props.formState, this.handlePost.bind(this));
     }
     handlePrint(e){
         e.preventDefault();

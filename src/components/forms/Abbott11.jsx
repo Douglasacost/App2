@@ -27,7 +27,7 @@ const notes = {
                 {text: 'Nota: La aprobación de excepciones está sujeta a reconsideración y/o terminación en el caso de cualquier cambio en las leyes o regulaciones vigentes.'}]
 };
 const form = 'abbott11';
-const fieldsToVerify = ['seccion'];
+const fieldsToVerify = ['gerenteDeProducto', 'gerenteGeneral', 'directorFinanciero', 'gerenteCumplimiento', 'directorRegional'];
 
 export default class formState extends Component {
     constructor(props) {

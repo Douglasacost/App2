@@ -17,6 +17,9 @@ import moment from 'moment';
 var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
+var verifyRequired = require('../../modules/RequiredFields');
+var verifyRequiredInstance = new verifyRequired();
+
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const eventoTo = [ 'Medicos', 'Publico general', 'Farmacias', 'Medios', 'Fuerza de Ventas'];
@@ -41,6 +44,7 @@ const notes = {
     medicManager: [{text: '(Aplica para la validación de programas/agendas científicas de congresos  y eventos regionales o locales organizados por Abbott que impliquen la contratación de un HCP).'}]
 };
 const form = 'abbott04';
+const fieldsToVerify = ['gerenteDeDistrito', 'gerenteDelPais', 'gerenteDeProducto', 'gerenteMedico', 'gerenteGeneral'];
 export default class Abbott04 extends Component {
     constructor(props) {
         super(props);
@@ -100,8 +104,7 @@ export default class Abbott04 extends Component {
             this.props.setFormData.bind(this)
             );
     }
-    handleSubmit(e){
-        e.preventDefault();
+    handlePost(){
         var formApiInstance = new formApi();
         let formState;
         const formId = this.props.params.id;
@@ -117,6 +120,10 @@ export default class Abbott04 extends Component {
             formState,
             this.props.params.id
         );
+    }
+    handleSubmit(e){
+        e.preventDefault();
+        verifyRequiredInstance.verify(fieldsToVerify,this.props.formState, this.handlePost.bind(this));
     }
     handlePrint(e){
         e.preventDefault();

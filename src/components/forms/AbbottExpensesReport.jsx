@@ -16,6 +16,9 @@ import moment from 'moment';
 var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
+var verifyRequired = require('../../modules/RequiredFields');
+var verifyRequiredInstance = new verifyRequired();
+
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 const notes = [
         {
@@ -25,6 +28,7 @@ const expenseType = List([
   {Title: 'Reintegro'}, {Title: 'Anticipo'}, {Title: 'Liquidación Anticipo'}
 ]);
 const form = 'abbottExpensesReport';
+const fieldsToVerify = ['autorizacion'];
 export default class AbbottExpensesReport extends Component {
     constructor(props) {
         super(props);
@@ -92,9 +96,7 @@ export default class AbbottExpensesReport extends Component {
             this.props.setField.bind(this)
             );
     }
-    handleSubmit(e){
-        console.log('entered handle submit');
-        e.preventDefault();
+    handlePost(){
         var formApiInstance = new formApi();
         let formState;
         const formId = this.props.params.id;
@@ -111,6 +113,10 @@ export default class AbbottExpensesReport extends Component {
             this.props.params.id,
             this.handleSubmitTable.bind(this)
         );
+    }
+    handleSubmit(e){
+        e.preventDefault();
+        verifyRequiredInstance.verify(fieldsToVerify,this.props.formState, this.handlePost.bind(this));
     }
     handleSubmitTable(id){
         console.log('entered submit table');

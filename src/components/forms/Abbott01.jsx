@@ -14,6 +14,9 @@ import moment from 'moment';
 var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
+var verifyRequired = require('../../modules/RequiredFields');
+var verifyRequiredInstance = new verifyRequired()
+
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const booleanOption = [ 'Si', 'No'];
@@ -31,6 +34,7 @@ const footNotes = [
         }
 ];
 const form = 'abbott01';
+const fieldsToVerify = ['gerenteDeDistrito', 'gerenteDelPais', 'gerenteDeProducto', 'directorLegal', 'gerenteGeneral'];
 
 export default class Abbott01 extends Component {
     constructor(props) {
@@ -89,7 +93,7 @@ export default class Abbott01 extends Component {
             this.props.setFormData.bind(this)
             );
     }
-    handleSubmit(e){
+    handlePost(){
         e.preventDefault();
         var formApiInstance = new formApi();
         let formState;
@@ -106,6 +110,10 @@ export default class Abbott01 extends Component {
             formState,
             this.props.params.id
         );
+    }
+    handleSubmit(e){
+        e.preventDefault();
+        verifyRequiredInstance.verify(fieldsToVerify,this.props.formState, this.handlePost.bind(this));
     }
     handlePrint(e){
         e.preventDefault();

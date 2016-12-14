@@ -17,8 +17,12 @@ import moment from 'moment';
 var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
+var verifyRequired = require('../../modules/RequiredFields');
+var verifyRequiredInstance = new verifyRequired();
+
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 const form = 'abbottObjetivosActividad';
+const fieldsToVerify = ['gerenteDeDistrito'];
 export default class abbottObjetivosActividad extends Component {
     constructor(props) {
         super(props);
@@ -83,8 +87,7 @@ export default class abbottObjetivosActividad extends Component {
             this.props.setField.bind(this)
             );
     }
-    handleSubmit(e){
-        e.preventDefault();
+    handlePost(){
         var formApiInstance = new formApi();
         let formState;
         const formId = this.props.params.id;
@@ -101,6 +104,10 @@ export default class abbottObjetivosActividad extends Component {
             this.props.params.id,
             this.handleSubmitTable.bind(this)
         );
+    }
+    handleSubmit(e){
+        e.preventDefault();
+        verifyRequiredInstance.verify(fieldsToVerify,this.props.formState, this.handlePost.bind(this));
     }
     handleSubmitTable(id){
         let tableAsJson = this.props.formState.get('list').toJS();

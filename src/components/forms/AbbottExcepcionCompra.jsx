@@ -18,12 +18,16 @@ import $ from "jquery";
 var formApi = require('../../modules/FormApi');
 var formApiInstance = new formApi();
 
+var verifyRequired = require('../../modules/RequiredFields');
+var verifyRequiredInstance = new verifyRequired();
+
 const sharepointUrl = _spPageContextInfo.webAbsoluteUrl;
 let todayDate = moment();
 const requiereFirma = ['Si', 'No'];
 const orderType = [ 'Orden de compra emitida después del evento (Forma no aplica para servicios bajo contrato).', 'Proveedor único (no cotizaciones adicionales) (No clasificado como Proveedor Preferido).'];
 
 const form = 'abbottExcepcionCompra';
+const fieldsToVerify = ['jefeInmediato', 'gerenteGeneral'];
 
 export default class AbbottExcepcionCompra extends Component {
     constructor(props) {
@@ -82,9 +86,7 @@ export default class AbbottExcepcionCompra extends Component {
             this.props.setFormData.bind(this)
             );
     }
-    handleSubmit(e){
-        console.log('entered handle submit');
-        e.preventDefault();
+    handlePost(){
         let solicitante = this.props.formState.get('solicitante');
         let formState;
         const formId = this.props.params.id;
@@ -101,6 +103,10 @@ export default class AbbottExcepcionCompra extends Component {
             formState,
             this.props.params.id
         );
+    }
+    handleSubmit(e){
+        e.preventDefault();
+        verifyRequiredInstance.verify(fieldsToVerify,this.props.formState, this.handlePost.bind(this));
     }
     handlePrint(e){
         e.preventDefault();
