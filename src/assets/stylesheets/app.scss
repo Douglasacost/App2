@@ -11,6 +11,9 @@
     margin-top: -170px;
     .Form{
       fieldset{
+        div{
+          page-break-inside: avoid;
+        }
         .Print-topMinus20{
           margin-top: -20px;
         }
@@ -20,8 +23,11 @@
         .Print-nextPage{
           margin-top: 20px;
         }
-        #printButton{
+        .printButton{
           visibility: hidden;
+        }
+        .page-break{
+          margin-top: 50px;
         }
         .Firm{
           &-container{
@@ -31,14 +37,25 @@
             margin: 3px 10px 0 0;
           }
         }
+        .Form-spacer{
+          display: none;
+        }
         .Radio-container .Form-radioOptions {
           margin-top: 0;
         }
       }
-    }
-    .Abbott01{
-      #page-break{
-        margin-top: 50px;
+      .Abbott01 fieldset{
+        #page-break{
+          margin-top: 50px;
+        }
+      }
+      .Abbott02 fieldset{
+        .Form-textAreaBox .mdl-textfield {
+          padding: 0;
+        }
+        .page-break{
+          margin-top: 100px;
+        }
       }
     }
   }

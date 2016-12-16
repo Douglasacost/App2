@@ -219,7 +219,7 @@ export default class Abbott01 extends Component {
                             options={booleanOption}/>
                         <TextInput label='Nombre del evento/congreso al cual fue patrocinado previamente:' value={formState.get('nombrePatrocinioPrevio')} id='nombrePatrocinioPrevio' form={form} className='Form-textInputBox'/>
                         <TextInput label='Lugar del evento/congreso a donde fue patrocinado previamente:' value={formState.get('lugarPatrocinioPrevio')} id='lugarPatrocinioPrevio' form={form} className='Form-textInputBox '/>
-                        <div id="page-break"></div>
+                        <div className="page-break"></div>
                         <CheckboxInput 
                             className='Checkbox-container--first'
                             label='El Congreso/evento es consistente con las áreas terapeuticas de interés de Abbott'
@@ -288,9 +288,9 @@ export default class Abbott01 extends Component {
                         <ApproverFirm label='*Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('empleadoDelGobierno') === 'Si') ? true : false} state={formState}/>
                         <Notes notes={footNotes}/>
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
-                            <button className="mui-btn mui-btn--primary" id='printButton' onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                            <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                             :
-                            <button className="mui-btn mui-btn--primary" id='printButton' onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                            <button className="mui-btn mui-btn--primary printButton" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
                     </fieldset>
                 </form>
