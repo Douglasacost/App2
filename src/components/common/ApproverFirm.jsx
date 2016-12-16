@@ -89,7 +89,7 @@ class ApproverFirm extends Component {
                             </span>
                         )
                         :
-                        ( (aprobador === user) &&
+                        ( (aprobador === user && state.get('estado') !== 'Rechazado') &&
                             <div className='mui-container'>
                                 <button className="mui-btn mui-btn--primary" onClick={handleApprove}>Aprobar</button>
                                 <button className="mui-btn mui-btn--primary" onClick={handleReject}>Rechazar</button>

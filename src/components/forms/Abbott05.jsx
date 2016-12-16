@@ -144,7 +144,7 @@ export default class formState extends Component {
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <MetadataFields state={formState} form={form} disabled={disableInputs}/>
-                        <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
+                        <DateInput className='Print-topMinus10' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del solicitante:' value={formState.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Unidad de Negocio:' value={formState.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>
                         <TextInput label='Información del HCP:' value={formState.get('informacionHcp')} id='informacionHcp' form={form} className='Form-textInputBox'/>
@@ -180,6 +180,7 @@ export default class formState extends Component {
                         <TextInput label='Responsabilidades Academicas, si aplica:' value={formState.get('responsabilidades')} id='responsabilidades' form={form} className='Form-textInputBox'/>
                         <span className='Form-label'>Incluya comentarios relevantes a la experiencia del HCP (Educación, Investigación Clínica, Publicaciones, Experiencia como Speaker, Influencia como líder de opinión):</span>
                         <TextBoxInput rows='3' id='comentarios' value={formState.get('comentarios')} form={form}/>
+                        <div className="page-break"></div>
                         <CheckboxInput 
                             className=''
                             label='La experiencia del HCP esta alineada a la necesidad específica del servicio.'
@@ -237,7 +238,7 @@ export default class formState extends Component {
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                             :
-                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                            <button className="mui-btn mui-btn--primary printButton" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
                     </fieldset>
                 </form>

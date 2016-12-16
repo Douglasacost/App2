@@ -158,7 +158,7 @@ export default class Abbott04 extends Component {
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <MetadataFields state={formState} form={form} disabled={disableInputs}/>
-                        <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
+                        <DateInput className='Print-topMinus10' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <RadioInput 
                             label='Eventos regionales organizados por Abbott' 
                             name='eventos'
@@ -220,6 +220,7 @@ export default class Abbott04 extends Component {
                             value={formState.get('aFuerzaDeVentas')} 
                             form={form}/>
                         <TextInput label='Otro' value={formState.get('aOtro')} id='aOtro' form={form} className='Form-textInputBox'/>
+                        <div className="page-break"></div>
                         <NumericTable className='Form-expensesTable' headerArray={planedExpenses} fields={expensesList} state={formState} form={form}/>
                         <TextInput label='Moneda' value={formState.get('moneda')} id='moneda' form={form} className='Form-textInputBox'/>
                         <TextInput label='Total en letras' value={formState.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox'/>
@@ -252,7 +253,7 @@ export default class Abbott04 extends Component {
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                             :
-                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                            <button className="mui-btn mui-btn--primary printButton" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
                     </fieldset>
                 </form>
