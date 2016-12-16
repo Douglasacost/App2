@@ -181,19 +181,19 @@ export default class formState extends Component {
                         <span className='Form-label'>Incluya comentarios relevantes a la experiencia del HCP (Educación, Investigación Clínica, Publicaciones, Experiencia como Speaker, Influencia como líder de opinión):</span>
                         <TextBoxInput rows='3' id='comentarios' value={formState.get('comentarios')} form={form}/>
                         <CheckboxInput 
-                            className='Checkbox-container--singleOption'
+                            className=''
                             label='La experiencia del HCP esta alineada a la necesidad específica del servicio.'
                             id='experienciaServicio'
                             value={formState.get('experienciaServicio')} 
                             form={form}/>
                         <CheckboxInput 
-                            className='Checkbox-container--singleOption'
+                            className=''
                             label='El HCP es reconocido como un líder de opinión por su conocimiento.'
                             id='reconocidoLider'
                             value={formState.get('reconocidoLider')} 
                             form={form} />
                         <CheckboxInput 
-                            className='Checkbox-container--singleOption'
+                            className=''
                             label='El HCP cuenta con experiencia para proveer el servicio solicitado por Abbott.'
                             id='experienciaSolicitada'
                             value={formState.get('experienciaSolicitada')} 

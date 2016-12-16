@@ -15,11 +15,11 @@ export default class Notes extends Component {
         return (
             <div className={classes} >
                 <span className='Note-title'>{title}</span>
-                <List className='Note-list'>
+                <ul className='Note-list'>
                     {notes.map(function(note, i){
-                            return <ListItem key={i}>{note.text}</ListItem>;
+                            return <li key={i}>{note.text}</li>;
                         })}
-                </List>
+                </ul>
             </div>
         );
     }

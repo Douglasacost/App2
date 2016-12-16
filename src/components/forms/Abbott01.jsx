@@ -94,7 +94,6 @@ export default class Abbott01 extends Component {
             );
     }
     handlePost(){
-        e.preventDefault();
         var formApiInstance = new formApi();
         let formState;
         const formId = this.props.params.id;
@@ -113,7 +112,7 @@ export default class Abbott01 extends Component {
     }
     handleSubmit(e){
         e.preventDefault();
-        verifyRequiredInstance.verify(fieldsToVerify,this.props.formState, this.handlePost.bind(this));
+        verifyRequiredInstance.verify(fieldsToVerify, this.props.formState, this.handlePost.bind(this));
     }
     handlePrint(e){
         e.preventDefault();
@@ -155,7 +154,7 @@ export default class Abbott01 extends Component {
                             selected={formState.get('localidad')}
                             options={localidad}/>
                         <MetadataFields state={formState} form={form} disabled={disableInputs}/>
-                        <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
+                        <DateInput className='Print-topMinus10' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                         <TextInput label='Nombre del solicitante:' value={formState.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Unidad de Negocio:' value={formState.get('unidadDeNegocio')} id='unidadDeNegocio' form={form} className='Form-textInputBox'/>
                         <TextInput label='Nombre del HCP:' value={formState.get('nombreHcp')} id='nombreHcp' form={form} className='Form-textInputBox'/>
@@ -219,7 +218,8 @@ export default class Abbott01 extends Component {
                             selected={formState.get('patrocinadoPreviamente')}
                             options={booleanOption}/>
                         <TextInput label='Nombre del evento/congreso al cual fue patrocinado previamente:' value={formState.get('nombrePatrocinioPrevio')} id='nombrePatrocinioPrevio' form={form} className='Form-textInputBox'/>
-                        <TextInput label='Lugar del evento/congreso a donde fue patrocinado previamente:' value={formState.get('lugarPatrocinioPrevio')} id='lugarPatrocinioPrevio' form={form} className='Form-textInputBox'/>
+                        <TextInput label='Lugar del evento/congreso a donde fue patrocinado previamente:' value={formState.get('lugarPatrocinioPrevio')} id='lugarPatrocinioPrevio' form={form} className='Form-textInputBox '/>
+                        <div id="page-break"></div>
                         <CheckboxInput 
                             className='Checkbox-container--first'
                             label='El Congreso/evento es consistente con las áreas terapeuticas de interés de Abbott'
@@ -263,7 +263,7 @@ export default class Abbott01 extends Component {
                         <DateInput className='Form-dateInput--marginBottom' label='Fecha de Finalizacion:' stringDate={formState.get('fechaDeFinalizacion')} form={form} input='fechaDeFinalizacion' disabled={disableInputs} />
                     </fieldset>
                     <fieldset className='Form-fieldSet'>
-                        <span className='Form-label Form-label--under '>Solicitantes:</span>
+                        <span className='Form-label Print-topMinus20'>Solicitantes:</span>
                         { (this.props.params.id) ?
                             <ApproverFirm label='Nombre del Gerente de Distrito:' aprobador={formState.get('gerenteDeDistrito')} aprobado={formState.get('gerenteDeDistritoAprobo')} stringDate={formState.get('fechaGerenteDeDistrito')} form={form} dateInput='fechaGerenteDeDistrito' approveInput='gerenteDeDistritoAprobo' user={user.get('displayName')} state={formState}/>
                             :
@@ -288,9 +288,9 @@ export default class Abbott01 extends Component {
                         <ApproverFirm label='*Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('empleadoDelGobierno') === 'Si') ? true : false} state={formState}/>
                         <Notes notes={footNotes}/>
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
-                            <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
+                            <button className="mui-btn mui-btn--primary" id='printButton' onClick={this.handleSubmit.bind(this)}>Enviar</button>
                             :
-                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                            <button className="mui-btn mui-btn--primary" id='printButton' onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
                     </fieldset>
                 </form>

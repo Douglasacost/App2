@@ -2,9 +2,6 @@
 
 //Print media query
 @media print{
-  #asociacion{
-    margin-top: 50px!important;
-  }
   body{
     visibility: hidden;
   }
@@ -12,6 +9,38 @@
     visibility: visible;
     padding-top: 0;
     margin-top: -170px;
+    .Form{
+      fieldset{
+        .Print-topMinus20{
+          margin-top: -20px;
+        }
+        .Print-topMinus10{
+          margin-top: -10px;
+        }
+        .Print-nextPage{
+          margin-top: 20px;
+        }
+        #printButton{
+          visibility: hidden;
+        }
+        .Firm{
+          &-container{
+            margin: 3px 0;
+          }
+          .Form-dateInput{
+            margin: 3px 10px 0 0;
+          }
+        }
+        .Radio-container .Form-radioOptions {
+          margin-top: 0;
+        }
+      }
+    }
+    .Abbott01{
+      #page-break{
+        margin-top: 50px;
+      }
+    }
   }
 }
 // end of print section
@@ -34,6 +63,10 @@
 
   li {
       list-style-type: none;
+  }
+
+  .mdl-checkbox__label, .mdl-textfield__input {
+    font-size: 14px;
   }
   
   .mdl-textfield.is-invalid .mdl-textfield__error {
@@ -98,6 +131,8 @@
     &-label {
       padding: 10px 0;
       height: 16px;
+      display: block;
+      height: 100%;
     }
     &-label--under {
       margin-top: 20px;
@@ -110,6 +145,10 @@
       label {
         padding-right: 10px;
       }
+    }
+    &-radioOption {
+      display: inline-block;
+      margin-right: 15px;
     }
     &-spacer{
       display: block;
@@ -149,6 +188,7 @@
     }
   }
   .Checkbox-container {
+    height: 24px;
     label {
       height: 100%;
       display: block;
@@ -157,7 +197,8 @@
       width: auto;
     }
     &--singleOption {
-      height: 24px;
+      display: inline-block;
+      margin-right: 15px;
     }
     &--tableOption {
       height: 24px;
@@ -187,17 +228,13 @@
       margin-bottom: 25px;
       .Note-list {
         margin: 0;
-        span {
+        li {
           width: 95%;
           white-space: normal;
           display: block;
           font-family: Arial, Helvetica, sans-serif; 
+          font-size: 12px;
         }
-      }
-      .mdl-list__item {
-        margin-bottom: -25px;
-        font-size: 10px;
-
       }
     }
   }
@@ -337,6 +374,9 @@
       table tr td:nth-child(4) {
         max-width: 210px;
         word-wrap: break-word;
+        display: block;
+        border: none;
+        overflow: hidden;
       }
     }
   }
