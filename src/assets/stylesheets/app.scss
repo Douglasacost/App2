@@ -77,6 +77,33 @@
           margin-top: 100px;
         }
       }
+      .Abbott06{
+        fieldset{
+          div{
+            page-break-inside: auto;
+          }
+          .Form-textAreaBox .mdl-textfield{
+            padding: 0;
+          }
+          .page-break{
+            margin-top: 100px;
+          }
+          .Form-spacer{
+            display: none;
+          }
+          .Form-label{
+            padding: 0;
+          }
+          .Note-container {
+            margin-top: -50px;
+          }
+          .Firm-container{
+            .Form-dateInput {
+              margin-top: 0;
+            }
+          }
+        }
+      }
     }
   }
 }

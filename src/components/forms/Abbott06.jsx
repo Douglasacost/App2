@@ -69,7 +69,7 @@ export default class formState extends Component {
         fielsetEl.disabled = true;
         let keysNames = ['name','date','phone','email','division','nameHcp','hcpTier','amount', 'explain',
                          'signature', 'dateSignature', 'businessHead', 'dateBusinessHead', 'businessHeadApproved', 'finance', 'dateFinance', 'financeApproved', 'oecSignature',
-                         'dateOec', 'oecApproved', 'estado', 'comentarioRechazo'];
+                         'dateOec', 'oecApproved', 'estado', 'comentarioRechazo', 'paisProceso', 'divisionProceso', 'productoProceso'];
         let data = formApiInstance.getData(sharepointUrl,
             'Abbott06', 
             keysNames, 
@@ -146,7 +146,7 @@ export default class formState extends Component {
                         <span className='Form-label'>Please answer the following questions:</span>
                         <span className='Form-spacer'></span>
                         <span className='Form-label'>1. What is the proposed FMV compensation for this HCP/Customer (“HCP”)? $</span>
-                        <NumberInput label='Amount:' id='amount' value={formState.get('amount')} className='Form-textInputBox' form={form}/>
+                        <NumberInput label='Amount:' id='amount' value={formState.get('amount')} className='Form-textInputBox Print-smallTextInput' form={form}/>
                         <span className='Form-spacer'></span>
                         <span className='Form-label'>2. Please explain why the proposed compensation is consistent with fair market value, focusing on factors such as the HCP’s unique qualifications and experience, the nature of the services to be provided, theHCP’s particular specialty or area of expertise, and any other relevant information to consider.</span>
                         <TextBoxInput rows='2' id='explain' value={formState.get('explain')} form={form}/>
@@ -177,7 +177,7 @@ export default class formState extends Component {
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                             :
-                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                            <button className="mui-btn mui-btn--primary printButton" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
                         <Notes notes={notes.footNotes} />
                     </fieldset>
