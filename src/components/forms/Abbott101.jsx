@@ -201,11 +201,12 @@ export default class formState extends Component {
                             <Dropdown options={formState.get('aprobadores')} label='**Seleccione Gerente Medico' selected={formState.get('gerenteMedico')} input='gerenteMedico' form={form} />
                         }
                         <ApproverFirm label='Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} flagGerente={(formState.get('gerenteGeneral') === user.get('displayName') && formState.get('estado') === 'Pendiente' && formState.get('donacionProducto') === 'Si') ? true : false} state={formState} />
+                        <div className="page-break"></div>
                         <Notes notes={footNotes} />
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                             :
-                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                            <button className="mui-btn mui-btn--primary  printButton" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
                     </fieldset>
                 </form>
