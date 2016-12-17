@@ -139,12 +139,12 @@ export default class AbbottExpensesReport extends Component {
             <div className='Form MainScreen mui-container-fluid'>
                 <form className='Form-container AbbottExpensesReport' action="#">
                     <div className='mui-row'>
-                        <div className='mui-col-md-4 mui-paddingFix'>
+                        <div className='mui-col-md-4 mui-paddingFix Print-expensesTop--left'>
                             <span className='Form-text Form-title'>ABBOTT CACMP-DR</span>
                             <span className='Form-text Form-state'>Estado: {formState.get('estado')}</span>
                             <span className='Form-text Form-state'>Id: {this.props.params.id}</span>
                         </div>
-                        <div className='mui-col-md-8 mui-paddingFix Form-topOptions'>
+                        <div className='mui-col-md-8 mui-paddingFix Form-topOptions Print-expensesTop--right'>
                             <Liquidation state={formState} form={form} className='Form-liquidation' />
                             <Dropdown options={expenseType} label='Tipo de Gasto' selected={formState.get('tipoDeGasto')} input='tipoDeGasto' form={form} disabled={disableInputs}/>
                         </div>
@@ -171,7 +171,7 @@ export default class AbbottExpensesReport extends Component {
                         </fieldset>
                         <fieldset className='Form-fieldSet'>
                             <div className='mui-row'>
-                                <Firm label='Firma de Titular:' user={user.get('displayName')} solicitante={formState.get('titular')} stringDate={formState.get('fechaFirmaTitular')} form={form} input='fechaFirmaTitular' />                
+                                <Firm label='Firma de Titular:' className='Print-firmTight' user={user.get('displayName')} solicitante={formState.get('titular')} stringDate={formState.get('fechaFirmaTitular')} form={form} input='fechaFirmaTitular' />                
                                 { (this.props.params.id) ?
                                     <ApproverFirm label='Firma de Autoricacion (Jefatura Inmediata)' aprobador={formState.get('autorizacion')} aprobado={formState.get('autorizacionAprobo')} stringDate={formState.get('fechaFirmaAutorizacion')} form={form} dateInput='fechaFirmaAutorizacion' approveInput='autorizacionAprobo' user={user.get('displayName')} state={formState}/>
                                     :

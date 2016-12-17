@@ -155,11 +155,29 @@
         }
       }
       .AbbottExpensesReport{
+        .Print-expensesTop{
+          display: inline-block;
+          &-left{
+            float: left;
+          }
+          &-right{
+            float: right;
+          }
+        }
         .mui-row{
           margin: 0;
         }
         .Form-textAreaBox .mdl-textfield {
           padding: 0;
+        }
+        fieldset{
+          .Print-firmTight{
+            margin: 0;
+          }
+          .mui-row .Print-expensesInputFix .mdl-textfield{
+            margin: 0;
+            padding: 0;
+          }
         }
       }
     }
