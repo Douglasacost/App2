@@ -203,6 +203,7 @@ export default class abbottObjetivosActividad extends Component {
                             value={formState.get('otro')} 
                             form={form}/>
                         <TextInput label='otro:' value={formState.get('otroComentario')} id='otroComentario' form={form} className='Form-textInputBox'/>
+                        <div className="page-break"></div>
                         <span className='Form-label'>Productos relacionados, describa:</span>
                         <TextBoxInput rows='3' id='producto' value={formState.get('producto')} form={form}/>
                         <span className='Form-label'>Material Entregado:</span>
@@ -223,7 +224,7 @@ export default class abbottObjetivosActividad extends Component {
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                             :
-                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                            <button className="mui-btn mui-btn--primary printButton" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
                     </fieldset>
                 </form>
