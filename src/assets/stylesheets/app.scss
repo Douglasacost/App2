@@ -31,13 +31,16 @@
           margin-top: 20px;
         }
         .printButton{
-          visibility: hidden;
+          display: none;
         }
         .page-break{
           margin-top: 50px;
         }
         .Print-tight{
           padding: 2px 0;
+          margin: 0;
+        }
+        .Print-zeroMargin{
           margin: 0;
         }
         .Form-dateInput{
@@ -155,14 +158,13 @@
         }
       }
       .AbbottExpensesReport{
-        .Print-expensesTop{
+        .Print-expensesTop--left{
           display: inline-block;
-          &-left{
-            float: left;
-          }
-          &-right{
-            float: right;
-          }
+          float: left;
+        }
+        .Print-expensesTop--right{
+          display: inline-block;
+          float: right;
         }
         .mui-row{
           margin: 0;
@@ -172,7 +174,7 @@
         }
         fieldset{
           .Print-firmTight{
-            margin: 0;
+            margin: 10px 0 0 0;
           }
           .mui-row .Print-expensesInputFix .mdl-textfield{
             margin: 0;
@@ -418,6 +420,10 @@
       display: block;
       margin-top: 10px;
     }
+    &-scroll{
+      max-height: 150px;
+      overflow: auto;
+    }
   }
   .Abbott01{
     .Form-dateInput--marginBottom{
@@ -492,6 +498,11 @@
       }
     }
     .Table{
+      &-descriptionBox{
+        width: 210px;
+        max-height: 42px;
+        overflow: hidden;
+      }
       table {
           border-collapse: collapse;
           input {
@@ -508,15 +519,7 @@
       }
       table td {
         vertical-align: top;
-        height: 42px;
         min-width: 100px;
-      }
-      table tr td:nth-child(4) {
-        max-width: 210px;
-        word-wrap: break-word;
-        display: block;
-        border: none;
-        overflow: hidden;
       }
     }
   }

@@ -29,7 +29,7 @@ class Dropdown extends Component {
                         <span className="mui-caret"></span>
                     </button>
                     { (!disabled) &&
-                        <ul className="mui-dropdown__menu">
+                        <ul className="mui-dropdown__menu Dropdown-scroll">
                             {options.map((option, i) => {
                                 console.log(option);
                                 return <li key={i} onClick={handleClick.bind(this, option.Title)}>{option.Title}</li>;

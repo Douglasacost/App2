@@ -108,7 +108,7 @@ class ExpensesTable extends Component {
                                                     onChange={()=>{}} disabled={true}/></td>
                                             <td>{listItem.factura}</td>
                                             <td>{listItem.pais}</td>
-                                            <td>{listItem.descripcion}</td>
+                                            <td><p className='Table-descriptionBox'>{listItem.descripcion}</p></td>
                                             <td>{listItem.tc}</td>
                                             <td>{listItem.otraMoneda}</td>
                                             <td>{listItem.total}</td>

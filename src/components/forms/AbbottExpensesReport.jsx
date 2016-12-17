@@ -154,7 +154,7 @@ export default class AbbottExpensesReport extends Component {
                             <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                             <div className='mui-row'>
                                 <div className='mui-col-md-12 mui-paddingFix'>
-                                    <DateInput className='' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
+                                    <DateInput className='Print-zeroMargin' label='Fecha de Solicitud:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                                     <TextInput label='Nombre del Solicitante:' value={formState.get('solicitante')} id='solicitante' form={form} className='Form-textInputBox Form-seventy' disabled={disableInputs}/>
                                     <TextInput label='Puesto:' value={formState.get('puesto')} id='puesto' form={form} className='Form-textInputBox Form-seventy' disabled={disableInputs}/>
                                     <TextInput label='Pais - Presupuesto:' value={formState.get('pais')} id='pais' form={form} className='Form-textInputBox Form-seventy' disabled={disableInputs}/>
