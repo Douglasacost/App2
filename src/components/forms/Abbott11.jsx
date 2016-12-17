@@ -137,7 +137,7 @@ export default class formState extends Component {
         let today = moment();
         return (
             <div className='Form MainScreen'>
-                <form className='Form-container formState' action="#">
+                <form className='Form-container Abbott11' action="#">
                     <div className='Form-titleContainer'>
                         <span className='Form-text Form-title'>CACMP-DR ABBOTT 011</span>
                         <span className='Form-text Form-state'>Estado: {formState.get('estado')}</span>
@@ -147,9 +147,9 @@ export default class formState extends Component {
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <MetadataFields state={formState} form={form} disabled={disableInputs}/>
                         <span className='Form-label'>Excepción Solicitada para la Sección: (incluir nombre y especificar la razón de la excepción)</span>
-                        <TextInput label='' value={formState.get('seccion')} id='seccion' form={form} className='Form-textInputBox'/>
+                        <TextInput label='' value={formState.get('seccion')} id='seccion' form={form} className='Form-textInputBox Print-smallTextInput'/>
                         <span className='Form-label'>Base de la Solicitud: (adjuntar cualquier documentación que respalde el presente formulario)</span>
-                        <TextInput label='' value={formState.get('base')} id='base' form={form} className='Form-textInputBox'/>
+                        <TextInput label='' value={formState.get('base')} id='base' form={form} className='Form-textInputBox Print-smallTextInput'/>
                         <TextInput label='Nombre del solicitante:' value={formState.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Division del Solicitante' value={formState.get('division')} id='division' form={form} className='Form-textInputBox'/>
                         <DateInput className='' label='Fecha:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
@@ -164,13 +164,13 @@ export default class formState extends Component {
                         <Notes notes={notes.completeDisclaimer} />
                         <span className='Form-label'>Revisado por:</span>
                         <ApproverFirm label='Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} state={formState} />
-                        { (this.props.params.id && formState.get('gerenteGeneral') === user.get('displayName') || this.checkVal(formState.get('condicionesGeneral'))) &&
+                        { ((this.props.params.id && formState.get('gerenteGeneral') === user.get('displayName') && estadoActual === 'Pendiente') || this.checkVal(formState.get('condicionesGeneral'))) &&
                             <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesGeneral')} id='condicionesGeneral' form={form} className='Form-textInputBox' disabled={(formState.get('gerenteGeneralAprobo') === 'si' || formState.get('gerenteGeneralAprobo') === 'no' || user.get('displayName') !== formState.get('gerenteGeneral')) ? true : false }/>
                         }
                         { (this.props.params.id) ?
                             <div>
                                 <ApproverFirm label='Director Financiero (de acuerdo a lo querido en la politica de la Afiliada):' aprobador={formState.get('directorFinanciero')} aprobado={formState.get('directorFinancieroAprobo')} stringDate={formState.get('fechaDirectorFinanciero')} form={form} dateInput='fechaDirectorFinanciero' approveInput='directorFinancieroAprobo' user={user.get('displayName')} state={formState} />
-                                { (formState.get('directorFinanciero') === user.get('displayName') || this.checkVal(formState.get('condicionesFinanciero'))) &&
+                                { ((formState.get('directorFinanciero') === user.get('displayName') && estadoActual === 'Pendiente') || this.checkVal(formState.get('condicionesFinanciero'))) &&
                                     <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesFinanciero')} id='condicionesFinanciero' form={form} className='Form-textInputBox' disabled={(formState.get('directorFinancieroAprobo') === 'si' || formState.get('directorFinancieroAprobo') === 'no' || user.get('displayName') !== formState.get('directorFinanciero')) ? true : false }/>
                                 }
                             </div>
@@ -180,7 +180,7 @@ export default class formState extends Component {
                         { (this.props.params.id) ?
                             <div>
                                 <ApproverFirm label='Gerente de Cumplimiento (de acuerdo a lo querido en la politica de la Afiliada):' aprobador={formState.get('gerenteCumplimiento')} aprobado={formState.get('gerenteCumplimientoAprobo')} stringDate={formState.get('fechaGerenteCumplimiento')} form={form} dateInput='fechaGerenteCumplimiento' approveInput='gerenteCumplimientoAprobo' user={user.get('displayName')} state={formState} />
-                                { (formState.get('gerenteCumplimiento') === user.get('displayName') || this.checkVal(formState.get('condicionesCumplimiento'))) &&
+                                { ((formState.get('gerenteCumplimiento') === user.get('displayName') && estadoActual === 'Pendiente') || this.checkVal(formState.get('condicionesCumplimiento'))) &&
                                     <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesCumplimiento')} id='condicionesCumplimiento' form={form} className='Form-textInputBox' disabled={(formState.get('gerenteCumplimientoAprobo') === 'si' || formState.get('gerenteCumplimientoAprobo') === 'no' || user.get('displayName') !== formState.get('gerenteCumplimiento')) ? true : false }/>
                                 }
                             </div>
@@ -190,7 +190,7 @@ export default class formState extends Component {
                         { (this.props.params.id) ?
                             <div>
                                 <ApproverFirm label='Directore Regional de la Oficina de Etica y Cumplimiento (o delegado)' aprobador={formState.get('directorRegional')} aprobado={formState.get('directorRegionalAprobo')} stringDate={formState.get('fechaDirectorRegional')} form={form} dateInput='fechaDirectorRegional' approveInput='directorRegionalAprobo' user={user.get('displayName')} state={formState} />
-                                { (formState.get('directorRegional') === user.get('displayName') || this.checkVal(formState.get('condicionesEtica'))) &&
+                                { ((formState.get('directorRegional') === user.get('displayName') && estadoActual === 'Pendiente') || this.checkVal(formState.get('condicionesEtica'))) &&
                                     <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesEtica')} id='condicionesEtica' form={form} className='Form-textInputBox' disabled={(formState.get('directorRegionalAprobo') === 'si' || formState.get('directorRegionalAprobo') === 'no' || user.get('displayName') !== formState.get('directorRegional')) ? true : false }/>
                                 }
                             </div>
@@ -201,7 +201,7 @@ export default class formState extends Component {
                         { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                             <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                             :
-                            <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                            <button className="mui-btn mui-btn--primary  printButton" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                         }
                     </fieldset>
                 </form>
