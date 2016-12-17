@@ -166,7 +166,7 @@ export default class AbbottExpensesReport extends Component {
                                 <TextBoxInput rows='3' id='descripcion' value={formState.get('descripcion')} form={form} disabled={disableInputs}/>
                                 <ExpensesTable list={formState.get('list')} form={form} input='list' className='Table' selectedDate={formState.get('tempDate')} state={formState}/>
                                 <span className='Form-label Form-label--leftAlign'>TOTAL EN LETRAS:</span>
-                                <TextInput label='' value={formState.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox' disabled={disableInputs}/>
+                                <TextInput label='' value={formState.get('totalEnLetras')} id='totalEnLetras' form={form} className='Form-textInputBox Print-expensesInputFix' disabled={disableInputs}/>
                             </div>
                         </fieldset>
                         <fieldset className='Form-fieldSet'>
@@ -187,7 +187,7 @@ export default class AbbottExpensesReport extends Component {
                 { (formState.get('estado') !== 'Aprobado' && formState.get('estado') !== 'Rechazado' ) ?
                     <button className="mui-btn mui-btn--primary" onClick={this.handleSubmit.bind(this)}>Enviar</button>
                     :
-                    <button className="mui-btn mui-btn--primary" onClick={this.handlePrint.bind(this)}>Imprimir</button>
+                    <button className="mui-btn mui-btn--primary printButton" onClick={this.handlePrint.bind(this)}>Imprimir</button>
                 }
             </div>
         );

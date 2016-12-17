@@ -63,7 +63,7 @@ class ExpensesTable extends Component {
         this.props.setField(this.props.form, this.props.input, newList);
     }
     render() {
-        let { className, label, list, form, input, selectedDate, state } = this.props;
+        let { className, list, form, input, selectedDate, state } = this.props;
         let setLocalDate = this.setLocalDate.bind(this);
         let estadoActual = state.get('estado');
         let today = moment();
@@ -81,7 +81,6 @@ class ExpensesTable extends Component {
         });
         return (
             <div className={className}>
-                <span className='Form-label'>{label}</span>
                 <table>
                     <tbody>
                         <tr>

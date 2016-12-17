@@ -10,6 +10,9 @@
     position: absolute;
     top: 0;
     .Form{
+      .printButton{
+        visibility: hidden;
+      }
       .Form-container{
         padding: 0;
         margin: 0;
@@ -149,6 +152,14 @@
       .AbbottObjetivosActividad fieldset{
         .page-break{
           margin-top: 100px;
+        }
+      }
+      .AbbottExpensesReport{
+        .mui-row{
+          margin: 0;
+        }
+        .Form-textAreaBox .mdl-textfield {
+          padding: 0;
         }
       }
     }
