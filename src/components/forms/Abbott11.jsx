@@ -146,13 +146,13 @@ export default class formState extends Component {
                     </div>
                     <fieldset className='Form-fieldSet' id='fieldset-to-disable'>
                         <MetadataFields state={formState} form={form} disabled={disableInputs}/>
-                        <span className='Form-label'>Excepción Solicitada para la Sección: (incluir nombre y especificar la razón de la excepción)</span>
+                        <span className='Form-label Print-tight'>Excepción Solicitada para la Sección: (incluir nombre y especificar la razón de la excepción)</span>
                         <TextInput label='' value={formState.get('seccion')} id='seccion' form={form} className='Form-textInputBox Print-smallTextInput'/>
-                        <span className='Form-label'>Base de la Solicitud: (adjuntar cualquier documentación que respalde el presente formulario)</span>
+                        <span className='Form-label Print-tight'>Base de la Solicitud: (adjuntar cualquier documentación que respalde el presente formulario)</span>
                         <TextInput label='' value={formState.get('base')} id='base' form={form} className='Form-textInputBox Print-smallTextInput'/>
                         <TextInput label='Nombre del solicitante:' value={formState.get('nombreDelSolicitante')} id='nombreDelSolicitante' form={form} className='Form-textInputBox'/>
                         <TextInput label='Division del Solicitante' value={formState.get('division')} id='division' form={form} className='Form-textInputBox'/>
-                        <DateInput className='' label='Fecha:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
+                        <DateInput className='Print-tight' label='Fecha:' stringDate={(fecha !== undefined && fecha !== null && fecha !== '') ? moment(fecha) : today } form={form} input='fecha' disabled={true}/>
                     </fieldset>
                     <fieldset className='Form-fieldSet'>
                         <Firm label='Nombre del Solicitante:' user={user.get('displayName')} solicitante={formState.get('solicitante')} stringDate={formState.get('fechaFirmaDelSolicitante')} form={form} input='fechaFirmaDelSolicitante' />
@@ -162,13 +162,13 @@ export default class formState extends Component {
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Gerente de Producto' selected={formState.get('gerenteDeProducto')} input='gerenteDeProducto' form={form} />
                         }
                         <Notes notes={notes.completeDisclaimer} />
-                        <span className='Form-label'>Revisado por:</span>
+                        <span className='Form-label Print-tight'>Revisado por:</span>
                         <ApproverFirm label='Gerente General:' aprobador={formState.get('gerenteGeneral')} aprobado={formState.get('gerenteGeneralAprobo')} stringDate={formState.get('fechaGerenteGeneral')} form={form} dateInput='fechaGerenteGeneral' approveInput='gerenteGeneralAprobo' user={user.get('displayName')} state={formState} />
                         { ((this.props.params.id && formState.get('gerenteGeneral') === user.get('displayName') && estadoActual === 'Pendiente') || this.checkVal(formState.get('condicionesGeneral'))) &&
                             <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesGeneral')} id='condicionesGeneral' form={form} className='Form-textInputBox' disabled={(formState.get('gerenteGeneralAprobo') === 'si' || formState.get('gerenteGeneralAprobo') === 'no' || user.get('displayName') !== formState.get('gerenteGeneral')) ? true : false }/>
                         }
                         { (this.props.params.id) ?
-                            <div>
+                            <div className='Print-firmFix'>
                                 <ApproverFirm label='Director Financiero (de acuerdo a lo querido en la politica de la Afiliada):' aprobador={formState.get('directorFinanciero')} aprobado={formState.get('directorFinancieroAprobo')} stringDate={formState.get('fechaDirectorFinanciero')} form={form} dateInput='fechaDirectorFinanciero' approveInput='directorFinancieroAprobo' user={user.get('displayName')} state={formState} />
                                 { ((formState.get('directorFinanciero') === user.get('displayName') && estadoActual === 'Pendiente') || this.checkVal(formState.get('condicionesFinanciero'))) &&
                                     <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesFinanciero')} id='condicionesFinanciero' form={form} className='Form-textInputBox' disabled={(formState.get('directorFinancieroAprobo') === 'si' || formState.get('directorFinancieroAprobo') === 'no' || user.get('displayName') !== formState.get('directorFinanciero')) ? true : false }/>
@@ -178,7 +178,7 @@ export default class formState extends Component {
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Director Financiero' selected={formState.get('directorFinanciero')} input='directorFinanciero' form={form} />
                         }
                         { (this.props.params.id) ?
-                            <div>
+                            <div className='Print-firmFix'>
                                 <ApproverFirm label='Gerente de Cumplimiento (de acuerdo a lo querido en la politica de la Afiliada):' aprobador={formState.get('gerenteCumplimiento')} aprobado={formState.get('gerenteCumplimientoAprobo')} stringDate={formState.get('fechaGerenteCumplimiento')} form={form} dateInput='fechaGerenteCumplimiento' approveInput='gerenteCumplimientoAprobo' user={user.get('displayName')} state={formState} />
                                 { ((formState.get('gerenteCumplimiento') === user.get('displayName') && estadoActual === 'Pendiente') || this.checkVal(formState.get('condicionesCumplimiento'))) &&
                                     <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesCumplimiento')} id='condicionesCumplimiento' form={form} className='Form-textInputBox' disabled={(formState.get('gerenteCumplimientoAprobo') === 'si' || formState.get('gerenteCumplimientoAprobo') === 'no' || user.get('displayName') !== formState.get('gerenteCumplimiento')) ? true : false }/>
@@ -188,7 +188,7 @@ export default class formState extends Component {
                             <Dropdown options={formState.get('aprobadores')} label='Seleccione Gerente de Cumplimiento' selected={formState.get('gerenteCumplimiento')} input='gerenteCumplimiento' form={form} />
                         }
                         { (this.props.params.id) ?
-                            <div>
+                            <div className='Print-firmFix'>
                                 <ApproverFirm label='Directore Regional de la Oficina de Etica y Cumplimiento (o delegado)' aprobador={formState.get('directorRegional')} aprobado={formState.get('directorRegionalAprobo')} stringDate={formState.get('fechaDirectorRegional')} form={form} dateInput='fechaDirectorRegional' approveInput='directorRegionalAprobo' user={user.get('displayName')} state={formState} />
                                 { ((formState.get('directorRegional') === user.get('displayName') && estadoActual === 'Pendiente') || this.checkVal(formState.get('condicionesEtica'))) &&
                                     <TextInput label='Condiciones para aprobación (si aplica):' value={formState.get('condicionesEtica')} id='condicionesEtica' form={form} className='Form-textInputBox' disabled={(formState.get('directorRegionalAprobo') === 'si' || formState.get('directorRegionalAprobo') === 'no' || user.get('displayName') !== formState.get('directorRegional')) ? true : false }/>

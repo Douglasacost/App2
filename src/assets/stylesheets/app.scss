@@ -7,9 +7,13 @@
   }
   #app{
     visibility: visible;
-    padding-top: 0;
-    margin-top: -170px;
+    position: absolute;
+    top: 0;
     .Form{
+      .Form-container{
+        padding: 0;
+        margin: 0;
+      }
       fieldset{
         div{
           page-break-inside: avoid;
@@ -29,6 +33,13 @@
         .page-break{
           margin-top: 50px;
         }
+        .Print-tight{
+          padding: 2px 0;
+          margin: 0;
+        }
+        .Form-dateInput{
+          margin: 3px 10px 0 0;
+        }
         .Firm{
           &-container{
             margin: 3px 0;
@@ -42,6 +53,17 @@
         }
         .Radio-container .Form-radioOptions {
           margin-top: 0;
+        }
+        .Note-container {
+          margin: 0;
+        }
+        .Form-title{
+          font-weight: bold;
+          font-size: 18px;
+        }
+        .Form-state{
+          font-weight: bold;
+          font-size: 16px;
         }
       }
       .Abbott01 fieldset{
@@ -119,6 +141,9 @@
         .Print-smallTextInput .mdl-textfield{
           padding: 0 0 2px 0;
           margin-bottom: 10px;
+        }
+        .Print-firmFix{
+          margin: 3px 0;
         }
       }
     }
