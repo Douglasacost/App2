@@ -1,11 +1,10 @@
-import $ from 'jquery';
 import { Map, fromJS, List } from 'immutable';
 
 let verifyRequired = function(){
     this.verify = function(keysNames, state, callback){
-        let errorMessage = 'Debe seleccionar Pais, Division, Producto y todos los campos de firma antes de enviar el formulario.',
+        let errorMessage = 'Error',
             validForm = true,
-            alwaysRequire = ['paisProceso', 'divisionProceso', 'productoProceso'];
+            alwaysRequire = ['key1', 'key2', 'key3'];
             keysNames = keysNames.concat(alwaysRequire);
         keysNames.map(function(key){
             let value = state.get(key);

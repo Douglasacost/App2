@@ -19,7 +19,7 @@ class DateInput extends Component {
         this.props.setField(form, input, stringDate);
     }
     render() {
-        let defaultClasses = 'Form-dateInput ';
+        let defaultClasses = 'DateInput ';
         let className = this.props.className;
         let classes = defaultClasses.concat(className);
         let id = this.props.id;
@@ -39,7 +39,7 @@ class DateInput extends Component {
         }
         return (
             <div id={id} className={classes}>
-                <span className='Form-dateLabel'>{label}</span>
+                <span className='DateInput-label'>{label}</span>
                 <DatePicker
                     todayButton={"Hoy"}
                     selected={date}

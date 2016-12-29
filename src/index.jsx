@@ -34,43 +34,12 @@ const store = createStore(
     middleware
 );
 
-try {
-    _spPageContextInfo
-    var userid= _spPageContextInfo.userId;
-    var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/getuserbyid(" + userid + ")";
-    var requestHeaders = { "accept" : "application/json;odata=verbose" };
-    $.ajax({
-        url : requestUri,
-        contentType : "application/json;odata=verbose",
-        headers : requestHeaders,
-        success : onSuccess,
-        error : onError
-    });
-} catch(err) {
-    store.dispatch(setState(state));
-    render(
-        <MuiThemeProvider muiTheme={muiTheme} >
-            <Provider store={store}>
-                <Router history={hashHistory}>{routes}</Router>
-            </Provider>
-        </MuiThemeProvider>,
-        document.getElementById('app')
-    );
-}
-
-function onSuccess(data, request){
-    var displayName = data.d.Title;
-    store.dispatch(setState(state.setIn(['user', 'displayName'], displayName)));
-    render(
-        <MuiThemeProvider muiTheme={muiTheme} >
-            <Provider store={store}>
-                <Router history={hashHistory}>{routes}</Router>
-            </Provider>
-        </MuiThemeProvider>,
-        document.getElementById('app')
-    );
-}
-
-function onError(error) {
-    console.log(error);
-}
+store.dispatch(setState(state));
+render(
+    <MuiThemeProvider muiTheme={muiTheme} >
+        <Provider store={store}>
+            <Router history={hashHistory}>{routes}</Router>
+        </Provider>
+    </MuiThemeProvider>,
+    document.getElementById('app')
+);

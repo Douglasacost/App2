@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Textfield } from 'react-mdl';
 import { setField } from '../../actions/Actions';
 
 class Dropdown extends Component {
@@ -8,21 +7,18 @@ class Dropdown extends Component {
         super(props);
     }
     handleClick(name){
-        console.log(name);
-        this.props.setField(this.props.form, this.props.input, name);
+        this.props.setField(this.props.location, this.props.input, name);
     }
     render() {
-        let { className, form, input, name, options, selected, label, disabled } = this.props;
+        let { className, location, input, name, options, selected, label, disabled } = this.props;
         let handleClick = this.handleClick.bind(this);
-        console.log(options);
-        console.log(selected);
         return (
             <div className='Dropdown-container'>
                 <span className='Dropdown-label'>{label}</span>
                 <div className="mui-dropdown">
                     <button className="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
                         { (selected === '') ?
-                            'Selecciones'
+                            'Text'
                             :
                             selected
                         }
@@ -31,7 +27,6 @@ class Dropdown extends Component {
                     { (!disabled) &&
                         <ul className="mui-dropdown__menu Dropdown-scroll">
                             {options.map((option, i) => {
-                                console.log(option);
                                 return <li key={i} onClick={handleClick.bind(this, option.Title)}>{option.Title}</li>;
                             })}
                         </ul>    

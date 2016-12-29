@@ -2,220 +2,16 @@
 
 //Print media query
 @media print{
-  body{
-    visibility: hidden;
-  }
-  #app{
-    visibility: visible;
-    position: absolute;
-    top: 0;
-    .Form{
-      .printButton{
-        visibility: hidden;
-      }
-      .Form-container{
-        padding: 0;
-        margin: 0;
-      }
-      fieldset{
-        div{
-          page-break-inside: avoid;
-        }
-        .Print-topMinus20{
-          margin-top: -20px;
-        }
-        .Print-topMinus10{
-          margin-top: -10px;
-        }
-        .Print-nextPage{
-          margin-top: 20px;
-        }
-        .printButton{
-          display: none;
-        }
-        .page-break{
-          margin-top: 50px;
-        }
-        .Print-tight{
-          padding: 2px 0;
-          margin: 0;
-        }
-        .Print-zeroMargin{
-          margin: 0;
-        }
-        .Form-dateInput{
-          margin: 3px 10px 0 0;
-        }
-        .Firm{
-          &-container{
-            margin: 3px 0;
-          }
-          .Form-dateInput{
-            margin: 3px 10px 0 0;
-          }
-        }
-        .Form-spacer{
-          display: none;
-        }
-        .Radio-container .Form-radioOptions {
-          margin-top: 0;
-        }
-        .Note-container {
-          margin: 0;
-        }
-        .Form-title{
-          font-weight: bold;
-          font-size: 18px;
-        }
-        .Form-state{
-          font-weight: bold;
-          font-size: 16px;
-        }
-      }
-      .Abbott01 fieldset{
-        #page-break{
-          margin-top: 50px;
-        }
-      }
-      .Abbott02 fieldset{
-        .Form-textAreaBox .mdl-textfield {
-          padding: 0;
-        }
-        .page-break{
-          margin-top: 100px;
-        }
-      }
-      .Abbott04 fieldset{
-        .Form-textAreaBox .mdl-textfield {
-          padding: 0;
-        }
-        .page-break{
-          margin-top: 100px;
-        }
-        .Form-label--under{
-          margin-top: 0;
-          padding: 5px 0;
-        }
-      }
-      .Abbott05 fieldset{
-        .Form-textAreaBox .mdl-textfield {
-          padding: 0;
-        }
-        .page-break{
-          margin-top: 100px;
-        }
-      }
-      .Abbott06{
-        fieldset{
-          div{
-            page-break-inside: auto;
-          }
-          .Form-textAreaBox .mdl-textfield{
-            padding: 0;
-          }
-          .page-break{
-            margin-top: 100px;
-          }
-          .Form-spacer{
-            display: none;
-          }
-          .Form-label{
-            padding: 0;
-          }
-          .Note-container {
-            margin-top: 0;
-          }
-          .Firm-container{
-            .Form-dateInput {
-              margin-top: 0;
-            }
-          }
-        }
-      }
-      .Abbott101 fieldset{
-        .Form-label--under{
-          margin-top: -10px;
-        }
-        .page-break{
-          margin-top: 100px;
-        }
-      }
-      .Abbott11 fieldset{
-        .Note-container {
-          margin: 0;
-        }
-        .Print-smallTextInput .mdl-textfield{
-          padding: 0 0 2px 0;
-          margin-bottom: 10px;
-        }
-        .Print-firmFix{
-          margin: 3px 0;
-        }
-      }
-      .AbbottObjetivosActividad fieldset{
-        .page-break{
-          margin-top: 100px;
-        }
-      }
-      .AbbottExpensesReport{
-        .Print-expensesTop--left{
-          display: inline-block;
-          float: left;
-        }
-        .Print-expensesTop--right{
-          display: inline-block;
-          float: right;
-        }
-        .mui-row{
-          margin: 0;
-        }
-        .Form-textAreaBox .mdl-textfield {
-          padding: 0;
-        }
-        fieldset{
-          .Print-firmTight{
-            margin: 10px 0 0 0;
-          }
-          .mui-row .Print-expensesInputFix .mdl-textfield{
-            margin: 0;
-            padding: 0;
-          }
-        }
-      }
-    }
-  }
 }
 // end of print section
 
 #app {
-  .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
-    padding-right: 0;
-  }
-
   ul, .mdl-list__item {
     padding: 0;
-  }
-  .mdl-layout__container {
-    height: 56px;
-  }
-
-  .mdl-textfield{
-    width: 100%;
   }
 
   li {
       list-style-type: none;
-  }
-
-  .mdl-checkbox__label, .mdl-textfield__input {
-    font-size: 14px;
-  }
-  
-  .mdl-textfield.is-invalid .mdl-textfield__error {
-    position: relative;
-  }
-  .mdl-textfield.is-invalid .mdl-textfield__label:after {
-    bottom: 42px;
   }
 
   .MainScreen {
@@ -224,109 +20,17 @@
     max-width: 1000px;
     height: 100%;
   }
-
-  .Form {
-    &-container {
-      padding: 50px;
-    }
-    &-fieldSet{
-      margin: 0;
-      padding: 0;
-      border: none;
-    }
-    &-leftContainer {
-      float: left;
-      height: 60px;
-    }
-    &-rightContainer {
-      float: right;
-      height: 60px;
-    }
-    &-text {
-      font-size: 12px;
-      font-family: Arial, Helvetica, sans-serif;
-      display: block;
-    }
-    &-textInputBox{
-      display: block;
-      margin-bottom: -20px;
-      width: 100%;
-      min-width: 200px;
-    }
-    &-textAreaBox {
-      width: 100%;
-    }
-    &-dateLabel {
-      margin-right: 10px;
-    }
-    &-dateInput {
-      margin-top: 20px;
-    }
-    &-title{
-      font-weight: bold;
-      font-size: 22px;
-    }
-    &-state{
-      font-weight: bold;
-      font-size: 18px;
-    }
-    &-label {
-      padding: 10px 0;
-      height: 16px;
-      display: block;
-      height: 100%;
-    }
-    &-label--under {
-      margin-top: 20px;
-    }
-    &-radioContainer {
-      margin-top: 15px;
-    }
-    &-radioOptions {
+  .Radio-container {
+    margin-top: 15px;
+    .Radio-Options {
       margin-top: 10px;
       label {
         padding-right: 10px;
       }
     }
-    &-radioOption {
+    .Radio-option {
       display: inline-block;
       margin-right: 15px;
-    }
-    &-spacer{
-      display: block;
-      min-height: 10px;
-      margin: 5px;
-    }
-    &-expensesTable {
-      margin-top: 50px;
-    }
-  }
-  .Firm {
-    &-container {
-      margin: 20px 0;
-    }
-    &-textInput {
-      width: 300px;
-      display: inline-block;
-      margin: 0 20px 0 0;
-    }
-    .Form-dateInput {
-      display: inline-block;
-      margin: 20px 10px 0 0;
-    }
-    &-label {
-      margin-right: 20px;
-    }
-    &-time{
-      margin-right: 15px;
-    }
-    &-top{
-      display: block;
-      width: 95%;
-    }
-    &-bottom {
-      display: block;
-      width: 95%;
     }
   }
   .Checkbox-container {
@@ -341,28 +45,6 @@
     &--singleOption {
       display: inline-block;
       margin-right: 15px;
-    }
-    &--tableOption {
-      height: 24px;
-      text-align: center;
-      padding-left: 45px;
-      label {
-        padding: 0;
-      }
-    }
-    &--twoOption {
-      height: 50px;
-    }
-    &--fourOption {
-      margin-top: 10px;
-      height: 120px;
-    }
-    &--fiveOption {
-      margin-top: 10px;
-      height: 120px;
-    }
-    &--first {
-      margin-top: 10px;
     }
   }
   .Note {
@@ -380,41 +62,6 @@
       }
     }
   }
-  .Table {
-    &-textInputBox {
-      height: 37px;
-      width: 100%;
-      margin-bottom: -1px;
-      // Remove 20 padding and keeping style functionality.
-      .mdl-textfield {
-        padding: 0
-      }
-      .mdl-textfield__label:after {
-        bottom: 0px;
-      }
-      input {
-        height: 37px;
-        padding: 0;
-        border-bottom: none;
-      }
-    }
-    table {
-      border-collapse: collapse;
-    }
-    td {
-      text-align: center;
-      vertical-align: bottom;
-    }
-    th, td {
-      border-bottom: 1px solid rgba(0,0,0,.12);
-    }
-    &--Subsidiary{
-      input{
-        outline: none;
-        border: none;
-      }
-    }
-  }
   .Dropdown {
     &-label {
       display: block;
@@ -425,108 +72,10 @@
       overflow: auto;
     }
   }
-  .Abbott01{
-    .Form-dateInput--marginBottom{
-      margin-bottom: 20px;
-    }
-    .Form-dateInput--marginright{
-      .Form-dateLabel {
-        margin-right: 51px;
-      }
-    }
-  }
-  .Abbott04{
-    .Form-dateInput--marginright{
-      .Form-dateLabel {
-        margin-right: 51px;
-      }
-    }
-    table{
-      input{
-        text-align: right;
-      }
-      .mdl-textfield{
-        padding-top: 0;
-      }
-    }
-  }
-  .Abbott06 {
-    td {
-      width: 400px;
-    }
-  }
-  .AbbottExcepcionCompra{
-    .Form-label--singleLine{
-      display: block;
-    }
-  }
-  .AbbottExpensesReport{
-    .Form-seventy{
-      width: 90%;
-    }
-    .Form-topOptions{
-      .Dropdown-container{
-        display: inline-block;
-        vertical-align: top;
-      }
-    }
-    .mui-paddingFix{
-      padding: 0;
-    }
-    .Form-liquidation{
-      display: inline-block;
+  .DateInput {
+    margin-top: 20px;
+    &-label {
       margin-right: 10px;
-      table {
-          border-collapse: collapse;
-      }
-      table, th, td {
-          border: 1px solid black;
-      }
-      .mdl-textfield{
-        padding: 0;
-      }
-      .mdl-textfield--floating-label.is-focused .mdl-textfield__label {
-        top: 10px;
-      }
-      .Form-textInputBox{
-        width: 100%;
-        min-width: 0;
-      }
-      input{
-        outline: none;
-        border: none;
-      }
-    }
-    .Table{
-      &-descriptionBox{
-        width: 210px;
-        max-height: 42px;
-        overflow: hidden;
-      }
-      table {
-          border-collapse: collapse;
-          input {
-            height: 42px;
-            outline: none;
-            border: none;
-          }
-          th{
-            min-width: 100px;
-          }
-      }
-      table, th, td {
-          border: 1px solid black;
-      }
-      table td {
-        vertical-align: top;
-        min-width: 100px;
-      }
-    }
-  }
-  .MetadataFields-container{
-    .Dropdown-container{
-      display: inline-block;
-      margin-right: 20px;
     }
   }
 }

@@ -8,19 +8,11 @@ export const setState = (state) => {
     };
 }
 
-export const setField = (form, input, data) => {
+export const setField = (location, input, data) => {
     return {
         type: Types.SET_FIELD,
-        form,
+        location,
         input,
-        data
-    };
-}
-
-export const setFormData = (form, data) => {
-    return {
-        type: Types.SET_FORM_DATA,
-        form,
         data
     };
 }

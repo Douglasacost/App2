@@ -3,16 +3,7 @@ import { Map } from 'immutable';
 import * as Types from '../constants/ActionTypes';
 
 const setState = (state, newState) => state.mergeDeep(newState);
-const setField = (state, form, input, data) => {
-  let test = state.setIn([form, input], data);
-  console.log(test.toJS());
-  return test;
-}
-const setFormData = (state, form, data) => {
-  let test = state.mergeDeepIn([form], data);
-  console.log(test.toJS());
-  return test;
-}
+const setField = (state, location, input, data) => state.setIn([form, input], data);
 let initialState = Map({});
 
 export default function(state = initialState, action) {
@@ -20,8 +11,6 @@ export default function(state = initialState, action) {
     case Types.SET_STATE:
       return setState(state, action.state);
     case Types.SET_FIELD:
-      return setField(state, action.form, action.input, action.data);
-    case Types.SET_FORM_DATA:
-      return setFormData(state, action.form, action.data);
+      return setField(state, action.location, action.input, action.data);
   }
 }

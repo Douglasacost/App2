@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { RadioGroup, Radio  } from 'react-mdl';
 import { connect } from 'react-redux';
 import { setField } from '../../actions/Actions';
 
@@ -12,14 +11,14 @@ class RadioInput extends Component {
         let selected = this.props.selected;
         if (selected === undefined || selected === null || selected === ''){
             let value = this.props.options[0];
-            this.props.setField(this.props.form, this.props.name, value);
+            this.props.setField(this.props.location, this.props.name, value);
         }
     }
     handleChange(e){
         let value = e.currentTarget.value,
-            form = this.props.form,
+            location = this.props.location,
             input = this.props.name;
-        this.props.setField(form, input, value);
+        this.props.setField(location, input, value);
     }
     render() {
         let defaultClasses = 'Radio-container ';
@@ -33,11 +32,11 @@ class RadioInput extends Component {
         let handleChange = this.handleChange.bind(this);
         return (
             <div className={classes}>
-                <span className='Form-radioLabel'>{label}</span>
-                <div className='Form-radioOptions'>
+                <span className='Radio-label'>{label}</span>
+                <div className='Radio-options'>
                     {options.map(function(option, i){
                         return (
-                            <div className='Form-radioOption' key={i}>
+                            <div className='Radio-option' key={i}>
                                 <input type="radio" name={name} 
                                         value={option} 
                                         checked={option === selected} 

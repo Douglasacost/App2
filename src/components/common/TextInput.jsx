@@ -8,10 +8,10 @@ class TextInput extends Component {
         super(props);
     }
     handleChange(){
-        let form = this.props.form,
+        let location = this.props.location,
             input = this.props.id,
             value = document.getElementById(this.props.id).value;
-        this.props.setField(form, input, value);
+        this.props.setField(location, input, value);
     }
     render() {
         let { className, id, label, name, value, disabled } = this.props;
