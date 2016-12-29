@@ -1,4 +1,4 @@
-== Xynapce ==
+== BaseReactApp ==
 
 #Development
 

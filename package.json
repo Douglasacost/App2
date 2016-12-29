@@ -1,7 +1,7 @@
 {
-  "name": "abbott",
-  "version": "1.0.0",
-  "description": "Abbott forms",
+  "name": "BaseReactApp",
+  "version": "2.0.0",
+  "description": "Base code for react app",
   "main": "index.js",
   "scripts": {
     "build": "webpack -p --config ./webpack-production.config.js",
