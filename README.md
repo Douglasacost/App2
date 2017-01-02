@@ -4,7 +4,6 @@
 
 ## Setup steps
 1. do npm install.
-2. do gulp.
 
 ## Run BaseReactApp App locally
 1. do npm start (keep terminal/console open).
