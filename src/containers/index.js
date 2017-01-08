@@ -1,11 +1,11 @@
 import App from './App';
-import IndexConmponent from './IndexConmponent';
+import IndexComponentContainer from './IndexComponentContainer';
 import ComponentAContainer from './ComponentAContainer';
 import ComponentBContainer from './ComponentBContainer';
 
 const Containers = {
     App,
-    IndexConmponentContainer,
+    IndexComponentContainer,
     ComponentAContainer,
     ComponentBContainer
 };
