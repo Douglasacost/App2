@@ -5,6 +5,7 @@ export default Map({
     User: Map({
         name: 'TestName'
     }),
+    IndexComponent: Map({}),
     ComponentA: Map({
         radioSample: '',
         checkboxSample: '',

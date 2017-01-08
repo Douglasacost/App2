@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Components from '../components';
-import {setField } from '../actions/Actions';
-let { ComponentA } = Components;
+import { setField } from '../actions/Actions';
+let { IndexConmponent } = Components;
 
 const mapStateToProps = (state) => { 
     return {
-        state: state.get('ComponentA'),
+        state: state.get('IndexConmponent'),
         user: state.get('User')
     };
 };
 
-export default connect(mapStateToProps, {setField })(ComponentA);
+export default connect(mapStateToProps, { setField })(IndexConmponent);
