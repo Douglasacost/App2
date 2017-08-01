@@ -6,76 +6,7 @@
 // end of print section
 
 #app {
-  ul, .mdl-list__item {
+  ul{
     padding: 0;
-  }
-
-  li {
-      list-style-type: none;
-  }
-
-  .MainScreen {
-    margin: 0;
-    width: 100%;
-    max-width: 1000px;
-    height: 100%;
-  }
-  .Radio-container {
-    margin-top: 15px;
-    .Radio-Options {
-      margin-top: 10px;
-      label {
-        padding-right: 10px;
-      }
-    }
-    .Radio-option {
-      display: inline-block;
-      margin-right: 15px;
-    }
-  }
-  .Checkbox-container {
-    height: 24px;
-    label {
-      height: 100%;
-      display: block;
-      float: left; 
-      clear: left; 
-      width: auto;
-    }
-    &--singleOption {
-      display: inline-block;
-      margin-right: 15px;
-    }
-  }
-  .Note {
-    &-container {
-      margin-bottom: 25px;
-      .Note-list {
-        margin: 0;
-        li {
-          width: 95%;
-          white-space: normal;
-          display: block;
-          font-family: Arial, Helvetica, sans-serif; 
-          font-size: 12px;
-        }
-      }
-    }
-  }
-  .Dropdown {
-    &-label {
-      display: block;
-      margin-top: 10px;
-    }
-    &-scroll{
-      max-height: 150px;
-      overflow: auto;
-    }
-  }
-  .DateInput {
-    margin-top: 20px;
-    &-label {
-      margin-right: 10px;
-    }
   }
 }
