@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 const normal = ( children ) => (
     <div>
+        <h1>Hello world!</h1>
         {children}
     </div>
 );

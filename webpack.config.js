@@ -6,29 +6,33 @@ let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 let common = {
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:8080/',
-    'webpack/hot/only-dev-server',
     './src/index.jsx'
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'react-hot!babel'
+        exclude: [ __dirname + '/node_modules' ],
+        loader: 'babel-loader'
       },
       {
           test: /\.css$/,
-          loader: 'style!css'
+          loader: 'css-loader"'
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass')
+        use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "sass-loader" // compiles Sass to CSS
+            }]
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   output: {
     path: __dirname + '/dist',

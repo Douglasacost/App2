@@ -1,15 +1,12 @@
 import React from 'react';
-import { Route, IndexRedirect } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Containers from './containers';
 import Components from './components';
-let { App,
-    IndexComponentContainer
-     } = Containers;
+let { App } = Containers;
 
 const routes = 
-    <Route path="/" component={App}>
-        <IndexRedirect to="indexComponent" />
-        <Route path="indexComponent" component={IndexComponentContainer}></Route>
-    </Route>;
+    <BrowserRouter>
+        <Route path="/" component={App}/>
+    </BrowserRouter>;
 
 export default routes;

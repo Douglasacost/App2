@@ -7,12 +7,3 @@ export const setState = (state) => {
         state
     };
 }
-
-export const setField = (location, input, data) => {
-    return {
-        type: Types.SET_FIELD,
-        location,
-        input,
-        data
-    };
-}
