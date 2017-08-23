@@ -1,11 +1,13 @@
 import App from './App';
-import View1Container from './View1Container';
-import View2Container from './View2Container';
+import EsperandoContainer from './EsperandoContainer';
+import MencionContainer from './MencionContainer';
+import RespondeContainer from './RespondeContainer';
 
 const Containers = {
     App,
-    View1Container,
-    View2Container
+    EsperandoContainer,
+    MencionContainer,
+    RespondeContainer
 };
 
 export default Containers;

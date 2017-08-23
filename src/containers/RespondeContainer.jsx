@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Components from '../components';
-let { View2 } = Components;
+let { Responde } = Components;
 
-export default connect()(View2);
+export default connect()(Responde);

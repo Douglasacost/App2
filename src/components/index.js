@@ -1,8 +1,10 @@
-import View1 from './views/View1';
-import View2 from './views/View2';
+import Mencion from './views/Mencion';
+import Responde from './views/Responde';
+import Esperando from './views/Esperando';
 const Components = {
-    View1,
-    View2
+    Mencion,
+    Responde,
+    Esperando
 };
 
 export default Components;

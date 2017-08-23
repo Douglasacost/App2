@@ -26,8 +26,32 @@
     border-style: solid;
     border-radius: 2px;
     height: 300px;
+    &-box{
+      width: 30%;
+      height: 95%;
+      background-color: gray;
+      border: 1px;
+      border-style: solid;
+      display: inline-block;
+      border-radius: 3px;
+      margin: 5%;
+      float: right;
+    }
+    &-textbox{
+      background-color: gray;
+      border: 1px;
+      border-radius: 4px; 
+      border-style: solid;
+      margin-top: 10%;
+    }
     &-logo{
       margin: 25%;
+      &--innerbox{
+        width: 30%;
+        height: auto;
+        margin: 5%;
+        display: inline-block;
+      }
     }
     &-content{
       width: 95%;
