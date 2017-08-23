@@ -3,4 +3,4 @@ import { connect } from 'react-redux';
 import Components from '../components';
 let { Responde } = Components;
 
-export default connect()(Responde);
+export default connect(state => state.toJS())(Responde);

@@ -1,5 +1,5 @@
 // Importing npm packages
-import React, { Component } from 'react';
+import React, { Component } from 'react'; 
 import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
@@ -11,7 +11,9 @@ const newHistory = createBrowserHistory();
 
 // importing custom packages
 import reducers from './reducers';
-import remoteActionMiddleware from './middleware/RemoteActionMiddleware';
+//socket
+import io from 'socket.io-client';
+import remoteActionMiddleware from './remote_action_middleware';
 import { setState } from './actions/Actions';
 import state from './State';
 import routes from './Routes';
@@ -21,14 +23,19 @@ require("./assets/stylesheets/app.scss");
 
 injectTapEventPlugin();
 
-const middleware = [ remoteActionMiddleware ];
-
-const store = createStore(
-    reducers,
-    middleware
+//beg
+const socket = io(`${location.protocol}//${location.hostname}:8090`);
+socket.on('state', state =>
+  {
+    return store.dispatch(setState(state))
+  }
 );
 
-store.dispatch(setState(state));
+const createStoreWithMiddleware = applyMiddleware(
+  remoteActionMiddleware(socket)
+)(createStore);
+const store = createStoreWithMiddleware(reducers);
+//end
 render(
         <Provider store={store}>
             <Router history={newHistory}>{routes}</Router>

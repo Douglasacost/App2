@@ -10,7 +10,7 @@ export default class Responde extends Component {
                     <div className="Box-logo--innerbox"><Logo size={80} /></div>
                 </Content>
                 <Content>
-                    <div className="Box-textbox"><code>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</code></div>
+                    <div className="Box-textbox"><code>{this.props.message}.</code></div>
                 </Content>
             </Box>
         </div>;
