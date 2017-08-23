@@ -7,7 +7,11 @@ export default class View1 extends Component {
     render(){
         return <div className="Container">
             <Box>
-            <Content />
+            <Content>
+                <div style=
+                    {{backgroundColor: 'blue', width: '80%',
+                     height: '90%', margin: '10px auto'}}></div>
+            </Content>
             <Content>
                 <div className="Box-content--middle">
                     <Button className="mui-btn" text="PLAY" />

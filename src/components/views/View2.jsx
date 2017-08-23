@@ -5,9 +5,9 @@ let {Button, Box, Content, Logo} = Components;
 export default class View2 extends Component {
     render(){
         return <div className="Container">
-            <Box>
+            <Box nonStyle>
                 <Content>
-                    <Logo />
+                    <Logo size={80} />
                 </Content>
             </Box>
         </div>;
