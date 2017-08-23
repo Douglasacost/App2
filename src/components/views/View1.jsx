@@ -9,7 +9,7 @@ export default class View1 extends Component {
             <Box>
             <Content>
                 <div style=
-                    {{backgroundColor: 'blue', width: '80%',
+                    {{backgroundColor: 'gray', width: '80%',
                      height: '90%', margin: '10px auto'}}></div>
             </Content>
             <Content>

@@ -20,7 +20,11 @@
   .Box{
     margin: auto;
     width: 40%;
-    background-color: aqua;
+    background-color: white;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 2px;
     height: 300px;
     &-logo{
       margin: 25%;
