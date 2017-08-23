@@ -6,7 +6,34 @@
 // end of print section
 
 #app {
+  a{
+    margin: auto;
+  }
   ul{
     padding: 0;
+  }
+  .Container{
+    display: flex;
+    min-height: 100vh;
+    margin: 0;;
+  }
+  .Box{
+    margin: auto;
+    width: 40%;
+    background-color: aqua;
+    height: 300px;
+    &-content{
+      width: 95%;
+      height: 50%;
+      margin: auto;
+      text-align: center;
+      &--middle{
+        display: inline-block;
+        margin-top: 10%;
+        button{
+          margin: 0 50px;
+        }
+      }
+    }
   }
 }
